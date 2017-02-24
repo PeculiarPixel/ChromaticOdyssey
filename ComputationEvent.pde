@@ -1,0 +1,1 @@
+class ComputationEvent extends Event {}
