@@ -1,7 +1,7 @@
 class World {
   
-  Level currentLevel;                 // Current Level
-  ArrayList<Level> levels;         // Collection of all levels
+  private Level currentLevel;                 // Current Level
+  private ArrayList<Level> levels;         // Collection of all levels
   
   // Accessors
   public Level getCurrentLevel() {

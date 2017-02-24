@@ -1,0 +1,1 @@
+class DisplayableEvent extends Event {}
