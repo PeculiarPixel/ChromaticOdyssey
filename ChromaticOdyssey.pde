@@ -4,7 +4,7 @@ import processing.video.*;
 PlayerCharacter newt;
 boolean hitBoxMode = false;
 ArrayList<Hitbox> hitboxes;
-
+ComputationEngine comp = new ComputationEngine();
 void setup(){
   size(1024, 768);
 
@@ -63,8 +63,8 @@ if (keyCode == UP) {
 void draw(){
   background(0);
   newt.displaySprite();
-
-    newt.move(5.0);
+  
+  comp.run();
 
   if(hitBoxMode){
     //newt.local.hitbox.display();

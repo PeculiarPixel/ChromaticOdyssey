@@ -13,6 +13,6 @@ characters.add(newt);
 //items =new ArrayList<Item>();
 //menus =new ArrayList<Menu>();
 landscapes =new ArrayList<Landscape>();
-landscapes.add(new Landscape(new Hitbox(300, 150, 100, 50, color(255,0,0), "wall"))); // this needs to be standardized and cleaned up so its easier to make new instances of things
+landscapes.add(new Landscape(300, 150, 100, 50)); // this needs to be standardized and cleaned up so its easier to make new instances of things
 }
 }
