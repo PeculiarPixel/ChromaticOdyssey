@@ -1,3 +1,5 @@
+import processing.video.*;
+
 
 PlayerCharacter newt;
 boolean hitBoxMode = false;
