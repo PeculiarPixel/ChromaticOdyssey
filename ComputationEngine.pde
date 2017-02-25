@@ -1,10 +1,16 @@
 class ComputationEngine{ //will extend this class into different landscapes if needed
 ArrayList<Hitbox> hitboxes;
 ArrayList<PlayerCharacter> players;
+ArrayList<ComputationEvent> computationEvents = new ArrayList<ComputationEvent>(); 
 void run(){
   moveCharacter(5.0);
 }
 
+void clear(){  //clears the computation engine when a new state is declared
+  hitboxes.clear();
+  computationEvents.clear();
+  players.clear();
+}
 
 void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChange){
   

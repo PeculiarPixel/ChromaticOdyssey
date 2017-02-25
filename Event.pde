@@ -1,1 +1,3 @@
-class Event {}
+class Event {
+  String type;
+}
