@@ -12,6 +12,6 @@ Landscape(float x, float y,float sizeX, float sizeY){
   yPos = y;
   hitboxes =new ArrayList<Hitbox>();
   //sprites =new ArrayList<Sprite>();
-  hitboxes.add(new Hitbox(x,  y, sizeX, sizeY, color(0, 255, 0), "landscape"));
+  hitboxes.add(new Hitbox(x,  y, sizeX, sizeY, color(random(255), random(255),random(255)), "landscape"));
 }
 }

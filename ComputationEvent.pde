@@ -1,1 +1,9 @@
-class ComputationEvent extends Event {}
+class ComputationEvent extends Event {
+
+  
+  
+  
+  ComputationEvent(){
+    type = "ComputationEvent";
+  }  
+}

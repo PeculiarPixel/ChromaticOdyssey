@@ -1,1 +1,8 @@
-class DisplayableEvent extends Event {}
+class DisplayableEvent extends Event {
+
+
+
+  DisplayableEvent(){
+    type = "DisplayableEvent";
+  }
+}

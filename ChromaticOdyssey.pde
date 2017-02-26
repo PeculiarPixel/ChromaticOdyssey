@@ -3,17 +3,19 @@ import processing.video.*;
 
 PlayerCharacter newt;
 boolean hitBoxMode = false;
-ArrayList<Hitbox> hitboxes;
-ComputationEngine comp = new ComputationEngine();
+ComputationEngine comp;
+StateEngine state;
+Level beginning;
 void setup(){
   size(1024, 768);
-
   background(0);
   frameRate(60);
   newt = new PlayerCharacter();
-  
-  hitboxes = new ArrayList<Hitbox>(); 
-  hitboxes.add(new Hitbox(300, 150, 100, 50, color(255,0,0), "wall"));
+  comp  = new ComputationEngine();
+  comp.players.add(newt);
+  state  = new StateEngine(beginning);
+
+
 }
 
 
@@ -64,13 +66,13 @@ void draw(){
   background(0);
   newt.displaySprite();
   
-  comp.run();
-
+   state.run();
+   comp.run();
+   //display.run();
   if(hitBoxMode){
-    //newt.local.hitbox.display();
     newt.local.hitboxDisplay = true;
-    for(int i=0;i<hitboxes.size();i++){
-    hitboxes.get(i).display();
+    for(int i=0;i<comp.hitboxes.size();i++){
+    comp.hitboxes.get(i).display();
     }
   }
 }

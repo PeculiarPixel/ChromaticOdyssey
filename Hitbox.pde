@@ -1,5 +1,4 @@
-class Hitbox
-{
+class Hitbox{
   private float xPos;
   private float yPos;
   private float hitWidth;
