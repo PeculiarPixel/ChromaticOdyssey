@@ -5,6 +5,20 @@ ArrayList<GameCharacter> players;
 ArrayList<ComputationEvent> computationEvents = new ArrayList<ComputationEvent>();
 
 void run(){
+  
+      ComputationEvent checkEvent;
+      //println(computationEvents.size());
+      for(int i=0;i<computationEvents.size();i++){
+        checkEvent = computationEvents.get(i); //<>//
+        if(checkEvent.type=="ComputationEvent"){ //<>// //<>//
+          checkEvent.affectedCharacter.local.currHealth += checkEvent.value;
+        }
+        
+      }
+    computationEvents.clear();
+  
+  
+  
   moveCharacter(5.0);
 }
 
@@ -50,7 +64,9 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
   if(hBox1.designation =="EventBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this check to see if the hitbox being intersected is an "EventBox", or one that triggers a switch
     state.events.add(new StateEvent(state.currentState.nextState()));
   }
-
+  if(hBox1.designation =="DamageBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test computable event
+    computationEvents.add(new ComputationEvent(-10,newt));
+  }
 
 
 }

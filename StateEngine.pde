@@ -12,6 +12,7 @@ class StateEngine{
         if(checkEvent.type=="StateEvent"){
           swapState((StateEvent)checkEvent);
         }else if(checkEvent.type=="ComputationEvent"){
+          //println("We found the computationEvent");
           sendComputable((ComputationEvent)checkEvent);
         }else if(checkEvent.type=="DisplayableEvent"){
           sendDisplayable((DisplayableEvent)checkEvent);
