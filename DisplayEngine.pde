@@ -12,6 +12,9 @@ class DisplayEngine{
   
     void displayCharacter(GameCharacter guy){
     imageMode(CENTER);
+
+    
+ 
     image(guy.global.sprite,guy.local.xPos,guy.local.yPos);
     if(guy.local.hitboxDisplay){
       displayHitbox(guy.local.hitbox);
@@ -27,8 +30,7 @@ class DisplayEngine{
   
   
   void run(){
-    background(0);
-    
+    background(0);  
     
     GameCharacter tempChar;
     for(int i=0; i <state.currentState.characters.size();i++){

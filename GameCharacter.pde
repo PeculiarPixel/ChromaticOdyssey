@@ -16,8 +16,8 @@ class GameCharacter{
 
     
     GameCharacter(){
-    global = new GlobalInfo(1,2,3);
-    local = new LocalInfo(100,100,global.sprite.width,global.sprite.height,3,4,5);
+    global = new GlobalInfo(100,0,100);
+    local = new LocalInfo(100,100,global.sprite.width,global.sprite.height,100,0,100);
     //comp.players.add(this);
     }
 }
