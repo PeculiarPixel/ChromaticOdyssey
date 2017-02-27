@@ -1,7 +1,9 @@
 class ComputationEngine{ //will extend this class into different landscapes if needed
+
 ArrayList<Hitbox> hitboxes;
 ArrayList<PlayerCharacter> players;
-ArrayList<ComputationEvent> computationEvents = new ArrayList<ComputationEvent>(); 
+ArrayList<ComputationEvent> computationEvents = new ArrayList<ComputationEvent>();
+
 void run(){
   moveCharacter(5.0);
 }
@@ -9,7 +11,9 @@ void run(){
 void clear(){  //clears the computation engine when a new state is declared
   hitboxes.clear();
   computationEvents.clear();
+  PlayerCharacter temp = players.get(0);
   players.clear();
+  players.add(temp);
 }
 
 void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChange){
@@ -59,9 +63,9 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
   } 
 
 
-  void moveCharacter(float speed){
+  void moveCharacter(float speed){ //<>//
     
-    if(players.get(0).local.moveUp){
+    if(players.get(0).local.moveUp){ //<>//
       moveCheck(0.0,-speed);
     }
     if(players.get(0).local.moveDown){
@@ -77,11 +81,10 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
 
   }
 
-
-
-
-ComputationEngine(){
-hitboxes = new ArrayList<Hitbox>();
-players = new ArrayList<PlayerCharacter>();
-}
+  // Constructor
+  ComputationEngine() {
+    hitboxes = new ArrayList<Hitbox>();
+    players = new ArrayList<PlayerCharacter>();
+  }
+  
 }
