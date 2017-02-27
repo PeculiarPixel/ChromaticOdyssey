@@ -18,16 +18,14 @@ class StateEngine{
         }
         
       }
-    events.clear();
+    events.clear();  //May need to change when the state engine clears the event queue.  Should it be allowed to finish?
  
    //should have some sort of  comp.run(currentState) but it does it without explicitly stating it.
   }
   
   void swapState(StateEvent event){  //swap the current state to the new state
     currentState = event.nextState;
-    comp.clear();
-    currentState = new Level(newt);
-    //currentState = new State();
+    //comp.clear(); //Nathan - I moved this clear to a method inside Level.  When a state swap occurs the comp is cleared right before next level initializes.
   }
   void sendComputable(ComputationEvent computation){  //send computables to computation engine to check
     comp.computationEvents.add(computation);
@@ -37,7 +35,7 @@ class StateEngine{
   }
 
     StateEngine(Level state){
-      state = new Level(newt);
+      state = new Test_Level_0(newt);
       currentState = state;
     }
 

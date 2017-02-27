@@ -1,18 +1,25 @@
 class Level{ //will extend this class into different levels, ex LevelOne,LevelTwo, etc
-private ArrayList<Movie> cutscenes;
-private ArrayList<PlayerCharacter> characters;
-//private ArrayList<Item> items;
-//private ArrayList<Menu> menus;
-private ArrayList<Landscape> landscapes;
+public ArrayList<Movie> cutscenes;
+public ArrayList<GameCharacter> characters;
+//public ArrayList<Item> items;
+//public ArrayList<Menu> menus;
+public ArrayList<Landscape> landscapes;
 
+Level nextState(){  //Nathan - I edited the level class so it is a basis from which to extend specific levels.  Note there is now a Test_Level_0 extended from this class
+  return null;
+}
 
-Level(PlayerCharacter newt){
+Level(){
+  
+}
+
+/*Level(GameCharacter newt){
 cutscenes =new ArrayList<Movie>();
-characters =new ArrayList<PlayerCharacter>();
+characters =new ArrayList<GameCharacter>();
 characters.add(newt);
 //items =new ArrayList<Item>();
 //menus =new ArrayList<Menu>();
-landscapes =new ArrayList<Landscape>();
-landscapes.add(new Landscape(300, 150, random(100,200), random(100,200))); // this needs to be deleted eventually so we can just extend the level to a new level
-}
+//landscapes =new ArrayList<Landscape>();
+//landscapes.add(new Landscape(300, 150, random(100,200), random(100,200))); // this needs to be deleted eventually so we can just extend the level to a new level
+}*/
 }

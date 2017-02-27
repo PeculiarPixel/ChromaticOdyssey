@@ -7,11 +7,23 @@ ArrayList<Hitbox> hitboxes;
     hitboxes.get(0).display();
   }
 
-Landscape(float x, float y,float sizeX, float sizeY){
+Landscape(float x, float y,float sizeX, float sizeY, String type){
   xPos = x;
   yPos = y;
+  int r=255;
+  int g=255;
+  int b=255;
   hitboxes =new ArrayList<Hitbox>();
   //sprites =new ArrayList<Sprite>();
-  hitboxes.add(new Hitbox(x,  y, sizeX, sizeY, color(random(255), random(255),random(255)), "landscape"));
+  if(type == "Landcape"){
+     r = 0;
+     g = 255;
+     b = 0;
+  }else if(type =="EventBox"){
+     r = 255;
+     g = 0;
+     b = 0;
+  }
+  hitboxes.add(new Hitbox(x,  y, sizeX, sizeY, color(r, g,b), type));
 }
 }
