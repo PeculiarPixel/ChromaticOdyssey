@@ -16,6 +16,9 @@ void clear(){  //clears the computation engine when a new state is declared
   players.add(temp);
 }
 
+
+
+
 void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChange){
   
   if((hBox1.yPos + hBox1.hitHeight/2 >= hBox2.yPos - hBox2.hitHeight/2 &&
@@ -24,7 +27,7 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
     hBox1.xPos - hBox1.hitWidth/2 <= hBox2.xPos + hBox2.hitWidth/2 + xChange))
     {
       hBox2.isHitX=true;
-      hBox1.isHitX=true;
+      hBox1.isHitX=true;            
     }
   else{
     hBox2.isHitX=false;
@@ -43,6 +46,12 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
     hBox2.isHitY=false;
     hBox1.isHitY=false;
   }
+
+  if(hBox1.designation =="EventBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this check to see if the hitbox being intersected is an "EventBox", or one that triggers a switch
+    state.events.add(new StateEvent(state.currentState.nextState()));
+  }
+
+
 
 }
 

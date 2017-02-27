@@ -5,7 +5,7 @@ PlayerCharacter newt;
 boolean hitBoxMode = false;
 ComputationEngine comp;
 StateEngine state;
-Level beginning;
+Test_Level_0 beginning;  //we now set the beginning to level 0
 void setup(){
   size(1024, 768);
   background(0);
@@ -14,12 +14,6 @@ void setup(){
   comp  = new ComputationEngine();
   comp.players.add(newt);
   state  = new StateEngine(beginning);
-
-  // Basic swapState test
-  Level l1 = new Level(newt);
-  StateEvent e = new StateEvent(l1);
-  state.swapState(e);
-
 }
 
 
@@ -61,6 +55,7 @@ if (keyCode == UP) {
   if(key == 'h' || key == 'H'){
       hitBoxMode = !hitBoxMode;
   }
+
 }
 
 
