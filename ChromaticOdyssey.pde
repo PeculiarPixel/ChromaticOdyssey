@@ -1,7 +1,7 @@
 import processing.video.*;
 
 
-PlayerCharacter newt;
+GameCharacter newt;
 boolean hitBoxMode = false;
 ComputationEngine comp;
 StateEngine state;
@@ -10,7 +10,7 @@ void setup(){
   size(1024, 768);
   background(0);
   frameRate(60);
-  newt = new PlayerCharacter();
+  newt = new GameCharacter();
   comp  = new ComputationEngine();
   comp.players.add(newt);
   state  = new StateEngine(beginning);

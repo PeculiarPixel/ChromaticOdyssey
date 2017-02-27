@@ -1,6 +1,6 @@
 class Level{ //will extend this class into different levels, ex LevelOne,LevelTwo, etc
 public ArrayList<Movie> cutscenes;
-public ArrayList<PlayerCharacter> characters;
+public ArrayList<GameCharacter> characters;
 //public ArrayList<Item> items;
 //public ArrayList<Menu> menus;
 public ArrayList<Landscape> landscapes;
@@ -13,9 +13,9 @@ Level(){
   
 }
 
-/*Level(PlayerCharacter newt){
+/*Level(GameCharacter newt){
 cutscenes =new ArrayList<Movie>();
-characters =new ArrayList<PlayerCharacter>();
+characters =new ArrayList<GameCharacter>();
 characters.add(newt);
 //items =new ArrayList<Item>();
 //menus =new ArrayList<Menu>();

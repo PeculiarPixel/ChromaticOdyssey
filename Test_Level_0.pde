@@ -9,9 +9,9 @@ Level nextState(){
 
 
 
-Test_Level_0(PlayerCharacter newt){
+Test_Level_0(GameCharacter newt){
 cutscenes =new ArrayList<Movie>();
-characters =new ArrayList<PlayerCharacter>();
+characters =new ArrayList<GameCharacter>();
 characters.add(newt);
 //items =new ArrayList<Item>();
 //menus =new ArrayList<Menu>();

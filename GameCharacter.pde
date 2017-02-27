@@ -1,4 +1,4 @@
-class PlayerCharacter{
+class GameCharacter{
   
   private GlobalInfo global;
   private LocalInfo local;
@@ -15,7 +15,7 @@ class PlayerCharacter{
    
 
     
-    PlayerCharacter(){
+    GameCharacter(){
     global = new GlobalInfo(1,2,3);
     local = new LocalInfo(100,100,global.sprite.width,global.sprite.height,3,4,5);
     //comp.players.add(this);
