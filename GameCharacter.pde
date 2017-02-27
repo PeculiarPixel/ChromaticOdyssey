@@ -4,13 +4,13 @@ class GameCharacter{
   private LocalInfo local;
     
     
-  void displaySprite(){
+/*  void displaySprite(){
     imageMode(CENTER);
     image(global.sprite,local.xPos ,local.yPos );
     if(local.hitboxDisplay){
       local.hitbox.display();
     }
-  }
+  }*/
    
    
 

@@ -3,9 +3,9 @@ ArrayList<Hitbox> hitboxes;
   private float xPos;  //the player's current position X
   private float yPos;  // the player's curent position Y
 //ArrayList<Sprite> sprites; // possibly sprite_Animations
-  void display(){
+  /*void display(){
     hitboxes.get(0).display();
-  }
+  }*/
 
 Landscape(float x, float y,float sizeX, float sizeY, String type){
   xPos = x;

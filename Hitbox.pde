@@ -7,13 +7,13 @@ class Hitbox{
   private String designation;
   private boolean isHitX;
   private boolean isHitY;
-  void display(){
-    fill(255,255,255);
+  /*void display(){
+   fill(255,255,255);
     stroke(10);  
     fill(this.showColor, 100);
     rectMode(CENTER);
     rect(xPos, yPos, hitWidth, hitHeight);
-  }
+  }*/
   
    
   

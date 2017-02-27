@@ -5,6 +5,7 @@ GameCharacter newt;
 boolean hitBoxMode = false;
 ComputationEngine comp;
 StateEngine state;
+DisplayEngine display;
 Test_Level_0 beginning;  //we now set the beginning to level 0
 void setup(){
   size(1024, 768);
@@ -14,6 +15,7 @@ void setup(){
   comp  = new ComputationEngine();
   comp.players.add(newt);
   state  = new StateEngine(beginning);
+  display = new DisplayEngine();
 }
 
 
@@ -61,17 +63,9 @@ if (keyCode == UP) {
 
 
 
-void draw(){
-  background(0);
-  newt.displaySprite();
-  
+void draw(){  
    state.run();
    comp.run();
-   //display.run();
-  if(hitBoxMode){
-    newt.local.hitboxDisplay = true;
-    for(int i=0;i<comp.hitboxes.size();i++){
-    comp.hitboxes.get(i).display();
-    }
-  }
+   display.run();
+
 }

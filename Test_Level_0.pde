@@ -18,7 +18,11 @@ characters.add(newt);
 
 //next = new Test_Level_1(newt);
 landscapes =new ArrayList<Landscape>();
-landscapes.add(new Landscape(300, 150,100,100,"Landscape")); // this needs to be deleted eventually so we can just extend the level to a new level
+landscapes.add(new Landscape(300, 150,10,10,"Landscape"));
+landscapes.add(new Landscape(310, 160,10,10,"Landscape"));
+landscapes.add(new Landscape(320, 170,10,10,"Landscape"));
+landscapes.add(new Landscape(330, 180,10,10,"Landscape"));
+landscapes.add(new Landscape(340, 190,10,10,"Landscape"));// this needs to be deleted eventually so we can just extend the level to a new level
 landscapes.add(new Landscape(600, 300, 100, 100,"EventBox"));
 }
 
