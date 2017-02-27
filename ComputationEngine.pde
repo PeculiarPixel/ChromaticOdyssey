@@ -59,9 +59,9 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
   } 
 
 
-  void moveCharacter(float speed){
+  void moveCharacter(float speed){ //<>//
     
-    if(players.get(0).local.moveUp){
+    if(players.get(0).local.moveUp){ //<>//
       moveCheck(0.0,-speed);
     }
     if(players.get(0).local.moveDown){

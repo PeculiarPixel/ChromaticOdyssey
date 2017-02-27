@@ -15,6 +15,10 @@ void setup(){
   comp.players.add(newt);
   state  = new StateEngine(beginning);
 
+  // Basic swapState test
+  Level l1 = new Level(newt);
+  StateEvent e = new StateEvent(l1);
+  state.swapState(e);
 
 }
 
