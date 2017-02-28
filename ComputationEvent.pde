@@ -1,13 +1,13 @@
 class ComputationEvent extends Event {
-  int value;
-  GameCharacter affectedCharacter;
   
+  int value;               // Value to compute
+  GameCharacter target;    // Target of value
   
-  
-  ComputationEvent(int number,GameCharacter guy){
+  // Constructor
+  ComputationEvent(int value, GameCharacter target){
     type = "ComputationEvent";
-    value=number;
-    affectedCharacter = guy;
+    this.value = value;
+    this.target = target;
   }  
 
 }
