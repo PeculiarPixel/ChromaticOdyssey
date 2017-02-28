@@ -13,6 +13,7 @@ class EventDispatcher {
         break;
       case "DisplayableEvent":
         sendDisplayable((DisplayableEvent) e);  // Send displayable events
+        break;
       default: 
         println("Event class not registered");  
     }
