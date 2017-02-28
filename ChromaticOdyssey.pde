@@ -1,21 +1,20 @@
 import processing.video.*;
 
-
-GameCharacter newt;
-boolean hitBoxMode = false;
-ComputationEngine comp;
-StateEngine state;
-DisplayEngine display;
-Test_Level_0 beginning;  //we now set the beginning to level 0
 void setup(){
-  size(1024, 768);
-  background(0);
-  frameRate(60);
+  
+  surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
+  surface.setResizable(false);                   // Disable resize
+  background(BACKGROUND_COLOR);                  // Background refresh color
+  frameRate(FRAMES_PER_SECOND_RATE);             // FPS rate
+  
+  // Instantiate newt, engines, event dispatcher
   newt = new GameCharacter();
   comp  = new ComputationEngine();
   comp.players.add(newt);
   state  = new StateEngine(beginning);
   display = new DisplayEngine();
+  dispatcher = new EventDispatcher();
+  
 }
 
 
@@ -64,8 +63,10 @@ if (keyCode == UP) {
 
 
 void draw(){  
-   state.run();
-   comp.run();
-   display.run();
+  
+  // Run engines to handle incoming events
+  state.run();
+  comp.run();
+  display.run();
 
 }

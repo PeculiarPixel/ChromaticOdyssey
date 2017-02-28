@@ -1,6 +1,6 @@
-class DisplayEngine{
+class DisplayEngine {
   
-   ArrayList<DisplayableEvent> displayableEvents = new ArrayList<DisplayableEvent>();
+   ArrayList<DisplayableEvent> events = new ArrayList<DisplayableEvent>();
 
     void displayHitbox(Hitbox hit){
     fill(255,255,255);
@@ -10,11 +10,10 @@ class DisplayEngine{
     rect(hit.xPos, hit.yPos, hit.hitWidth, hit.hitHeight);
   }
   
-    void displayCharacter(GameCharacter guy){
-    imageMode(CENTER);
-
+  void displayCharacter(GameCharacter guy){
     
- 
+    imageMode(CENTER);
+   
     image(guy.global.sprite,guy.local.xPos,guy.local.yPos);
     if(guy.local.hitboxDisplay){
       displayHitbox(guy.local.hitbox);
@@ -30,6 +29,7 @@ class DisplayEngine{
   
   
   void run(){
+    
     background(0);  
     
     GameCharacter tempChar;
