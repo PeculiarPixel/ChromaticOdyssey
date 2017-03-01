@@ -15,6 +15,10 @@ void setup(){
   display = new DisplayEngine();
   dispatcher = new EventDispatcher();
   
+  px=0; //px is the world translation in the x direction
+  py=0; //py is the world translation in the y direction
+  saveX = newt.local.xPos;  //this saves newt's previous x position for movement delta purposes
+  saveY = newt.local.yPos;  //this saves newt's previous y position for movement delta purposes
 }
 
 

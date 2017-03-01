@@ -9,14 +9,16 @@ void run(){
   // Loop through all registered computation events
   for(ComputationEvent e : events) {
     if(e.type == "ComputationEvent") { 
-      print("Character health reduced from " +  e.target.local.currHealth);
+      //print("Character health reduced from " +  e.target.local.currHealth);
       e.target.local.currHealth += e.value;
-      print(" to " + e.target.local.currHealth + "\n");
+      //print(" to " + e.target.local.currHealth + "\n");
     }
   }
   events.clear();
-  moveCharacter(5.0);
-  
+  moveWorld();              //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
+  moveCharacter(5.0); //input is movespeed
+
+
 }
 
 void clear() {  //clears the computation engine when a new state is declared
@@ -33,7 +35,7 @@ void clear() {  //clears the computation engine when a new state is declared
 
 
 void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChange){
-  
+
   if((hBox1.yPos + hBox1.hitHeight/2 >= hBox2.yPos - hBox2.hitHeight/2 &&
     hBox1.yPos - hBox1.hitHeight/2 <= hBox2.yPos + hBox2.hitHeight/2) &&
     (hBox1.xPos + hBox1.hitWidth/2 >= hBox2.xPos - hBox2.hitWidth/2 + xChange &&
@@ -66,7 +68,6 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
   if(hBox1.designation =="DamageBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test computable event
     dispatcher.dispatch(new ComputationEvent(-10,newt));
   }
-
 
 }
 
@@ -101,9 +102,36 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
     if(players.get(0).local.moveRight){
       moveCheck(speed,0.0);
     }
-    
-
   }
+  
+//Move world calculates the translation factor that you will move the background based on character movement
+  void moveWorld(){
+    px = px + (saveX-newt.local.xPos);
+    py = py + (saveY-newt.local.yPos);
+
+  /*if(newt.local.xPos<(3*(width/10))){      //fancier movement, may be inadvisable
+      px = px + (saveX-newt.local.xPos)/2;
+  }else if(newt.local.xPos>(6*(width/10))){
+        px = px + (saveX-newt.local.xPos)/2;
+  }else{
+    px = px + (saveX-newt.local.xPos)/8;
+  }
+  if(newt.local.yPos<(3*(height/10))){
+      py = py + (saveY-newt.local.yPos)/2;
+  }else if(newt.local.yPos>(6*(height/10))){
+        py = py + (saveY-newt.local.yPos)/2;
+  }else{
+     py = py + (saveY-newt.local.yPos)/8;
+  }*/
+
+
+
+  saveX = newt.local.xPos;
+  saveY = newt.local.yPos;
+  } 
+
+
+
 
   // Constructor
   ComputationEngine() {

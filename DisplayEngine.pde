@@ -30,19 +30,24 @@ class DisplayEngine {
   
   void run(){
     
-    background(0);  
+   background(0);
+
+   pushMatrix();            //in order to move the world around the character you must translate the frame of reference when you display everything
+   translate(px, py);
+
+    Landscape tempLand;
+    for(int i=0; i <state.currentState.landscapes.size();i++){
+      tempLand = state.currentState.landscapes.get(i);
+      displayLandscape(tempLand);
+    }  
+
     
     GameCharacter tempChar;
     for(int i=0; i <state.currentState.characters.size();i++){
       tempChar = state.currentState.characters.get(i);
       displayCharacter(tempChar);
-    }  
-    Landscape tempLand;
-    for(int i=0; i <state.currentState.landscapes.size();i++){
-      tempLand = state.currentState.landscapes.get(i);
-      displayLandscape(tempLand);
     }     
-   
+    popMatrix(); 
     if(hitBoxMode){
     newt.local.hitboxDisplay = true;
 
