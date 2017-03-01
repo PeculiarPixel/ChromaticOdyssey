@@ -14,3 +14,9 @@ DisplayEngine display;            // Display Engine
 EventDispatcher dispatcher;       // Event Dispatcher
 
 Test_Level_0 beginning;           // Test Level 0
+
+//movement variables
+  float px;
+  float py;
+  float saveX;
+  float saveY;
