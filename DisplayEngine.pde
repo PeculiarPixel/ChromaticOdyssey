@@ -34,6 +34,8 @@ class DisplayEngine {
 
    pushMatrix();            //in order to move the world around the character you must translate the frame of reference when you display everything
    translate(px, py);
+   
+   
 
     Landscape tempLand;
     for(int i=0; i <state.currentState.landscapes.size();i++){
@@ -50,6 +52,12 @@ class DisplayEngine {
     popMatrix(); 
     if(hitBoxMode){
     newt.local.hitboxDisplay = true;
+    
+    // test displaying loaded sprites
+    image(newtWalk.sprites[0], 50, 50);
+    image(newtWalk.sprites[1], 150, 50);
+    image(newtIdle.sprites[0], 50, 160);
+    image(newtIdle.sprites[1], 150, 160);
 
   }
     
