@@ -28,6 +28,16 @@ void initializeGlobals() {
   py=0; //py is the world translation in the y direction
   saveX = newt.local.xPos;  //this saves newt's previous x position for movement delta purposes
   saveY = newt.local.yPos;  //this saves newt's previous y position for movement delta purposes
+  
+  try {
+    newtWalk = spriteLibrary.getSpriteAnimation("NewtWalk");
+    newtIdle = spriteLibrary.getSpriteAnimation("NewtIdle");
+  } catch (DirectoryNotFoundException dnfe) {
+      println(dnfe.getLocalizedMessage());
+  } catch (NoDirPathEntryFoundException ndpfe) {
+      println(ndpfe.getLocalizedMessage());
+  }
+  
 }
 
 

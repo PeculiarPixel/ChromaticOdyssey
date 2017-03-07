@@ -9,7 +9,7 @@ class FileUtils {
     
     // Load all images into the sprite array
     for (int i = 0; i < animationFiles.length; i++) {
-      sprites[i] = loadImage(animationFiles[i].getName());
+      sprites[i] = loadImage(animationFiles[i].getAbsolutePath());
     }
     
     return sprites;    // Return the array of sprites
@@ -19,7 +19,9 @@ class FileUtils {
   // Setup a file collection from dir path
   private File[] getFileListOfDirectory(String dirPath) throws DirectoryNotFoundException {
     
-      File dir = new File(dirPath);  // Get directory by path
+      println(dataPath(dirPath));
+    
+      File dir = new File(dataPath(dirPath));  // Get directory by path
       
       // Get all files for animation lib
       if (dir.isDirectory()) {
@@ -27,7 +29,7 @@ class FileUtils {
         return files;
       } 
       
-      throw new DirectoryNotFoundException();
+      throw new DirectoryNotFoundException(dirPath);
       
   }
 

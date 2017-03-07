@@ -17,6 +17,9 @@ FileUtils fileUtils;                    // File I/O Utilities
 
 Test_Level_0 beginning;           // Test Level 0
 
+SpriteAnimation newtWalk;
+SpriteAnimation newtIdle;
+
 //movement variables
   float px;
   float py;
