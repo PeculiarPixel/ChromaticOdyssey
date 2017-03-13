@@ -2,9 +2,13 @@ class GameCharacter{
   
   private GlobalInfo global;
   private LocalInfo local;
+  private GameCharacterName name;
    
     // Constructor
-    GameCharacter() {
+    GameCharacter(GameCharacterName name) {
+      
+      // Character's identifier
+      this.name = name;
       
       // Global info
       global = new GlobalInfo(100, 0, 100);
@@ -39,4 +43,9 @@ class GameCharacter{
       global.updateSpriteDirection(direction);
     }
     
+}
+
+// Characters identifiers
+enum GameCharacterName {
+  NEWT, KIT, MYTHRA, RUSS, FAISAL, PRAGMA, KNIGHT;
 }
