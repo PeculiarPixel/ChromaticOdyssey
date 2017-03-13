@@ -59,7 +59,7 @@ class LocalInfo{
          
     }
     
-    void releaseDirection(MoveDirection direction) {
+    boolean releaseDirection(MoveDirection direction) {
         
       switch(direction) {
           case LEFT:
@@ -79,8 +79,11 @@ class LocalInfo{
         if (!isMoving()) {
           this.direction = MoveDirection.IDLE;
           println("Current direction: " + this.direction);
+          return true;
         }
         
+        return false;
+  
     }
     
     boolean isMoving() {

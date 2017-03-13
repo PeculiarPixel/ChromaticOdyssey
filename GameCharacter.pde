@@ -17,12 +17,26 @@ class GameCharacter{
     
     // Set character move direction
     void setDirection(MoveDirection direction) {
+      if (isDirectionChange(direction)) updateSprite(direction);
       local.setDirection(direction);
     }
     
     // Release character move direction
     void releaseDirection(MoveDirection direction) {
-      local.releaseDirection(direction);
+      if (local.releaseDirection(direction)) updateSprite(MoveDirection.IDLE);
+    }
+    
+    boolean isDirectionChange(MoveDirection direction) {
+      return local.isDirectionChange(direction);
+    }
+    
+    boolean isMoving() {
+      if (local.isMoving()) return true;
+      return false;
+    }
+    
+    void updateSprite(MoveDirection direction) {
+      global.updateSpriteDirection(direction);
     }
     
 }
