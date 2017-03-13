@@ -40,41 +40,39 @@ void initializeGlobals() {
   
 }
 
-
+// Key Pressed Events
 void keyPressed() {
 
   //newt.inputPressed();
   if (keyCode == UP) {
-    newt.local.moveUp = true;
+    newt.setDirection(MoveDirection.UP);
   }
   if(keyCode == DOWN){
-    newt.local.moveDown = true;
+    newt.setDirection(MoveDirection.DOWN);
   }
   if(keyCode == LEFT){
-   newt.local.moveLeft = true;
+   newt.setDirection(MoveDirection.LEFT);
   }
   if(keyCode == RIGHT){
-    newt.local.moveRight = true;
+    newt.setDirection(MoveDirection.RIGHT);
   }
 }
 
-
-//boolean hitBoxMode = false;
-
+// Key Released Events
 void keyReleased() {
   
 //  newt.inputReleased();
 if (keyCode == UP) {
-    newt.local.moveUp = false;
+    newt.releaseDirection(MoveDirection.UP);
   }
   if(keyCode == DOWN){
-    newt.local.moveDown = false;
+    newt.releaseDirection(MoveDirection.DOWN);
   }
   if(keyCode == LEFT){
-   newt.local.moveLeft = false;
+   newt.releaseDirection(MoveDirection.LEFT);
   }
   if(keyCode == RIGHT){
-    newt.local.moveRight = false;
+    newt.releaseDirection(MoveDirection.RIGHT);
   }
   if(key == 'h' || key == 'H'){
       hitBoxMode = !hitBoxMode;

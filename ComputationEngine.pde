@@ -76,9 +76,9 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
       computeIntersection(hitboxes.get(i), players.get(0).local.hitbox,xChange,yChange);
       if(players.get(0).local.hitbox.isHitX)
         xChange = 0;
-      if(players.get(0).local.hitbox.isHitY) //<>//
+      if(players.get(0).local.hitbox.isHitY) //<>// //<>// //<>//
         yChange = 0;
-    } //<>//
+    } //<>// //<>// //<>//
 
     players.get(0).local.xPos += xChange;
     players.get(0).local.yPos += yChange;
@@ -88,20 +88,26 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
   } 
 
 
-  void moveCharacter(float speed){ //<>// //<>//
+  void moveCharacter(float speed){ //<>// //<>// //<>// //<>//
     
-    if(players.get(0).local.moveUp){ //<>// //<>//
-      moveCheck(0.0,-speed);
+    GameCharacter newt = players.get(0); //<>// //<>//
+    
+    if (newt.local.isMoving()) {
+      if(newt.local.moveUp){ //<>// //<>//
+        moveCheck(0.0,-speed);
+      }
+      if(newt.local.moveDown){
+        moveCheck(0.0,speed);
+      }
+      if(newt.local.moveLeft){
+        moveCheck(-speed,0.0);
+      }
+      if(newt.local.moveRight){
+        moveCheck(speed,0.0);
+      }
     }
-    if(players.get(0).local.moveDown){
-      moveCheck(0.0,speed);
-    }
-    if(players.get(0).local.moveLeft){
-      moveCheck(-speed,0.0);
-    }
-    if(players.get(0).local.moveRight){
-      moveCheck(speed,0.0);
-    }
+    
+    
   }
   
 //Move world calculates the translation factor that you will move the background based on character movement
