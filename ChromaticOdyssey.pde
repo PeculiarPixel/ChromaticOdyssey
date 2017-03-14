@@ -1,7 +1,9 @@
 import processing.video.*;
-boolean initValues; //<>//
+import processing.sound.*; //<>//
+boolean initValues;
+
   void setup() {
-    size(1024,768,P2D);
+    size(1024, 768, P2D);
     smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
@@ -11,8 +13,9 @@ boolean initValues; //<>//
     //initializeGlobals();                           // Initialize Globals
     println("after globals");                                  // Show title screen
     initValues = false;
+    SoundFile song = new SoundFile(this, "Beepbox-Song.wav");
+    song.loop();
   }
-
 
   // Instantiate newt, engines, event dispatcher, spriteLibrary, &c
   private void initializeGlobals() {

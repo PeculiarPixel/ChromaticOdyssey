@@ -5,6 +5,6 @@ abstract class ComputationEvent extends Event {
     this.type = EventTypeEnum.COMPUTATION;
   }
   
-  abstract void compute();
-
+  abstract void compute(); 
+  
 }
