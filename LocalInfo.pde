@@ -27,7 +27,7 @@ class LocalInfo{
       moveDown = false;
       moveLeft = false;
       moveRight = false;
-      hitbox = new Hitbox(x,  y, sizeX, sizeY, color(0, 255, 0), "player");
+      hitbox = new Hitbox(x,  y, sizeX, sizeY, color(0, 255, 0), "player",-1);
     }
     
     

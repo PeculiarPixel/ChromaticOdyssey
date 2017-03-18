@@ -86,6 +86,7 @@ if (keyCode == UP) {
   //Dialog Window Checks//
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
         comp.updateDialog();
+    
     }
 }
 

@@ -18,10 +18,13 @@ characters.add(newt);
 
 //next = new Test_Level_0(newt);
 landscapes =new ArrayList<Landscape>();
-landscapes.add(new Landscape(350, 350,100,100,"Landscape")); // this needs to be deleted eventually so we can just extend the level to a new level
-landscapes.add(new Landscape(120, 120, 100, 100,"EventBox"));
+landscapes.add(new Landscape(350, 350,100,100,"Landscape",-1)); 
+landscapes.add(new Landscape(120, 120, 100, 100,"EventBox",-1));
+
+landscapes.add(new Landscape(300, 120, 100, 100,"DialogBox",0));
+landscapes.add(new Landscape(700, 120, 100, 100,"DialogBox",1));
 try{
-  conversations= fileUtils.getLevelConversations("levelScripts/level0");
+  conversations= fileUtils.getLevelConversations("levelScripts/level1");
  } catch (DirectoryNotFoundException dnfe) {
       println(dnfe.getLocalizedMessage());
   } 
