@@ -6,7 +6,7 @@ class SpriteAnimation {
   int tickSpeed;                     // Animation tick rate
   
   int currentTime = 0;               // Current time
-  long lastTick = 0;                 // Previous game tick
+  int lastTick = 0;                 // Previous game tick
   int currentImage = 0;              // Currently displayed animation image
   
   // Constructor
@@ -20,7 +20,10 @@ class SpriteAnimation {
     currentImage = ((currentImage + 1) % sprites.length);
   }
   
-  public void update(long currentTick) {
+  // Update animation image based on time
+  public void update() {
+    
+    int currentTick = frameCount;
     
     // Update animation times
     this.currentTime += currentTick - this.lastTick;
@@ -35,6 +38,17 @@ class SpriteAnimation {
   }
   
   // Get current image to display
-  public PImage getCurrentImage() { return this.sprites[currentImage]; } 
+  public PImage getCurrentImage() { return this.sprites[currentImage]; }
+  
+  // Reset animation counts
+  public void resetAnimation() {
+    this.currentTime = 0;
+    this.lastTick = 0;
+    this.currentImage = 0;
+  }  
+  
+  // Change tick speed of animation
+  public void changeTickSpeed(int tickSpeed) { this.tickSpeed = tickSpeed; }
+    
   
 }
