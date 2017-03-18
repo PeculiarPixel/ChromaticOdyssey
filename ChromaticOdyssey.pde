@@ -13,7 +13,7 @@ void setup(){
 
 // Instantiate newt, engines, event dispatcher, spriteLibrary, &c
 void initializeGlobals() {
-  
+ 
   fileUtils = new FileUtils();
   spriteLibrary = new SpriteAnimationLibrary();
   
@@ -24,20 +24,11 @@ void initializeGlobals() {
   display = new DisplayEngine();
   dispatcher = new EventDispatcher();
   
-  
   px=0; //px is the world translation in the x direction
   py=0; //py is the world translation in the y direction
   saveX = newt.local.xPos;  //this saves newt's previous x position for movement delta purposes
   saveY = newt.local.yPos;  //this saves newt's previous y position for movement delta purposes
   
-  try {
-    newtWalk = spriteLibrary.getSpriteAnimation("NewtWalk");
-    newtIdle = spriteLibrary.getSpriteAnimation("NewtIdle");
-  } catch (DirectoryNotFoundException dnfe) {
-      println(dnfe.getLocalizedMessage());
-  } catch (NoDirPathEntryFoundException ndpfe) {
-      println(ndpfe.getLocalizedMessage());
-  }
   //init dialog global values//
   dialog = false;  //whether or not the dialog box pops up
   saveSpot =0;     //the index of the script in the current dialog

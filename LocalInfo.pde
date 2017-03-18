@@ -60,26 +60,52 @@ class LocalInfo{
     }
     
     boolean releaseDirection(MoveDirection direction) {
+      
+      MoveDirection lastDirection;
         
       switch(direction) {
           case LEFT:
             moveLeft = false;
+            lastDirection = MoveDirection.LEFT;
             break;
           case RIGHT:
             moveRight = false;
+            lastDirection = MoveDirection.RIGHT;
             break;
           case UP:
             moveUp = false;
+            lastDirection = MoveDirection.UP;
             break;
           case DOWN:
            moveDown = false;
+           lastDirection = MoveDirection.DOWN;
            break;
+           default:
+             lastDirection = MoveDirection.DOWN;
         }    
       
         if (!isMoving()) {
-          this.direction = MoveDirection.IDLE;
+          
+          switch(lastDirection) {
+            case LEFT:
+               this.direction = MoveDirection.IDLE_LEFT;
+               break;
+            case RIGHT:
+              this.direction = MoveDirection.IDLE_RIGHT;
+              break;
+            case UP:
+              this.direction = MoveDirection.IDLE_UP;
+              break;
+            case DOWN:
+              this.direction = MoveDirection.IDLE_DOWN;
+              break;
+            default:
+              this.direction = MoveDirection.IDLE_DOWN;
+          }
+          
           println("Current direction: " + this.direction);
           return true;
+          
         }
         
         return false;
@@ -95,9 +121,13 @@ class LocalInfo{
       if (this.direction != newDirection) return true;
       return false;
     }
+    
+    // Get direction
+    public MoveDirection getDirection() { return this.direction; }
 
 }
 
 enum MoveDirection {
-  LEFT, RIGHT, UP, DOWN, IDLE;
+  LEFT, RIGHT, UP, DOWN, IDLE,
+  IDLE_UP, IDLE_DOWN, IDLE_LEFT, IDLE_RIGHT;
 }

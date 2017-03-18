@@ -37,8 +37,10 @@ class DisplayEngine {
   void displayCharacter(GameCharacter guy){
     
     imageMode(CENTER);
-   
-    image(guy.global.sprite,guy.local.xPos,guy.local.yPos);
+    
+    guy.updateSpriteAnimation();
+    image(guy.getCurrentImage(), guy.local.xPos, guy.local.yPos);
+    
     if(guy.local.hitboxDisplay){
       displayHitbox(guy.local.hitbox);
     }
@@ -51,8 +53,8 @@ class DisplayEngine {
   }
   
   
-  
-  void run(){
+  // Run display engine
+  void run() {
     
    background(0);
 
@@ -74,14 +76,8 @@ class DisplayEngine {
       displayCharacter(tempChar);
     }     
     popMatrix(); 
-    if(hitBoxMode){
+    if(hitBoxMode) {
     newt.local.hitboxDisplay = true;
-    
-    // test displaying loaded sprites
-    image(newtWalk.sprites[0], 50, 50);
-    image(newtWalk.sprites[1], 150, 50);
-    image(newtIdle.sprites[0], 50, 160);
-    image(newtIdle.sprites[1], 150, 160);
 
   }
     if(dialog){

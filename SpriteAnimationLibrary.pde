@@ -13,8 +13,15 @@ public class SpriteAnimationLibrary {
   private void loadAnimationPaths() {
     
     // Extend for all animation paths
-    AnimationDirPathMap.put("NewtWalk", "SpriteAnimations/Newt/WalkAnimation");
-    AnimationDirPathMap.put("NewtIdle", "SpriteAnimations/Newt/IdleAnimation");
+    AnimationDirPathMap.put("NewtIdleUp", "SpriteAnimations/Newt/IdleAnimationUp");
+    AnimationDirPathMap.put("NewtIdleDown", "SpriteAnimations/Newt/IdleAnimationDown");
+    AnimationDirPathMap.put("NewtIdleLeft", "SpriteAnimations/Newt/IdleAnimationLeft");
+    AnimationDirPathMap.put("NewtIdleRight", "SpriteAnimations/Newt/IdleAnimationRight");
+    AnimationDirPathMap.put("NewtWalkUp", "SpriteAnimations/Newt/WalkAnimationUp");
+    AnimationDirPathMap.put("NewtWalkDown", "SpriteAnimations/Newt/WalkAnimationDown");
+    AnimationDirPathMap.put("NewtWalkLeft", "SpriteAnimations/Newt/WalkAnimationLeft");
+    AnimationDirPathMap.put("NewtWalkRight", "SpriteAnimations/Newt/WalkAnimationRight");
+    
     
   }
   
@@ -35,13 +42,44 @@ public class SpriteAnimationLibrary {
   
   
   // Return designated SpriteAnimation using key of the path
-  public SpriteAnimation getSpriteAnimation(String pathKey) throws DirectoryNotFoundException, NoDirPathEntryFoundException {
+  public SpriteAnimation getSpriteAnimation(String pathKey, int ANIMATION_RATE) throws DirectoryNotFoundException, NoDirPathEntryFoundException {
     
-    String path = getDirPathByKey(pathKey);                      // Get path from library
-    PImage[] images = fileUtils.getSpriteAnimations(path);       // Get all the images designated
-    SpriteAnimation animation = new SpriteAnimation(images);     // Create the new SpriteAnimation
+    String path = getDirPathByKey(pathKey);                            // Get path from library
+    PImage[] images = fileUtils.getSpriteAnimations(path);             // Get all the images designated
+    
+    SpriteAnimation animation = new SpriteAnimation(images, ANIMATION_RATE);     // Create the new SpriteAnimation
     
     return animation;  // Return the SpriteAnimationS    
+  }
+  
+  public ArrayList<SpriteAnimation> getCharacterAnimations(GameCharacterName name) {
+  
+    // Setup animations for character
+    ArrayList<SpriteAnimation> animations = new ArrayList<SpriteAnimation>(10);
+    
+    try {
+      switch(name) {
+        case NEWT:
+          animations.add(IDLE_UP_ANIMATION_INDEX, getSpriteAnimation("NewtIdleUp", IDLE_ANIMATION_RATE));
+          animations.add(IDLE_DOWN_ANIMATION_INDEX, getSpriteAnimation("NewtIdleDown", IDLE_ANIMATION_RATE));
+          animations.add(IDLE_LEFT_ANIMATION_INDEX, getSpriteAnimation("NewtIdleLeft", IDLE_ANIMATION_RATE));
+          animations.add(IDLE_RIGHT_ANIMATION_INDEX, getSpriteAnimation("NewtIdleRight", IDLE_ANIMATION_RATE));
+          animations.add(WALK_UP_ANIMATION_INDEX, getSpriteAnimation("NewtWalkUp", WALK_ANIMATION_RATE));
+          animations.add(WALK_DOWN_ANIMATION_INDEX, getSpriteAnimation("NewtWalkDown", WALK_ANIMATION_RATE));
+          animations.add(WALK_LEFT_ANIMATION_INDEX, getSpriteAnimation("NewtWalkLeft", WALK_ANIMATION_RATE));
+          animations.add(WALK_RIGHT_ANIMATION_INDEX, getSpriteAnimation("NewtWalkRight", WALK_ANIMATION_RATE));
+        default:
+  
+      }
+    } catch (NoDirPathEntryFoundException e) {
+      println(e.getLocalizedMessage());
+    } catch (DirectoryNotFoundException e) {
+      println(e.getLocalizedMessage());
+    }
+    
+   
+    return animations;
+    
   }
   
 }
