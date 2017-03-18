@@ -7,7 +7,7 @@ ArrayList<Hitbox> hitboxes;
     hitboxes.get(0).display();
   }*/
 
-Landscape(float x, float y,float sizeX, float sizeY, String type){
+Landscape(float x, float y,float sizeX, float sizeY, String type, int number){
   xPos = x;
   yPos = y;
   int r=255;
@@ -23,7 +23,11 @@ Landscape(float x, float y,float sizeX, float sizeY, String type){
      r = 255;
      g = 0;
      b = 0;
+  }else if(type =="DialogBox"){
+     r = 0;
+     g = 0;
+     b = 255;
   }
-  hitboxes.add(new Hitbox(x,  y, sizeX, sizeY, color(r, g,b), type));
+  hitboxes.add(new Hitbox(x,  y, sizeX, sizeY, color(r, g,b), type, number));
 }
 }

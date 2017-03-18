@@ -7,6 +7,7 @@ class Hitbox{
   private String designation;
   private boolean isHitX;
   private boolean isHitY;
+  private int conversationIndex;
   /*void display(){
    fill(255,255,255);
     stroke(10);  
@@ -17,7 +18,7 @@ class Hitbox{
   
    
   
-    Hitbox(float x, float y, float w, float h, color c, String t){
+    Hitbox(float x, float y, float w, float h, color c, String t, int number){
     this.xPos = x;
     this.yPos = y;
     this.hitWidth = w;
@@ -28,6 +29,11 @@ class Hitbox{
     isHitY=false;
     if(designation != "player"){
       comp.hitboxes.add(this);
+    }
+    if(t == "DialogBox"){
+      conversationIndex = number;
+    }else{
+      conversationIndex = -1;
     }
   }
   

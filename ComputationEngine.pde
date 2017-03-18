@@ -3,7 +3,7 @@ class ComputationEngine{ //will extend this class into different landscapes if n
 ArrayList<Hitbox> hitboxes;
 ArrayList<GameCharacter> players;
 ArrayList<ComputationEvent> events = new ArrayList<ComputationEvent>();
-
+int conversationIndex;
 void run(){
   
   // Loop through all registered computation events
@@ -17,7 +17,6 @@ void run(){
   events.clear();
   moveWorld();              //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
-
 
 }
 
@@ -68,7 +67,12 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
   if(hBox1.designation =="DamageBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test computable event
     dispatcher.dispatch(new ComputationEvent(-10,newt));
   }
-
+  if(hBox1.designation =="DialogBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test dialog
+    dialog = true;
+    hBox1.isHitX = false;
+    hBox1.isHitY = false;
+    conversationIndex = hBox1.conversationIndex;
+  }
 }
 
  void moveCheck(float xChange, float yChange){ //this assumes that the player's hitbox is initialized and added to the computation engine first, player is hitboxes[0]
@@ -121,17 +125,20 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
 
  void updateDialog(){            //Nathan- Partially implemented dialog test.  Works for one conversation, need to update to pull conversations from file, and when to trigger conversations
       if(dialog==false){
-        dialog = true;   // make the window appear
+        //dialog = true;   // make the window appear
+        println("dialog is false");
       }else{
-        if(state.currentState.conversations.get(0).currentLine < state.currentState.conversations.get(0).script.size()-1){ //you press enter to go to the next line of conversation
+        println("dialog is true");
+        if(state.currentState.conversations.get(conversationIndex).currentLine < state.currentState.conversations.get(conversationIndex).script.size()-1){ //you press enter to go to the next line of conversation
            saveSpot =0;
            displayText="";
-           state.currentState.conversations.get(0).currentLine++;  //go to next line of conversation
+           state.currentState.conversations.get(conversationIndex).currentLine++;  //go to next line of conversation
+
         }else{
           //reset or go to next conversation.  right now it resets the conversation and removes the conversation bar.
            saveSpot =0;
            displayText="";
-           state.currentState.conversations.get(0).currentLine=0;  //start conversation over
+           state.currentState.conversations.get(conversationIndex).currentLine=0;  //start conversation over
            dialog = false; //remove the dialog window
         }
       }

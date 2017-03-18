@@ -86,7 +86,7 @@ class DisplayEngine {
   }
     if(dialog){
       //print("enter has been pressed");
-     displayDialog(state.currentState.conversations.get(0));
+     displayDialog(state.currentState.conversations.get(comp.conversationIndex));
     }
     
   }
