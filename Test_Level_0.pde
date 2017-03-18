@@ -12,6 +12,7 @@ Level nextState(){
 Test_Level_0(GameCharacter newt){
 cutscenes =new ArrayList<Movie>();
 characters =new ArrayList<GameCharacter>();
+conversations = new ArrayList<Dialog>();
 characters.add(newt);
 //items =new ArrayList<Item>();
 //menus =new ArrayList<Menu>();
@@ -26,6 +27,12 @@ landscapes.add(new Landscape(340, 190,10,10,"Landscape"));// this needs to be de
 landscapes.add(new Landscape(600, 300, 100, 100,"EventBox"));
 
 landscapes.add(new Landscape(200, 200, 300, 100,"DamageBox"));
+
+try{
+  conversations = fileUtils.getLevelConversations("levelScripts/level0");
+ } catch (DirectoryNotFoundException dnfe) {
+      println(dnfe.getLocalizedMessage());
+  } 
 }
 
 }

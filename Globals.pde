@@ -25,3 +25,8 @@ SpriteAnimation newtIdle;
   float py;
   float saveX;
   float saveY;
+  
+//globals for tracking
+boolean dialog;                           //is dialog window up
+String displayText;                       //the text currently being shown in the dialog window
+int saveSpot ;                            //index of the current string animation
