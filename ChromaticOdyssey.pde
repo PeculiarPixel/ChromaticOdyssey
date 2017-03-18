@@ -1,19 +1,21 @@
 import processing.video.*;
 
 void setup(){
-  
+  //gg boys
   surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
   surface.setResizable(false);                   // Disable resize
   background(BACKGROUND_COLOR);                  // Background refresh color
   frameRate(FRAMES_PER_SECOND_RATE);             // FPS rate
   
   initializeGlobals();                           // Initialize Globals
-  
 }
 
 
 // Instantiate newt, engines, event dispatcher, spriteLibrary, &c
 void initializeGlobals() {
+  
+  fileUtils = new FileUtils();
+  spriteLibrary = new SpriteAnimationLibrary();
   
   newt = new GameCharacter(GameCharacterName.NEWT);
   comp  = new ComputationEngine();
@@ -21,8 +23,7 @@ void initializeGlobals() {
   state  = new StateEngine(beginning);
   display = new DisplayEngine();
   dispatcher = new EventDispatcher();
-  spriteLibrary = new SpriteAnimationLibrary();
-  fileUtils = new FileUtils();
+  
   
   px=0; //px is the world translation in the x direction
   py=0; //py is the world translation in the y direction
@@ -37,6 +38,11 @@ void initializeGlobals() {
   } catch (NoDirPathEntryFoundException ndpfe) {
       println(ndpfe.getLocalizedMessage());
   }
+  //init dialog global values//
+  dialog = false;  //whether or not the dialog box pops up
+  saveSpot =0;     //the index of the script in the current dialog
+  displayText =""; //the text currently being displayed.
+  
   
 }
 
@@ -77,7 +83,10 @@ if (keyCode == UP) {
   if(key == 'h' || key == 'H'){
       hitBoxMode = !hitBoxMode;
   }
-
+  //Dialog Window Checks//
+    if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
+        comp.updateDialog();
+    }
 }
 
 

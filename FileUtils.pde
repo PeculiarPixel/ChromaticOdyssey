@@ -16,6 +16,25 @@ class FileUtils {
     
   }
   
+  // Get a script from file
+  public ArrayList<Dialog> getLevelConversations(String dirPath)  throws DirectoryNotFoundException {
+   println("get level conversations");
+    File[] levelConversationFiles = getFileListOfDirectory(dirPath);     // Get files
+   println("files obtained");
+    ArrayList<Dialog> levelConversations = new ArrayList<Dialog>();        // Script collection
+
+
+  //This bit below loads all the conversations
+    for (int i = 0; i < levelConversationFiles.length; i++) {
+        levelConversations.add(new Dialog(loadStrings(levelConversationFiles[i].getAbsolutePath())));// loadStrings(levelConversationFiles[i].getAbsolutePath());
+    }
+   println("script converted from file to dialog");
+
+    return levelConversations;
+  }
+  
+  
+  
   // Setup a file collection from dir path
   private File[] getFileListOfDirectory(String dirPath) throws DirectoryNotFoundException {
     

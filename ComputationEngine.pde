@@ -115,28 +115,27 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
     px = px + (saveX-newt.local.xPos);
     py = py + (saveY-newt.local.yPos);
 
-  /*if(newt.local.xPos<(3*(width/10))){      //fancier movement, may be inadvisable
-      px = px + (saveX-newt.local.xPos)/2;
-  }else if(newt.local.xPos>(6*(width/10))){
-        px = px + (saveX-newt.local.xPos)/2;
-  }else{
-    px = px + (saveX-newt.local.xPos)/8;
-  }
-  if(newt.local.yPos<(3*(height/10))){
-      py = py + (saveY-newt.local.yPos)/2;
-  }else if(newt.local.yPos>(6*(height/10))){
-        py = py + (saveY-newt.local.yPos)/2;
-  }else{
-     py = py + (saveY-newt.local.yPos)/8;
-  }*/
-
-
-
   saveX = newt.local.xPos;
   saveY = newt.local.yPos;
   } 
 
-
+ void updateDialog(){            //Nathan- Partially implemented dialog test.  Works for one conversation, need to update to pull conversations from file, and when to trigger conversations
+      if(dialog==false){
+        dialog = true;   // make the window appear
+      }else{
+        if(state.currentState.conversations.get(0).currentLine < state.currentState.conversations.get(0).script.size()-1){ //you press enter to go to the next line of conversation
+           saveSpot =0;
+           displayText="";
+           state.currentState.conversations.get(0).currentLine++;  //go to next line of conversation
+        }else{
+          //reset or go to next conversation.  right now it resets the conversation and removes the conversation bar.
+           saveSpot =0;
+           displayText="";
+           state.currentState.conversations.get(0).currentLine=0;  //start conversation over
+           dialog = false; //remove the dialog window
+        }
+      }
+}
 
 
   // Constructor

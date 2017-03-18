@@ -10,6 +10,30 @@ class DisplayEngine {
     rect(hit.xPos, hit.yPos, hit.hitWidth, hit.hitHeight);
   }
   
+  void displayDialog(Dialog talk){                                                                    //displays the dialog on the screen
+    fill(255,255,255);
+    stroke(20);  
+    fill(155,155,155);
+    rectMode(CENTER);
+    rect(width/2,height-100,width,height/4);
+    textSize(36);
+    fill(0,0,0);
+    text(talk.script.get(talk.currentLine),100,height-150);                                            //show static message
+    
+    //animation for text//
+
+     if(frameCount%3==0 && saveSpot<talk.script.get(talk.currentLine).length()){                        //check for frame skips and if the current line has finished typing
+      displayText += talk.script.get(talk.currentLine).charAt(saveSpot);                                //add the next character to the display text
+      text(displayText,100,height-100);                                                                 //display the text
+      saveSpot++;                                                                                       //set index to the next character of the current conversation line
+    }else{
+      text(displayText,100,height-100);                                                                 //wait until the character presses next to continue
+    }
+    
+  }
+  
+  
+  
   void displayCharacter(GameCharacter guy){
     
     imageMode(CENTER);
@@ -60,7 +84,10 @@ class DisplayEngine {
     image(newtIdle.sprites[1], 150, 160);
 
   }
-    
+    if(dialog){
+      //print("enter has been pressed");
+     displayDialog(state.currentState.conversations.get(0));
+    }
     
   }
   
