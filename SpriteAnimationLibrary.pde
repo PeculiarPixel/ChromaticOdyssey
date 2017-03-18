@@ -39,9 +39,33 @@ public class SpriteAnimationLibrary {
     
     String path = getDirPathByKey(pathKey);                      // Get path from library
     PImage[] images = fileUtils.getSpriteAnimations(path);       // Get all the images designated
-    SpriteAnimation animation = new SpriteAnimation(images);     // Create the new SpriteAnimation
+    SpriteAnimation animation = new SpriteAnimation(images, 100);     // Create the new SpriteAnimation
     
     return animation;  // Return the SpriteAnimationS    
+  }
+  
+  public ArrayList<SpriteAnimation> getCharacterAnimations(GameCharacterName name) {
+  
+    // Setup animations for character
+    ArrayList<SpriteAnimation> animations = new ArrayList<SpriteAnimation>();
+    
+    try {
+      switch(name) {
+        case NEWT:
+          animations.add(getSpriteAnimation("NewtWalk"));
+          animations.add(getSpriteAnimation("NewtIdle"));        
+        default:
+  
+      }
+    } catch (NoDirPathEntryFoundException e) {
+      println(e.getLocalizedMessage());
+    } catch (DirectoryNotFoundException e) {
+      println(e.getLocalizedMessage());
+    }
+    
+   
+    return animations;
+    
   }
   
 }

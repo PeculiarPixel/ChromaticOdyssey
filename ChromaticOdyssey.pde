@@ -13,7 +13,7 @@ void setup(){
 
 // Instantiate newt, engines, event dispatcher, spriteLibrary, &c
 void initializeGlobals() {
-  
+ 
   fileUtils = new FileUtils();
   spriteLibrary = new SpriteAnimationLibrary();
   
@@ -23,7 +23,6 @@ void initializeGlobals() {
   state  = new StateEngine(beginning);
   display = new DisplayEngine();
   dispatcher = new EventDispatcher();
-  
   
   px=0; //px is the world translation in the x direction
   py=0; //py is the world translation in the y direction
