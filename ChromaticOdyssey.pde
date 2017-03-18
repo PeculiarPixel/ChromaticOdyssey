@@ -15,7 +15,7 @@ void setup(){
 // Instantiate newt, engines, event dispatcher, spriteLibrary, &c
 void initializeGlobals() {
   
-  newt = new GameCharacter();
+  newt = new GameCharacter(GameCharacterName.NEWT);
   comp  = new ComputationEngine();
   comp.players.add(newt);
   state  = new StateEngine(beginning);
