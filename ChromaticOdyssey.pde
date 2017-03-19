@@ -1,5 +1,5 @@
 import processing.video.*;
-import processing.sound.*; //<>//
+import processing.sound.*; //<>// //<>//
 boolean initValues;
 
   void setup() {
@@ -43,7 +43,6 @@ boolean initValues;
 
   // Key Pressed Events
   void keyPressed() {
-  
     if (keyCode == UP) {
       newt.setDirection(MoveDirection.UP);
     }
@@ -56,7 +55,6 @@ boolean initValues;
     if(keyCode == RIGHT){
       newt.setDirection(MoveDirection.RIGHT);
     }
-    
   }
 
   // Key Released Events
