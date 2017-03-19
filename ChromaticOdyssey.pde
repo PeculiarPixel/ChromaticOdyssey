@@ -1,6 +1,5 @@
 import processing.video.*;
-//import processing.sound.*; //<>// //<>// //<>//
-import ddf.minim.*;
+import ddf.minim.*; //<>// //<>//
 boolean initValues;
 
   void setup() {
@@ -27,6 +26,7 @@ boolean initValues;
     //println("Looping song");
     
     //song.loop();
+    
   }
 
   // Instantiate newt, engines, event dispatcher, spriteLibrary, &c
