@@ -60,6 +60,45 @@ class GameCharacter{
     // Get current direction
     public MoveDirection getDirection() { return this.local.getDirection(); }
     
+    // Move GameCharacter along Y axis
+    public void moveY(float amount) {
+      this.local.moveY(amount);
+    }
+    
+    // Move GameCharacter along X axis
+    public void moveX(float amount) {
+      this.local.moveX(amount);
+    } 
+    
+    // Get X Position of Character
+    public float getXPos() { return this.local.getXPos(); }
+    
+    // Get Y Position of Character
+    public float getYPos() { return this.local.getYPos(); }
+    
+    // Set X Position of Character
+    public void setXPos(float pos) { this.local.setXPos(pos); }
+    
+    // Set Y Position of Character
+    public void setYPos(float pos) { this.local.setYPos(pos); }
+    
+    // Get Character Hitbox X Position
+    public float getHitboxXPos() { return this.local.getHitboxXPos(); }
+    
+    // Get Character Hitbox Y Position
+    public float getHitboxYPos() { return this.local.getHitboxYPos(); }
+    
+    // Set Character Hitbox Y Position
+    public void setHitboxXPos(float pos) { this.local.setHitboxXPos(pos); }
+    
+    // Set Character Hitbox Y Position
+    public void setHitboxYPos(float pos) { this.local.setHitboxYPos(pos); }
+    
+    // Get Hitbox of Character
+    public Hitbox getHitbox() { return this.local.hitbox; }
+    
+    
+    
 }
 
 // Characters identifiers

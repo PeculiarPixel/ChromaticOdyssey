@@ -38,4 +38,17 @@ class Hitbox{
   }
   
   
+    // Get X Position
+    public float getXPos() { return this.xPos; }
+    
+    // Get Y Position
+    public float getYPos() { return this.yPos; }
+    
+    // Set X Position
+    public void setXPos(float pos) { this.xPos = pos; }
+    
+    // Set Y Position
+    public void setYPos(float pos) { this.yPos = pos; }
+  
+  
 }
