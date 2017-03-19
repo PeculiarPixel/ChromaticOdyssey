@@ -1,5 +1,6 @@
 import processing.video.*;
-import processing.sound.*; //<>// //<>//
+//import processing.sound.*; //<>// //<>// //<>//
+import ddf.minim.*;
 boolean initValues;
 
   void setup() {
@@ -13,8 +14,19 @@ boolean initValues;
     //initializeGlobals();                           // Initialize Globals
     println("after globals");                                  // Show title screen
     initValues = false;
-    SoundFile song = new SoundFile(this, "Beepbox-Song.wav");
+       
+    Minim minim = new Minim(this); 
+    
+    println("Loading file a.wav");
+    AudioPlayer song = minim.loadFile("a.wav");
     song.loop();
+     
+    //println("Opening Beepbox-Song.wav");
+    //SoundFile song = new SoundFile(this, "a.wav");
+    
+    //println("Looping song");
+    
+    //song.loop();
   }
 
   // Instantiate newt, engines, event dispatcher, spriteLibrary, &c
