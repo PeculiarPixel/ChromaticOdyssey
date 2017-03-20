@@ -77,17 +77,22 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
 
  //<>// //<>//
 
-void computeColorCheck(){
-  color pixelColor = state.currentState.hitboxImage.get((int)newt.local.xPos,(int)newt.local.yPos);
+void computeColorCheck(int xChange, int yChange){
+  color pixelColor = state.currentState.hitboxImage.get((int)newt.local.xPos+xChange,(int)newt.local.yPos+yChange);
     if(red(pixelColor) == 255){
-      // newt.getHitbox();
+       newt.getHitbox().isHitX = true;
+       newt.getHitbox().isHitY = true;
+    }else{
+       newt.getHitbox().isHitX = false;
+       newt.getHitbox().isHitY = false;
     }
 }
 
 
  void moveCheck(float xChange, float yChange) { //this assumes that the player's hitbox is initialized and added to the computation engine first, player is hitboxes[0]
     for(int i = 0; i < hitboxes.size(); i++) {
-      computeIntersection(hitboxes.get(i), players.get(0).getHitbox(),xChange,yChange);
+      //computeIntersection(hitboxes.get(i), players.get(0).getHitbox(),xChange,yChange);
+      //computeColorCheck((int)xChange,(int)yChange);
       if(players.get(0).local.hitbox.isHitX)
         xChange = 0;
       if(players.get(0).local.hitbox.isHitY)
