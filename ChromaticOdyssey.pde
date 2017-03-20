@@ -90,5 +90,6 @@ void draw(){
   state.run();
   comp.run();
   display.run();
-
+  println(mouseX-px,mouseY-py);
+  println("newt",newt.local.xPos,newt.local.yPos);
 }

@@ -18,8 +18,9 @@ class DisplayEngine {
     rect(width/2,height-100,width,height/4);
     textSize(36);
     fill(0,0,0);
-    text(talk.script.get(talk.currentLine),100,height-150);                                            //show static message
-    
+    //text(talk.script.get(talk.currentLine),100,height-150);                                            //show static message
+    //String wholeLine = talk.script.get(talk.currentLine);
+    //String nameTag = talk.script.substring();
     //animation for text//
 
      if(frameCount%3==0 && saveSpot<talk.script.get(talk.currentLine).length()){                        //check for frame skips and if the current line has finished typing
@@ -62,19 +63,24 @@ class DisplayEngine {
    translate(px, py);
    
    
-
-    Landscape tempLand;
-    for(int i=0; i <state.currentState.landscapes.size();i++){
-      tempLand = state.currentState.landscapes.get(i);
-      displayLandscape(tempLand);
-    }  
-
+    imageMode(CORNER);
     
+    image(state.currentState.backgroundImage,0,0);    
     GameCharacter tempChar;
     for(int i=0; i <state.currentState.characters.size();i++){
       tempChar = state.currentState.characters.get(i);
       displayCharacter(tempChar);
-    }     
+    }    
+    imageMode(CORNER);
+    image(state.currentState.foregroundImage,0,0); 
+    
+    
+        Landscape tempLand;
+    for(int i=0; i <state.currentState.landscapes.size();i++){
+      tempLand = state.currentState.landscapes.get(i);
+      displayLandscape(tempLand);
+    }  
+    
     popMatrix(); 
     if(hitBoxMode) {
     newt.local.hitboxDisplay = true;

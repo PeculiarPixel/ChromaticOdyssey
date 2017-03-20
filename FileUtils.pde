@@ -10,7 +10,7 @@ class FileUtils {
     // Load all images into the sprite array
     for (int i = 0; i < animationFiles.length; i++) {
       sprites[i] = loadImage(animationFiles[i].getAbsolutePath());
-      //sprites[i].resize(sprites[i].width/3, sprites[i].height/3);
+     // sprites[i].resize(sprites[i].width/3, sprites[i].height/3);
     }
     
     return sprites;    // Return the array of sprites

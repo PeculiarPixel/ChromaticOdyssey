@@ -15,7 +15,8 @@ conversations = new ArrayList<Dialog>();
 characters.add(newt);
 //items =new ArrayList<Item>();
 //menus =new ArrayList<Menu>();
-
+backgroundImage = loadImage("CastleWalkup.png");
+foregroundImage = loadImage("CastleWalkupTopLayer.png");
 //next = new Test_Level_0(newt);
 landscapes =new ArrayList<Landscape>();
 landscapes.add(new Landscape(350, 350,100,100,"Landscape",-1)); 
