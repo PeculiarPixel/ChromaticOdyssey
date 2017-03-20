@@ -39,10 +39,10 @@ class DisplayEngine {
     imageMode(CENTER);
     
     guy.updateSpriteAnimation();
-    image(guy.getCurrentImage(), guy.local.xPos, guy.local.yPos);
+    image(guy.getCurrentImage(), guy.getXPos(), guy.getYPos());
     
     if(guy.local.hitboxDisplay){
-      displayHitbox(guy.local.hitbox);
+      displayHitbox(guy.getHitbox());
     }
   }
     void displayLandscape(Landscape land){

@@ -15,7 +15,7 @@ void run(){
     }
   }
   events.clear();
-  moveWorld();              //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
+  moveWorld();        //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
 
 }
@@ -75,29 +75,29 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
   }
 }
 
- void moveCheck(float xChange, float yChange){ //this assumes that the player's hitbox is initialized and added to the computation engine first, player is hitboxes[0]
-    for(int i = 0; i < hitboxes.size(); i++){
-      computeIntersection(hitboxes.get(i), players.get(0).local.hitbox,xChange,yChange);
-      if(players.get(0).local.hitbox.isHitX)
+ void moveCheck(float xChange, float yChange) { //this assumes that the player's hitbox is initialized and added to the computation engine first, player is hitboxes[0]
+    for(int i = 0; i < hitboxes.size(); i++) { //<>//
+      computeIntersection(hitboxes.get(i), players.get(0).getHitbox(),xChange,yChange);
+      if(players.get(0).local.hitbox.isHitX) //<>//
         xChange = 0;
-      if(players.get(0).local.hitbox.isHitY) //<>// //<>// //<>//
+      if(players.get(0).local.hitbox.isHitY)
         yChange = 0;
-    } //<>// //<>// //<>//
+    }
 
-    players.get(0).local.xPos += xChange;
-    players.get(0).local.yPos += yChange;
+    players.get(0).moveX(xChange);
+    players.get(0).moveY(yChange);
 
-    players.get(0).local.hitbox.xPos= players.get(0).local.xPos;
-    players.get(0).local.hitbox.yPos= players.get(0).local.yPos;
+    players.get(0).setHitboxXPos(players.get(0).getXPos());
+    players.get(0).setHitboxYPos(players.get(0).getYPos()); //<>// //<>//
   } 
+ //<>// //<>//
 
-
-  void moveCharacter(float speed){ //<>// //<>// //<>// //<>//
-    
-    GameCharacter newt = players.get(0); //<>// //<>//
+  void moveCharacter(float speed) {
+ //<>//
+    GameCharacter newt = players.get(0);
     
     if (newt.local.isMoving()) {
-      if(newt.local.moveUp){ //<>// //<>//
+      if(newt.local.moveUp) {
         moveCheck(0.0,-speed);
       }
       if(newt.local.moveDown){
@@ -116,11 +116,11 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
   
 //Move world calculates the translation factor that you will move the background based on character movement
   void moveWorld(){
-    px = px + (saveX-newt.local.xPos);
-    py = py + (saveY-newt.local.yPos);
+    px = px + (saveX-newt.getXPos());
+    py = py + (saveY-newt.getYPos());
 
-  saveX = newt.local.xPos;
-  saveY = newt.local.yPos;
+  saveX = newt.getXPos();
+  saveY = newt.getYPos();
   } 
 
  void updateDialog(){            //Nathan- Partially implemented dialog test.  Works for one conversation, need to update to pull conversations from file, and when to trigger conversations

@@ -26,13 +26,13 @@ void initializeGlobals() {
   
   px=0; //px is the world translation in the x direction
   py=0; //py is the world translation in the y direction
-  saveX = newt.local.xPos;  //this saves newt's previous x position for movement delta purposes
-  saveY = newt.local.yPos;  //this saves newt's previous y position for movement delta purposes
+  saveX = newt.getXPos();  //this saves newt's previous x position for movement delta purposes
+  saveY = newt.getYPos();  //this saves newt's previous y position for movement delta purposes
   
   //init dialog global values//
   dialog = false;  //whether or not the dialog box pops up
-  saveSpot =0;     //the index of the script in the current dialog
-  displayText =""; //the text currently being displayed.
+  saveSpot = 0;     //the index of the script in the current dialog
+  displayText = ""; //the text currently being displayed.
   
   
 }
