@@ -4,6 +4,7 @@ ArrayList<Hitbox> hitboxes;
 ArrayList<GameCharacter> players;
 ArrayList<ComputationEvent> events = new ArrayList<ComputationEvent>();
 int conversationIndex;
+boolean runLevelPrompt = false;
 
 void run(){
 
@@ -18,6 +19,10 @@ void run(){
   events.clear();
   moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
+  
+  if(runLevelPrompt){   
+    runLevelPrompt();
+  }
 
 }
 
@@ -36,17 +41,23 @@ void clear() {  //clears the computation engine when a new state is declared
 
 void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChange){
 
+ 
+  
   if((hBox1.yPos + hBox1.hitHeight/2 >= hBox2.yPos - hBox2.hitHeight/2 &&
     hBox1.yPos - hBox1.hitHeight/2 <= hBox2.yPos + hBox2.hitHeight/2) &&
     (hBox1.xPos + hBox1.hitWidth/2 >= hBox2.xPos - hBox2.hitWidth/2 + xChange &&
     hBox1.xPos - hBox1.hitWidth/2 <= hBox2.xPos + hBox2.hitWidth/2 + xChange))
     {
-      hBox2.isHitX=true;
-      hBox1.isHitX=true;            
+      if(hBox1.designation != "EventBox"){
+        hBox2.isHitX=true;    //character
+        hBox1.isHitX=true;    //box checking 
+      }
+      runLevelPrompt = true;
     }
   else{
     hBox2.isHitX=false;
     hBox2.isHitX=false;
+    runLevelPrompt = false;
   }
 
   if((hBox1.xPos + hBox1.hitWidth/2 >= hBox2.xPos - hBox2.hitWidth/2 &&
@@ -54,29 +65,43 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
     (hBox1.yPos + hBox1.hitHeight/2 >= hBox2.yPos - hBox2.hitHeight/2 + yChange &&
     hBox1.yPos - hBox1.hitHeight/2 <= hBox2.yPos + hBox2.hitHeight/2 + yChange))
       {
-      hBox2.isHitY=true;
-      hBox1.isHitY=true;
+        if(hBox1.designation != "EventBox"){
+          hBox2.isHitY=true;
+          hBox1.isHitY=true;
+        }
+        runLevelPrompt = true;
     }
   else{
     hBox2.isHitY=false;
     hBox1.isHitY=false;
+    runLevelPrompt = false;
   }
 
-  if(hBox1.designation =="EventBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this check to see if the hitbox being intersected is an "EventBox", or one that triggers a switch
-    dispatcher.dispatch(new StateEvent(state.currentState.nextState()));
-  }
+  //if(hBox1.designation =="EventBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this check to see if the hitbox being intersected is an "EventBox", or one that triggers a switch
+    
+  //}
+  
   if(hBox1.designation =="DamageBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test computable event
     dispatcher.dispatch(new ComputationEvent(-10,newt));
   }
   if(hBox1.designation =="DialogBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test dialog
-    dialog = true;
+    dialog = true;  
     hBox1.isHitX = false;
     hBox1.isHitY = false;
     conversationIndex = hBox1.conversationIndex;
   }
 }
 
- //<>// //<>//
+ //<>// //<>// //<>//
+ 
+void runLevelPrompt(){
+  println("Enter the castle?");
+  if(keyCode == ENTER) {
+    println("Entering the castle");
+    dispatcher.dispatch(new StateEvent(state.currentState.nextState()));
+    runLevelPrompt = false;
+  }
+}
 
 void computeColorCheck(int xChange, int yChange){
   color pixelColor = state.currentState.hitboxImage.get((int)newt.local.getFeetX()+xChange,(int)newt.local.getFeetY()+yChange);
@@ -95,16 +120,16 @@ void computeColorCheck(int xChange, int yChange){
     
     
     for(int i = 0; i < hitboxes.size(); i++) {
-      //computeIntersection(hitboxes.get(i), players.get(0).getHitbox(),xChange,yChange);
+      computeIntersection(hitboxes.get(i), players.get(0).getHitbox(),xChange,yChange);
       //computeColorCheck((int)xChange,(int)yChange);
       if(players.get(0).local.hitbox.isHitX)
         xChange = 0;
-      if(players.get(0).local.hitbox.isHitY)
+      if(players.get(0).local.hitbox.isHitY) //<>//
         yChange = 0;
-    }
+    } //<>//
 
     computeColorCheck((int)xChange,(int)yChange);
-    if(players.get(0).local.hitbox.isHitX)
+    if(players.get(0).local.hitbox.isHitX) //<>//
         xChange = 0;
     if(players.get(0).local.hitbox.isHitY)
         yChange = 0;
@@ -119,7 +144,7 @@ void computeColorCheck(int xChange, int yChange){
 
 
   void moveCharacter(float speed) {
- //<>//
+    //<>//
     GameCharacter newt = players.get(0);
     
     if (newt.local.isMoving()) {

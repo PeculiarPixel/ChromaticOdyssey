@@ -8,6 +8,7 @@ public ArrayList<Dialog> conversations;
 public PImage backgroundImage;
 public PImage foregroundImage;
 public PImage hitboxImage;
+public PImage enterCastlePrompt;
 Level nextState(){  //Nathan - I edited the level class so it is a basis from which to extend specific levels.  Note there is now a Test_Level_0 extended from this class
   return null;
 }

@@ -65,6 +65,7 @@ class DisplayEngine {
    
     imageMode(CORNER);
     
+   
     image(state.currentState.backgroundImage,0,0);    
     GameCharacter tempChar;
     for(int i=0; i <state.currentState.characters.size();i++){
@@ -73,6 +74,13 @@ class DisplayEngine {
     }    
     imageMode(CORNER);
     image(state.currentState.foregroundImage,0,0); 
+    
+    imageMode(CENTER);
+     //draws castle enter prompt
+    if(comp.runLevelPrompt){
+      image(state.currentState.enterCastlePrompt,newt.getXPos()-200,newt.getYPos()-100); 
+    }
+    imageMode(CORNER);
     
     
         Landscape tempLand;

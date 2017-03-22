@@ -22,15 +22,18 @@ landscapes =new ArrayList<Landscape>();
 backgroundImage = loadImage("CastleWalkup.png");
 foregroundImage = loadImage("CastleWalkupTopLayer.png");
 hitboxImage = loadImage("hitboxLayer.png");
+enterCastlePrompt = loadImage("EnterCastlePrompt.png");
 //backgroundImage.resize(backgroundImage.width*4,backgroundImage.height*4);
 //foregroundImage.resize(foregroundImage.width*4,foregroundImage.height*4);
+
+//landscapes.add(new Landscape(300, 120, 100, 100,"DialogBox",0));
 
 //landscapes.add(new Landscape(100, 2450,800,40,"Landscape",-1));
 //landscapes.add(new Landscape(540, 2430,80,40,"Landscape",-1));
 //landscapes.add(new Landscape(320, 170,10,10,"Landscape",-1));
 //landscapes.add(new Landscape(330, 180,10,10,"Landscape",-1));
 //landscapes.add(new Landscape(340, 190,10,10,"Landscape",-1));
-//landscapes.add(new Landscape(600, 300, 100, 100,"EventBox",-1));
+landscapes.add(new Landscape(3651, 767, 200, 50,"EventBox",-1));    //switch to state 1
 
 //landscapes.add(new Landscape(200, 200, 300, 100,"DamageBox",-1));
 
