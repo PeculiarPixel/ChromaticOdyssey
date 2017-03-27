@@ -8,6 +8,7 @@ class Hitbox{
   private boolean isHitX;
   private boolean isHitY;
   private int conversationIndex;
+
   /*void display(){
    fill(255,255,255);
     stroke(10);  
