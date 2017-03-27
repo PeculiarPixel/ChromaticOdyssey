@@ -20,8 +20,9 @@ void initializeGlobals() {
   newt = new GameCharacter(GameCharacterName.NEWT);
   comp  = new ComputationEngine();
   comp.players.add(newt);
-  state  = new StateEngine(beginning);
   display = new DisplayEngine();
+  state  = new StateEngine(beginning);
+//  display = new DisplayEngine();
   dispatcher = new EventDispatcher();
   
   px=0; //px is the world translation in the x direction

@@ -2,6 +2,8 @@ class LocalInfo{
 
   private float xPos;  //the player's current position X
   private float yPos;  // the player's curent position Y
+  
+  
   private boolean moveUp;
   private boolean moveDown;
   private boolean moveLeft;
@@ -140,6 +142,12 @@ class LocalInfo{
       this.xPos += amount;
     } 
     
+    //Get X Position of the character's feet, not character center
+    public float getFeetX(){return this.xPos;}
+    
+    //Get X Position of the character's feet, not character center
+    public float getFeetY(){return this.yPos+this.hitbox.hitHeight/2;}
+    
     // Get X Position of Character
     public float getXPos() { return this.xPos; }
     
@@ -163,7 +171,8 @@ class LocalInfo{
     
     // Set Hitbox Y Position
     public void setHitboxYPos(float pos) { this.hitbox.setYPos(pos); }
-
+    
+    
 }
 
 enum MoveDirection {

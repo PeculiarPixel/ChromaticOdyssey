@@ -4,8 +4,9 @@ ArrayList<Hitbox> hitboxes;
 ArrayList<GameCharacter> players;
 ArrayList<ComputationEvent> events = new ArrayList<ComputationEvent>();
 int conversationIndex;
+
 void run(){
-  
+
   // Loop through all registered computation events
   for(ComputationEvent e : events) {
     if(e.type == "ComputationEvent") { 
@@ -15,7 +16,7 @@ void run(){
     }
   }
   events.clear();
-  moveWorld();        //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
+  moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
 
 }
@@ -78,7 +79,8 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
  //<>// //<>//
 
 void computeColorCheck(int xChange, int yChange){
-  color pixelColor = state.currentState.hitboxImage.get((int)newt.local.xPos+xChange,(int)newt.local.yPos+yChange);
+  color pixelColor = state.currentState.hitboxImage.get((int)newt.local.getFeetX()+xChange,(int)newt.local.getFeetY()+yChange);
+  println("COLOR="+red(pixelColor)+"<r:"+green(pixelColor)+"<g:"+blue(pixelColor)+"<b:");
     if(red(pixelColor) == 255){
        newt.getHitbox().isHitX = true;
        newt.getHitbox().isHitY = true;
@@ -90,6 +92,8 @@ void computeColorCheck(int xChange, int yChange){
 
 
  void moveCheck(float xChange, float yChange) { //this assumes that the player's hitbox is initialized and added to the computation engine first, player is hitboxes[0]
+    
+    
     for(int i = 0; i < hitboxes.size(); i++) {
       //computeIntersection(hitboxes.get(i), players.get(0).getHitbox(),xChange,yChange);
       //computeColorCheck((int)xChange,(int)yChange);
@@ -99,6 +103,12 @@ void computeColorCheck(int xChange, int yChange){
         yChange = 0;
     }
 
+    computeColorCheck((int)xChange,(int)yChange);
+    if(players.get(0).local.hitbox.isHitX)
+        xChange = 0;
+    if(players.get(0).local.hitbox.isHitY)
+        yChange = 0;
+
     players.get(0).moveX(xChange);
     players.get(0).moveY(yChange);
 
@@ -106,6 +116,7 @@ void computeColorCheck(int xChange, int yChange){
     players.get(0).setHitboxYPos(players.get(0).getYPos()); //<>// //<>//
   } 
  //<>// //<>//
+
 
   void moveCharacter(float speed) {
  //<>//
@@ -129,8 +140,13 @@ void computeColorCheck(int xChange, int yChange){
     
   }
   
+  
+  
+  
+  
 //Move world calculates the translation factor that you will move the background based on character movement
   void moveWorld(){
+
     px = px + (saveX-newt.getXPos());
     py = py + (saveY-newt.getYPos());
 

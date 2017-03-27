@@ -16,6 +16,7 @@ class StateEngine{
   }
   
   void swapState(StateEvent event){  //swap the current state to the new state
+
     currentState = event.nextState;
     //comp.clear(); //Nathan - I moved this clear to a method inside Level.  When a state swap occurs the comp is cleared right before next level initializes.
   }

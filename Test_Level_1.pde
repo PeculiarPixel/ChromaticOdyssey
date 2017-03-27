@@ -24,6 +24,9 @@ landscapes.add(new Landscape(120, 120, 100, 100,"EventBox",-1));
 
 landscapes.add(new Landscape(300, 120, 100, 100,"DialogBox",0));
 landscapes.add(new Landscape(700, 120, 100, 100,"DialogBox",1));
+
+
+
 try{
   conversations= fileUtils.getLevelConversations("levelScripts/level1");
  } catch (DirectoryNotFoundException dnfe) {
