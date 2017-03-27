@@ -13,6 +13,7 @@ cutscenes =new ArrayList<Movie>();
 characters =new ArrayList<GameCharacter>();
 conversations = new ArrayList<Dialog>();
 characters.add(newt);
+hitboxImage = loadImage("hitboxLayer.png");
 //items =new ArrayList<Item>();
 //menus =new ArrayList<Menu>();
 backgroundImage = loadImage("hitboxLayer.png");
