@@ -1,38 +1,54 @@
-class Test_Level_1 extends Level{ //will extend this class into different levels, ex LevelOne,LevelTwo, etc
+// Default Test Level 1
+class Test_Level_1 extends Level {
+  
+  private final int START_X = 0;
+  private final int START_Y = 0;
+  
+  public Test_Level_1(GameCharacter Newt){
+    super();
+    
+    // Add Newt
+    characters.add(Newt);
+    
+    // Load assets
+    loadAssets();
+    
+    // Setup newt start position
+    setStartPosition();
+  
+  }
 
+  public Level nextState() {
+    comp.clear();
+    Test_Level_0 next = new Test_Level_0(newt);
+    return next;
+  }
+  
+  public void setStartPosition() {
+    GameCharacter newt = this.characters.get(0);
+    newt.setXPos(START_X);
+    newt.setYPos(START_Y);  
+  }
 
-
-Level nextState(){
-  comp.clear();
-  Test_Level_0 next = new Test_Level_0(newt);
-  return next;
-}
-
-Test_Level_1(GameCharacter newt){
-cutscenes =new ArrayList<Movie>();
-characters =new ArrayList<GameCharacter>();
-conversations = new ArrayList<Dialog>();
-characters.add(newt);
-hitboxImage = loadImage("hitboxLayer.png");
-//items =new ArrayList<Item>();
-//menus =new ArrayList<Menu>();
-backgroundImage = loadImage("hitboxLayer.png");
-foregroundImage = loadImage("CastleWalkupTopLayer.png");
-//next = new Test_Level_0(newt);
-landscapes =new ArrayList<Landscape>();
-landscapes.add(new Landscape(350, 350,100,100,"Landscape",-1)); 
-landscapes.add(new Landscape(120, 120, 100, 100,"EventBox",-1));
-
-landscapes.add(new Landscape(300, 120, 100, 100,"DialogBox",0));
-landscapes.add(new Landscape(700, 120, 100, 100,"DialogBox",1));
-
-
-
-try{
-  conversations= fileUtils.getLevelConversations("levelScripts/level1");
- } catch (DirectoryNotFoundException dnfe) {
-      println(dnfe.getLocalizedMessage());
-  } 
-}
-
+  public Level changeLevel() { return null; }
+  
+  public void loadAssets() {
+    
+    this.hitboxImage = loadImage("hitboxLayer.png");    
+    this.backgroundImage = loadImage("hitboxLayer.png");
+    this.foregroundImage = loadImage("CastleWalkupTopLayer.png");
+    this.landscapes.add(new Landscape(350, 350,100,100, "Landscape", -1)); 
+    this.landscapes.add(new Landscape(120, 120, 100, 100, "EventBox", -1));
+    this.landscapes.add(new Landscape(300, 120, 100, 100, "DialogBox", 0));
+    this.landscapes.add(new Landscape(700, 120, 100, 100, "DialogBox", 1));
+    
+    
+  // Load test conversation
+  try{
+    this.conversations = fileUtils.getLevelConversations("levelScripts/level1");
+   } catch (DirectoryNotFoundException e) {
+        println(e.getLocalizedMessage());
+    } 
+  }
+    
 }

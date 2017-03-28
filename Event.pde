@@ -1,3 +1,9 @@
 class Event {
-  String type;
+  EventTypeEnum type;
+}
+
+enum EventTypeEnum {
+  DISPLAY,
+  STATE,
+  COMPUTATION;
 }

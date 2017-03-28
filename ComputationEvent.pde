@@ -5,7 +5,7 @@ class ComputationEvent extends Event {
   
   // Constructor
   ComputationEvent(int value, GameCharacter target){
-    type = "ComputationEvent";
+    this.type = EventTypeEnum.COMPUTATION;
     this.value = value;
     this.target = target;
   }  

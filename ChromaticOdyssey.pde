@@ -1,6 +1,6 @@
 import processing.video.*;
 
-void setup(){
+void setup(){ //<>//
   //gg boys
   surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
   surface.setResizable(false);                   // Disable resize
@@ -15,18 +15,17 @@ void setup(){
 void initializeGlobals() {
  
   fileUtils = new FileUtils();
-  spriteLibrary = new SpriteAnimationLibrary();
+  spriteLibrary = new SpriteAnimationLibrary(); //<>//
   
   newt = new GameCharacter(GameCharacterName.NEWT);
   comp  = new ComputationEngine();
   comp.players.add(newt);
   display = new DisplayEngine();
   state  = new StateEngine(beginning);
-//  display = new DisplayEngine();
   dispatcher = new EventDispatcher();
   
-  px=0; //px is the world translation in the x direction
-  py=0; //py is the world translation in the y direction
+  px = 0; //px is the world translation in the x direction
+  py = 0; //py is the world translation in the y direction
   saveX = newt.getXPos();  //this saves newt's previous x position for movement delta purposes
   saveY = newt.getYPos();  //this saves newt's previous y position for movement delta purposes
   
@@ -91,6 +90,6 @@ void draw(){
   state.run();
   comp.run();
   display.run();
-  println(mouseX-px,mouseY-py);
-  println("newt",newt.local.xPos,newt.local.yPos);
+  println(mouseX - px, mouseY - py); //<>//
+  println("newt", newt.getXPos(), newt.getYPos());
 }

@@ -1,8 +1,18 @@
-class StateEngine{
+/* State Engine
+*  Update game on changes of state (level changes)
+*/
+class StateEngine {
   
   ArrayList<StateEvent> events = new ArrayList<StateEvent>();    // Queue of state events
-  Level currentState;                                  // Current set level
+  Level currentState;                                            // Current set level
   
+  // Constructor
+ public StateEngine(Level state){
+      state = new Test_Level_0(newt);
+      currentState = state;
+  }
+  
+  // Run the StateEngine to check for state changes
   void run() {
     
     // Loop through all state swaps in the queue
@@ -15,15 +25,9 @@ class StateEngine{
    //should have some sort of  comp.run(currentState) but it does it without explicitly stating it.
   }
   
-  void swapState(StateEvent event){  //swap the current state to the new state
-
+  // Swap the current state to the new state
+  public void swapState(StateEvent event) {   
     currentState = event.nextState;
-    //comp.clear(); //Nathan - I moved this clear to a method inside Level.  When a state swap occurs the comp is cleared right before next level initializes.
   }
-
-    StateEngine(Level state){
-      state = new Test_Level_0(newt);
-      currentState = state;
-    }
 
 }

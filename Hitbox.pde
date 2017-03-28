@@ -1,55 +1,25 @@
-class Hitbox{
-  private float xPos;
-  private float yPos;
-  private float hitWidth;
-  private float hitHeight;
-  private color showColor;
-  private String designation;
-  private boolean isHitX;
-  private boolean isHitY;
-  private int conversationIndex;
-
-  /*void display(){
-   fill(255,255,255);
-    stroke(10);  
-    fill(this.showColor, 100);
-    rectMode(CENTER);
-    rect(xPos, yPos, hitWidth, hitHeight);
-  }*/
+// Hitbox class for hit detection
+abstract class Hitbox extends Area {
+ 
+  private boolean isHitX;  // Hit detection for X axis
+  private boolean isHitY;  // Hit detection for Y axis
   
-   
-  
-    Hitbox(float x, float y, float w, float h, color c, String t, int number){
-    this.xPos = x;
-    this.yPos = y;
-    this.hitWidth = w;
-    this.hitHeight = h;
-    this.showColor = c;
-    this.designation = t;
-    isHitX=false;
-    isHitY=false;
-    if(designation != "player"){
-      comp.hitboxes.add(this);
-    }
-    if(t == "DialogBox"){
-      conversationIndex = number;
-    }else{
-      conversationIndex = -1;
-    }
+  // Default Constructor
+  Hitbox(float x, float y, float w, float h, AreaTypeEnum designation)  {
+    super(x, y, w, h, designation);
+    
+    // Initialize hit values to false
+    this.isHitX = false;
+    this.isHitY = false;
+    
   }
   
+  // Hit detection getter setter - X axis
+  public boolean getIsHitX() { return isHitX; }
+  public void setIsHitX(boolean v) { this.isHitX = v; }
   
-    // Get X Position
-    public float getXPos() { return this.xPos; }
-    
-    // Get Y Position
-    public float getYPos() { return this.yPos; }
-    
-    // Set X Position
-    public void setXPos(float pos) { this.xPos = pos; }
-    
-    // Set Y Position
-    public void setYPos(float pos) { this.yPos = pos; }
-  
-  
+  // Hit detection getter setter - Y axis
+  public boolean getIsHitY() { return isHitY; }
+  public void setIsHitY(boolean v) { this.isHitY = v; }
+
 }

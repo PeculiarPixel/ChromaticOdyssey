@@ -1,9 +1,10 @@
-class LocalInfo{
+// Local information for each character
+class LocalInfo {
 
-  private float xPos;  //the player's current position X
-  private float yPos;  // the player's curent position Y
-  
-  
+  private float xPos;  // Current position X
+  private float yPos;  // Current position Y
+ 
+  // Movement handlers
   private boolean moveUp;
   private boolean moveDown;
   private boolean moveLeft;
@@ -12,14 +13,14 @@ class LocalInfo{
   private boolean hitboxDisplay;
   private Hitbox hitbox;
 
-  
+  // Stats values
   private int currHealth;
   private int currExperience;
   private int currMana;
  
   
   // Constructor
-  LocalInfo(float x, float y,float sizeX, float sizeY, int h, int e, int m) {
+  LocalInfo(float x, float y, float sizeX, float sizeY, int h, int e, int m) {
     xPos = x;
     yPos = y;
     currHealth = h;
@@ -29,7 +30,7 @@ class LocalInfo{
     moveDown = false;
     moveLeft = false;
     moveRight = false;
-    hitbox = new Hitbox(x,  y, sizeX, sizeY, color(0, 255, 0), "player",-1);
+    hitbox = new CharacterHitbox(x,  y, sizeX, sizeY);
   }
     
     
@@ -146,7 +147,7 @@ class LocalInfo{
     public float getFeetX(){return this.xPos;}
     
     //Get X Position of the character's feet, not character center
-    public float getFeetY(){return this.yPos+this.hitbox.hitHeight/2;}
+    public float getFeetY(){return this.yPos+this.hitbox.getHeight()/2;}
     
     // Get X Position of Character
     public float getXPos() { return this.xPos; }

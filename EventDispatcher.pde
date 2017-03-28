@@ -3,15 +3,15 @@
 class EventDispatcher {
   
   // Dispatch given event to correct engine
-  void dispatch(Event e) {
+  void dispatch(Event e) { 
     switch(e.type) {
-      case "ComputationEvent":
+      case COMPUTATION:
          sendComputable((ComputationEvent) e);  // Send computation events
         break;
-      case "StateEvent":
+      case STATE:
         sendState((StateEvent) e);              // Send state events
         break;
-      case "DisplayableEvent":
+      case DISPLAY:
         sendDisplayable((DisplayableEvent) e);  // Send displayable events
         break;
       default: 

@@ -1,4 +1,4 @@
-class GameCharacter{
+class GameCharacter {
   
   private GlobalInfo global;
   private LocalInfo local;

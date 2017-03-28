@@ -1,33 +1,45 @@
-class ComputationEngine{ //will extend this class into different landscapes if needed
+class ComputationEngine {
 
 ArrayList<Hitbox> hitboxes;
 ArrayList<GameCharacter> players;
 ArrayList<ComputationEvent> events = new ArrayList<ComputationEvent>();
 int conversationIndex;
+
 boolean runLevelPrompt = false;
+
+  // Constructor
+  public ComputationEngine() {
+    hitboxes = new ArrayList<Hitbox>();
+    players = new ArrayList<GameCharacter>();
+  }
+  
+  // Add to hitboxes for level
+  public void addToHitboxes(Hitbox h) {
+    this.hitboxes.add(h);
+  }
 
 void run(){
 
   // Loop through all registered computation events
   for(ComputationEvent e : events) {
-    if(e.type == "ComputationEvent") { 
+    if(e.type == EventTypeEnum.COMPUTATION) { 
       //print("Character health reduced from " +  e.target.local.currHealth);
       e.target.local.currHealth += e.value;
       //print(" to " + e.target.local.currHealth + "\n");
     }
   }
+  
   events.clear();
   moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
   
-  if(runLevelPrompt){   
-    runLevelPrompt();
-  }
+  //if(runLevelPrompt){   
+  //  runLevelPrompt();
+  //}
 
 }
 
 void clear() {  //clears the computation engine when a new state is declared
-  
   hitboxes.clear();
   events.clear();
   GameCharacter temp = players.get(0);
@@ -40,15 +52,13 @@ void clear() {  //clears the computation engine when a new state is declared
 
 
 void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChange){
-
- 
   
-  if((hBox1.yPos + hBox1.hitHeight/2 >= hBox2.yPos - hBox2.hitHeight/2 &&
-    hBox1.yPos - hBox1.hitHeight/2 <= hBox2.yPos + hBox2.hitHeight/2) &&
-    (hBox1.xPos + hBox1.hitWidth/2 >= hBox2.xPos - hBox2.hitWidth/2 + xChange &&
-    hBox1.xPos - hBox1.hitWidth/2 <= hBox2.xPos + hBox2.hitWidth/2 + xChange))
+  if((hBox1.yPos + hBox1.getHeight()/2 >= hBox2.yPos - hBox2.getHeight()/2 &&
+    hBox1.yPos - hBox1.getHeight()/2 <= hBox2.yPos + hBox2.getHeight()/2) &&
+    (hBox1.xPos + hBox1.getWidth()/2 >= hBox2.xPos - hBox2.getWidth()/2 + xChange &&
+    hBox1.xPos - hBox1.getWidth()/2 <= hBox2.xPos + hBox2.getWidth()/2 + xChange))
     {
-      if(hBox1.designation != "EventBox"){
+      if(hBox1.designation != AreaTypeEnum.CHARACTER_HITBOX){
         hBox2.isHitX=true;    //character
         hBox1.isHitX=true;    //box checking 
       }
@@ -60,12 +70,12 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
     runLevelPrompt = false;
   }
 
-  if((hBox1.xPos + hBox1.hitWidth/2 >= hBox2.xPos - hBox2.hitWidth/2 &&
-    hBox1.xPos - hBox1.hitWidth/2 <= hBox2.xPos + hBox2.hitWidth/2) &&
-    (hBox1.yPos + hBox1.hitHeight/2 >= hBox2.yPos - hBox2.hitHeight/2 + yChange &&
-    hBox1.yPos - hBox1.hitHeight/2 <= hBox2.yPos + hBox2.hitHeight/2 + yChange))
+  if((hBox1.xPos + hBox1.getWidth()/2 >= hBox2.xPos - hBox2.getWidth()/2 &&
+    hBox1.xPos - hBox1.getWidth()/2 <= hBox2.xPos + hBox2.getWidth()/2) &&
+    (hBox1.yPos + hBox1.getHeight()/2 >= hBox2.yPos - hBox2.getHeight()/2 + yChange &&
+    hBox1.yPos - hBox1.getHeight()/2 <= hBox2.yPos + hBox2.getHeight()/2 + yChange))
       {
-        if(hBox1.designation != "EventBox"){
+        if(hBox1.designation != AreaTypeEnum.CHARACTER_HITBOX){
           hBox2.isHitY=true;
           hBox1.isHitY=true;
         }
@@ -81,27 +91,26 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
     
   //}
   
-  if(hBox1.designation =="DamageBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test computable event
-    dispatcher.dispatch(new ComputationEvent(-10,newt));
-  }
-  if(hBox1.designation =="DialogBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test dialog
-    dialog = true;  
-    hBox1.isHitX = false;
-    hBox1.isHitY = false;
-    conversationIndex = hBox1.conversationIndex;
-  }
+  //if(hBox1.designation == AreaTypeEnum.DAMAGE_HITBOX && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test computable event
+  //  dispatcher.dispatch(new ComputationEvent(-10,newt)); //<>//
+  //}
+  //if(hBox1.designation == AreaTypeEnum.DIALOG_TRIGGER && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test dialog
+  //  dialog = true;  
+  //  hBox1.isHitX = false;
+  //  hBox1.isHitY = false;
+  //  conversationIndex = hBox1.conversationIndex;
+  //}
 }
-
- //<>// //<>// //<>//
  
-void runLevelPrompt(){
-  println("Enter the castle?");
-  if(keyCode == ENTER) {
-    println("Entering the castle");
-    dispatcher.dispatch(new StateEvent(state.currentState.nextState()));
-    runLevelPrompt = false;
-  }
-}
+
+//void runLevelPrompt(){
+//  println("Enter the castle?");
+//  if(keyCode == ENTER) {
+//    println("Entering the castle");
+//    dispatcher.dispatch(new StateEvent(state.currentState.nextState()));
+//    runLevelPrompt = false;
+//  }
+//}
 
 void computeColorCheck(int xChange, int yChange){
   color pixelColor = state.currentState.hitboxImage.get((int)newt.local.getFeetX()+xChange,(int)newt.local.getFeetY()+yChange);
@@ -115,18 +124,18 @@ void computeColorCheck(int xChange, int yChange){
     }
 }
 
-
+ //<>//
  void moveCheck(float xChange, float yChange) { //this assumes that the player's hitbox is initialized and added to the computation engine first, player is hitboxes[0]
-    
+     //<>//
     
     for(int i = 0; i < hitboxes.size(); i++) {
-      computeIntersection(hitboxes.get(i), players.get(0).getHitbox(),xChange,yChange);
+      computeIntersection(hitboxes.get(i), players.get(0).getHitbox(), xChange, yChange); //<>//
       //computeColorCheck((int)xChange,(int)yChange);
       if(players.get(0).local.hitbox.isHitX)
         xChange = 0;
-      if(players.get(0).local.hitbox.isHitY) //<>//
+      if(players.get(0).local.hitbox.isHitY)
         yChange = 0;
-    } //<>//
+    }
 
     computeColorCheck((int)xChange,(int)yChange);
     if(players.get(0).local.hitbox.isHitX) //<>//
@@ -138,13 +147,13 @@ void computeColorCheck(int xChange, int yChange){
     players.get(0).moveY(yChange);
 
     players.get(0).setHitboxXPos(players.get(0).getXPos());
-    players.get(0).setHitboxYPos(players.get(0).getYPos()); //<>// //<>//
+    players.get(0).setHitboxYPos(players.get(0).getYPos());
+    
   } 
- //<>// //<>//
 
 
   void moveCharacter(float speed) {
-    //<>//
+    
     GameCharacter newt = players.get(0);
     
     if (newt.local.isMoving()) {
@@ -169,17 +178,22 @@ void computeColorCheck(int xChange, int yChange){
   
   
   
-//Move world calculates the translation factor that you will move the background based on character movement
-  void moveWorld(){
+  //public void setWorld(px, py, saveX, saveY) {
+  
+  //}
+  
+  
+  // Move world calculates the translation factor that you will move the background based on character movement
+  public void moveWorld() {
 
-    px = px + (saveX-newt.getXPos());
-    py = py + (saveY-newt.getYPos());
-
-  saveX = newt.getXPos();
-  saveY = newt.getYPos();
+    px += (saveX - newt.getXPos());
+    py += (saveY - newt.getYPos());
+    saveX = newt.getXPos();
+    saveY = newt.getYPos();
+    
   } 
 
- void updateDialog(){            //Nathan- Partially implemented dialog test.  Works for one conversation, need to update to pull conversations from file, and when to trigger conversations
+   public void updateDialog() {            //Nathan- Partially implemented dialog test.  Works for one conversation, need to update to pull conversations from file, and when to trigger conversations
       if(dialog==false){
         //dialog = true;   // make the window appear
         println("dialog is false");
@@ -199,12 +213,5 @@ void computeColorCheck(int xChange, int yChange){
         }
       }
 }
-
-
-  // Constructor
-  ComputationEngine() {
-    hitboxes = new ArrayList<Hitbox>();
-    players = new ArrayList<GameCharacter>();
-  }
   
 }

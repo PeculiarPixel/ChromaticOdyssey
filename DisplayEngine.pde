@@ -1,16 +1,25 @@
+/*  Display Engine
+*   Draw received events in game
+*/
 class DisplayEngine {
   
+   // Displayable events
    ArrayList<DisplayableEvent> events = new ArrayList<DisplayableEvent>();
+   
+   // Constructor
+   public DisplayEngine() {}
 
-    void displayHitbox(Hitbox hit){
+  // Display hitboxes
+  public void displayHitbox(Hitbox hit) {
     fill(255,255,255);
     stroke(10);  
     fill(hit.showColor, 100);
     rectMode(CENTER);
-    rect(hit.xPos, hit.yPos, hit.hitWidth, hit.hitHeight);
+    rect(hit.xPos, hit.yPos, hit.getWidth(), hit.getHeight());
   }
   
-  void displayDialog(Dialog talk){                                                                    //displays the dialog on the screen
+  // Display dialog
+  void displayDialog(Dialog talk) {                                                                  
     fill(255,255,255);
     stroke(20);  
     fill(155,155,155);
@@ -22,7 +31,6 @@ class DisplayEngine {
     //String wholeLine = talk.script.get(talk.currentLine);
     //String nameTag = talk.script.substring();
     //animation for text//
-
      if(frameCount%3==0 && saveSpot<talk.script.get(talk.currentLine).length()){                        //check for frame skips and if the current line has finished typing
       displayText += talk.script.get(talk.currentLine).charAt(saveSpot);                                //add the next character to the display text
       text(displayText,100,height-100);                                                                 //display the text
@@ -34,22 +42,40 @@ class DisplayEngine {
   }
   
   
-  
-  void displayCharacter(GameCharacter guy){
+  // Display game characters
+  public void displayCharacter(GameCharacter c) {
     
     imageMode(CENTER);
+    c.updateSpriteAnimation();
+    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>//
     
-    guy.updateSpriteAnimation();
-    image(guy.getCurrentImage(), guy.getXPos(), guy.getYPos());
-    
-    if(guy.local.hitboxDisplay){
-      displayHitbox(guy.getHitbox());
+    if(c.local.hitboxDisplay){
+      displayHitbox(c.getHitbox());
     }
+    
   }
-    void displayLandscape(Landscape land){
+  
+  // Display Landscapes
+  public void displayLandscape(Landscape land){
     imageMode(CENTER);
     if(newt.local.hitboxDisplay){
       displayHitbox(land.hitboxes.get(0));
+    }
+  }
+  
+  // Display all characters in state's current level
+  private void displayCharacters() {
+    imageMode(CORNER);
+    for (GameCharacter c : state.currentState.characters) {
+      displayCharacter(c);
+    }
+  }
+  
+  // Display all landscapes in state's current level
+  private void displayLandscapes() {
+    imageMode(CORNER);
+    for (Landscape l : state.currentState.landscapes) {
+      displayLandscape(l);
     }
   }
   
@@ -57,54 +83,44 @@ class DisplayEngine {
   // Run display engine
   void run() {
     
-   background(0);
-
-   pushMatrix();            //in order to move the world around the character you must translate the frame of reference when you display everything
-   translate(px, py);
+   background(0);      //  Init background
+   pushMatrix();       //  In order to move the world around the character you must translate the frame of reference when you display everything
+   translate(px, py);  //  Perform that translate
    
-   
+    // Draw background layer
     imageMode(CORNER);
+    image(state.currentState.backgroundImage, 0, 0);
     
-   
-    image(state.currentState.backgroundImage,0,0);    
-    GameCharacter tempChar;
-    for(int i=0; i <state.currentState.characters.size();i++){
-      tempChar = state.currentState.characters.get(i);
-      displayCharacter(tempChar);
-    }    
+    // Display characters
+    displayCharacters();
+    
+    // Draw foreground
     imageMode(CORNER);
     image(state.currentState.foregroundImage,0,0); 
     
-    imageMode(CENTER);
-     //draws castle enter prompt
-    if(comp.runLevelPrompt){
-      image(state.currentState.enterCastlePrompt,newt.getXPos()-200,newt.getYPos()-100); 
-    }
-    imageMode(CORNER);
+    //imageMode(CENTER);
+    // Draws castle enter prompt
+    //if(comp.runLevelPrompt){
+      //image(state.currentState.enterCastlePrompt,newt.getXPos()-200,newt.getYPos()-100); 
+    //}
     
+    // Display landscapes
+    displayLandscapes();  
     
-        Landscape tempLand;
-    for(int i=0; i <state.currentState.landscapes.size();i++){
-      tempLand = state.currentState.landscapes.get(i);
-      displayLandscape(tempLand);
-    }  
-    
+    // Pop translate matrix
     popMatrix(); 
+    
+    // Hitbox display
     if(hitBoxMode) {
-    newt.local.hitboxDisplay = true;
-
-  }
-    if(dialog){
+      newt.local.hitboxDisplay = true;
+    }
+    
+    // Dialog display
+    if(dialog) {
       //print("enter has been pressed");
-     displayDialog(state.currentState.conversations.get(comp.conversationIndex));
+      displayDialog(state.currentState.conversations.get(comp.conversationIndex));
     }
     
   }
-  
-
-    DisplayEngine(){
-      //state = new Test_Level_0(newt);
-      //currentState = state;
-    }
 
 }

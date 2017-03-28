@@ -4,7 +4,7 @@ class StateEvent extends Event {
   Level nextState;         // State to switch to
   
   StateEvent(Level nextState){
-    type = "StateEvent";
+    type = EventTypeEnum.STATE;
     this.nextState = nextState;
   }
   
