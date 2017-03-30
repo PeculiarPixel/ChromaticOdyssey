@@ -19,12 +19,14 @@ class DialogTrigger extends Trigger {
   
   // Trigger
   public void trigger() {
-    if (!hasActivated()) {
+    
       dispatcher.dispatch(dialogEvent);
       setColor(ACTIVATED_DIALOG_TRIGGER_COLOR);
-      this.isActive = true;
+      triggerEvents();
+      
+      this.isActive = true;  // Disarm dialog event (one time action)
+      
       print("Triggered Dialog Event\n");
-    }
   }
   
 }

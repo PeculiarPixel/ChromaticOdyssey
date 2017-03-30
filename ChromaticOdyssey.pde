@@ -8,6 +8,8 @@ void setup(){ //<>//
   frameRate(FRAMES_PER_SECOND_RATE);             // FPS rate
   
   initializeGlobals();                           // Initialize Globals
+  gameStart();
+  
 }
 
 
@@ -16,16 +18,13 @@ void initializeGlobals() {
  
   fileUtils = new FileUtils();
   spriteLibrary = new SpriteAnimationLibrary();
-  
-
   world = new World();
-  newt = new GameCharacter(GameCharacterName.NEWT);  
-  comp  = new ComputationEngine(newt);
-  display = new DisplayEngine();
+  comp  = new ComputationEngine();
   state  = new StateEngine();
+  display = new DisplayEngine();
   dispatcher = new EventDispatcher();
   
-  px = 0; //px is the world translation in the x direction //<>//
+  px = 0; //px is the world translation in the x direction
   py = 0; //py is the world translation in the y direction
   saveX = newt.getXPos();  //this saves newt's previous x position for movement delta purposes
   saveY = newt.getYPos();  //this saves newt's previous y position for movement delta purposes
@@ -35,6 +34,7 @@ void initializeGlobals() {
   saveSpot = 0;     //the index of the script in the current dialog
   displayText = ""; //the text currently being displayed.
   
+  state.setState(0);
   
 }
 
@@ -82,6 +82,11 @@ if (keyCode == UP) {
 }
 
 
+void gameStart() {
+  
+}
+
+
 
 
 void draw(){  
@@ -90,6 +95,8 @@ void draw(){
   state.run();
   comp.run();
   display.run();
-  //println(mouseX - px, mouseY - py); //<>//
+  
+  //println(mouseX - px, mouseY - py);
   //println("newt", newt.getXPos(), newt.getYPos());
+  
 }

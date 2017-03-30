@@ -19,4 +19,8 @@ abstract class Trigger extends Area {
     return this.isActive;
   }
   
+  protected void triggerEvents() {
+    this.clearHit();
+  }
+  
 }

@@ -5,7 +5,7 @@ class GameCharacter {
   private GameCharacterName name;
    
     // Constructor
-    GameCharacter(GameCharacterName name) {
+    public GameCharacter(GameCharacterName name) {
       
       // Character's identifier
       this.name = name;
@@ -97,7 +97,7 @@ class GameCharacter {
     // Get Hitbox of Character
     public CharacterHitbox getHitbox() { return this.local.hitbox; }
     
-    public void initialize() { comp.players.add(this); }
+    public void initialize() { comp.addCharacter(this); }
     
 }
 

@@ -22,19 +22,10 @@ abstract class Level {
     this.triggers = new ArrayList<Trigger>();
     this.hitboxes = new ArrayList<Hitbox>();
     
-    this.characters.add(newt);
-    
   }
   
   abstract void loadAssets();
   abstract void setStartPosition();
   abstract void initialize();
-  
-  // Setup level
-  public void initialize(GameCharacter Newt) {
-    this.characters.add(Newt);
-        loadAssets();
-    setStartPosition();
-  }
 
 }

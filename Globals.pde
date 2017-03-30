@@ -1,5 +1,7 @@
 
 GameCharacter newt;               // Main character, Newt
+GameCharacter kit;
+
 boolean hitBoxMode = false;       // Default hitbox mode setting
 
 // Screen size & FPS rate

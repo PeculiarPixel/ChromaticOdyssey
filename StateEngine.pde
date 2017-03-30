@@ -3,13 +3,12 @@
 */
 class StateEngine {
   
-  ArrayList<StateEvent> events = new ArrayList<StateEvent>();    // Queue of state events
+  ArrayList<StateEvent> events;    // Queue of state events
   Level currentState;                                            // Current set level
   
   // Constructor
    public StateEngine() {
-      currentState = world.getCurrentLevel();
-      currentState.initialize(newt);  
+     this.events = new ArrayList<StateEvent>();  
     }
   
   // Run the StateEngine to check for state changes
@@ -17,20 +16,54 @@ class StateEngine {
     
     // Loop through all state swaps in the queue
     for (StateEvent e : events) {
-      swapState(e);
+      handleStateEvent(e);
     }
       
-    events.clear();  //May need to change when the state engine clears the event queue.  Should it be allowed to finish?
- 
-   //should have some sort of  comp.run(currentState) but it does it without explicitly stating it.
+    clearEvents(); // May need to change when the state engine clears the event queue.  Should it be allowed to finish?
+
+  }
+  
+  // Clear state events
+  public void clearEvents() {
+    this.events.clear();
+  }
+  
+  
+  // Clear the engine
+  public void clearEngine() {
+    clearEvents();
+  }
+  
+  // Get state to swap to and pass off
+  private void handleStateEvent(StateEvent event) {
+    int nextLevel = event.getState();
+    setState(nextLevel);
   }
   
   // Swap the current state to the new state
-  public void swapState(StateEvent event) {    
-      Level nextState = world.getLevelByIndex(event.getState());
-      comp.clear();
-      nextState.initialize();
-      currentState = nextState;
+  public void setState(int levelIndex) {    
+      Level nextState = world.getLevelByIndex(levelIndex);
+      cleanupEngineStates();
+      swapState(nextState);
+  }
+  
+  // Initialize and swap into the next state
+  private void swapState(Level nextState) {
+    nextState.initialize();
+    this.currentState = nextState;
+  }
+ 
+  // Clean all engines of queued events before swapping states
+  private void cleanupEngineStates() {
+      comp.clearEngine();
+      display.clearEngine();
+  }
+  
+  
+  // Set level
+  public void setState(Level state) {
+    cleanupEngineStates();
+    swapState(state);
   }
 
 }

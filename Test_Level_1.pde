@@ -6,6 +6,7 @@ class Test_Level_1 extends Level {
   
   public Test_Level_1(){
     super();
+    loadAssets();
   }
   
   public void setStartPosition() {
@@ -14,7 +15,15 @@ class Test_Level_1 extends Level {
     newt.setYPos(START_Y);  
   }
   
-  public void initialize() {}
+    // Initialize all assets, characters, &c into comp engine
+  public void initialize() {
+    
+    for (GameCharacter c : characters) { c.initialize(); }
+    for (Landscape l : landscapes) { l.initialize(); }
+    for (Trigger t : triggers) { t.initialize(); }
+    for (Hitbox h : hitboxes) { h.initialize(); }
+    
+  }
   
   public void loadAssets() {
     
@@ -23,10 +32,13 @@ class Test_Level_1 extends Level {
     this.foregroundImage = loadImage("CastleWalkupTopLayer.png");
     
     this.landscapes.add(new Landscape(350, 350,100,100)); 
-    this.landscapes.add(new Landscape(120, 120, 100, 100));
+    this.triggers.add(new LevelTransitionTrigger(120, 300, 100, 100, 0));
     this.landscapes.add(new Landscape(300, 120, 100, 100));
     this.landscapes.add(new Landscape(700, 120, 100, 100));
     
+     
+    this.characters.add(newt);
+   
     
   // Load test conversation
   try{

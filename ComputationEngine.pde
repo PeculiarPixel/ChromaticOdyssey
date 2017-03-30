@@ -4,19 +4,18 @@ class ComputationEngine {
   private ArrayList<Trigger> triggers;
   private ArrayList<Trigger> activatedTriggers;
   private ArrayList<GameCharacter> players;
-  private ArrayList<ComputationEvent> events = new ArrayList<ComputationEvent>();
+  private ArrayList<ComputationEvent> events;
   public int conversationIndex;
   private boolean runLevelPrompt = false;
 
   // Constructor
-  public ComputationEngine(GameCharacter Newt) {
+  public ComputationEngine() {
     
+    this.events = new ArrayList<ComputationEvent>();
     this.hitboxes = new ArrayList<Hitbox>();
     this.triggers = new ArrayList<Trigger>();
     this.activatedTriggers = new ArrayList<Trigger>();
     this.players = new ArrayList<GameCharacter>();
-    
-    this.players.add(Newt);
     
   }
   
@@ -29,16 +28,23 @@ class ComputationEngine {
   public void addTrigger(Trigger t) {
     this.triggers.add(t);
   }
+  
+  
+  // Add To Characters for Level
+  public void addCharacter(GameCharacter c) {
+    this.players.add(c);
+  }
 
 void run(){
 
   // Loop through all registered computation events
   for(ComputationEvent e : events) {
-      e.compute();
+      e.compute(); //<>//
       print("Computed Event\n");
   }
   
-  events.clear();
+  clearEvents();
+  
   moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
   
@@ -48,18 +54,20 @@ void run(){
 
 }
 
-void clear() {  //clears the computation engine when a new state is declared
-  hitboxes.clear();
-  triggers.clear();
-  events.clear();
-  GameCharacter temp = players.get(0);
-  players.clear();
-  players.add(temp);
-}
+  // Clears computation engine events
+  public void clearEvents() {  
+    this.events.clear();
+  }
+  
+  
+  public void clearEngine() {
+    clearEvents();
+    this.hitboxes.clear();
+    this.triggers.clear();
+    this.players.clear();
+  }
 
-
-
-
+  // Calculate intersections between area boxes (Hitboxes, Triggers)
   private void computeIntersection(Area hBox1, Area hBox2, float xChange, float yChange){
   
       if((hBox1.yPos + hBox1.getHeight()/2 >= hBox2.yPos - hBox2.getHeight()/2 &&
@@ -136,15 +144,15 @@ void clear() {  //clears the computation engine when a new state is declared
 //  }
 //}
 
-  private void computeColorCheck(int xChange, int yChange){
-    color pixelColor = state.currentState.hitboxImage.get( (int) newt.local.getFeetX() + xChange, (int) newt.local.getFeetY() + yChange);
+  private void computeColorCheck(GameCharacter c, int xChange, int yChange){
+    color pixelColor = state.currentState.hitboxImage.get( (int) c.local.getFeetX() + xChange, (int) c.local.getFeetY() + yChange);
     //println("COLOR="+red(pixelColor)+"<r:"+green(pixelColor)+"<g:"+blue(pixelColor)+"<b:");
       if(red(pixelColor) == 255){
-         newt.getHitbox().isHitX = true;
-         newt.getHitbox().isHitY = true;
+         c.getHitbox().isHitX = true;
+         c.getHitbox().isHitY = true;
       }else{
-         newt.getHitbox().isHitX = false;
-         newt.getHitbox().isHitY = false;
+         c.getHitbox().isHitX = false;
+         c.getHitbox().isHitY = false;
       }
   }
 
@@ -159,19 +167,11 @@ void clear() {  //clears the computation engine when a new state is declared
       }
       
       for (Trigger t : triggers) {
-        if (t.isHit()) {
+        if (t.isHit() && !t.hasActivated()) {
           t.trigger();
-          activatedTriggers.add(t);
         }
       }
-      
-      if ( !activatedTriggers.isEmpty() ) {
-        for (Trigger t : activatedTriggers) {
-          triggers.remove(t);
-        }
-        activatedTriggers.clear();  
-      }
-      
+     
       // Collision for hitboxes
       for (Area a : hitboxes) {
         
@@ -184,14 +184,17 @@ void clear() {  //clears the computation engine when a new state is declared
       
     }
     
-    // Compute color change
-    computeColorCheck( (int) xChange, (int) yChange );
+    
+    for (GameCharacter c : players) {
+      // Compute color change
+      computeColorCheck( c, (int) xChange, (int) yChange );
+    }    
     
     // Stop character movement again for color
-   if(players.get(0).local.hitbox.isHitX)
-        xChange = 0;
-    if(players.get(0).local.hitbox.isHitY)
-        yChange = 0;
+    for (GameCharacter c : players) {
+      if(c.local.hitbox.isHitX) xChange = 0;
+      if(c.local.hitbox.isHitY) yChange = 0;
+    }
     
     //for(int i = 0; i < hitboxes.size(); i++) {
     //  computeIntersection(hitboxes.get(i), players.get(0).getHitbox(), xChange, yChange); //<>//
@@ -201,19 +204,21 @@ void clear() {  //clears the computation engine when a new state is declared
     //  if(players.get(0).local.hitbox.isHitY)
     //    yChange = 0;
     //} //<>//
-
-    players.get(0).moveX(xChange);
-    players.get(0).moveY(yChange);
-
-    players.get(0).setHitboxXPos(players.get(0).getXPos());
-    players.get(0).setHitboxYPos(players.get(0).getYPos());
+    
+    for (GameCharacter c : players) {
+      
+      c.moveX(xChange);
+      c.moveY(yChange);
+      
+      c.setHitboxXPos(c.getXPos());
+      c.setHitboxYPos(c.getYPos());
+    
+    }
     
   } 
 
 
   void moveCharacter(float speed) {
-    
-    GameCharacter newt = players.get(0);
     
     if (newt.local.isMoving()) {
       if(newt.local.moveUp) {

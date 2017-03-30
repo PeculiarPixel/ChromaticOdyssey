@@ -15,11 +15,12 @@ class LevelTransitionTrigger extends Trigger {
   
   // Send off the transition event to swap levels
   public void trigger() {
-    if (!hasActivated()) {
-    dispatcher.dispatch(transitionEvent);
-    this.isActive = false;
-    println("Transitioning to new level...");
-    }
+    
+      dispatcher.dispatch(transitionEvent);
+      triggerEvents();
+      
+      println("Transitioning to level: " + Integer.toString(transitionEvent.getState()));
+      
   }
   
 }

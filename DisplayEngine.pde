@@ -4,10 +4,12 @@
 class DisplayEngine {
   
    // Displayable events
-   ArrayList<DisplayableEvent> events = new ArrayList<DisplayableEvent>();
+   ArrayList<DisplayableEvent> events;
    
    // Constructor
-   public DisplayEngine() {}
+   public DisplayEngine() {
+     this.events = new ArrayList<DisplayableEvent>();
+   }
 
   // Display hitboxes
   public void displayArea(Area hit) {
@@ -93,6 +95,15 @@ class DisplayEngine {
     }
   }
   
+  
+  // Clear Display Engine of Events
+  public void clearEvents() {
+    this.events.clear();
+  }
+  
+  public void clearEngine() {
+    clearEvents();
+  }
 
   // Run display engine
   void run() {
