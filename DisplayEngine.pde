@@ -10,33 +10,40 @@ class DisplayEngine {
    public DisplayEngine() {}
 
   // Display hitboxes
-  public void displayHitbox(Hitbox hit) {
+  public void displayArea(Area hit) {
+    
     fill(255,255,255);
     stroke(10);  
     fill(hit.showColor, 100);
     rectMode(CENTER);
     rect(hit.xPos, hit.yPos, hit.getWidth(), hit.getHeight());
+    
   }
   
   // Display dialog
-  void displayDialog(Dialog talk) {                                                                  
+  void displayDialog(Dialog talk) {
+    
+    // Set dialog window details
     fill(255,255,255);
     stroke(20);  
     fill(155,155,155);
     rectMode(CENTER);
-    rect(width/2,height-100,width,height/4);
+    rect(width/2, height-100, width, height/4);
     textSize(36);
     fill(0,0,0);
-    //text(talk.script.get(talk.currentLine),100,height-150);                                            //show static message
-    //String wholeLine = talk.script.get(talk.currentLine);
-    //String nameTag = talk.script.substring();
-    //animation for text//
-     if(frameCount%3==0 && saveSpot<talk.script.get(talk.currentLine).length()){                        //check for frame skips and if the current line has finished typing
-      displayText += talk.script.get(talk.currentLine).charAt(saveSpot);                                //add the next character to the display text
-      text(displayText,100,height-100);                                                                 //display the text
-      saveSpot++;                                                                                       //set index to the next character of the current conversation line
-    }else{
-      text(displayText,100,height-100);                                                                 //wait until the character presses next to continue
+    
+     // Animate Dialog Text
+     if( frameCount % 3 == 0 
+         && saveSpot < talk.script.get(talk.currentLine).length() ) {          // Check for frame skips and if the current line has finished typing
+         
+      displayText += talk.script.get(talk.currentLine).charAt(saveSpot);       // Add the next character to the display text
+      text(displayText,100,height-100);                                        // Display the text
+      saveSpot++;                                                              // Set index to the next character of the current conversation line
+      
+    } else {                                                                   // Display the txt until player presses next
+      
+      text(displayText,100,height-100);                                        // Wait until the character presses next to continue
+      
     }
     
   }
@@ -50,7 +57,7 @@ class DisplayEngine {
     image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>//
     
     if(c.local.hitboxDisplay){
-      displayHitbox(c.getHitbox());
+      displayArea(c.getHitbox());
     }
     
   }
@@ -59,7 +66,7 @@ class DisplayEngine {
   public void displayLandscape(Landscape land){
     imageMode(CENTER);
     if(newt.local.hitboxDisplay){
-      displayHitbox(land.hitboxes.get(0));
+      displayArea(land.hitboxes.get(0));
     }
   }
   
@@ -73,9 +80,16 @@ class DisplayEngine {
   
   // Display all landscapes in state's current level
   private void displayLandscapes() {
-    imageMode(CORNER);
     for (Landscape l : state.currentState.landscapes) {
       displayLandscape(l);
+    }
+  }
+  
+  private void displayTriggers() {
+    for (Trigger t : state.currentState.triggers) {
+      if (newt.local.hitboxDisplay) {
+        displayArea(t);
+      }
     }
   }
   
@@ -105,7 +119,8 @@ class DisplayEngine {
     //}
     
     // Display landscapes
-    displayLandscapes();  
+    displayLandscapes();
+    displayTriggers();
     
     // Pop translate matrix
     popMatrix(); 
@@ -113,7 +128,7 @@ class DisplayEngine {
     // Hitbox display
     if(hitBoxMode) {
       newt.local.hitboxDisplay = true;
-    }
+    } 
     
     // Dialog display
     if(dialog) {

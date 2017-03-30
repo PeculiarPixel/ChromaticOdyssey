@@ -23,14 +23,13 @@ final static int WALK_DOWN_ANIMATION_INDEX = 5;
 final static int WALK_LEFT_ANIMATION_INDEX = 6;          
 final static int WALK_RIGHT_ANIMATION_INDEX = 7;         
 
+World world;
 ComputationEngine comp;                 // Computation Engine
 StateEngine state;                      // State Engine
 DisplayEngine display;                  // Display Engine
 EventDispatcher dispatcher;             // Event Dispatcher
 SpriteAnimationLibrary spriteLibrary;   // Sprite Animation Library
 FileUtils fileUtils;                    // File I/O Utilities
-
-Test_Level_0 beginning;                 // Test Level 0
 
 //movement variables
   float px;

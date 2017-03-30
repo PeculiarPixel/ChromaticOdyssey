@@ -15,16 +15,17 @@ void setup(){ //<>//
 void initializeGlobals() {
  
   fileUtils = new FileUtils();
-  spriteLibrary = new SpriteAnimationLibrary(); //<>//
+  spriteLibrary = new SpriteAnimationLibrary();
   
-  newt = new GameCharacter(GameCharacterName.NEWT);
-  comp  = new ComputationEngine();
-  comp.players.add(newt);
+
+  world = new World();
+  newt = new GameCharacter(GameCharacterName.NEWT);  
+  comp  = new ComputationEngine(newt);
   display = new DisplayEngine();
-  state  = new StateEngine(beginning);
+  state  = new StateEngine();
   dispatcher = new EventDispatcher();
   
-  px = 0; //px is the world translation in the x direction
+  px = 0; //px is the world translation in the x direction //<>//
   py = 0; //py is the world translation in the y direction
   saveX = newt.getXPos();  //this saves newt's previous x position for movement delta purposes
   saveY = newt.getYPos();  //this saves newt's previous y position for movement delta purposes
@@ -77,7 +78,6 @@ if (keyCode == UP) {
   //Dialog Window Checks//
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
         comp.updateDialog();
-    
     }
 }
 
@@ -90,6 +90,6 @@ void draw(){
   state.run();
   comp.run();
   display.run();
-  println(mouseX - px, mouseY - py); //<>//
-  println("newt", newt.getXPos(), newt.getYPos());
+  //println(mouseX - px, mouseY - py); //<>//
+  //println("newt", newt.getXPos(), newt.getYPos());
 }

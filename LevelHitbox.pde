@@ -7,6 +7,6 @@ class LevelHitbox extends Hitbox {
   public LevelHitbox(float x, float y, float w, float h) {
     super(x, y, w, h, AreaTypeEnum.LEVEL_HITBOX);
     setColor(LEVEL_HITBOX_COLOR);
-    comp.addToHitboxes(this);
   }
+  
 }

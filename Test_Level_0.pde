@@ -1,36 +1,37 @@
 // Default Test Level 0
 class Test_Level_0 extends Level {
   
-  public Test_Level_0(GameCharacter Newt) {
+  public Test_Level_0() {
     super();
-  
-    // Add Newt
-    characters.add(Newt);
-    
-    // Load assets
     loadAssets();
-  
   }
 
   public Level nextState() {
     comp.clear();
-    Test_Level_1 next = new Test_Level_1(newt);
+    Test_Level_1 next = new Test_Level_1();
     return next;
   }
   
   public void setStartPosition() {}
-
-  public Level changeLevel() { return null; }
+  
+  public void initialize() {
+    for (Landscape l : landscapes) { l.initialize(); }
+    for (Trigger t : triggers) { t.initialize(); }
+    for (Hitbox h : hitboxes) { h.initialize(); }
+  }
   
   public void loadAssets() {
     
     this.hitboxImage = loadImage("hitboxLayer.png");    
-    backgroundImage = loadImage("CastleWalkup.png");
+    this.backgroundImage = loadImage("CastleWalkup.png");
     this.foregroundImage = loadImage("CastleWalkupTopLayer.png");
-    this.landscapes.add(new Landscape(350, 350,100,100, "Landscape", -1)); 
-    this.landscapes.add(new Landscape(120, 120, 100, 100, "EventBox", -1));
-    this.landscapes.add(new Landscape(300, 120, 100, 100, "DialogBox", 0));
-    this.landscapes.add(new Landscape(700, 120, 100, 100, "DialogBox", 1));
+    
+    //this.landscapes.add(new Landscape(350, 350,100,100));
+    this.triggers.add(new DialogTrigger(350, 350, 100, 100, 1));
+    this.triggers.add(new LevelTransitionTrigger(300, 120, 100, 100, 0));
+    this.landscapes.add(new Landscape(120, 120, 100, 100));
+    //this.landscapes.add(new Landscape(300, 120, 100, 100));
+    this.landscapes.add(new Landscape(700, 120, 100, 100));
     
     
   // Load test conversation

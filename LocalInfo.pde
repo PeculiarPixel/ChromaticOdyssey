@@ -11,7 +11,7 @@ class LocalInfo {
   private boolean moveRight;
   private MoveDirection direction;
   private boolean hitboxDisplay;
-  private Hitbox hitbox;
+  private CharacterHitbox hitbox;
 
   // Stats values
   private int currHealth;

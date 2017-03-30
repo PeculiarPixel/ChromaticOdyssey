@@ -7,10 +7,10 @@ class StateEngine {
   Level currentState;                                            // Current set level
   
   // Constructor
- public StateEngine(Level state){
-      state = new Test_Level_0(newt);
-      currentState = state;
-  }
+   public StateEngine() {
+      currentState = world.getCurrentLevel();
+      currentState.initialize(newt);  
+    }
   
   // Run the StateEngine to check for state changes
   void run() {
@@ -26,8 +26,11 @@ class StateEngine {
   }
   
   // Swap the current state to the new state
-  public void swapState(StateEvent event) {   
-    currentState = event.nextState;
+  public void swapState(StateEvent event) {    
+      Level nextState = world.getLevelByIndex(event.getState());
+      comp.clear();
+      nextState.initialize();
+      currentState = nextState;
   }
 
 }

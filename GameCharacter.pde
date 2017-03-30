@@ -95,9 +95,9 @@ class GameCharacter {
     public void setHitboxYPos(float pos) { this.local.setHitboxYPos(pos); }
     
     // Get Hitbox of Character
-    public Hitbox getHitbox() { return this.local.hitbox; }
+    public CharacterHitbox getHitbox() { return this.local.hitbox; }
     
-    
+    public void initialize() { comp.players.add(this); }
     
 }
 

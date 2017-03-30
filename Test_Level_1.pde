@@ -4,24 +4,8 @@ class Test_Level_1 extends Level {
   private final int START_X = 0;
   private final int START_Y = 0;
   
-  public Test_Level_1(GameCharacter Newt){
+  public Test_Level_1(){
     super();
-    
-    // Add Newt
-    characters.add(Newt);
-    
-    // Load assets
-    loadAssets();
-    
-    // Setup newt start position
-    setStartPosition();
-  
-  }
-
-  public Level nextState() {
-    comp.clear();
-    Test_Level_0 next = new Test_Level_0(newt);
-    return next;
   }
   
   public void setStartPosition() {
@@ -29,18 +13,19 @@ class Test_Level_1 extends Level {
     newt.setXPos(START_X);
     newt.setYPos(START_Y);  
   }
-
-  public Level changeLevel() { return null; }
+  
+  public void initialize() {}
   
   public void loadAssets() {
     
     this.hitboxImage = loadImage("hitboxLayer.png");    
     this.backgroundImage = loadImage("hitboxLayer.png");
     this.foregroundImage = loadImage("CastleWalkupTopLayer.png");
-    this.landscapes.add(new Landscape(350, 350,100,100, "Landscape", -1)); 
-    this.landscapes.add(new Landscape(120, 120, 100, 100, "EventBox", -1));
-    this.landscapes.add(new Landscape(300, 120, 100, 100, "DialogBox", 0));
-    this.landscapes.add(new Landscape(700, 120, 100, 100, "DialogBox", 1));
+    
+    this.landscapes.add(new Landscape(350, 350,100,100)); 
+    this.landscapes.add(new Landscape(120, 120, 100, 100));
+    this.landscapes.add(new Landscape(300, 120, 100, 100));
+    this.landscapes.add(new Landscape(700, 120, 100, 100));
     
     
   // Load test conversation

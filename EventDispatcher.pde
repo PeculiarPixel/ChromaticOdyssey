@@ -2,22 +2,11 @@
 // Handler for dispatching events to correct destinations
 class EventDispatcher {
   
-  // Dispatch given event to correct engine
-  void dispatch(Event e) { 
-    switch(e.type) {
-      case COMPUTATION:
-         sendComputable((ComputationEvent) e);  // Send computation events
-        break;
-      case STATE:
-        sendState((StateEvent) e);              // Send state events
-        break;
-      case DISPLAY:
-        sendDisplayable((DisplayableEvent) e);  // Send displayable events
-        break;
-      default: 
-        println("Event class not registered");  
-    }
-  }
+  public void dispatch(StateEvent e) { sendState(e); }
+  
+  public void dispatch(ComputationEvent e) { sendComputable(e); }
+  
+  public void dispatch(DisplayableEvent e) { sendDisplayable(e); }
   
   private void sendState(StateEvent stateEvent){  //send computables to computation engine to check
     state.events.add(stateEvent);
