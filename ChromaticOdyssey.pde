@@ -1,6 +1,6 @@
 import processing.video.*;
 
-void setup(){ //<>//
+void setup() { //<>//
   //gg boys
   surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
   surface.setResizable(false);                   // Disable resize
@@ -8,7 +8,7 @@ void setup(){ //<>//
   frameRate(FRAMES_PER_SECOND_RATE);             // FPS rate
   
   initializeGlobals();                           // Initialize Globals
-  gameStart();
+  gameStart();                                   // Show title screen
   
 }
 
@@ -34,7 +34,7 @@ void initializeGlobals() {
   saveSpot = 0;     //the index of the script in the current dialog
   displayText = ""; //the text currently being displayed.
   
-  state.setState(0);
+  state.setState(LevelName.TEST_0);
   
 }
 

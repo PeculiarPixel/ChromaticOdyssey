@@ -1,45 +1,34 @@
 // Default Test Level 0
 class Test_Level_0 extends Level {
   
+  private final float START_X = 235;
+  private final float START_Y = 2750;
+  
+  // Constructor
   public Test_Level_0() {
     super();
     loadAssets();
   }
-
-  public Level nextState() {
-    comp.clearEvents();
-    Test_Level_1 next = new Test_Level_1();
-    return next;
-  }
   
-  public void setStartPosition() {}
-  
-  // Initialize all assets, characters, &c into comp engine
-  public void initialize() {
-    
-    // Loop through all assets and add initialize them
-    for (GameCharacter c : characters) { c.initialize(); }
-    for (Landscape l : landscapes) { l.initialize(); }
-    for (Trigger t : triggers) { t.initialize(); }
-    for (Hitbox h : hitboxes) { h.initialize(); }
-    
+  // Set Newt Starting Position
+  public void setStartPosition() {
+    GameCharacter newt = this.characters.get(0);
+    newt.setXPos(START_X);
+    newt.setYPos(START_Y);
   }
   
   // Load level necessary characters
   private void loadCharacters() {
-    
+    this.characters.add(newt);
   }
   
   // Load all level landscapes (Hitboxes, Triggers, Objects)
   private void loadLandscapes() {
     
-    
     this.triggers.add(new DialogTrigger(350, 350, 100, 100, 1));
-    this.triggers.add(new LevelTransitionTrigger(300, 120, 100, 100, 1));
+    this.triggers.add(new LevelTransitionTrigger(3650, 900, 100, 100, LevelName.TEST_1));
     this.landscapes.add(new Landscape(120, 120, 100, 100));
     this.landscapes.add(new Landscape(700, 120, 100, 100));
-    
-    this.characters.add(newt);
     
   }
   

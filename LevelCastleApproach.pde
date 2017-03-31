@@ -6,10 +6,7 @@ class LevelCastleApproach extends Level {
   // Constructor
   public LevelCastleApproach() {
     super();
-    
-    // Load assets
     loadAssets();
-    
   }
   
   public void setStartPosition() {}

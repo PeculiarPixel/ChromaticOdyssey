@@ -26,6 +26,29 @@ abstract class Level {
   
   abstract void loadAssets();
   abstract void setStartPosition();
-  abstract void initialize();
+  
+  // Initialize all assets, characters, &c into comp engine
+  public void initialize() {
+    
+    
+    
+    // Loop through all assets and add initialize them
+    for (GameCharacter c : characters) { c.initialize(); }
+    for (Landscape l : landscapes) { l.initialize(); }
+    for (Trigger t : triggers) { t.initialize(); }
+    for (Hitbox h : hitboxes) { h.initialize(); }
+    
+    // Set Starting position for level
+    setStartPosition();
+    
+  }
+  
 
+}
+
+public enum LevelName {
+  EMERALD_FOREST, EMERALD_FOREST_CAVE,
+  KIT_PRISM_INNER, WORLD_PRISM_INNER, CASTLE_APPROACH, CASTLE_COURTYARD,
+  CASTLE_HUB, LIBRARY, THRONE_ROOM, MASTER_BEDROOM, KIT_BEDROOM,
+  SPIRE, TEST_0, TEST_1;
 }

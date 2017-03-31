@@ -56,7 +56,7 @@ class DisplayEngine {
     
     imageMode(CENTER);
     c.updateSpriteAnimation();
-    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>//
+    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>// //<>// //<>// //<>//
     
     if(c.local.hitboxDisplay){
       displayArea(c.getHitbox());

@@ -7,10 +7,10 @@ class LevelTransitionTrigger extends Trigger {
   private StateEvent transitionEvent;
   
   // Constructor
-  protected LevelTransitionTrigger(float x, float y, float w, float h, int level_index) {
+  protected LevelTransitionTrigger(float x, float y, float w, float h, LevelName level_name) {
     super(x, y, w, h, AreaTypeEnum.TRANSITION_TRIGGER);
     setColor(TRANSITION_TRIGGER_COLOR);    
-    this.transitionEvent = new StateEvent(level_index);
+    this.transitionEvent = new StateEvent(level_name);
   }
   
   // Send off the transition event to swap levels
@@ -19,7 +19,7 @@ class LevelTransitionTrigger extends Trigger {
       dispatcher.dispatch(transitionEvent);
       triggerEvents();
       
-      println("Transitioning to level: " + Integer.toString(transitionEvent.getState()));
+      println("Transitioning to level: " + transitionEvent.getState().toString());
       
   }
   

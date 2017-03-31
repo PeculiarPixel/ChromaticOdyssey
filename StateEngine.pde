@@ -36,13 +36,12 @@ class StateEngine {
   
   // Get state to swap to and pass off
   private void handleStateEvent(StateEvent event) {
-    int nextLevel = event.getState();
-    setState(nextLevel);
+    setState(event.getState());
   }
   
   // Swap the current state to the new state
-  public void setState(int levelIndex) {    
-      Level nextState = world.getLevelByIndex(levelIndex);
+  public void setState(LevelName levelIndex) {    
+      Level nextState = world.getLevel(levelIndex);
       cleanupEngineStates();
       swapState(nextState);
   }

@@ -1,15 +1,15 @@
 class StateEvent extends Event {
   
-  int nextState;         // State to switch to
+  LevelName nextState;         // State to switch to
   
   // Constructor
-  public StateEvent(int nextState) {
+  public StateEvent(LevelName nextState) {
     type = EventTypeEnum.STATE;
     this.nextState = nextState;
   }
   
   // Get level to transition to
-  public int getState() {
+  public LevelName getState() {
     return nextState;
   }
   
