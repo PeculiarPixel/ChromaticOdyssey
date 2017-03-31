@@ -28,6 +28,11 @@ class StateEngine {
     this.events.clear();
   }
   
+  // Get current state size
+  public LevelSize getCurrentStateSize() {
+    return this.currentState.getStateSize();
+  }
+  
   
   // Clear the engine
   public void clearEngine() {

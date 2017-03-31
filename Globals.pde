@@ -32,6 +32,7 @@ DisplayEngine display;                  // Display Engine
 EventDispatcher dispatcher;             // Event Dispatcher
 SpriteAnimationLibrary spriteLibrary;   // Sprite Animation Library
 FileUtils fileUtils;                    // File I/O Utilities
+GameCamera camera;
 
 //movement variables
   float px;

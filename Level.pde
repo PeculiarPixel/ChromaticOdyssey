@@ -27,6 +27,12 @@ abstract class Level {
   abstract void loadAssets();
   abstract void setStartPosition();
   
+  
+  // Get level size
+  public LevelSize getStateSize() {
+    return new LevelSize(backgroundImage.width, backgroundImage.height);
+  }
+  
   // Initialize all assets, characters, &c into comp engine
   public void initialize() {
     
@@ -40,6 +46,8 @@ abstract class Level {
     
     // Set Starting position for level
     setStartPosition();
+    camera.setTrackTarget(this.characters.get(0));
+    camera.setLevelSize(0, getStateSize().w, 0, getStateSize().h);
     
   }
   
