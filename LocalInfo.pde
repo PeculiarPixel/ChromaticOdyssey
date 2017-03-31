@@ -66,48 +66,18 @@ class LocalInfo {
          
     }
     
-    
-    private void checkOpposingDirections() {
-      
-      if (isMoving()) {
-        switch (this.secondaryDirection) {
-          case LEFT:
-               if (this.direction == MoveDirection.RIGHT) {
-                 this.direction = MoveDirection.IDLE_RIGHT;
-               }
-               break;
-         case RIGHT:
-               if (this.direction == MoveDirection.LEFT) {
-                 this.direction = MoveDirection.IDLE_LEFT;
-               }
-               break;
-         case UP:
-               if (this.direction == MoveDirection.DOWN) {
-                 this.direction = MoveDirection.IDLE_DOWN;
-               }
-               break;
-         case DOWN:
-               if (this.direction == MoveDirection.UP) {
-                 this.direction = MoveDirection.IDLE_UP;
-               }
-               break;
-               
-        }
-      }
-      
-    }
-    
+    // Add either new direction or new secondary direction
     private void addDirection(MoveDirection direction) {
       
       if(isMoving()) {
         this.secondaryDirection = this.direction;
         this.direction = direction;
-        checkOpposingDirections();
       }
       else this.direction = direction;
       
     }
     
+    // Release direction and move to either the secondary direction or idle
     private void releaseDirectionMoving(MoveDirection direction) {    
       if (direction != this.secondaryDirection) this.direction = this.secondaryDirection;       
     }
