@@ -5,11 +5,14 @@ class LocalInfo {
   private float yPos;  // Current position Y
  
   // Movement handlers
-  private boolean moveUp;
-  private boolean moveDown;
-  private boolean moveLeft;
-  private boolean moveRight;
+  private boolean moveUp = false;
+  private boolean moveDown = false;
+  private boolean moveLeft = false;
+  private boolean moveRight = false;
+  
   private MoveDirection direction;
+  private MoveDirection secondaryDirection;
+  
   private boolean hitboxDisplay;
   private CharacterHitbox hitbox;
 
@@ -17,20 +20,18 @@ class LocalInfo {
   private int currHealth;
   private int currExperience;
   private int currMana;
- 
   
   // Constructor
-  LocalInfo(float x, float y, float sizeX, float sizeY, int h, int e, int m) {
-    xPos = x;
-    yPos = y;
-    currHealth = h;
-    currExperience = e;
-    currMana = m;
-    moveUp = false;
-    moveDown = false;
-    moveLeft = false;
-    moveRight = false;
-    hitbox = new CharacterHitbox(x,  y, sizeX, sizeY);
+  public LocalInfo(float x, float y, float sizeX, float sizeY, int h, int e, int m) {
+    
+    this.xPos = x;
+    this.yPos = y;
+    this.currHealth = h;
+    this.currExperience = e;
+    this.currMana = m;
+    this.hitbox = new CharacterHitbox(x,  y, sizeX, sizeY);
+    this.direction = MoveDirection.IDLE_DOWN;
+    
   }
     
     
@@ -39,60 +40,135 @@ class LocalInfo {
       
       // Change direction only if direction is new
       if (isDirectionChange(direction)) {
+       
+        addDirection(direction);
         
-        this.direction = direction;
         switch(direction) {
           case LEFT:
-            moveLeft = true;
+            this.moveLeft = true;
             break;
           case RIGHT:
-            moveRight = true;
+            this.moveRight = true;
             break;
           case UP:
-            moveUp = true;
+            this.moveUp = true;
             break;
           case DOWN:
-           moveDown = true;
+           this.moveDown = true;
            break;
         }
         
         // Log direction
-        println("Current direction: " + this.direction);
+        println("Current direction: " + this.direction.toString());
         
       }
         
          
     }
     
+    
+    private void checkOpposingDirections() {
+      
+      if (isMoving()) {
+        switch (this.secondaryDirection) {
+          case LEFT:
+               if (this.direction == MoveDirection.RIGHT) {
+                 this.direction = MoveDirection.IDLE_RIGHT;
+               }
+               break;
+         case RIGHT:
+               if (this.direction == MoveDirection.LEFT) {
+                 this.direction = MoveDirection.IDLE_LEFT;
+               }
+               break;
+         case UP:
+               if (this.direction == MoveDirection.DOWN) {
+                 this.direction = MoveDirection.IDLE_DOWN;
+               }
+               break;
+         case DOWN:
+               if (this.direction == MoveDirection.UP) {
+                 this.direction = MoveDirection.IDLE_UP;
+               }
+               break;
+               
+        }
+      }
+      
+    }
+    
+    private void addDirection(MoveDirection direction) {
+      
+      if(isMoving()) {
+        this.secondaryDirection = this.direction;
+        this.direction = direction;
+        checkOpposingDirections();
+      }
+      else this.direction = direction;
+      
+    }
+    
+    private void releaseDirectionMoving(MoveDirection direction) {    
+      if (direction != this.secondaryDirection) this.direction = this.secondaryDirection;       
+    }
+   
+    
+    // Check that we have not put in more than two movement keys
+    public boolean checkTwoMoveKeyLimit() {
+      
+      // Initialize check
+      int check = 0;
+      
+      // Test current movement directions
+      if (this.moveUp) check++;
+      if (this.moveDown) check++;
+      if (this.moveLeft) check++;
+      if (this.moveRight) check++;
+      
+      return (check > 1) ? true : false;
+      
+    }
+   
+    // Release all directions
+    private void releaseDirections() {
+      this.moveUp = false;
+      this.moveDown = false;
+      this.moveLeft = false;
+      this.moveRight = false;
+    }
+    
     // Release movement direction
     public boolean releaseDirection(MoveDirection direction) {
       
-      MoveDirection lastDirection;
+      MoveDirection releaseDirection;
         
       switch(direction) {
           case LEFT:
             moveLeft = false;
-            lastDirection = MoveDirection.LEFT;
+            releaseDirection = MoveDirection.LEFT;
             break;
           case RIGHT:
             moveRight = false;
-            lastDirection = MoveDirection.RIGHT;
+            releaseDirection = MoveDirection.RIGHT;
             break;
           case UP:
             moveUp = false;
-            lastDirection = MoveDirection.UP;
+            releaseDirection = MoveDirection.UP;
             break;
           case DOWN:
            moveDown = false;
-           lastDirection = MoveDirection.DOWN;
+           releaseDirection = MoveDirection.DOWN;
            break;
            default:
-             lastDirection = MoveDirection.DOWN;
+             releaseDirection = MoveDirection.DOWN;
         }    
+        
+        println("Releasing direction: " + releaseDirection);
+        
       
         if (!isMoving()) {
           
-          switch(lastDirection) {
+          switch(releaseDirection) {
             case LEFT:
                this.direction = MoveDirection.IDLE_LEFT;
                break;
@@ -112,6 +188,11 @@ class LocalInfo {
           println("Current direction: " + this.direction);
           return true;
           
+        }
+        
+        if (isMoving()) { 
+            releaseDirectionMoving(releaseDirection);
+            return true;
         }
         
         return false;
