@@ -1,47 +1,59 @@
-class Test_Level_0 extends Level{ //will extend this class into different levels, ex LevelOne,LevelTwo, etc
-
-Level nextState(){
-  comp.clear();
-  Test_Level_1 next = new Test_Level_1(newt);
-  return next;
-}
-
-
-
-Test_Level_0(GameCharacter newt){
-cutscenes =new ArrayList<Movie>();
-characters =new ArrayList<GameCharacter>();
-conversations = new ArrayList<Dialog>();
-characters.add(newt);
-//items =new ArrayList<Item>();
-//menus =new ArrayList<Menu>();
-
-//next = new Test_Level_1(newt);
-landscapes =new ArrayList<Landscape>();
-
-backgroundImage = loadImage("CastleWalkup.png");
-foregroundImage = loadImage("CastleWalkupTopLayer.png");
-hitboxImage = loadImage("hitboxLayer.png");
-enterCastlePrompt = loadImage("EnterCastlePrompt.png");
-//backgroundImage.resize(backgroundImage.width*4,backgroundImage.height*4);
-//foregroundImage.resize(foregroundImage.width*4,foregroundImage.height*4);
-
-//landscapes.add(new Landscape(300, 120, 100, 100,"DialogBox",0));
-
-//landscapes.add(new Landscape(100, 2450,800,40,"Landscape",-1));
-//landscapes.add(new Landscape(540, 2430,80,40,"Landscape",-1));
-//landscapes.add(new Landscape(320, 170,10,10,"Landscape",-1));
-//landscapes.add(new Landscape(330, 180,10,10,"Landscape",-1));
-//landscapes.add(new Landscape(340, 190,10,10,"Landscape",-1));
-landscapes.add(new Landscape(3651, 767, 200, 50,"EventBox",-1));    //switch to state 1
-
-//landscapes.add(new Landscape(200, 200, 300, 100,"DamageBox",-1));
-
-try{
-  conversations = fileUtils.getLevelConversations("levelScripts/level0");
- } catch (DirectoryNotFoundException dnfe) {
-      println(dnfe.getLocalizedMessage());
-  } 
-}
-
+// Default Test Level 0
+class Test_Level_0 extends Level {
+  
+  private final float START_X = 235;
+  private final float START_Y = 2750;
+  
+  // Constructor
+  public Test_Level_0() {
+    super();
+    loadAssets();
+  }
+  
+  // Set Newt Starting Position
+  public void setStartPosition() {
+    GameCharacter newt = this.characters.get(0);
+    newt.setXPos(START_X);
+    newt.setYPos(START_Y);
+  }
+  
+  // Load level necessary characters
+  private void loadCharacters() {
+    this.characters.add(newt);
+  }
+  
+  // Load all level landscapes (Hitboxes, Triggers, Objects)
+  private void loadLandscapes() {
+    
+    this.triggers.add(new DialogTrigger(350, 350, 100, 100, 1));
+    this.triggers.add(new LevelTransitionTrigger(3650, 900, 100, 100, LevelName.TEST_1));
+    this.landscapes.add(new Landscape(120, 120, 100, 100));
+    this.landscapes.add(new Landscape(700, 120, 100, 100));
+    
+  }
+  
+  // Load level conversations
+  private void loadConversations() {
+  // Load test conversation
+  try{
+    this.conversations = fileUtils.getLevelConversations("levelScripts/level0");
+   } catch (DirectoryNotFoundException e) {
+        println(e.getLocalizedMessage());
+    }
+    
+  }
+  
+  // Load all level related assets
+  public void loadAssets() {
+    
+    this.hitboxImage = loadImage("hitboxLayer.png");    
+    this.backgroundImage = loadImage("CastleWalkup.png");
+    this.foregroundImage = loadImage("CastleWalkupTopLayer.png");
+    
+    loadLandscapes();
+    loadConversations();
+    loadCharacters();
+    
+  }
+  
 }

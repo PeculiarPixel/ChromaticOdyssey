@@ -68,8 +68,9 @@ public class SpriteAnimationLibrary {
           animations.add(WALK_DOWN_ANIMATION_INDEX, getSpriteAnimation("NewtWalkDown", WALK_ANIMATION_RATE));
           animations.add(WALK_LEFT_ANIMATION_INDEX, getSpriteAnimation("NewtWalkLeft", WALK_ANIMATION_RATE));
           animations.add(WALK_RIGHT_ANIMATION_INDEX, getSpriteAnimation("NewtWalkRight", WALK_ANIMATION_RATE));
+          break;
         default:
-  
+          println("Character animations unknown");
       }
     } catch (NoDirPathEntryFoundException e) {
       println(e.getLocalizedMessage());

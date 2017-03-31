@@ -1,13 +1,10 @@
-class ComputationEvent extends Event {
-  
-  int value;               // Value to compute
-  GameCharacter target;    // Target of value
+abstract class ComputationEvent extends Event {
   
   // Constructor
-  ComputationEvent(int value, GameCharacter target){
-    type = "ComputationEvent";
-    this.value = value;
-    this.target = target;
-  }  
+  ComputationEvent() {
+    this.type = EventTypeEnum.COMPUTATION;
+  }
+  
+  abstract void compute();
 
 }
