@@ -14,6 +14,8 @@ abstract class Level {
   protected PImage foregroundImage;      // Level's foreground image
   protected PImage hitboxImage;          // Level's hitbox image
   
+  
+  protected Fog fog;
   protected Level() {
     
     this.characters = new ArrayList<GameCharacter>();
