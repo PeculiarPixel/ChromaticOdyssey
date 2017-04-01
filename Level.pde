@@ -23,6 +23,7 @@ abstract class Level {
     this.conversations = new ArrayList<Dialog>();
     this.triggers = new ArrayList<Trigger>();
     this.hitboxes = new ArrayList<Hitbox>();
+    this.fog = new Fog(0,0,0);
     
   }
   
