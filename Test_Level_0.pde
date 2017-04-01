@@ -20,6 +20,7 @@ class Test_Level_0 extends Level {
   // Load level necessary characters
   private void loadCharacters() {
     this.characters.add(newt);
+    //this.characters.add(kit);
   }
   
   // Load all level landscapes (Hitboxes, Triggers, Objects)
@@ -46,9 +47,9 @@ class Test_Level_0 extends Level {
   // Load all level related assets
   public void loadAssets() {
     
-    this.hitboxImage = loadImage("hitboxLayer.png");    
-    this.backgroundImage = loadImage("CastleWalkup.png");
-    this.foregroundImage = loadImage("CastleWalkupTopLayer.png");
+    this.hitboxImage = loadImage("LevelBackgrounds/CastleApproach/hitboxLayer.png");    
+    this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkup.png");
+    this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkupTopLayer.png");
     
     loadLandscapes();
     loadConversations();

@@ -15,10 +15,10 @@ class LevelCastleApproach extends Level {
   
   // Load image assets
   public void loadAssets() {
-    this.backgroundImage = loadImage("CastleWalkup.png");
-    this.foregroundImage = loadImage("CastleWalkupTopLayer.png");
-    this.hitboxImage = loadImage("hitboxLayer.png");
-    this.enterCastlePrompt = loadImage("EnterCastlePrompt.png");
+    this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkup.png");
+    this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkupTopLayer.png");
+    this.hitboxImage = loadImage("LevelBackgrounds/CastleApproach/hitboxLayer.png");
+    this.enterCastlePrompt = loadImage("LevelBackgrounds/CastleApproach/EnterCastlePrompt.png");
   }
   
 }

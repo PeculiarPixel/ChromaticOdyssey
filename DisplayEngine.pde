@@ -13,7 +13,6 @@ class DisplayEngine {
 
   // Display hitboxes
   public void displayArea(Area hit) {
-    
     fill(255,255,255);
     stroke(10);  
     fill(hit.showColor, 100);
@@ -57,7 +56,7 @@ class DisplayEngine {
     imageMode(CENTER);
     c.updateSpriteAnimation();
     image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>// //<>// //<>// //<>//
-    
+     //<>//
     if(c.local.hitboxDisplay){
       displayArea(c.getHitbox());
     }
@@ -109,6 +108,9 @@ class DisplayEngine {
   void run() {
     
    background(0);      //  Init background
+   
+   camera.fixedUpdate(); // Update camera positions
+   
    pushMatrix();       //  In order to move the world around the character you must translate the frame of reference when you display everything
    translate(px, py);  //  Perform that translate
    
@@ -121,7 +123,7 @@ class DisplayEngine {
     
     // Draw foreground
     imageMode(CORNER);
-    image(state.currentState.foregroundImage,0,0); 
+    image(state.currentState.foregroundImage, 0, 0); 
     
     //imageMode(CENTER);
     // Draws castle enter prompt

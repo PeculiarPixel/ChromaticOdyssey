@@ -11,10 +11,10 @@ class GameCharacter {
       this.name = name;
       
       // Load characters required animations
-      ArrayList<SpriteAnimation> animations = spriteLibrary.getCharacterAnimations(name);
+      HashMap<String, SpriteAnimation> animations = spriteLibrary.getCharacterAnimations(name);
       
       // Global info
-      global = new GlobalInfo(100, 0, 100, animations);
+      global = new GlobalInfo(100, 100, animations);
       
       // Local info
       local = new LocalInfo(width/2, height/2, 

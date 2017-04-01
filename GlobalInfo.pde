@@ -4,75 +4,52 @@ class GlobalInfo {
   private int maxExperience;  // amount needed to level up, incremented upwards each time you level
   private int maxMana;        // max character mana
 
-  private SpriteAnimation idleUpAnimation;     // Idle Animation
-  private SpriteAnimation idleDownAnimation;     // Idle Animation
-  private SpriteAnimation idleLeftAnimation;     // Idle Animation
-  private SpriteAnimation idleRightAnimation;     // Idle Animation
-  private SpriteAnimation walkUpAnimation;     // Walk Animation
-  private SpriteAnimation walkDownAnimation;     // Walk Animation
-  private SpriteAnimation walkLeftAnimation;     // Walk Animation
-  private SpriteAnimation walkRightAnimation;     // Walk Animation
-  
-  private SpriteAnimation currentAnimation;  // Current animation
+  private HashMap<String, SpriteAnimation> animations;  // Character Animations
+  private SpriteAnimation currentAnimation;             // Current animation
   
   // Constructor
-  public GlobalInfo(int h, int e, int m, ArrayList<SpriteAnimation> animations) {
+  public GlobalInfo(int h, int m, HashMap<String, SpriteAnimation> animations) {
       
       this.maxHealth = h;
-      this.maxExperience = e;
       this.maxMana = m;
       
-      loadAnimations(animations);  // Load characters animations
+      // Get all animations
+      this.animations = animations;
+      this.currentAnimation = animations.get("IDLE_DOWN");
       
-    }
-    
-    
-  // Load character animations
-  private void loadAnimations(ArrayList<SpriteAnimation> animations) {
-    
-    this.idleUpAnimation = animations.get(IDLE_UP_ANIMATION_INDEX);
-    this.idleDownAnimation = animations.get(IDLE_DOWN_ANIMATION_INDEX);
-    this.idleLeftAnimation = animations.get(IDLE_LEFT_ANIMATION_INDEX);
-    this.idleRightAnimation = animations.get(IDLE_RIGHT_ANIMATION_INDEX);
-    this.walkUpAnimation = animations.get(WALK_UP_ANIMATION_INDEX);
-    this.walkDownAnimation = animations.get(WALK_DOWN_ANIMATION_INDEX);
-    this.walkLeftAnimation = animations.get(WALK_LEFT_ANIMATION_INDEX);
-    this.walkRightAnimation = animations.get(WALK_RIGHT_ANIMATION_INDEX);
-    
-    this.currentAnimation = idleDownAnimation;  // Set current animation to idle when loaded
-    
   }
+    
 
   // Update sprite animation based on direction
   public void updateSpriteDirection(MoveDirection direction) {
     
     // Reset current animation counts
-      resetAnimation(this.currentAnimation);
+    resetAnimation(this.currentAnimation);
       
     switch (direction) {
       case LEFT:
-          this.currentAnimation = walkLeftAnimation;
+          this.currentAnimation = animations.get("WALK_LEFT");;
           break;
       case RIGHT:
-        this.currentAnimation = walkRightAnimation;
+        this.currentAnimation = animations.get("WALK_RIGHT");
         break;
       case UP:
-        this.currentAnimation = walkUpAnimation;
+        this.currentAnimation = animations.get("WALK_UP");
         break;
       case DOWN:
-        this.currentAnimation = walkDownAnimation;
+        this.currentAnimation = animations.get("WALK_DOWN");
         break;
       case IDLE_UP:
-        this.currentAnimation = idleUpAnimation;
+        this.currentAnimation = animations.get("IDLE_UP");
         break;
       case IDLE_DOWN:
-        this.currentAnimation = idleDownAnimation;
+        this.currentAnimation = animations.get("IDLE_DOWN");
         break;
       case IDLE_LEFT:
-        this.currentAnimation = idleLeftAnimation;
+        this.currentAnimation = animations.get("IDLE_LEFT");
         break;
       case IDLE_RIGHT:
-        this.currentAnimation = idleRightAnimation;
+        this.currentAnimation = animations.get("IDLE_RIGHT");
         break;
     }
     

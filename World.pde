@@ -33,7 +33,7 @@ public class World {
   
   private void setupCharacters() {
     newt = new GameCharacter(GameCharacterName.NEWT);
-    //kit = new GameCharacter(GameCharacterName.KIT);
+    kit = new GameCharacter(GameCharacterName.KIT);
   }
   
   // Accessors

@@ -1,6 +1,6 @@
 import processing.video.*;
 
-  // Setup Game //<>//
+  // Setup Game //<>// //<>//
   void setup() {
     //gg boys
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
@@ -24,6 +24,7 @@ import processing.video.*;
     state  = new StateEngine();
     display = new DisplayEngine();
     dispatcher = new EventDispatcher();
+    camera = new GameCamera();
     
     px = 0; //px is the world translation in the x direction
     py = 0; //py is the world translation in the y direction
@@ -74,7 +75,7 @@ import processing.video.*;
         hitBoxMode = !hitBoxMode;
     }
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
-        comp.updateDialog();
+        comp.updateDialog(); //<>//
     }
   }
 
