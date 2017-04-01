@@ -1,21 +1,38 @@
 // Dialog for character interactions
 class Dialog {
   
-  public ArrayList<String> script;     //This is the scipt for the current conversation
-  public int currentLine;              //This is the index used to pick each line out of the script
+  private ArrayList<String> lines;       // This is the scipt for the current conversation
+  private int currentLine;              // This is the index used to pick each line out of the script
+  private GameCharacterName author;     // The author of the person saying the event
+  private Image image;                  // Image to display for the line
+  private int dialogSize;
   
   // Constructor
-  public Dialog(String[] inputScript){ 
+  public Dialog(String[] inputScript) { 
     
     // Initialize
-    script = new ArrayList<String>();
-    currentLine = 0;
+    lines = new ArrayList<String>();
+    currentLine = 1;
+    author = GameCharacterName.valueOf(inputScript[0].toUpperCase());
     
     // Add each inputted dialog line to script
-    for (String s : inputScript) {
-      script.add(s);
+    for (String s : Arrays.copyOfRange(inputScript, 1, inputScript.length)) {
+      lines.add(s);
+      dialogSize++;
     }
     
-  }  
+  } 
+  
+  // Return the current line
+  public int getCurrentLine() { return currentLine; }
+  
+  // Get Author
+  public GameCharacterName getAuthor() { return this.author; }
+  
+  // Get Author Image
+  public Image getAuthorImage() { return this.image; }
 
+  // Get dialog size
+  public int getSize() { return this.dialogSize(); }
+  
 }

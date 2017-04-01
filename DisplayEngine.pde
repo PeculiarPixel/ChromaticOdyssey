@@ -5,6 +5,7 @@ class DisplayEngine {
   
    // Displayable events
    ArrayList<DisplayableEvent> events;
+   Script currentScript;
    
    //State Transition in progress
    boolean transition;
@@ -102,8 +103,8 @@ void fadeOut(){
   public void displayCharacter(GameCharacter c) {
     
     imageMode(CENTER);
-    c.updateSpriteAnimation();
-    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+    c.updateSpriteAnimation(); //<>//
+    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
      //<>// //<>//
     if(c.local.hitboxDisplay){
       displayArea(c.getHitbox());
@@ -143,6 +144,11 @@ void fadeOut(){
   }
   
   
+  private void displayDialog() {
+    
+  }
+  
+  
   // Clear Display Engine of Events
   public void clearEvents() {
     this.events.clear();
@@ -150,6 +156,14 @@ void fadeOut(){
   
   public void clearEngine() {
     clearEvents();
+  }
+  
+  public void nextDialogLine() {
+    
+  }
+  
+  public Script getCurrentScript() {
+ 
   }
 
   // Run display engine
