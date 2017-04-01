@@ -10,17 +10,18 @@ class Test_Level_1 extends Level {
   }
   
   public void setStartPosition() {
-    GameCharacter newt = this.characters.get(0);
     newt.setXPos(START_X);
     newt.setYPos(START_Y);  
+    //kit.setXPos(START_X - 30);
+    //kit.setYPos(START_Y - 30);  
   }
   
   // Load all assets for this level
   public void loadAssets() {
     
-    this.hitboxImage = loadImage("hitboxLayer.png");    
-    this.backgroundImage = loadImage("hitboxLayer.png");
-    this.foregroundImage = loadImage("CastleWalkupTopLayer.png");
+    this.hitboxImage = loadImage("LevelBackgrounds/CastleApproach/hitboxLayer.png");    
+    this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/hitboxLayer.png");
+    this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkupTopLayer.png");
    
    loadCharacters();
    loadLandscapes();
@@ -32,6 +33,7 @@ class Test_Level_1 extends Level {
   // Load characters
   private void loadCharacters() {
     this.characters.add(newt);
+    this.characters.add(kit);
   }
   
   // Load landscapes
