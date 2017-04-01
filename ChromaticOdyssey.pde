@@ -2,7 +2,7 @@ import processing.video.*;
 
   // Setup Game //<>// //<>//
   void setup() {
-    //gg boys
+    size(1024,768,P2D);
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
     background(BACKGROUND_COLOR);                  // Background refresh color
