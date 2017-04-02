@@ -24,7 +24,7 @@ void run(){
     position.get(i).y = map(noise(seedY.get(i)),0,1,-2*height,2*height);
   
     float distance = dist(newt.local.xPos,newt.local.yPos,xpos+position.get(i).x,ypos+position.get(i).y);
-    tint(255,255,100,map(distance/3,0,255,0,distance*4)); //dist(0,0,width,height) //maybe tint color semi randomly to add purple haze
+    tint(255,255,100,map(distance/3,0,255,0,distance*3)); //dist(0,0,width,height) //the multiplier of distance changed the size of halo
     image(fogImage, xpos+position.get(i).x, ypos+position.get(i).y);
 
     //ellipse(30,30,position.get(i).x, position.get(i).y);

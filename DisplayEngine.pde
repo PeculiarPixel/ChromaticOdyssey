@@ -10,10 +10,18 @@ class DisplayEngine {
    boolean transition;
    //State Transition Event copy
    StateEvent transitionEvent;
+   //values to control the fade
+   int alpha;
+   int theta;
+   
+   
+   
    // Constructor
    public DisplayEngine() {
      this.events = new ArrayList<DisplayableEvent>();
      transition = false;
+     alpha=0;
+     theta = 255;
    }
 
   // Display hitboxes
@@ -53,29 +61,29 @@ class DisplayEngine {
     }
     
   }
-  
-int alpha=0;
-int theta = 255;
+
+
+void strokeText(String message, float x, float y, int size, int fade){ 
+  textSize(size);
+  fill(255,255,255,fade); 
+  text(message, x-2, y); 
+  text(message, x, y-2); 
+  text(message, x+2, y); 
+  text(message, x, y+2); 
+  fill(0,0,0,fade); 
+  text(message, x, y);
+} 
 
 void fadeOut(){
-  
-/*  makeFog.addCircles(30);
-    alpha+=5;
-           if(makeFog.numCircles!=0){
-          makeFog.run();
-           }*/
   fill(104,50,104,alpha);
   rect(0,0,1000,1000);
+  strokeText("FUK U",width/2,height/2,48,alpha);
   alpha+=5;
   }
  void fadeIn(){
-     /*makeFog.removeCircles(30);
-       theta-=5;
-       if(makeFog.numCircles!=0){
-             makeFog.run();
-       }*/
   fill(104,50,104,theta);
   rect(0,0,1000,1000);
+  strokeText("FUK U",width/2,height/2,48,theta);
   theta-=5;
 } 
   // Display game characters

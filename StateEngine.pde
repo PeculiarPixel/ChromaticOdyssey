@@ -43,7 +43,7 @@ class StateEngine {
   private void handleStateEvent(StateEvent event) {
         display.transition = true;
         display.transitionEvent = event;
-        //setState(event.getState()); do this later with animation timing
+        //setState(event.getState()); do this later with animation timing.  Or add a check to the StateEvent to see if it needs a transition or not.
   }
   
   // Swap the current state to the new state
