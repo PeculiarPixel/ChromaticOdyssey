@@ -6,9 +6,14 @@ class DisplayEngine {
    // Displayable events
    ArrayList<DisplayableEvent> events;
    
+   //State Transition in progress
+   boolean transition;
+   //State Transition Event copy
+   StateEvent transitionEvent;
    // Constructor
    public DisplayEngine() {
      this.events = new ArrayList<DisplayableEvent>();
+     transition = false;
    }
 
   // Display hitboxes
@@ -49,7 +54,30 @@ class DisplayEngine {
     
   }
   
+int alpha=0;
+int theta = 255;
+
+void fadeOut(){
   
+/*  makeFog.addCircles(30);
+    alpha+=5;
+           if(makeFog.numCircles!=0){
+          makeFog.run();
+           }*/
+  fill(104,50,104,alpha);
+  rect(0,0,1000,1000);
+  alpha+=5;
+  }
+ void fadeIn(){
+     /*makeFog.removeCircles(30);
+       theta-=5;
+       if(makeFog.numCircles!=0){
+             makeFog.run();
+       }*/
+  fill(104,50,104,theta);
+  rect(0,0,1000,1000);
+  theta-=5;
+} 
   // Display game characters
   public void displayCharacter(GameCharacter c) {
     
@@ -137,6 +165,7 @@ class DisplayEngine {
     
     
     state.currentState.fog.run();
+
     // Pop translate matrix
     popMatrix(); 
     
@@ -151,6 +180,20 @@ class DisplayEngine {
       displayDialog(state.currentState.conversations.get(comp.conversationIndex));
     }
     
+    if(transition){
+      if(alpha<255){
+        fadeOut();
+      }else if(alpha==255){
+        state.setState(transitionEvent.getState());
+        fadeIn();
+      }
+   
+      if(theta ==0){
+        theta = 255;
+        transition = false;
+        alpha =0;
+      }
+    }
   }
 
 }
