@@ -13,8 +13,8 @@ class DisplayEngine {
    //values to control the fade
    int alpha;
    int theta;
-   
-   
+   float transitionFade;
+   Fog transitionFog;
    
    // Constructor
    public DisplayEngine() {
@@ -22,6 +22,8 @@ class DisplayEngine {
      transition = false;
      alpha=0;
      theta = 255;
+     transitionFade = 0;
+     transitionFog = new Fog(width/2,height/2,5);
    }
 
   // Display hitboxes
@@ -79,12 +81,22 @@ void fadeOut(){
   rect(0,0,1000,1000);
   strokeText("FUK U",width/2,height/2,48,alpha);
   alpha+=5;
+  if(transitionFade<255){
+  transitionFade = alpha+5;
+  }else{
+    transitionFade = 255;
+  }
   }
  void fadeIn(){
   fill(104,50,104,theta);
   rect(0,0,1000,1000);
   strokeText("FUK U",width/2,height/2,48,theta);
   theta-=5;
+  if(transitionFade>0){
+  transitionFade = theta-5;
+  }else{
+  transitionFade =0;
+  }
 } 
   // Display game characters
   public void displayCharacter(GameCharacter c) {
@@ -171,8 +183,8 @@ void fadeOut(){
     displayLandscapes();
     displayTriggers();
     
-    
-    state.currentState.fog.run();
+
+    state.currentState.fog.run(-1);
 
     // Pop translate matrix
     popMatrix(); 
@@ -187,8 +199,9 @@ void fadeOut(){
       //print("enter has been pressed");
       displayDialog(state.currentState.conversations.get(comp.conversationIndex));
     }
-    
+        
     if(transition){
+          //  transitionFog.run(transitionFade);
       if(alpha<255){
         fadeOut();
       }else if(alpha==255){
@@ -200,8 +213,12 @@ void fadeOut(){
         theta = 255;
         transition = false;
         alpha =0;
+        transitionFade=0;
       }
+      
+
     }
+
   }
 
 }

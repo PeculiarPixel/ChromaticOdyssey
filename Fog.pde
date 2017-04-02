@@ -14,7 +14,7 @@ ArrayList<Float> seedY;// = new float[numCircles];
 
 
 
-void run(){
+void run(float fade){
   imageMode(CENTER);
 
   blendMode(SUBTRACT);
@@ -22,9 +22,12 @@ void run(){
   for(int i=0;i<numCircles;i++){
     position.get(i).x = map(noise(seedX.get(i)),0,1,-2*width,2*width);
     position.get(i).y = map(noise(seedY.get(i)),0,1,-2*height,2*height);
-  
+    if(fade ==-1){
     float distance = dist(newt.local.xPos,newt.local.yPos,xpos+position.get(i).x,ypos+position.get(i).y);
     tint(255,255,100,map(distance/3,0,255,0,distance*3)); //dist(0,0,width,height) //the multiplier of distance changed the size of halo
+    }else{
+     tint(255,255,100,fade);
+    }
     image(fogImage, xpos+position.get(i).x, ypos+position.get(i).y);
 
     //ellipse(30,30,position.get(i).x, position.get(i).y);
