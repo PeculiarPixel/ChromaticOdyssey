@@ -91,6 +91,8 @@ boolean initValues;
    Combatant enemy = new Combatant("Enemy", p2i, defaultColor, baseStats, meterMods);
   
    fightManager = new FightManager(player,enemy,inventory);  
+   
+   inCombat = false;
   }
 
   // Key Pressed Events
@@ -127,6 +129,11 @@ boolean initValues;
     if(key == 'h' || key == 'H'){
         hitBoxMode = !hitBoxMode;
     }
+    if(key == 'c' || key == 'C')
+    {
+      // Trigger combat
+      inCombat = !inCombat;
+    }
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
         comp.updateDialog(); //<>//
     }
@@ -150,11 +157,31 @@ boolean initValues;
     }
      
     // Run engines to handle incoming events
-    state.run();
-    comp.run();
-    display.run();
+    if(!inCombat)
+    {
+      state.run();
+      comp.run();
+      display.run();
+    }
+    else
+    {
+      fightManager.drawActive();
+      image(fightManager.getAsPImage(), 512, 384);
+    }
     
     //println(mouseX - px, mouseY - py);
     //println("newt", newt.getXPos(), newt.getYPos());
     
   }
+  
+  void mousePressed()
+{
+  if(inCombat)
+  fightManager.pressCheck();
+}
+
+void mouseMoved()
+{
+  if(inCombat)
+  fightManager.hoverCheck();
+}

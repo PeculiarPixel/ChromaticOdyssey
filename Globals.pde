@@ -38,3 +38,4 @@ int saveSpot ;                            //index of the current string animatio
 
 FightManager fightManager;
 ImageMaker imageMaker;
+boolean inCombat;
