@@ -1,16 +1,16 @@
 import processing.video.*;
-
-  // Setup Game //<>// //<>//
+boolean initValues; //<>//
   void setup() {
-    //gg boys
+    size(1024,768,P2D);
+    smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
     background(BACKGROUND_COLOR);                  // Background refresh color
     frameRate(FRAMES_PER_SECOND_RATE);             // FPS rate
-    
-    initializeGlobals();                           // Initialize Globals
-    gameStart();                                   // Show title screen
-    
+    println("before globals");
+    //initializeGlobals();                           // Initialize Globals
+    println("after globals");                                  // Show title screen
+    initValues = false;
   }
 
 
@@ -88,6 +88,12 @@ import processing.video.*;
 
   // Draw game loop
   void draw(){  
+    if(initValues==false){
+      initializeGlobals();
+      gameStart(); 
+      initValues = true;
+    }
+    
     
     // Run engines to handle incoming events
     state.run();

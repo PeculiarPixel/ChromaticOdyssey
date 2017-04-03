@@ -50,7 +50,7 @@ class Test_Level_0 extends Level {
     this.hitboxImage = loadImage("LevelBackgrounds/CastleApproach/hitboxLayer.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkup.png");
     this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkupTopLayer.png");
-    
+    this.fog = new Fog(3500,2000,1500);
     loadLandscapes();
     loadConversations();
     loadCharacters();

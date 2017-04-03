@@ -14,6 +14,8 @@ abstract class Level {
   protected PImage foregroundImage;      // Level's foreground image
   protected PImage hitboxImage;          // Level's hitbox image
   
+  
+  protected Fog fog;
   protected Level() {
     
     this.characters = new ArrayList<GameCharacter>();
@@ -21,6 +23,7 @@ abstract class Level {
     this.conversations = new ArrayList<Dialog>();
     this.triggers = new ArrayList<Trigger>();
     this.hitboxes = new ArrayList<Hitbox>();
+    this.fog = new Fog(0,0,0);
     
   }
   
