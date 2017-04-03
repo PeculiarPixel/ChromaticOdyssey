@@ -1,20 +1,45 @@
+/*  Display Engine
+*   Draw received events in game
+*/
 class DisplayEngine {
   
-   ArrayList<DisplayableEvent> events = new ArrayList<DisplayableEvent>();
-
+   // Displayable events
+   ArrayList<DisplayableEvent> events;
    
-
-   void displayHitbox(Hitbox hit)
-   {
-     fill(255,255,255);
-     stroke(10);  
-     fill(hit.showColor, 100);
-     rectMode(CENTER);
-     rect(hit.xPos, hit.yPos, hit.hitWidth, hit.hitHeight);
+   //State Transition in progress
+   boolean transition;
+   //State Transition Event copy
+   StateEvent transitionEvent;
+   //values to control the fade
+   int alpha;
+   int theta;
+   float transitionFade;
+   Fog transitionFog;
+   
+   // Constructor
+   public DisplayEngine() {
+     this.events = new ArrayList<DisplayableEvent>();
+     transition = false;
+     alpha=0;
+     theta = 255;
+     transitionFade = 0;
+     transitionFog = new Fog(width/2,height/2,5);
    }
+
+  // Display hitboxes
+  public void displayArea(Area hit) {
+    fill(255,255,255);
+    stroke(10);  
+    fill(hit.showColor, 100);
+    rectMode(CENTER);
+    rect(hit.xPos, hit.yPos, hit.getWidth(), hit.getHeight());
+    
+  }
   
-  void displayDialog(Dialog talk)
-  {                                                                    //displays the dialog on the screen
+  // Display dialog
+  void displayDialog(Dialog talk) {
+    
+    // Set dialog window details
     fill(255,255,255);
     stroke(20);  
     fill(155,155,155);
@@ -22,100 +47,178 @@ class DisplayEngine {
     rect(width/2, height-100, width, height/4);
     textSize(36);
     fill(0,0,0);
-    //text(talk.script.get(talk.currentLine),100,height-150);                                            //show static message
-    //String wholeLine = talk.script.get(talk.currentLine);
-    //String nameTag = talk.script.substring();
-    //animation for text//
-
-     if(frameCount%3==0 && saveSpot<talk.script.get(talk.currentLine).length())
-     {                        //check for frame skips and if the current line has finished typing
-      displayText += talk.script.get(talk.currentLine).charAt(saveSpot);                                //add the next character to the display text
-      text(displayText,100,height-100);                                                                 //display the text
-      saveSpot++;                                                                                       //set index to the next character of the current conversation line
-     }
-     else
-     {
-      text(displayText,100,height-100);                                                                 //wait until the character presses next to continue
-     }
+    
+     // Animate Dialog Text
+     if( frameCount % 3 == 0 
+         && saveSpot < talk.script.get(talk.currentLine).length() ) {          // Check for frame skips and if the current line has finished typing
+         
+      displayText += talk.script.get(talk.currentLine).charAt(saveSpot);       // Add the next character to the display text
+      text(displayText,100,height-100);                                        // Display the text
+      saveSpot++;                                                              // Set index to the next character of the current conversation line
+      
+    } else {                                                                   // Display the txt until player presses next
+      
+      text(displayText,100,height-100);                                        // Wait until the character presses next to continue
+      
+    }
     
   }
-  
-  
-  
-  void displayCharacter(GameCharacter guy)
-  {
+
+
+void strokeText(String message, float x, float y, int size, int fade){ 
+  textSize(size);
+  fill(255,255,255,fade); 
+  text(message, x-2, y); 
+  text(message, x, y-2); 
+  text(message, x+2, y); 
+  text(message, x, y+2); 
+  fill(0,0,0,fade); 
+  text(message, x, y);
+} 
+
+void fadeOut(){
+  fill(104,50,104,alpha);
+  rect(0,0,1000,1000);
+  strokeText("FUK U",width/2,height/2,48,alpha);
+  alpha+=5;
+  if(transitionFade<255){
+  transitionFade = alpha+5;
+  }else{
+    transitionFade = 255;
+  }
+  }
+ void fadeIn(){
+  fill(104,50,104,theta);
+  rect(0,0,1000,1000);
+  strokeText("FUK U",width/2,height/2,48,theta);
+  theta-=5;
+  if(transitionFade>0){
+  transitionFade = theta-5;
+  }else{
+  transitionFade =0;
+  }
+} 
+  // Display game characters
+  public void displayCharacter(GameCharacter c) {
     
     imageMode(CENTER);
-    
-    guy.updateSpriteAnimation();
-    image(guy.getCurrentImage(), guy.getXPos(), guy.getYPos());
-    
-    if(guy.local.hitboxDisplay){
-      displayHitbox(guy.getHitbox());
+    c.updateSpriteAnimation();
+    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>// //<>// //<>// //<>//
+     //<>//
+    if(c.local.hitboxDisplay){
+      displayArea(c.getHitbox());
     }
+    
   }
     
-    
-    void displayLandscape(Landscape land)
-    {
-      imageMode(CENTER);
-      if(newt.local.hitboxDisplay)
-      {
-        displayHitbox(land.hitboxes.get(0));
+  
+  // Display Landscapes
+  public void displayLandscape(Landscape land){
+    imageMode(CENTER);
+    if(newt.local.hitboxDisplay){
+      displayArea(land.hitboxes.get(0));
+    }
+  }
+  
+  // Display all characters in state's current level
+  private void displayCharacters() {
+    imageMode(CORNER);
+    for (GameCharacter c : state.currentState.characters) {
+      displayCharacter(c);
+    }
+  }
+  
+  // Display all landscapes in state's current level
+  private void displayLandscapes() {
+    for (Landscape l : state.currentState.landscapes) {
+      displayLandscape(l);
+    }
+  }
+  
+  private void displayTriggers() {
+    for (Trigger t : state.currentState.triggers) {
+      if (newt.local.hitboxDisplay) {
+        displayArea(t);
       }
     }
   
   
-  // Run display engine
-  void run() 
-  {
-       
-   background(0);
-
-   pushMatrix();            //in order to move the world around the character you must translate the frame of reference when you display everything
-   translate(px, py);
-   
-   
-   imageMode(CORNER);
-    
-   image(state.currentState.backgroundImage,0,0);    
-   GameCharacter tempChar;
-
-   for(int i =0; i <state.currentState.characters.size();i++)
-   {
-     tempChar = state.currentState.characters.get(i);
-     displayCharacter(tempChar);
-   }    
-   
-   imageMode(CORNER);
-   image(state.currentState.foregroundImage,0,0); 
-   
-   Landscape tempLand;
-   
-   for(int i=0; i <state.currentState.landscapes.size();i++)
-   {
-     tempLand = state.currentState.landscapes.get(i);
-     displayLandscape(tempLand);
-   }  
-    
-   popMatrix(); 
-   if(hitBoxMode) 
-   {
-     newt.local.hitboxDisplay = true;
-   }
-   if(dialog)
-   {
-     //print("enter has been pressed");
-    displayDialog(state.currentState.conversations.get(comp.conversationIndex));
-   }
-    
- }
+  // Clear Display Engine of Events
+  public void clearEvents() {
+    this.events.clear();
+  }
   
+  public void clearEngine() {
+    clearEvents();
+  }
 
-   DisplayEngine()
-   {
-     //state = new Test_Level_0(newt);
-     //currentState = state;
-   }
+  // Run display engine
+void run() {
+    
+   background(0);      //  Init background
+   
+   camera.fixedUpdate(); // Update camera positions
+   
+   pushMatrix();       //  In order to move the world around the character you must translate the frame of reference when you display everything
+   translate(px, py);  //  Perform that translate
+   
+    // Draw background layer
+    imageMode(CORNER);
+    image(state.currentState.backgroundImage, 0, 0);
+    
+    // Display characters
+    displayCharacters();
+    
+    // Draw foreground
+    imageMode(CORNER);
+    image(state.currentState.foregroundImage, 0, 0); 
+    
+    //imageMode(CENTER);
+    // Draws castle enter prompt
+    //if(comp.runLevelPrompt){
+      //image(state.currentState.enterCastlePrompt,newt.getXPos()-200,newt.getYPos()-100); 
+    //}
+    
+    // Display landscapes
+    displayLandscapes();
+    displayTriggers();
+    
+
+    state.currentState.fog.run(-1);
+
+    // Pop translate matrix
+    popMatrix(); 
+    
+    // Hitbox display
+    if(hitBoxMode) {
+      newt.local.hitboxDisplay = true;
+    } 
+    
+    // Dialog display
+    if(dialog) {
+      //print("enter has been pressed");
+      displayDialog(state.currentState.conversations.get(comp.conversationIndex));
+    }
+        
+    if(transition){
+          //  transitionFog.run(transitionFade);
+      if(alpha<255){
+        fadeOut();
+      }else if(alpha==255){
+        state.setState(transitionEvent.getState());
+        fadeIn();
+      }
+   
+      if(theta ==0){
+        theta = 255;
+        transition = false;
+        alpha =0;
+        transitionFade=0;
+      }
+      
+
+    }
+
+  }
 
 }

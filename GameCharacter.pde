@@ -1,20 +1,20 @@
-class GameCharacter{
+class GameCharacter {
   
   private GlobalInfo global;
   private LocalInfo local;
   private GameCharacterName name;
    
     // Constructor
-    GameCharacter(GameCharacterName name) {
+    public GameCharacter(GameCharacterName name) {
       
       // Character's identifier
       this.name = name;
       
       // Load characters required animations
-      ArrayList<SpriteAnimation> animations = spriteLibrary.getCharacterAnimations(name);
+      HashMap<String, SpriteAnimation> animations = spriteLibrary.getCharacterAnimations(name);
       
       // Global info
-      global = new GlobalInfo(100, 0, 100, animations);
+      global = new GlobalInfo(100, 100, animations);
       
       // Local info
       local = new LocalInfo(width/2, height/2, 
@@ -24,9 +24,21 @@ class GameCharacter{
     
     // Set character move direction
     void setDirection(MoveDirection direction) {
-      if (isDirectionChange(direction)) updateSprite(direction);
-      local.setDirection(direction);
+      
+      if (checkTwoMoveKeyLimit()) return;
+      
+      if (isDirectionChange(direction)) {
+        local.setDirection(direction);
+        updateSprite(local.getDirection());
+      }
+      
     }
+    
+    // Check that we have only up to two move keys pressed
+    private boolean checkTwoMoveKeyLimit() {
+      return this.local.checkTwoMoveKeyLimit();
+    }
+   
     
     // Release character move direction
     void releaseDirection(MoveDirection direction) {
@@ -117,9 +129,9 @@ class GameCharacter{
     public void setHitboxYPos(float pos) { this.local.setHitboxYPos(pos); }
     
     // Get Hitbox of Character
-    public Hitbox getHitbox() { return this.local.hitbox; }
+    public CharacterHitbox getHitbox() { return this.local.hitbox; }
     
-    
+    public void initialize() { comp.addCharacter(this); }
     
 }
 

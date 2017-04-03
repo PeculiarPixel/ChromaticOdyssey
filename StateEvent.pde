@@ -1,8 +1,6 @@
 class StateEvent extends Event {
-
- //Level currentState;      // Current state
-  Level nextState;         // State to switch to
   
+<<<<<<< HEAD
   StateEvent(Level nextState)
   {
     type = "StateEvent";
@@ -21,4 +19,19 @@ class CombatEvent extends StateEvent
     type = "Fight";
     this.fightManager = fight;
   }
+=======
+  LevelName nextState;         // State to switch to
+  
+  // Constructor
+  public StateEvent(LevelName nextState) {
+    type = EventTypeEnum.STATE;
+    this.nextState = nextState;
+  }
+  
+  // Get level to transition to
+  public LevelName getState() {
+    return nextState;
+  }
+  
+>>>>>>> refs/remotes/origin/master
 }

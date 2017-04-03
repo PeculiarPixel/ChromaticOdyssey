@@ -13,14 +13,28 @@ public class SpriteAnimationLibrary {
   private void loadAnimationPaths() {
     
     // Extend for all animation paths
-    AnimationDirPathMap.put("NewtIdleUp", "SpriteAnimations/Newt/IdleAnimationUp");
-    AnimationDirPathMap.put("NewtIdleDown", "SpriteAnimations/Newt/IdleAnimationDown");
-    AnimationDirPathMap.put("NewtIdleLeft", "SpriteAnimations/Newt/IdleAnimationLeft");
-    AnimationDirPathMap.put("NewtIdleRight", "SpriteAnimations/Newt/IdleAnimationRight");
-    AnimationDirPathMap.put("NewtWalkUp", "SpriteAnimations/Newt/WalkAnimationUp");
-    AnimationDirPathMap.put("NewtWalkDown", "SpriteAnimations/Newt/WalkAnimationDown");
-    AnimationDirPathMap.put("NewtWalkLeft", "SpriteAnimations/Newt/WalkAnimationLeft");
-    AnimationDirPathMap.put("NewtWalkRight", "SpriteAnimations/Newt/WalkAnimationRight");
+    
+    // Newt
+    AnimationDirPathMap.put("NEWT_IDLE_UP", "SpriteAnimations/Newt/IdleAnimationUp");
+    AnimationDirPathMap.put("NEWT_IDLE_DOWN", "SpriteAnimations/Newt/IdleAnimationDown");
+    AnimationDirPathMap.put("NEWT_IDLE_LEFT", "SpriteAnimations/Newt/IdleAnimationLeft");
+    AnimationDirPathMap.put("NEWT_IDLE_RIGHT", "SpriteAnimations/Newt/IdleAnimationRight");
+    AnimationDirPathMap.put("NEWT_WALK_UP", "SpriteAnimations/Newt/WalkAnimationUp");
+    AnimationDirPathMap.put("NEWT_WALK_DOWN", "SpriteAnimations/Newt/WalkAnimationDown");
+    AnimationDirPathMap.put("NEWT_WALK_LEFT", "SpriteAnimations/Newt/WalkAnimationLeft");
+    AnimationDirPathMap.put("NEWT_WALK_RIGHT", "SpriteAnimations/Newt/WalkAnimationRight");
+    
+    // Kit
+    AnimationDirPathMap.put("KIT_IDLE_UP", "SpriteAnimations/Kit/IdleAnimationUp");
+    AnimationDirPathMap.put("KIT_IDLE_DOWN", "SpriteAnimations/Kit/IdleAnimationDown");
+    AnimationDirPathMap.put("KIT_IDLE_LEFT", "SpriteAnimations/Kit/IdleAnimationLeft");
+    AnimationDirPathMap.put("KIT_IDLE_RIGHT", "SpriteAnimations/Kit/IdleAnimationRight");
+    AnimationDirPathMap.put("KIT_WALK_UP", "SpriteAnimations/Kit/WalkAnimationUp");
+    AnimationDirPathMap.put("KIT_WALK_DOWN", "SpriteAnimations/Kit/WalkAnimationDown");
+    AnimationDirPathMap.put("KIT_WALK_LEFT", "SpriteAnimations/Kit/WalkAnimationLeft");
+    AnimationDirPathMap.put("KIT_WALK_RIGHT", "SpriteAnimations/Kit/WalkAnimationRight");
+    AnimationDirPathMap.put("KIT_ATTACK", "SpriteAnimations/Kit/AttackAnimation");
+    AnimationDirPathMap.put("KIT_HURT", "SpriteAnimations/Kit/HurtAnimation");
     
     
   }
@@ -52,24 +66,34 @@ public class SpriteAnimationLibrary {
     return animation;  // Return the SpriteAnimationS    
   }
   
-  public ArrayList<SpriteAnimation> getCharacterAnimations(GameCharacterName name) {
+  public HashMap<String, SpriteAnimation> getCharacterAnimations(GameCharacterName name) {
   
     // Setup animations for character
-    ArrayList<SpriteAnimation> animations = new ArrayList<SpriteAnimation>(10);
+    HashMap<String, SpriteAnimation> animations = new HashMap<String, SpriteAnimation>();
     
     try {
       switch(name) {
         case NEWT:
-          animations.add(IDLE_UP_ANIMATION_INDEX, getSpriteAnimation("NewtIdleUp", IDLE_ANIMATION_RATE));
-          animations.add(IDLE_DOWN_ANIMATION_INDEX, getSpriteAnimation("NewtIdleDown", IDLE_ANIMATION_RATE));
-          animations.add(IDLE_LEFT_ANIMATION_INDEX, getSpriteAnimation("NewtIdleLeft", IDLE_ANIMATION_RATE));
-          animations.add(IDLE_RIGHT_ANIMATION_INDEX, getSpriteAnimation("NewtIdleRight", IDLE_ANIMATION_RATE));
-          animations.add(WALK_UP_ANIMATION_INDEX, getSpriteAnimation("NewtWalkUp", WALK_ANIMATION_RATE));
-          animations.add(WALK_DOWN_ANIMATION_INDEX, getSpriteAnimation("NewtWalkDown", WALK_ANIMATION_RATE));
-          animations.add(WALK_LEFT_ANIMATION_INDEX, getSpriteAnimation("NewtWalkLeft", WALK_ANIMATION_RATE));
-          animations.add(WALK_RIGHT_ANIMATION_INDEX, getSpriteAnimation("NewtWalkRight", WALK_ANIMATION_RATE));
+            animations.put("IDLE_UP", getSpriteAnimation("NEWT_IDLE_UP", IDLE_ANIMATION_RATE));
+            animations.put("IDLE_DOWN", getSpriteAnimation("NEWT_IDLE_DOWN", IDLE_ANIMATION_RATE));
+            animations.put("IDLE_LEFT", getSpriteAnimation("NEWT_IDLE_LEFT", IDLE_ANIMATION_RATE));
+            animations.put("IDLE_RIGHT", getSpriteAnimation("NEWT_IDLE_RIGHT", IDLE_ANIMATION_RATE));
+            animations.put("WALK_UP", getSpriteAnimation("NEWT_WALK_UP", WALK_ANIMATION_RATE));
+            animations.put("WALK_DOWN", getSpriteAnimation("NEWT_WALK_DOWN", WALK_ANIMATION_RATE));
+            animations.put("WALK_LEFT", getSpriteAnimation("NEWT_WALK_LEFT", WALK_ANIMATION_RATE));
+            animations.put("WALK_RIGHT", getSpriteAnimation("NEWT_WALK_RIGHT", WALK_ANIMATION_RATE));
+            break;
+        case KIT:
+            animations.put("IDLE_UP", getSpriteAnimation("KIT_IDLE_UP", IDLE_ANIMATION_RATE));
+            animations.put("IDLE_DOWN", getSpriteAnimation("KIT_IDLE_DOWN", IDLE_ANIMATION_RATE));
+            animations.put("IDLE_LEFT", getSpriteAnimation("KIT_IDLE_LEFT", IDLE_ANIMATION_RATE));
+            animations.put("IDLE_RIGHT", getSpriteAnimation("KIT_IDLE_RIGHT", IDLE_ANIMATION_RATE));
+            animations.put("WALK_UP", getSpriteAnimation("KIT_WALK_UP", WALK_ANIMATION_RATE));
+            animations.put("WALK_DOWN", getSpriteAnimation("KIT_WALK_DOWN", WALK_ANIMATION_RATE));
+            animations.put("WALK_LEFT", getSpriteAnimation("KIT_WALK_LEFT", WALK_ANIMATION_RATE));
+            animations.put("WALK_RIGHT", getSpriteAnimation("KIT_WALK_RIGHT", WALK_ANIMATION_RATE));
         default:
-  
+          println("Character animations unknown");
       }
     } catch (NoDirPathEntryFoundException e) {
       println(e.getLocalizedMessage());
