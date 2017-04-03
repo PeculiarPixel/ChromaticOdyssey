@@ -1,12 +1,5 @@
 class ComputationEngine {
 
-ArrayList<Hitbox> hitboxes;
-ArrayList<GameCharacter> players;
-ArrayList<ComputationEvent> events = new ArrayList<ComputationEvent>();
-int conversationIndex;
-
-void run()
-{
   private ArrayList<Hitbox> hitboxes;
   private ArrayList<Trigger> triggers;
   private ArrayList<Trigger> activatedTriggers;
@@ -35,9 +28,7 @@ void run()
   public void addTrigger(Trigger t) {
     this.triggers.add(t);
   }
->>>>>>> refs/remotes/origin/master
-  
-  
+    
   // Add To Characters for Level
   public void addCharacter(GameCharacter c) {
     this.players.add(c);
@@ -50,7 +41,7 @@ void run()
   {
     for(ComputationEvent e : events) 
     {
-      if(e.type == "ComputationEvent") 
+      if(e.type == EventTypeEnum.COMPUTATION) 
       { 
         //print("Character health reduced from " +  e.target.local.currHealth);
         e.target.local.currHealth += e.value;
@@ -81,7 +72,7 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
       print("Computed Event\n");
   }
   
-  clearEvents(); //<>// //<>//
+  clearEvents();
   
   moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
@@ -90,7 +81,7 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
   //  runLevelPrompt();
   //}
 
-}
+} //<>//
 
   // Clears computation engine events
   public void clearEvents() {  
@@ -104,21 +95,21 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
     this.triggers.clear();
     this.players.clear();
   }
- //<>// //<>//
+
   // Calculate intersections between area boxes (Hitboxes, Triggers)
-  private void computeIntersection(Area hBox1, Area hBox2, float xChange, float yChange){ //<>// //<>//
+  private void computeIntersection(Area hBox1, Area hBox2, float xChange, float yChange){
   
       if((hBox1.yPos + hBox1.getHeight()/2 >= hBox2.yPos - hBox2.getHeight()/2 &&
-    hBox1.yPos - hBox1.getHeight()/2 <= hBox2.yPos + hBox2.getHeight()/2) && //<>// //<>//
+    hBox1.yPos - hBox1.getHeight()/2 <= hBox2.yPos + hBox2.getHeight()/2) &&
     (hBox1.xPos + hBox1.getWidth()/2 >= hBox2.xPos - hBox2.getWidth()/2 + xChange &&
     hBox1.xPos - hBox1.getWidth()/2 <= hBox2.xPos + hBox2.getWidth()/2 + xChange)) 
     {
-
+ //<>//
           
-        if( hBox1.getDesignation() != AreaTypeEnum.CHARACTER_HITBOX )
+        if( hBox1.getDesignation() != AreaTypeEnum.CHARACTER_HITBOX ) //<>//
         {
           
-          hBox2.setHitX(true);    //character
+          hBox2.setHitX(true);    //character //<>//
           hBox1.setHitX(true);    //box checking  
         }
         

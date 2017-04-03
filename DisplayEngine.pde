@@ -141,6 +141,7 @@ void fadeOut(){
         displayArea(t);
       }
     }
+  }
   
   
   // Clear Display Engine of Events
