@@ -33,3 +33,8 @@ GameCamera camera;
 boolean dialog;                           //is dialog window up
 String displayText;                       //the text currently being shown in the dialog window
 int saveSpot ;                            //index of the current string animation
+
+// Combat globals
+
+FightManager fightManager;
+ImageMaker imageMaker;
