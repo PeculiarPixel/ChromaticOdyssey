@@ -1,9 +1,11 @@
 import processing.video.*;
-import ddf.minim.*; //<>// //<>//
+import ddf.minim.*;
 boolean initValues;
 
-  void setup() {
+  void setup() 
+  {
     size(1024, 768, P2D);
+    //size(1024, 768);
     smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
@@ -100,14 +102,15 @@ boolean initValues;
 
 
   // Draw game loop
-  void draw(){  
-    if(initValues==false){
+  void draw()
+  {  
+    if(initValues==false)
+    {
       initializeGlobals();
       gameStart(); 
       initValues = true;
     }
-    
-    
+     
     // Run engines to handle incoming events
     state.run();
     comp.run();
