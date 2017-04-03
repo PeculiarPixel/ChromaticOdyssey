@@ -40,8 +40,22 @@ class GameCharacter{
     
     // Test is character is moving
     boolean isMoving() {
-      if (local.isMoving()) return true;
-      return false;
+      if (local.isMoving()) 
+      {
+        if(!footstep.isLooping())
+        {
+          footstep.loop();
+        }
+        return true;
+      }
+      else
+      {
+        if(footstep.isLooping())
+        {
+          footstep.pause();
+        }
+        return false;
+      }
     }
     
     // Update sprite animation
@@ -63,11 +77,19 @@ class GameCharacter{
     // Move GameCharacter along Y axis
     public void moveY(float amount) {
       this.local.moveY(amount);
+      //if(!footstep.isPlaying());
+      //{
+      // footstep.play(0);
+      //}
     }
     
     // Move GameCharacter along X axis
     public void moveX(float amount) {
       this.local.moveX(amount);
+     // if(!footstep.isPlaying());
+     // {
+     //   footstep.play(0);
+     // }
     } 
     
     // Get X Position of Character

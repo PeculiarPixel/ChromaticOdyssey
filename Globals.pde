@@ -42,3 +42,17 @@ Test_Level_0 beginning;                 // Test Level 0
 boolean dialog;                           //is dialog window up
 String displayText;                       //the text currently being shown in the dialog window
 int saveSpot ;                            //index of the current string animation
+
+Minim minim;
+AudioPlayer song;
+AudioPlayer footstep;
+
+// Combat module stuff:
+  
+  private FightManager fightManager;
+  private ImageMaker imageMaker;
+  private Combatant player;
+  private Combatant enemy;
+  
+  boolean inCombat;
+  

@@ -4,36 +4,40 @@ ArrayList<Hitbox> hitboxes;
 ArrayList<GameCharacter> players;
 ArrayList<ComputationEvent> events = new ArrayList<ComputationEvent>();
 int conversationIndex;
-void run(){
+
+void run()
+{
   
   // Loop through all registered computation events
-  for(ComputationEvent e : events) {
-    if(e.type == "ComputationEvent") { 
-      //print("Character health reduced from " +  e.target.local.currHealth);
-      e.target.local.currHealth += e.value;
-      //print(" to " + e.target.local.currHealth + "\n");
+  if(!inCombat)
+  {
+    for(ComputationEvent e : events) 
+    {
+      if(e.type == "ComputationEvent") 
+      { 
+        //print("Character health reduced from " +  e.target.local.currHealth);
+        e.target.local.currHealth += e.value;
+        //print(" to " + e.target.local.currHealth + "\n");
+      }
     }
+    events.clear();
+    moveWorld();        //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
+    moveCharacter(5.0); //input is movespeed
   }
-  events.clear();
-  moveWorld();        //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
-  moveCharacter(5.0); //input is movespeed
 
 }
 
-void clear() {  //clears the computation engine when a new state is declared
-  
+void clear() 
+{  //clears the computation engine when a new state is declared  
   hitboxes.clear();
   events.clear();
   GameCharacter temp = players.get(0);
   players.clear();
   players.add(temp);
-  
 }
 
-
-
-
-void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChange){
+void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChange)
+{
 
   if((hBox1.yPos + hBox1.hitHeight/2 >= hBox2.yPos - hBox2.hitHeight/2 &&
     hBox1.yPos - hBox1.hitHeight/2 <= hBox2.yPos + hBox2.hitHeight/2) &&
@@ -43,7 +47,8 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
       hBox2.isHitX=true;
       hBox1.isHitX=true;            
     }
-  else{
+  else
+  {
     hBox2.isHitX=false;
     hBox2.isHitX=false;
   }
@@ -56,7 +61,8 @@ void computeIntersection(Hitbox hBox1, Hitbox hBox2, float xChange, float yChang
       hBox2.isHitY=true;
       hBox1.isHitY=true;
     }
-  else{
+  else
+  {
     hBox2.isHitY=false;
     hBox1.isHitY=false;
   }

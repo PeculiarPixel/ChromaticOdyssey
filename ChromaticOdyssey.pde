@@ -1,4 +1,16 @@
 import processing.video.*;
+import ddf.minim.*;
+
+// Combat module imports:
+import java.awt.*;
+import java.awt.image.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.*;
+import javax.swing.*;
+
+
+
 
 void setup(){
   //gg boys
@@ -34,8 +46,44 @@ void initializeGlobals() {
   saveSpot = 0;     //the index of the script in the current dialog
   displayText = ""; //the text currently being displayed.
   
+  // Sounds for testing
+   minim = new Minim(this);
+  song = minim.loadFile("BeepBox-Song.wav");
+  footstep = minim.loadFile("Sounds/VeryPaddedFootstep.wav");
+  //song.loop();
   
-}
+  // Combat module stuff:
+  
+  imageMaker = new ImageMaker();
+  
+  BufferedImage p1i = imageMaker.drawTestSprite(Color.RED);
+  BufferedImage p2i = imageMaker.drawTestSprite(Color.BLUE);
+  
+  int[] modifiers = {0, 0, 0};
+  int[] baseStats = {10, 10, 10};
+    
+  CombatColor defaultColor = new CombatColor(Color.GRAY, modifiers, 2);
+  
+  int[] inventory = new int[]{1, 2, 3, 4, 5, 6};
+  
+  int[][] meterMods = new int[3][3];
+   meterMods[0][0] = 5;
+   meterMods[0][1] = -2;
+   meterMods[0][2] = -2;
+   meterMods[1][0] = -2;
+   meterMods[1][1] = 5;
+   meterMods[1][2] = -2;
+   meterMods[2][0] = -2;
+   meterMods[2][1] = -2;
+   meterMods[2][2] = 5;
+  
+   player = new Combatant("Player", p1i, defaultColor, baseStats, meterMods);
+   enemy = new Combatant("Enemy", p2i, defaultColor, baseStats, meterMods);
+  
+   fightManager = new FightManager(player,enemy,inventory); 
+   
+   inCombat = false;
+ }
 
 // Key Pressed Events
 void keyPressed() {
@@ -81,7 +129,17 @@ if (keyCode == UP) {
     }
 }
 
+// Mouse events
 
+void mousePressed()
+{
+  fightManager.pressCheck();
+}
+
+void mouseMoved()
+{
+  fightManager.hoverCheck();
+}
 
 
 void draw(){  
