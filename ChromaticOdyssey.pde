@@ -2,6 +2,7 @@ import processing.video.*;
 boolean initValues; //<>//
   void setup() {
     size(1024,768,P2D);
+    smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
     background(BACKGROUND_COLOR);                  // Background refresh color

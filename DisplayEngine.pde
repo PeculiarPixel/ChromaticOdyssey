@@ -6,9 +6,24 @@ class DisplayEngine {
    // Displayable events
    ArrayList<DisplayableEvent> events;
    
+   //State Transition in progress
+   boolean transition;
+   //State Transition Event copy
+   StateEvent transitionEvent;
+   //values to control the fade
+   int alpha;
+   int theta;
+   float transitionFade;
+   Fog transitionFog;
+   
    // Constructor
    public DisplayEngine() {
      this.events = new ArrayList<DisplayableEvent>();
+     transition = false;
+     alpha=0;
+     theta = 255;
+     transitionFade = 0;
+     transitionFog = new Fog(width/2,height/2,5);
    }
 
   // Display hitboxes
@@ -48,8 +63,41 @@ class DisplayEngine {
     }
     
   }
-  
-  
+
+
+void strokeText(String message, float x, float y, int size, int fade){ 
+  textSize(size);
+  fill(255,255,255,fade); 
+  text(message, x-2, y); 
+  text(message, x, y-2); 
+  text(message, x+2, y); 
+  text(message, x, y+2); 
+  fill(0,0,0,fade); 
+  text(message, x, y);
+} 
+
+void fadeOut(){
+  fill(104,50,104,alpha);
+  rect(0,0,1000,1000);
+  strokeText("FUK U",width/2,height/2,48,alpha);
+  alpha+=5;
+  if(transitionFade<255){
+  transitionFade = alpha+5;
+  }else{
+    transitionFade = 255;
+  }
+  }
+ void fadeIn(){
+  fill(104,50,104,theta);
+  rect(0,0,1000,1000);
+  strokeText("FUK U",width/2,height/2,48,theta);
+  theta-=5;
+  if(transitionFade>0){
+  transitionFade = theta-5;
+  }else{
+  transitionFade =0;
+  }
+} 
   // Display game characters
   public void displayCharacter(GameCharacter c) {
     
@@ -135,8 +183,9 @@ class DisplayEngine {
     displayLandscapes();
     displayTriggers();
     
-    
-    state.currentState.fog.run();
+
+    state.currentState.fog.run(-1);
+
     // Pop translate matrix
     popMatrix(); 
     
@@ -150,7 +199,26 @@ class DisplayEngine {
       //print("enter has been pressed");
       displayDialog(state.currentState.conversations.get(comp.conversationIndex));
     }
-    
+        
+    if(transition){
+          //  transitionFog.run(transitionFade);
+      if(alpha<255){
+        fadeOut();
+      }else if(alpha==255){
+        state.setState(transitionEvent.getState());
+        fadeIn();
+      }
+   
+      if(theta ==0){
+        theta = 255;
+        transition = false;
+        alpha =0;
+        transitionFade=0;
+      }
+      
+
+    }
+
   }
 
 }
