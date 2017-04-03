@@ -166,6 +166,7 @@ boolean initValues;
     else
     {
       fightManager.drawActive();
+      // Image has to be offset to the center of the screen, presumably due to matrix transform issues:
       image(fightManager.getAsPImage(), 512, 384);
     }
     
@@ -177,11 +178,11 @@ boolean initValues;
   void mousePressed()
 {
   if(inCombat)
-  fightManager.pressCheck();
+    fightManager.pressCheck();
 }
 
 void mouseMoved()
 {
   if(inCombat)
-  fightManager.hoverCheck();
+    fightManager.hoverCheck();
 }
