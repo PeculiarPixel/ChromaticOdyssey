@@ -39,7 +39,7 @@ void run(){
 
   // Loop through all registered computation events
   for(ComputationEvent e : events) {
-      e.compute(); //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+      e.compute(); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
       print("Computed Event\n");
   }
   
@@ -124,7 +124,7 @@ void run(){
     //}
     
     //if(hBox1.designation == AreaTypeEnum.DAMAGE_HITBOX && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test computable event
-    //  dispatcher.dispatch(new ComputationEvent(-10,newt)); //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+    //  dispatcher.dispatch(new ComputationEvent(-10,newt)); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
     //}
     //if(hBox1.designation == AreaTypeEnum.DIALOG_TRIGGER && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test dialog
     //  dialog = true;  
@@ -156,9 +156,9 @@ void run(){
       }
   }
 
- //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+ //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
  private void moveCheck(float xChange, float yChange) { //this assumes that the player's hitbox is initialized and added to the computation engine first, player is hitboxes[0]
-     //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+     //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
     for (GameCharacter c : players ) {
       
       // Collision for triggers
@@ -197,13 +197,13 @@ void run(){
     }
     
     //for(int i = 0; i < hitboxes.size(); i++) {
-    //  computeIntersection(hitboxes.get(i), players.get(0).getHitbox(), xChange, yChange); //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+    //  computeIntersection(hitboxes.get(i), players.get(0).getHitbox(), xChange, yChange); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
     //  //computeColorCheck((int)xChange,(int)yChange);
     //  if(players.get(0).local.hitbox.isHitX)
     //    xChange = 0;
     //  if(players.get(0).local.hitbox.isHitY)
     //    yChange = 0;
-    //} //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+    //} //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
     
     for (GameCharacter c : players) {
       

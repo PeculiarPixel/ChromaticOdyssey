@@ -103,8 +103,8 @@ void fadeOut(){
     
     imageMode(CENTER);
     c.updateSpriteAnimation();
-    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>// //<>// //<>// //<>//
-     //<>//
+    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+     //<>// //<>//
     if(c.local.hitboxDisplay){
       displayArea(c.getHitbox());
     }
@@ -188,14 +188,10 @@ void fadeOut(){
 
     // Pop translate matrix
     popMatrix(); 
-    
-    // Hitbox display
-    if(hitBoxMode) {
-      newt.local.hitboxDisplay = true;
-    } 
-    
-    // Dialog display
-    if(dialog) {
+  
+    newt.local.hitboxDisplay = hitBoxMode;
+  
+    if(dialog){
       //print("enter has been pressed");
       displayDialog(state.currentState.conversations.get(comp.conversationIndex));
     }

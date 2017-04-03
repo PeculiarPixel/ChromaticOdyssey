@@ -1,7 +1,9 @@
 import processing.video.*;
-boolean initValues; //<>//
+import ddf.minim.*; //<>// //<>//
+boolean initValues;
+
   void setup() {
-    size(1024,768,P2D);
+    size(1024, 768, P2D);
     smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
@@ -11,8 +13,21 @@ boolean initValues; //<>//
     //initializeGlobals();                           // Initialize Globals
     println("after globals");                                  // Show title screen
     initValues = false;
+       
+    Minim minim = new Minim(this); 
+    
+    println("Loading file a.wav");
+    AudioPlayer song = minim.loadFile("a.wav");
+    song.loop();
+     
+    //println("Opening Beepbox-Song.wav");
+    //SoundFile song = new SoundFile(this, "a.wav");
+    
+    //println("Looping song");
+    
+    //song.loop();
+    
   }
-
 
   // Instantiate newt, engines, event dispatcher, spriteLibrary, &c
   private void initializeGlobals() {
@@ -40,7 +55,6 @@ boolean initValues; //<>//
 
   // Key Pressed Events
   void keyPressed() {
-  
     if (keyCode == UP) {
       newt.setDirection(MoveDirection.UP);
     }
@@ -53,7 +67,6 @@ boolean initValues; //<>//
     if(keyCode == RIGHT){
       newt.setDirection(MoveDirection.RIGHT);
     }
-    
   }
 
   // Key Released Events
