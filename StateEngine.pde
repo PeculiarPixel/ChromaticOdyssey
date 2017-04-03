@@ -68,10 +68,10 @@ class StateEngine {
   }
   
   
-  // Set level
-  public void setState(Level state) {
-    cleanupEngineStates();
-    swapState(state);
-  }
+  //// Set level
+  //public void setState(Level state) {
+  //  cleanupEngineStates();
+  //  swapState(state);
+  //}
 
 }

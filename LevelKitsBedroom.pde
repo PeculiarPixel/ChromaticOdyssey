@@ -2,7 +2,7 @@
 class LevelKitsBedroom extends Level {
 
    public LevelKitsBedroom() {
-     super();
+     super(LevelName.KIT_BEDROOM);
      loadAssets();
    }
    

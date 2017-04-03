@@ -7,7 +7,8 @@ class ComputationEngine {
   private ArrayList<ComputationEvent> events;
   public int conversationIndex;
   private boolean runLevelPrompt = false;
-
+ 
+ 
   // Constructor
   public ComputationEngine() {
     
@@ -34,10 +35,30 @@ class ComputationEngine {
   public void addCharacter(GameCharacter c) {
     this.players.add(c);
   }
+  
+  //swaps state when button is clicked
+  public void IntroButton(){ //<>//
+    //state.events.add(new StateEvent(LevelName.TEST_0));
+    //dispatcher.dispatch(new StateEvent(LevelName.TEST_0)); //<>//
+    state.setState(LevelName.TEST_0);
+    println("running");
+  }
+  
 
 void run(){
   
   // Loop through all registered computation events //<>// //<>//
+ 
+  println(mouseX + ","+ mouseY);
+  if(mousePressed == true && state.currentState.name == LevelName.INTRO) {
+    if(mouseX > 511 && mouseX < 827 && mouseY > 385 && mouseY < 552){
+      println("SWAP TIME");
+      introScreen.stop();
+      IntroButton();
+    }
+  }
+
+  // Loop through all registered computation events
   for(ComputationEvent e : events) {
       e.send(); //<>// //<>// //<>// //<>// //<>//
       print("Computed Event\n");
@@ -104,7 +125,7 @@ void run(){
       
       hBox2.setHitX(false);
       hBox2.setHitX(false);
-      
+       //<>//
       runLevelPrompt = false;
       
     }
@@ -112,9 +133,9 @@ void run(){
     if((hBox1.xPos + hBox1.getWidth()/2 >= hBox2.xPos - hBox2.getWidth()/2 &&
     hBox1.xPos - hBox1.getWidth()/2 <= hBox2.xPos + hBox2.getWidth()/2) &&
     (hBox1.yPos + hBox1.getHeight()/2 >= hBox2.yPos - hBox2.getHeight()/2 + yChange &&
-    hBox1.yPos - hBox1.getHeight()/2 <= hBox2.yPos + hBox2.getHeight()/2 + yChange)) {
+    hBox1.yPos - hBox1.getHeight()/2 <= hBox2.yPos + hBox2.getHeight()/2 + yChange)) { //<>//
             
-          if ( hBox1.getDesignation() != AreaTypeEnum.CHARACTER_HITBOX ) {
+          if ( hBox1.getDesignation() != AreaTypeEnum.CHARACTER_HITBOX ) { //<>//
             
             hBox2.setHitY(true);
             hBox1.setHitY(true);
@@ -122,18 +143,18 @@ void run(){
           }
           
           runLevelPrompt = true;
-          
+           //<>//
       }
-    else {
+    else { //<>//
       
       hBox2.setHitY(false);
       hBox1.setHitY(false);
-      
+       //<>//
       runLevelPrompt = false;
       
     }
   //<>// //<>//
-  }
+  } //<>//
  
 
 //void runLevelPrompt(){
@@ -145,12 +166,12 @@ void run(){
 //  } //<>// //<>// //<>//
 //}
 
-  private void computeColorCheck(GameCharacter c, int xChange, int yChange){
-    color pixelColor = state.currentState.hitboxImage.get( (int) c.local.getFeetX() + xChange, (int) c.local.getFeetY() + yChange);
+  private void computeColorCheck(GameCharacter c, int xChange, int yChange){ //<>//
+    color pixelColor = state.currentState.hitboxImage.get( (int) c.local.getFeetX() + xChange, (int) c.local.getFeetY() + yChange); //<>//
     //println("COLOR="+red(pixelColor)+"<r:"+green(pixelColor)+"<g:"+blue(pixelColor)+"<b:");
-      if(red(pixelColor) == 255){
-         c.getHitbox().isHitX = true;
-         c.getHitbox().isHitY = true; //<>// //<>//
+      if(red(pixelColor) == 255){ //<>//
+         c.getHitbox().isHitX = true; //<>//
+         c.getHitbox().isHitY = true; //<>// //<>// //<>//
       }else{
          c.getHitbox().isHitX = false; //<>// //<>//
          c.getHitbox().isHitY = false;
@@ -163,18 +184,18 @@ void run(){
   //  for (GameCharacter c : players ) { //<>//
       // Collision for triggers
       for (Area a : triggers) {  
-        computeIntersection(a, character.getHitbox(), xChange, yChange);
-      }
+        computeIntersection(a, character.getHitbox(), xChange, yChange); //<>//
+      } //<>//
       
       for (Trigger t : triggers) {
-        if (t.isHit() && !t.hasActivated()) {
-          t.trigger();
-        }
-      }
+        if (t.isHit() && !t.hasActivated()) { //<>//
+          t.trigger(); //<>//
+        } //<>//
+      } //<>//
      
       // Collision for hitboxes  //<>//
-      for (Area a : hitboxes) { //<>//
-        
+      for (Area a : hitboxes) { //<>// //<>//
+         //<>//
         computeIntersection(a, character.getHitbox(), xChange, yChange);  //<>//
          //<>//
         if (character.local.hitbox.isHitX) xChange = 0;  //<>//
@@ -182,9 +203,9 @@ void run(){
       
       }
       
-   // }
-    
-  
+   // } //<>//
+     //<>//
+   //<>//
       // Compute color change
       computeColorCheck( character, (int) xChange, (int) yChange );
       
@@ -217,7 +238,7 @@ void run(){
     if (newt.local.isMoving()) {
       if(newt.local.moveUp) {
         moveCheck(0.0,-speed, newt);
-      }
+      } //<>//
       if(newt.local.moveDown){
         moveCheck(0.0,speed, newt);
       }

@@ -2,7 +2,7 @@
 class LevelThroneRoom extends Level {
 
    public LevelThroneRoom() {
-     super();
+     super(LevelName.THRONE_ROOM);
      loadAssets();
    }
    

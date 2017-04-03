@@ -5,6 +5,7 @@ abstract class Level {
   protected ArrayList<Trigger> triggers;
   protected ArrayList<Hitbox> hitboxes;
   protected ArrayList<Script> conversations;
+  protected LevelName name;
   
   //public ArrayList<Movie> cutscenes;
   //public ArrayList<Item> items;
@@ -16,7 +17,7 @@ abstract class Level {
   
   
   protected Fog fog;
-  protected Level() {
+  protected Level(LevelName inputName) {
     
     this.characters = new ArrayList<GameCharacter>();
     this.landscapes = new ArrayList<Landscape>();
@@ -24,6 +25,7 @@ abstract class Level {
     this.triggers = new ArrayList<Trigger>();
     this.hitboxes = new ArrayList<Hitbox>();
     this.fog = new Fog(0,0,0);
+    this.name = inputName;
     
   }
   
@@ -55,5 +57,4 @@ abstract class Level {
     
   }
   
-
 }

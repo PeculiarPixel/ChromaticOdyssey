@@ -1,9 +1,11 @@
 import processing.video.*;
-import ddf.minim.*; //<>// //<>//
+import ddf.minim.*; //<>// //<>// //<>//
 
   
-boolean initValues; //<>// //<>// //<>//
+boolean initValues; //<>// //<>// //<>// //<>//
 boolean kitKeyPress;
+PApplet master = this;
+Movie introScreen; 
 
 ArrayList<MoveDirection> kitMoveSet;
 ArrayList<MoveDirection> kitMoveRelease;
@@ -23,7 +25,7 @@ ArrayList<MoveDirection> kitMoveRelease;
     
     println("Loading file a.wav");
     AudioPlayer song = minim.loadFile("a.wav");
-    song.loop();
+    //song.loop();
      
     //println("Opening Beepbox-Song.wav");
     //SoundFile song = new SoundFile(this, "a.wav");
@@ -31,6 +33,9 @@ ArrayList<MoveDirection> kitMoveRelease;
     //println("Looping song");
     
     //song.loop();
+    
+    introScreen = new Movie(master, "TitleScreen.mp4");
+    introScreen.loop();
     
   }
 
@@ -82,11 +87,11 @@ ArrayList<MoveDirection> kitMoveRelease;
      newt.setDirection(MoveDirection.LEFT);
      //kitMoveSet.add(MoveDirection.LEFT);
     }
-    if(keyCode == RIGHT){
+    if(keyCode == RIGHT){ //<>//
       newt.setDirection(MoveDirection.RIGHT);
      // kitMoveSet.add(MoveDirection.RIGHT);
-    }
-  }
+    } //<>//
+  } //<>//
 
   // Key Released Events //<>// //<>//
   void keyReleased() {
@@ -105,12 +110,12 @@ ArrayList<MoveDirection> kitMoveRelease;
      newt.releaseDirection(MoveDirection.LEFT);
      kitMoveRelease.remove(0);     
      kitMoveRelease.add(MoveDirection.LEFT);
-    }
+    } //<>//
     if(keyCode == RIGHT){
       newt.releaseDirection(MoveDirection.RIGHT);
       kitMoveRelease.add(MoveDirection.RIGHT);
     }
-    if(key == 'h' || key == 'H'){
+    if(key == 'h' || key == 'H'){ //<>//
         hitBoxMode = !hitBoxMode;
     }
     if(key == 'b' || key == 'B'){
@@ -123,9 +128,12 @@ ArrayList<MoveDirection> kitMoveRelease;
 
   // Start the game intro and then the first level
   private void gameStart() {
-    state.setState(LevelName.TEST_0);
+    state.setState(LevelName.INTRO);
   }
 
+  void movieEvent(Movie m) {
+    m.read();
+  }
 
 
   // Draw game loop

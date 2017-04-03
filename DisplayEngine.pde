@@ -7,6 +7,7 @@ class DisplayEngine {
    ArrayList<DisplayableEvent> events;
    ArrayList<DisplayableEvent> inactiveEvents;
    
+
    ScriptQueue scriptQueue;                     // Queue of conversations
    boolean transition;                          //State Transition in progress
    
@@ -17,7 +18,6 @@ class DisplayEngine {
      this.inactiveEvents = new ArrayList<DisplayableEvent>();
      this.scriptQueue = new ScriptQueue();
      this.transition = false;
-     
      
    }
    
@@ -31,7 +31,6 @@ class DisplayEngine {
     fill(hit.showColor, 100);
     rectMode(CENTER);
     rect(hit.xPos, hit.yPos, hit.getWidth(), hit.getHeight());
-    
   }
 
   // Queue up a script to be displayed
@@ -111,11 +110,16 @@ class DisplayEngine {
   public Script getCurrentScript() {
    return null;
   }
- //<>// //<>//
-  // Run display engine //<>// //<>// //<>//
-  void run() { //<>// //<>//
-     //<>// //<>//
-   background(0);      //  Init background //<>// //<>//
+
+  // Run display engine
+  void run() {
+    
+   background(0);      //  Init background
+   
+   if (state.currentState.name == LevelName.INTRO){
+      image(introScreen, 0, 0, width, height);
+    }
+   else {
    
    camera.fixedUpdate(); // Update camera positions //<>// //<>//
     //<>// //<>//
@@ -158,6 +162,7 @@ class DisplayEngine {
     
     inactiveEvents.clear();
     
+  }
   }
 
 }
