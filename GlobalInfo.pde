@@ -15,6 +15,10 @@ class GlobalInfo {
   
   private SpriteAnimation currentAnimation;  // Current animation
   
+  public AudioPlayer footstep;
+  
+  
+  
   // Constructor
   public GlobalInfo(int h, int e, int m, ArrayList<SpriteAnimation> animations) {
       

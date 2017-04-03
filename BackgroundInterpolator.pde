@@ -4,6 +4,7 @@ class BackgroundInterpolator
   private static final int HEIGHT = 768;
   
   private BufferedImage image;
+  private BufferedImage altImage;
   
   public BackgroundInterpolator()
   {
