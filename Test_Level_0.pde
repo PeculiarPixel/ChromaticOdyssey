@@ -15,12 +15,16 @@ class Test_Level_0 extends Level {
     GameCharacter newt = this.characters.get(0);
     newt.setXPos(START_X);
     newt.setYPos(START_Y);
+    
+    kit.setXPos(START_X-100);
+    kit.setYPos(START_Y);
   }
   
   // Load level necessary characters
   private void loadCharacters() {
     this.characters.add(newt);
-    //this.characters.add(kit);
+    this.characters.add(kit);
+
   }
   
   // Load all level landscapes (Hitboxes, Triggers, Objects)

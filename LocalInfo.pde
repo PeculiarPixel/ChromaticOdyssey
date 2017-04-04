@@ -59,7 +59,7 @@ class LocalInfo {
         }
         
         // Log direction
-        println("Current direction: " + this.direction.toString());
+        //println("Current direction: " + this.direction.toString());
         
       }
         
@@ -133,7 +133,7 @@ class LocalInfo {
              releaseDirection = MoveDirection.DOWN;
         }    
         
-        println("Releasing direction: " + releaseDirection);
+       // println("Releasing direction: " + releaseDirection);
         
       
         if (!isMoving()) {
@@ -155,7 +155,7 @@ class LocalInfo {
               this.direction = MoveDirection.IDLE_DOWN;
           }
           
-          println("Current direction: " + this.direction);
+          //println("Current direction: " + this.direction);
           return true;
           
         }
@@ -228,6 +228,6 @@ class LocalInfo {
 }
 
 enum MoveDirection {
-  LEFT, RIGHT, UP, DOWN, IDLE,
+  LEFT, RIGHT, UP, DOWN,
   IDLE_UP, IDLE_DOWN, IDLE_LEFT, IDLE_RIGHT;
 }

@@ -5,10 +5,10 @@ class GameCharacter {
   private GameCharacterName name;
    
     // Constructor
-    public GameCharacter(GameCharacterName name) {
+    public GameCharacter(GameCharacterName inputName) {
       
       // Character's identifier
-      this.name = name;
+      this.name = inputName;
       
       // Load characters required animations
       HashMap<String, SpriteAnimation> animations = spriteLibrary.getCharacterAnimations(name);
@@ -28,7 +28,7 @@ class GameCharacter {
       if (checkTwoMoveKeyLimit()) return;
       
       if (isDirectionChange(direction)) {
-        local.setDirection(direction);
+        this.local.setDirection(direction);
         updateSprite(local.getDirection());
       }
       
@@ -42,17 +42,17 @@ class GameCharacter {
     
     // Release character move direction
     void releaseDirection(MoveDirection direction) {
-      if (local.releaseDirection(direction)) updateSprite(local.getDirection());
+      if (this.local.releaseDirection(direction)) updateSprite(this.local.getDirection());
     }
     
     // Test if move was change in direction
     boolean isDirectionChange(MoveDirection direction) {
-      return local.isDirectionChange(direction);
+      return this.local.isDirectionChange(direction);
     }
     
     // Test is character is moving
     boolean isMoving() {
-      if (local.isMoving()) return true;
+      if (this.local.isMoving()) return true;
       return false;
     }
     
@@ -114,6 +114,8 @@ class GameCharacter {
 }
 
 // Characters identifiers
+
+
 enum GameCharacterName {
   NEWT, KIT, MYTHRA, RUSS, FAISAL, PRAGMA, KNIGHT;
 }

@@ -12,8 +12,8 @@ class Test_Level_1 extends Level {
   public void setStartPosition() {
     newt.setXPos(START_X);
     newt.setYPos(START_Y);  
-    //kit.setXPos(START_X - 30);
-    //kit.setYPos(START_Y - 30);  
+    kit.setXPos(START_X - 30);
+    kit.setYPos(START_Y - 30);  
   }
   
   // Load all assets for this level

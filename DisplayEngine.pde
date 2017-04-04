@@ -58,7 +58,7 @@ void strokeText(String message, float x, float y, int size, int fade){
 
 void fadeOut(){
   fill(104,50,104,alpha);
-  rect(0,0,1000,1000);
+  rect(0,0,width,height);
   strokeText("FUK U",width/2,height/2,48,alpha);
   alpha+=5;
   if(transitionFade<255){
@@ -69,7 +69,7 @@ void fadeOut(){
   }
  void fadeIn(){
   fill(104,50,104,theta);
-  rect(0,0,1000,1000);
+  rect(0,0,width,height);
   strokeText("FUK U",width/2,height/2,48,theta);
   theta-=5;
   if(transitionFade>0){
@@ -93,15 +93,15 @@ void fadeOut(){
   
   // Display game characters
   public void displayCharacter(GameCharacter c) {
-    
+     //<>// //<>// //<>//
     imageMode(CENTER); //<>//
     c.updateSpriteAnimation(); //<>// //<>// //<>//
-    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
-     //<>// //<>//
+    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+     //<>// //<>// //<>//
     if(c.local.hitboxDisplay){
       displayArea(c.getHitbox());
-    } //<>//
-     //<>//
+    } //<>// //<>//
+     //<>// //<>//
   }
   
   // Display Landscapes
@@ -113,10 +113,13 @@ void fadeOut(){
   }
   
   // Display all characters in state's current level
-  private void displayCharacters() { //<>//
-    imageMode(CORNER); //<>//
+  private void displayCharacters() { //<>// //<>//
+    imageMode(CORNER); //<>// //<>//
     for (GameCharacter c : state.currentState.characters) {
+     // println("DISPLAYING CHARACTER:"+c.name);
+     // println("position:",c.local.xPos,",",c.local.yPos);
       displayCharacter(c);
+
     }
   }
   
@@ -142,31 +145,31 @@ void fadeOut(){
   }
   
   // Clear Display Engine of Events
-  public void clearEvents() { //<>//
-    this.events.clear(); //<>// //<>// //<>//
-  } //<>// //<>//
+  public void clearEvents() { //<>// //<>//
+    this.events.clear(); //<>// //<>// //<>// //<>//
+  } //<>// //<>// //<>//
   
   public void clearEngine() {
     clearEvents();
-  } //<>//
-   //<>//
+  } //<>// //<>//
+   //<>// //<>//
   public Script getCurrentScript() {
    return null;
   }
- //<>//
-  // Run display engine //<>// //<>//
-  void run() { //<>//
-     //<>//
-   background(0);      //  Init background //<>//
+ //<>// //<>//
+  // Run display engine //<>// //<>// //<>//
+  void run() { //<>// //<>//
+     //<>// //<>//
+   background(0);      //  Init background //<>// //<>//
    
-   camera.fixedUpdate(); // Update camera positions //<>//
-    //<>//
+   camera.fixedUpdate(); // Update camera positions //<>// //<>//
+    //<>// //<>//
    pushMatrix();       //  In order to move the world around the character you must translate the frame of reference when you display everything
    translate(px, py);  //  Perform that translate
    
     // Draw background layer
-    imageMode(CORNER); //<>//
-    image(state.currentState.backgroundImage, 0, 0); //<>//
+    imageMode(CORNER); //<>// //<>//
+    image(state.currentState.backgroundImage, 0, 0); //<>// //<>//
     
     // Display characters
     displayCharacters();
