@@ -7,7 +7,8 @@ class DisplayEngine {
    ArrayList<DisplayableEvent> events;
    ArrayList<DisplayableEvent> inactiveEvents;
    
-   Script currentScript;
+   private Script currentScript;                // Currently in use script
+   private boolean dialogInUse;                 // Check for script in use
    
    //State Transition in progress
    boolean transition;
@@ -17,13 +18,14 @@ class DisplayEngine {
    int alpha;
    int theta;
    float transitionFade;
-   Fog transitionFog;
+   Fog transitionFog;   
    
    // Constructor
    public DisplayEngine() {
      
      this.events = new ArrayList<DisplayableEvent>();
      this.inactiveEvents = new ArrayList<DisplayableEvent>();
+     
      transition = false;
      alpha=0;
      theta = 255;
@@ -42,6 +44,7 @@ class DisplayEngine {
     
   }
   
+  // Iterate through the current script
   public void updateCurrentScript() {
     if (currentScript != null) this.currentScript.next();
   }
@@ -81,11 +84,27 @@ void fadeOut(){
   }
 } 
 
+  
+  // Set the new current script
+  public void setCurrentScript(Script s) {
+    this.dialogInUse = true;
+    this.currentScript = s; 
+  }
+  
+  // Clear the current script
+  public void clearCurrentScript() {
+    this.dialogInUse = false;
+    this.currentScript = null;
+  }
+  
+  // Check if dialog is currently in use
+  public boolean checkScript() { return dialogInUse; }
+  
   // Display game characters
   public void displayCharacter(GameCharacter c) {
     
-    imageMode(CENTER);
-    c.updateSpriteAnimation(); //<>// //<>//
+    imageMode(CENTER); //<>//
+    c.updateSpriteAnimation(); //<>// //<>// //<>//
     image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
      //<>// //<>//
     if(c.local.hitboxDisplay){
@@ -138,8 +157,8 @@ void fadeOut(){
   
   public void clearEngine() {
     clearEvents();
-  }
-  
+  } //<>//
+   //<>//
   public Script getCurrentScript() {
    return null;
   }

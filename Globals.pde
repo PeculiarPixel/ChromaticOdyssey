@@ -24,13 +24,7 @@ FileUtils fileUtils;                    // File I/O Utilities
 GameCamera camera;
 
 //movement variables
-  float px;
-  float py;
-  float saveX;
-  float saveY;
-  
-//globals for tracking
-boolean dialog;                           //is dialog window up
-String displayText;                       //the text currently being shown in the dialog window
-String displayAuthor;                     // Display the current author name on the dialog display
-int saveSpot;                            //index of the current string animation
+float px;
+float py;
+float saveX;
+float saveY;
