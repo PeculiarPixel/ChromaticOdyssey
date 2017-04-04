@@ -38,7 +38,7 @@ class Test_Level_0 extends Level {
   private void loadConversations() {
   // Load test conversation
   try{
-    this.conversations = fileUtils.getLevelConversations("levelScripts/level0");
+    this.conversations = fileUtils.getLevelConversations("levelScripts/test0");
    } catch (DirectoryNotFoundException e) {
         println(e.getLocalizedMessage());
     }
