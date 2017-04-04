@@ -42,13 +42,11 @@ class ScriptQueue  {
   
   // Draw the current script
   public void draw() {
-    if (!isEmpty()) {
       if(first.item.draw()) {
         try {
           next();
         } catch (NoSuchElementException e) {}
       }
-    }
   }
   
   // Go through the script

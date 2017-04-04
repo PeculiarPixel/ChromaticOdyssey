@@ -130,6 +130,7 @@ void fadeOut(){
     }
   }
   
+  // Display triggers
   private void displayTriggers() {
     for (Trigger t : state.currentState.triggers) {
       if (newt.local.hitboxDisplay) {
@@ -138,9 +139,9 @@ void fadeOut(){
     }
   }
   
-  
+  // Draw currently queued script
   private void displayDialog() {
-    this.scriptQueue.draw();
+    if (!this.scriptQueue.isEmpty()) this.scriptQueue.draw();
   }
   
   // Clear Display Engine of Events
@@ -155,8 +156,8 @@ void fadeOut(){
   public Script getCurrentScript() {
    return null;
   }
-
-  // Run display engine //<>//
+ //<>//
+  // Run display engine //<>// //<>//
   void run() { //<>//
     
    background(0);      //  Init background
