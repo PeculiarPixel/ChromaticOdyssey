@@ -1,5 +1,5 @@
-abstract class Trigger extends Area {
-  
+abstract class Trigger extends Area 
+{  
   protected boolean isActive = false;
 
   // Default Constructor
