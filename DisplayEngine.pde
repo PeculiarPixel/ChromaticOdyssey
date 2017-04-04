@@ -7,6 +7,8 @@ class DisplayEngine {
    ArrayList<DisplayableEvent> events;
    ArrayList<DisplayableEvent> inactiveEvents;
    
+   ScriptQueue scriptQueue;
+   
    private Script currentScript;                // Currently in use script
    private boolean dialogInUse;                 // Check for script in use
    
@@ -25,12 +27,14 @@ class DisplayEngine {
      
      this.events = new ArrayList<DisplayableEvent>();
      this.inactiveEvents = new ArrayList<DisplayableEvent>();
+     this.scriptQueue = new ScriptQueue();
      
      transition = false;
      alpha=0;
      theta = 255;
      transitionFade = 0;
      transitionFog = new Fog(width/2,height/2,5);
+     
      
    }
 
@@ -43,12 +47,6 @@ class DisplayEngine {
     rect(hit.xPos, hit.yPos, hit.getWidth(), hit.getHeight());
     
   }
-  
-  // Iterate through the current script
-  public void updateCurrentScript() {
-    if (currentScript != null) this.currentScript.next();
-  }
-
 
 void strokeText(String message, float x, float y, int size, int fade){ 
   textSize(size);
@@ -84,21 +82,17 @@ void fadeOut(){
   }
 } 
 
+  // Queue up a script to be displayed
+  public void queueScript(Script s) { this.scriptQueue.enqueue(s); }
   
-  // Set the new current script
-  public void setCurrentScript(Script s) {
-    this.dialogInUse = true;
-    this.currentScript = s; 
+  // Clear script queue
+  public void clearScriptQueue() { this.scriptQueue.clearScripts(); }
+  
+  // Iterate through the current script
+  public void updateCurrentScript() {
+    this.scriptQueue.updateCurrentScript();
   }
   
-  // Clear the current script
-  public void clearCurrentScript() {
-    this.dialogInUse = false;
-    this.currentScript = null;
-  }
-  
-  // Check if dialog is currently in use
-  public boolean checkScript() { return dialogInUse; }
   
   // Display game characters
   public void displayCharacter(GameCharacter c) {
@@ -109,8 +103,8 @@ void fadeOut(){
      //<>// //<>//
     if(c.local.hitboxDisplay){
       displayArea(c.getHitbox());
-    }
-    
+    } //<>//
+     //<>//
   }
   
   // Display Landscapes
@@ -146,9 +140,8 @@ void fadeOut(){
   
   
   private void displayDialog() {
-    
+    this.scriptQueue.draw();
   }
-  
   
   // Clear Display Engine of Events
   public void clearEvents() { //<>//
@@ -163,8 +156,8 @@ void fadeOut(){
    return null;
   }
 
-  // Run display engine
-  void run() {
+  // Run display engine //<>//
+  void run() { //<>//
     
    background(0);      //  Init background
    
@@ -194,13 +187,14 @@ void fadeOut(){
     displayLandscapes();
     displayTriggers();
     
-
     state.currentState.fog.run(-1);
 
     // Pop translate matrix
     popMatrix(); 
   
     newt.local.hitboxDisplay = hitBoxMode;
+    
+    displayDialog();
         
     if(transition){
           //  transitionFog.run(transitionFade);
@@ -210,12 +204,6 @@ void fadeOut(){
         transitionEvent.send();
         fadeIn();
       }
-    
-    for (DisplayableEvent e : events) { if (!e.isFinished()) e.send(); }
-    
-    for(DisplayableEvent e : inactiveEvents) { this.events.remove(e); }
-    
-    inactiveEvents.clear();
    
       if(theta ==0){
         theta = 255;
@@ -226,6 +214,14 @@ void fadeOut(){
       
 
     }
+    
+            
+    for (DisplayableEvent e : events) { if (!e.isFinished()) e.send(); }
+    
+    for(DisplayableEvent e : inactiveEvents) { this.events.remove(e); }
+    
+    inactiveEvents.clear();
+    
   }
 
 }

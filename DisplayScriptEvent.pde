@@ -12,14 +12,17 @@ class DisplayScriptEvent extends DisplayableEvent {
   // Draw the current dialog script
   public void send() { 
       
-     display.setCurrentScript(script);
+     display.queueScript(script);
+     dispatcher.dispatchClear(this);
+     finish();
+     
       
-      if (script.draw()) {
-        dispatcher.dispatchClear(this);
-        display.clearCurrentScript();
-        finish();
-        println("Clearing script");
-     }
+      //if (script.draw()) {
+      //  dispatcher.dispatchClear(this);
+      //  display.clearCurrentScript();
+      //  finish();
+      //  println("Clearing script");
+       //}
   
   
   }
