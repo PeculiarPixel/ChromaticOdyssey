@@ -1,15 +1,17 @@
-class DisplayScriptEvent extends DisplayEvent {
+class DisplayScriptEvent extends DisplayableEvent {
   
   // Add script
   private Script script; 
+  private String displayText = "";
 
   // Script to display
   public DisplayScriptEvent(Script script) {
+    super();
     this.script = script;
   }
   
   // Draw the current dialog script
-  public void drawEvent() {
+  public void send() {
     
     // Set dialog window details
     fill(255,255,255);
@@ -22,18 +24,17 @@ class DisplayScriptEvent extends DisplayEvent {
     fill(0,0,0);
     
      // Animate Dialog Text
-     if( frameCount % 3 == 0 
-         && saveSpot < talk.script.get(talk.currentLine).length() ) {          // Check for frame skips and if the current line has finished typing
+     if( frameCount % 3 == 0 ) {                                               // Check for frame skips and if the current line has finished typing
          
       displayText += talk.script.get(talk.currentLine).charAt(saveSpot);       // Add the next character to the display text
-      text(displayText,100,height-100);                                        // Display the text
-      saveSpot++;                                                              // Set index to the next character of the current conversation line
+      text(displayText, 100, height - 100);                                        // Display the text
+      
       
     } else {                                                                   // Display the txt until player presses next
-      
-      text(displayText,100,height-100);                                        // Wait until the character presses next to continue
-      
+        text(displayText, 100, height - 100);                                        // Wait until the character presses next to continue
     }
+    
   }
+  
   
 }

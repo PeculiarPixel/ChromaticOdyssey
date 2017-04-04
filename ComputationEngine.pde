@@ -4,14 +4,14 @@ class ComputationEngine {
   private ArrayList<Trigger> triggers;
   private ArrayList<Trigger> activatedTriggers;
   private ArrayList<GameCharacter> players;
-  private ArrayList<ComputationEvent> events;
+  private ArrayList<Event> events;
   public int conversationIndex;
   private boolean runLevelPrompt = false;
 
   // Constructor
   public ComputationEngine() {
     
-    this.events = new ArrayList<ComputationEvent>();
+    this.events = new ArrayList<Event>();
     this.hitboxes = new ArrayList<Hitbox>();
     this.triggers = new ArrayList<Trigger>();
     this.activatedTriggers = new ArrayList<Trigger>();
@@ -38,8 +38,8 @@ class ComputationEngine {
 void run(){
 
   // Loop through all registered computation events
-  for(ComputationEvent e : events) {
-      e.compute(); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+  for(Event e : events) {
+      e.send(); //<>// //<>//
       print("Computed Event\n");
   }
   
@@ -124,7 +124,7 @@ void run(){
     //}
     
     //if(hBox1.designation == AreaTypeEnum.DAMAGE_HITBOX && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test computable event
-    //  dispatcher.dispatch(new ComputationEvent(-10,newt)); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+    //  dispatcher.dispatch(new ComputationEvent(-10,newt)); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
     //}
     //if(hBox1.designation == AreaTypeEnum.DIALOG_TRIGGER && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test dialog
     //  dialog = true;  
@@ -156,9 +156,9 @@ void run(){
       }
   }
 
- private void moveCheck(float xChange, float yChange) { //this assumes that the player's hitbox is initialized and added to the computation engine first, player is hitboxes[0] //<>//
+ private void moveCheck(float xChange, float yChange) { //this assumes that the player's hitbox is initialized and added to the computation engine first, player is hitboxes[0] //<>// //<>//
     for (GameCharacter c : players ) {
-       //<>//
+       //<>// //<>//
       // Collision for triggers
       for (Area a : triggers) {  
         computeIntersection(a, c.getHitbox(), xChange, yChange);
@@ -197,13 +197,13 @@ void run(){
     //for(int i = 0; i < hitboxes.size(); i++) {
     //  computeIntersection(hitboxes.get(i), players.get(0).getHitbox(), xChange, yChange); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
     //  //computeColorCheck((int)xChange,(int)yChange);
-    //  if(players.get(0).local.hitbox.isHitX) //<>//
+    //  if(players.get(0).local.hitbox.isHitX) //<>// //<>//
     //    xChange = 0;
     //  if(players.get(0).local.hitbox.isHitY)
     //    yChange = 0;
     //} //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
     
-    for (GameCharacter c : players) { //<>//
+    for (GameCharacter c : players) { //<>// //<>//
       
       c.moveX(xChange);
       c.moveY(yChange);
@@ -289,20 +289,26 @@ void run(){
         
         println("Executing Script...");
         
-        if (state.currentState.conversations.get(conversationIndex).currentLine 
-              < state.currentState.conversations.get(conversationIndex).script.size() - 1) { //you press enter to go to the next line of conversation
+        
+        if (state.currentState.hasNextLine(conversationIndex)) {
+          saveSpot = 0;
+          displayText = "";
+        
+        //if (state.currentState.conversations.get(conversationIndex).currentLine 
+        //      < state.currentState.conversations.get(conversationIndex).script.size() - 1) { //you press enter to go to the next line of conversation
               
-           saveSpot = 0;
-           displayText = "";
+        //   saveSpot = 0;
+        //   displayText = "";
            
-           state.currentState.conversations.get(conversationIndex).currentLine++;  //go to next line of conversation
+        //   state.currentState.conversations.get(conversationIndex).currentLine++;  //go to next line of conversation
 
         } else {
           
            // Reset Conversation, Remove Dialog Box
            saveSpot = 0;
            displayText = "";
-           state.currentState.conversations.get(conversationIndex).currentLine = 0;           
+           displayAuthor = "";
+           //state.currentState.conversations.get(conversationIndex).currentLine = 0;           
            dialog = false;
            
         }

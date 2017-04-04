@@ -32,4 +32,5 @@ GameCamera camera;
 //globals for tracking
 boolean dialog;                           //is dialog window up
 String displayText;                       //the text currently being shown in the dialog window
-int saveSpot ;                            //index of the current string animation
+String displayAuthor;                     // Display the current author name on the dialog display
+int saveSpot;                            //index of the current string animation

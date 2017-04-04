@@ -45,6 +45,8 @@ public class SpriteAnimationLibrary {
   // Load animations using the dirpaths given
   private void loadAnimations() {
     
+    try {
+    
     // NEWT
     Animations.put("NEWT_IDLE_UP", getSpriteAnimation("NEWT_IDLE_UP", IDLE_ANIMATION_RATE));
     Animations.put("NEWT_IDLE_DOWN", getSpriteAnimation("NEWT_IDLE_DOWN", IDLE_ANIMATION_RATE));
@@ -66,6 +68,12 @@ public class SpriteAnimationLibrary {
     Animations.put("KIT_WALK_RIGHT", getSpriteAnimation("KIT_WALK_RIGHT", WALK_ANIMATION_RATE));
     Animations.put("KIT_HURT", getSpriteAnimation("KIT_HURT", IDLE_ANIMATION_RATE));
     Animations.put("KIT_ATTACK", getSpriteAnimation("KIT_ATTACK", IDLE_ANIMATION_RATE));
+    
+    } catch (NoDirPathEntryFoundException e) {
+      println(e.getLocalizedMessage());
+    } catch (DirectoryNotFoundException e) {
+      println(e.getLocalizedMessage());
+    }
     
   }
   
@@ -101,10 +109,9 @@ public class SpriteAnimationLibrary {
     // Setup animations for character
     HashMap<String, SpriteAnimation> animations = new HashMap<String, SpriteAnimation>();
     
-    try {
       switch(name) {
         case NEWT:
-            animations.put("IDLE_UP", Animations.get("NEWT_IDLE_IP"));
+            animations.put("IDLE_UP", Animations.get("NEWT_IDLE_UP"));
             animations.put("IDLE_DOWN", Animations.get("NEWT_IDLE_DOWN"));
             animations.put("IDLE_LEFT", Animations.get("NEWT_IDLE_LEFT"));
             animations.put("IDLE_RIGHT", Animations.get("NEWT_IDLE_RIGHT"));
@@ -114,7 +121,7 @@ public class SpriteAnimationLibrary {
             animations.put("WALK_RIGHT", Animations.get("NEWT_WALK_RIGHT"));
             break;
         case KIT:
-            animations.put("IDLE_UP", Animations.get("KIT_IDLE_IP"));
+            animations.put("IDLE_UP", Animations.get("KIT_IDLE_UP"));
             animations.put("IDLE_DOWN", Animations.get("KIT_IDLE_DOWN"));
             animations.put("IDLE_LEFT", Animations.get("KIT_IDLE_LEFT"));
             animations.put("IDLE_RIGHT", Animations.get("KIT_IDLE_RIGHT"));
@@ -122,14 +129,10 @@ public class SpriteAnimationLibrary {
             animations.put("WALK_DOWN", Animations.get("KIT_WALK_DOWN"));
             animations.put("WALK_LEFT", Animations.get("KIT_WALK_LEFT"));
             animations.put("WALK_RIGHT", Animations.get("KIT_WALK_RIGHT"));
+            break;
         default:
-          println("Character animations unknown");
+          println("Character animations unknown: " + name.toString());
       }
-    } catch (NoDirPathEntryFoundException e) {
-      println(e.getLocalizedMessage());
-    } catch (DirectoryNotFoundException e) {
-      println(e.getLocalizedMessage());
-    }
     
    
     return animations;

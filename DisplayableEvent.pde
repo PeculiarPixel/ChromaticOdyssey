@@ -5,16 +5,8 @@ abstract class DisplayableEvent extends Event {
 
   // Constructor
   public DisplayableEvent() {
-    this.type = EventTypeEnum.DISPLAY;    
+    super(EventTypeEnum.DISPLAY);    
   }
-  
-  public void send()
-  {
-    dispatcher.sendDisplayable(this);
-  }
- 
-  // Draw the displayable event
-  abstract boolean drawEvent();
   
   // Test if display event finished
   public boolean isFinished() { return this.isFinished; }

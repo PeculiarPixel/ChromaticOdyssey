@@ -36,6 +36,17 @@ abstract class Level {
     return new LevelSize(backgroundImage.width, backgroundImage.height);
   }
   
+  // Get current script
+  public Script getCurrentScript(int index) { return this.conversations.get(index); }
+  
+  // Get current script's next line
+  public String getNextLine(int index) { return this.conversations.get(index).nextLine(); }
+  
+  public boolean hasNextLine(int index) { 
+     if (this.conversations.get(index).isFinished()) return false;
+     return true;
+  }
+  
   // Initialize all assets, characters, &c into comp engine
   public void initialize() {
     

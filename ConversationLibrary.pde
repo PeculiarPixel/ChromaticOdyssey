@@ -45,9 +45,8 @@ class ConversationLibrary {
     String path = getDirPathByKey(pathKey);                            // Get path from library
     PImage[] images = fileUtils.getSpriteAnimations(path);             // Get all the dialog designated
     
-    Script script = new Script();     // Create the new SpriteAnimation
     
-    return script;  // Return the script    
+    return null;  // Return the script    
   }
   
   // Load level conversations
@@ -56,21 +55,21 @@ class ConversationLibrary {
     // Map of levels conversations
     HashMap<String, Script> conversations = new HashMap<String, Script>();
     
-    try {
-      switch(name) {
-        case EMERALD_FOREST:
-            break;
-        default:
-          println("Dialog Script for Unknown Level Failed");
-      }
-    } catch (NoDirPathEntryFoundException e) {
-      println(e.getLocalizedMessage());
-    } catch (DirectoryNotFoundException e) {
-      println(e.getLocalizedMessage());
-    }
+    //try {
+    //  switch(name) {
+    //    case EMERALD_FOREST:
+    //        break;
+    //    default:
+    //      println("Dialog Script for Unknown Level Failed");
+    //  }
+    //} catch (NoDirPathEntryFoundException e) {
+    //  println(e.getLocalizedMessage());
+    //} catch (DirectoryNotFoundException e) {
+    //  println(e.getLocalizedMessage());
+    //}
     
    
-    return animations;
+    return conversations;
     
   }
 }

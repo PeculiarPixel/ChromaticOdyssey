@@ -5,11 +5,12 @@ class DamageComputationEvent extends ComputationEvent {
 
   // Constructor
   public DamageComputationEvent(int value, GameCharacter target) {
-    super();
+    this.damage_value = value;
+    this.target = target;
   }
   
   // Damage the target
-  public void compute() {
+  public void send() {
     this.target.local.currHealth += this.damage_value;
   }
   

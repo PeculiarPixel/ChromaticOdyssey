@@ -2,37 +2,48 @@
 class Dialog {
   
   private ArrayList<String> lines;       // This is the scipt for the current conversation
-  private int currentLine;              // This is the index used to pick each line out of the script
-  private GameCharacterName author;     // The author of the person saying the event
-  private Image image;                  // Image to display for the line
+  private int currentLine = 0;              // This is the index used to pick each line out of the script
+  private int currentChar = 0;
+  private String author;     // The author of the person saying the event
+  private PImage image;                  // Image to display for the line
   private int dialogSize;
   
   // Constructor
-  public Dialog(String[] inputScript) { 
+  public Dialog(String author, String image_key, ArrayList<String> content) { 
     
     // Initialize
-    lines = new ArrayList<String>();
-    currentLine = 1;
-    author = GameCharacterName.valueOf(inputScript[0].toUpperCase());
-    
-    // Add each inputted dialog line to script
-    for (String s : Arrays.copyOfRange(inputScript, 1, inputScript.length)) {
-      lines.add(s);
-      dialogSize++;
-    }
+    this.author = author; 
+    this.lines = content;
+    this.dialogSize = content.size();
     
   } 
+  
+  
+  // Check if dialog is finished
+  public boolean isFinished() { 
+    if (this.currentLine == this.lines.size() - 1) return true; 
+    else return false; 
+  }
+  
+  // Get next char
+  public char getNextChar() { return this.lines.get(currentLine).charAt(currentChar++); }
   
   // Return the current line
   public int getCurrentLine() { return currentLine; }
   
+  // Get next line
+  public String nextLine() {
+    currentChar = 0;
+    return this.lines.get(currentLine++); 
+  }
+  
   // Get Author
-  public GameCharacterName getAuthor() { return this.author; }
+  public String getAuthor() { return this.author; }
   
   // Get Author Image
-  public Image getAuthorImage() { return this.image; }
+  public PImage getAuthorImage() { return this.image; }
 
   // Get dialog size
-  public int getSize() { return this.dialogSize(); }
+  public int getSize() { return this.lines.size(); }
   
 }

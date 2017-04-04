@@ -40,28 +40,28 @@ class DisplayEngine {
   // Display dialog
   void displayDialog(Dialog talk) {
     
-    // Set dialog window details
-    fill(255,255,255);
-    stroke(20);  
-    fill(155,155,155);
-    rectMode(CENTER);
-    rect(width/2, height-100, width, height/4);
-    textSize(36);
-    fill(0,0,0);
+    //// Set dialog window details
+    //fill(255,255,255);
+    //stroke(20);  
+    //fill(155,155,155);
+    //rectMode(CENTER);
+    //rect(width/2, height-100, width, height/4);
+    //textSize(36);
+    //fill(0,0,0);
     
-     // Animate Dialog Text
-     if( frameCount % 3 == 0 
-         && saveSpot < talk.script.get(talk.currentLine).length() ) {          // Check for frame skips and if the current line has finished typing
+    // // Animate Dialog Text
+    // if( frameCount % 3 == 0 
+    //     && saveSpot <  ) {          // Check for frame skips and if the current line has finished typing
          
-      displayText += talk.script.get(talk.currentLine).charAt(saveSpot);       // Add the next character to the display text
-      text(displayText,100,height-100);                                        // Display the text
-      saveSpot++;                                                              // Set index to the next character of the current conversation line
+    //  displayText += talk.script.get(talk.currentLine).charAt(saveSpot);       // Add the next character to the display text
+    //  text(displayText,100,height-100);                                        // Display the text
+    //  saveSpot++;                                                              // Set index to the next character of the current conversation line
       
-    } else {                                                                   // Display the txt until player presses next
+    //} else {                                                                   // Display the txt until player presses next
       
-      text(displayText,100,height-100);                                        // Wait until the character presses next to continue
+    //  text(displayText,100,height-100);                                        // Wait until the character presses next to continue
       
-    }
+    //}
     
   }
 
@@ -103,8 +103,8 @@ void fadeOut(){
   public void displayCharacter(GameCharacter c) {
     
     imageMode(CENTER);
-    c.updateSpriteAnimation(); //<>//
-    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+    c.updateSpriteAnimation(); //<>// //<>//
+    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
      //<>// //<>//
     if(c.local.hitboxDisplay){
       displayArea(c.getHitbox());
@@ -150,9 +150,9 @@ void fadeOut(){
   
   
   // Clear Display Engine of Events
-  public void clearEvents() {
-    this.events.clear();
-  }
+  public void clearEvents() { //<>//
+    this.events.clear(); //<>// //<>// //<>//
+  } //<>// //<>//
   
   public void clearEngine() {
     clearEvents();
@@ -163,7 +163,7 @@ void fadeOut(){
   }
   
   public Script getCurrentScript() {
- 
+   return null;
   }
 
   // Run display engine
@@ -207,7 +207,7 @@ void fadeOut(){
   
     if(dialog){
       //print("enter has been pressed");
-      displayDialog(state.currentState.conversations.get(comp.conversationIndex));
+      //displayDialog(state.currentState.conversations.get(comp.conversationIndex));
     }
         
     if(transition){
@@ -215,7 +215,7 @@ void fadeOut(){
       if(alpha<255){
         fadeOut();
       }else if(alpha==255){
-        state.setState(transitionEvent.getState());
+        transitionEvent.send();
         fadeIn();
       }
    
@@ -228,7 +228,6 @@ void fadeOut(){
       
 
     }
-
   }
 
 }

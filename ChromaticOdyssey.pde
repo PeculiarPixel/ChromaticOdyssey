@@ -1,5 +1,5 @@
 import processing.video.*;
-import ddf.minim.*; //<>// //<>// //<>//
+import ddf.minim.*; //<>// //<>// //<>// //<>//
 boolean initValues;
 
   // Setup Game //<>// //<>// //<>//
@@ -75,7 +75,7 @@ boolean initValues;
     
   if (keyCode == UP) {
       newt.releaseDirection(MoveDirection.UP);
-    } //<>//
+    } //<>// //<>//
     if(keyCode == DOWN){
       newt.releaseDirection(MoveDirection.DOWN);
     }
@@ -89,7 +89,7 @@ boolean initValues;
         hitBoxMode = !hitBoxMode;
     }
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
-        comp.updateDialog(); //<>// //<>//
+        comp.updateDialog(); //<>// //<>// //<>//
     }
   }
 

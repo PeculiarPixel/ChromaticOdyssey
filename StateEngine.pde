@@ -16,7 +16,7 @@ class StateEngine {
     
     // Loop through all state swaps in the queue
     for (StateEvent e : events) {
-      handleStateEvent(e);
+      e.send();
     }
       
     clearEvents(); // May need to change when the state engine clears the event queue.  Should it be allowed to finish?
@@ -37,13 +37,6 @@ class StateEngine {
   // Clear the engine
   public void clearEngine() {
     clearEvents();
-  }
-  
-  // Get state to swap to and pass off
-  private void handleStateEvent(StateEvent event) {
-        display.transition = true;
-        display.transitionEvent = event;
-        //setState(event.getState()); do this later with animation timing.  Or add a check to the StateEvent to see if it needs a transition or not.
   }
   
   // Swap the current state to the new state
