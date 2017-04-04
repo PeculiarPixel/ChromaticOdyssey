@@ -5,6 +5,8 @@ class DisplayEngine {
   
    // Displayable events
    ArrayList<DisplayableEvent> events;
+   ArrayList<DisplayableEvent> inactiveEvents;
+   
    Script currentScript;
    
    //State Transition in progress
@@ -19,12 +21,15 @@ class DisplayEngine {
    
    // Constructor
    public DisplayEngine() {
+     
      this.events = new ArrayList<DisplayableEvent>();
+     this.inactiveEvents = new ArrayList<DisplayableEvent>();
      transition = false;
      alpha=0;
      theta = 255;
      transitionFade = 0;
      transitionFog = new Fog(width/2,height/2,5);
+     
    }
 
   // Display hitboxes
@@ -37,32 +42,8 @@ class DisplayEngine {
     
   }
   
-  // Display dialog
-  void displayDialog(Dialog talk) {
-    
-    //// Set dialog window details
-    //fill(255,255,255);
-    //stroke(20);  
-    //fill(155,155,155);
-    //rectMode(CENTER);
-    //rect(width/2, height-100, width, height/4);
-    //textSize(36);
-    //fill(0,0,0);
-    
-    // // Animate Dialog Text
-    // if( frameCount % 3 == 0 
-    //     && saveSpot <  ) {          // Check for frame skips and if the current line has finished typing
-         
-    //  displayText += talk.script.get(talk.currentLine).charAt(saveSpot);       // Add the next character to the display text
-    //  text(displayText,100,height-100);                                        // Display the text
-    //  saveSpot++;                                                              // Set index to the next character of the current conversation line
-      
-    //} else {                                                                   // Display the txt until player presses next
-      
-    //  text(displayText,100,height-100);                                        // Wait until the character presses next to continue
-      
-    //}
-    
+  public void updateCurrentScript() {
+    if (currentScript != null) this.currentScript.next();
   }
 
 
@@ -99,6 +80,7 @@ void fadeOut(){
   transitionFade =0;
   }
 } 
+
   // Display game characters
   public void displayCharacter(GameCharacter c) {
     
@@ -121,8 +103,8 @@ void fadeOut(){
   }
   
   // Display all characters in state's current level
-  private void displayCharacters() {
-    imageMode(CORNER);
+  private void displayCharacters() { //<>//
+    imageMode(CORNER); //<>//
     for (GameCharacter c : state.currentState.characters) {
       displayCharacter(c);
     }
@@ -158,10 +140,6 @@ void fadeOut(){
     clearEvents();
   }
   
-  public void nextDialogLine() {
-    
-  }
-  
   public Script getCurrentScript() {
    return null;
   }
@@ -171,14 +149,14 @@ void fadeOut(){
     
    background(0);      //  Init background
    
-   camera.fixedUpdate(); // Update camera positions
-   
+   camera.fixedUpdate(); // Update camera positions //<>//
+    //<>//
    pushMatrix();       //  In order to move the world around the character you must translate the frame of reference when you display everything
    translate(px, py);  //  Perform that translate
    
     // Draw background layer
-    imageMode(CORNER);
-    image(state.currentState.backgroundImage, 0, 0);
+    imageMode(CORNER); //<>//
+    image(state.currentState.backgroundImage, 0, 0); //<>//
     
     // Display characters
     displayCharacters();
@@ -204,11 +182,6 @@ void fadeOut(){
     popMatrix(); 
   
     newt.local.hitboxDisplay = hitBoxMode;
-  
-    if(dialog){
-      //print("enter has been pressed");
-      //displayDialog(state.currentState.conversations.get(comp.conversationIndex));
-    }
         
     if(transition){
           //  transitionFog.run(transitionFade);
@@ -218,6 +191,12 @@ void fadeOut(){
         transitionEvent.send();
         fadeIn();
       }
+    
+    for (DisplayableEvent e : events) { if (!e.isFinished()) e.send(); }
+    
+    for(DisplayableEvent e : inactiveEvents) { this.events.remove(e); }
+    
+    inactiveEvents.clear();
    
       if(theta ==0){
         theta = 255;

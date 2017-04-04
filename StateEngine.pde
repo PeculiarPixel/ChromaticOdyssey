@@ -8,14 +8,14 @@ class StateEngine {
   
   // Constructor
    public StateEngine() {
-     this.events = new ArrayList<StateEvent>();  
+     this.events = new ArrayList<StateEvent>();
     }
   
   // Run the StateEngine to check for state changes
   void run() {
     
     // Loop through all state swaps in the queue
-    for (StateEvent e : events) {
+    for (Event e : events) {
       e.send();
     }
       

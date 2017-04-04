@@ -26,7 +26,8 @@ class Test_Level_0 extends Level {
   // Load all level landscapes (Hitboxes, Triggers, Objects)
   private void loadLandscapes() {
     
-    this.triggers.add(new DialogTrigger(350, 350, 100, 100, 1));
+    this.triggers.add(new DialogTrigger(700, 2550, 100, 100, this.conversations.get(0)));
+    this.triggers.add(new DialogTrigger(300, 2750, 100, 100, this.conversations.get(1)));
     this.triggers.add(new LevelTransitionTrigger(3650, 900, 100, 100, LevelName.TEST_1));
     this.landscapes.add(new Landscape(120, 120, 100, 100));
     this.landscapes.add(new Landscape(700, 120, 100, 100));
@@ -51,8 +52,9 @@ class Test_Level_0 extends Level {
     this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkup.png");
     this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkupTopLayer.png");
     this.fog = new Fog(3500,2000,1500);
-    loadLandscapes();
+    
     loadConversations();
+    loadLandscapes();
     loadCharacters();
     
   }

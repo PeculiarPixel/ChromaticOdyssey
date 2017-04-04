@@ -20,21 +20,20 @@ class Dialog {
   
   
   // Check if dialog is finished
-  public boolean isFinished() { 
-    if (this.currentLine == this.lines.size() - 1) return true; 
-    else return false; 
+  public boolean hasNext() { 
+    if (this.currentLine < this.lines.size() - 1) return true; 
+    return false; 
   }
   
-  // Get next char
-  public char getNextChar() { return this.lines.get(currentLine).charAt(currentChar++); }
+  // Return the current line
+  public int getCurrentLineLength() { return currentLine; }
   
   // Return the current line
-  public int getCurrentLine() { return currentLine; }
+  public String getCurrentLine() { return this.lines.get(currentLine); }
   
   // Get next line
-  public String nextLine() {
-    currentChar = 0;
-    return this.lines.get(currentLine++); 
+  public void nextLine() {
+    this.currentLine++; 
   }
   
   // Get Author
@@ -45,5 +44,11 @@ class Dialog {
 
   // Get dialog size
   public int getSize() { return this.lines.size(); }
+  
+  // Reset positions of the dialog indicies
+  public void reset() {
+    this.currentLine = 0;
+    this.currentChar = 0;
+  }
   
 }

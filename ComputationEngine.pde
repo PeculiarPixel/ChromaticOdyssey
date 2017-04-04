@@ -4,14 +4,14 @@ class ComputationEngine {
   private ArrayList<Trigger> triggers;
   private ArrayList<Trigger> activatedTriggers;
   private ArrayList<GameCharacter> players;
-  private ArrayList<Event> events;
+  private ArrayList<ComputationEvent> events;
   public int conversationIndex;
   private boolean runLevelPrompt = false;
 
   // Constructor
   public ComputationEngine() {
     
-    this.events = new ArrayList<Event>();
+    this.events = new ArrayList<ComputationEvent>();
     this.hitboxes = new ArrayList<Hitbox>();
     this.triggers = new ArrayList<Trigger>();
     this.activatedTriggers = new ArrayList<Trigger>();
@@ -36,10 +36,10 @@ class ComputationEngine {
   }
 
 void run(){
-
-  // Loop through all registered computation events
-  for(Event e : events) {
-      e.send(); //<>// //<>//
+  
+  // Loop through all registered computation events //<>//
+  for(ComputationEvent e : events) {
+      e.send(); //<>// //<>// //<>//
       print("Computed Event\n");
   }
   
@@ -47,10 +47,6 @@ void run(){
   
   moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
-  
-  //if(runLevelPrompt){   
-  //  runLevelPrompt();
-  //}
 
 }
 
@@ -118,20 +114,7 @@ void run(){
       runLevelPrompt = false;
       
     }
-  
-    //if(hBox1.designation =="EventBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this check to see if the hitbox being intersected is an "EventBox", or one that triggers a switch
-      
-    //}
-    
-    //if(hBox1.designation == AreaTypeEnum.DAMAGE_HITBOX && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test computable event
-    //  dispatcher.dispatch(new ComputationEvent(-10,newt)); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
-    //}
-    //if(hBox1.designation == AreaTypeEnum.DIALOG_TRIGGER && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test dialog
-    //  dialog = true;  
-    //  hBox1.isHitX = false;
-    //  hBox1.isHitY = false;
-    //  conversationIndex = hBox1.conversationIndex;
-    //}
+ 
   }
  
 
@@ -139,9 +122,9 @@ void run(){
 //  println("Enter the castle?");
 //  if(keyCode == ENTER) {
 //    println("Entering the castle");
-//    dispatcher.dispatch(new StateEvent(state.currentState.nextState()));
+//    dispatcher.dispatch(new StateEvent(state.currentState.nextState())); //<>//
 //    runLevelPrompt = false;
-//  }
+//  } //<>// //<>//
 //}
 
   private void computeColorCheck(GameCharacter c, int xChange, int yChange){
@@ -171,11 +154,11 @@ void run(){
       }
      
       // Collision for hitboxes
-      for (Area a : hitboxes) {
+      for (Area a : hitboxes) { //<>//
         
-        computeIntersection(a, c.getHitbox(), xChange, yChange);
+        computeIntersection(a, c.getHitbox(), xChange, yChange); //<>// //<>// //<>//
         
-        if (c.local.hitbox.isHitX) xChange = 0;
+        if (c.local.hitbox.isHitX) xChange = 0; //<>// //<>//
         if (c.local.hitbox.isHitY) yChange = 0;
         
       }
@@ -212,15 +195,15 @@ void run(){
       c.setHitboxYPos(c.getYPos());
     
     }
-    
+     //<>//
   } 
-
+ //<>// //<>//
 
   void moveCharacter(float speed) {
     
-    if (newt.local.isMoving()) {
+    if (newt.local.isMoving()) { //<>//
       if(newt.local.moveUp) {
-        moveCheck(0.0,-speed);
+        moveCheck(0.0,-speed); //<>// //<>//
       }
       if(newt.local.moveDown){
         moveCheck(0.0,speed);
@@ -277,47 +260,5 @@ void run(){
     //clampCameraToWorld();
     
   } 
-
-   public void updateDialog() {            //Nathan- Partially implemented dialog test.  Works for one conversation, need to update to pull conversations from file, and when to trigger conversations
-   
-      if (dialog == false) { 
-        
-        //dialog = true;   // make the window appear
-        println("Currently No Dialog To Update\n");
-        
-      } else {
-        
-        println("Executing Script...");
-        
-        
-        if (state.currentState.hasNextLine(conversationIndex)) {
-          saveSpot = 0;
-          displayText = "";
-        
-        //if (state.currentState.conversations.get(conversationIndex).currentLine 
-        //      < state.currentState.conversations.get(conversationIndex).script.size() - 1) { //you press enter to go to the next line of conversation
-              
-        //   saveSpot = 0;
-        //   displayText = "";
-           
-        //   state.currentState.conversations.get(conversationIndex).currentLine++;  //go to next line of conversation
-
-        } else {
-          
-           // Reset Conversation, Remove Dialog Box
-           saveSpot = 0;
-           displayText = "";
-           displayAuthor = "";
-           //state.currentState.conversations.get(conversationIndex).currentLine = 0;           
-           dialog = false;
-           
-        }
-      }
-}
-
-  // Set the conversation index
-  public void setConversationIndex(int conversationIndex) {
-    this.conversationIndex = conversationIndex;
-  }
   
 }

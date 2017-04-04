@@ -5,16 +5,15 @@ class DialogTrigger extends Trigger {
   private final int ACTIVATED_DIALOG_TRIGGER_COLOR = color(20, 20, 0);
   
   // Computation Event
-  private DialogComputationEvent dialogEvent;
-  private DisplayScriptEvent dialogEvent2;
+  private DisplayScriptEvent dialogEvent;
 
   // Constructor
-  public DialogTrigger(float x, float y, float w, float h, int index) {
+  public DialogTrigger(float x, float y, float w, float h, Script script) {
     super(x, y, w, h, AreaTypeEnum.DIALOG_TRIGGER);
     setColor(DIALOG_TRIGGER_COLOR);
     
     // Set dialog conversation index
-    this.dialogEvent = new DialogComputationEvent(index);
+    this.dialogEvent = new DisplayScriptEvent(script);
     
   }
   

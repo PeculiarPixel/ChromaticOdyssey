@@ -1,7 +1,7 @@
 abstract class DisplayableEvent extends Event {
   
   // Test for finished event
-  private boolean isFinished = false;
+  protected boolean isFinished = false;
 
   // Constructor
   public DisplayableEvent() {
@@ -10,5 +10,7 @@ abstract class DisplayableEvent extends Event {
   
   // Test if display event finished
   public boolean isFinished() { return this.isFinished; }
+  
+  public void finish() { this.isFinished = true; }
   
 }

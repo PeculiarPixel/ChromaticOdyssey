@@ -1,8 +1,8 @@
 import processing.video.*;
-import ddf.minim.*; //<>// //<>// //<>// //<>//
+import ddf.minim.*; //<>// //<>// //<>// //<>// //<>// //<>//
 boolean initValues;
 
-  // Setup Game //<>// //<>// //<>//
+  // Setup Game
   void setup() {
     size(1024, 768, P2D);
     smooth();
@@ -70,12 +70,12 @@ boolean initValues;
     }
   }
 
-  // Key Released Events
+  // Key Released Events //<>//
   void keyReleased() {
     
   if (keyCode == UP) {
       newt.releaseDirection(MoveDirection.UP);
-    } //<>// //<>//
+    } //<>// //<>// //<>//
     if(keyCode == DOWN){
       newt.releaseDirection(MoveDirection.DOWN);
     }
@@ -88,8 +88,11 @@ boolean initValues;
     if(key == 'h' || key == 'H'){
         hitBoxMode = !hitBoxMode;
     }
+    if(key == 'b' || key == 'B'){
+       println(); //<>//
+    }
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
-        comp.updateDialog(); //<>// //<>// //<>//
+        display.updateCurrentScript();
     }
   }
 
@@ -107,7 +110,6 @@ boolean initValues;
       gameStart(); 
       initValues = true;
     }
-    
     
     // Run engines to handle incoming events
     state.run();
