@@ -15,7 +15,7 @@ class StateEngine {
   void run() {
     
     // Loop through all state swaps in the queue
-    for (Event e : events) {
+    for (StateEvent e : events) {
       e.send();
     }
       
