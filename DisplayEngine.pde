@@ -7,10 +7,7 @@ class DisplayEngine {
    ArrayList<DisplayableEvent> events;
    ArrayList<DisplayableEvent> inactiveEvents;
    
-   ScriptQueue scriptQueue;
-   
-   private Script currentScript;                // Currently in use script
-   private boolean dialogInUse;                 // Check for script in use
+   ScriptQueue scriptQueue;                     // Queue of conversations
    
    //State Transition in progress
    boolean transition;
@@ -159,8 +156,8 @@ void fadeOut(){
  //<>//
   // Run display engine //<>// //<>//
   void run() { //<>//
-    
-   background(0);      //  Init background
+     //<>//
+   background(0);      //  Init background //<>//
    
    camera.fixedUpdate(); // Update camera positions //<>//
     //<>//

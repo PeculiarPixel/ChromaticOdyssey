@@ -14,16 +14,7 @@ class DisplayScriptEvent extends DisplayableEvent {
       
      display.queueScript(script);
      dispatcher.dispatchClear(this);
-     finish();
-     
-      
-      //if (script.draw()) {
-      //  dispatcher.dispatchClear(this);
-      //  display.clearCurrentScript();
-      //  finish();
-      //  println("Clearing script");
-       //}
-  
+     this.finish();
   
   }
   
