@@ -43,16 +43,16 @@ void run(){
       print("Computed Event\n");
   }
   
-  MoveDirection copy = newt.local.getDirection();
-  kitMoveSet.add(copy);
+  //MoveDirection copy = newt.local.getDirection();
+ // kitMoveSet.add(copy);
 
   clearEvents();
   kitRelease();
   moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
-  moveKit(5.0);
+  //moveKit(5.0);
   
-  kitMoveRelease.add(copy);
+  //kitMoveRelease.add(copy);
 
   
   //if(runLevelPrompt){   
