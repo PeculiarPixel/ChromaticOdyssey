@@ -2,22 +2,16 @@
 // Handler for dispatching events to correct destinations
 class EventDispatcher {
   
-  public void dispatch(StateEvent e) { sendState(e); }
+  // Dispatch new state event
+  public void dispatch(StateEvent e) { state.events.add(e); }
   
-  public void dispatch(ComputationEvent e) { sendComputable(e); }
+  // Dispatch new computation event
+  public void dispatch(ComputationEvent e) { comp.events.add(e); }
   
-  public void dispatch(DisplayableEvent e) { sendDisplayable(e); }
+  // Dispatch new display event
+  public void dispatch(DisplayableEvent e) { display.events.add(e); }
   
-  private void sendState(StateEvent stateEvent){  //send computables to computation engine to check
-    state.events.add(stateEvent);
-  }
-  
-  private void sendComputable(ComputationEvent computationEvent){  //send computables to computation engine to check
-    comp.events.add(computationEvent);
-  }
-  
-  private void sendDisplayable(DisplayableEvent displayableEvent){  // send displayables to display engine to display
-    display.events.add(displayableEvent); // pending creation of the DisplayEngine
-  }
+  // Clear active display events
+  public void dispatchClear(DisplayableEvent e) { display.inactiveEvents.add(e); }
   
 }

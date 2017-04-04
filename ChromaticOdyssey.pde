@@ -1,7 +1,8 @@
 import processing.video.*;
-import ddf.minim.*; //<>// //<>//
+import ddf.minim.*; //<>//
 boolean initValues;
 
+  // Setup Game
   void setup() {
     size(1024, 768, P2D);
     smooth();
@@ -46,11 +47,6 @@ boolean initValues;
     saveX = newt.getXPos();  //this saves newt's previous x position for movement delta purposes
     saveY = newt.getYPos();  //this saves newt's previous y position for movement delta purposes
     
-    //init dialog global values//
-    dialog = false;  //whether or not the dialog box pops up
-    saveSpot = 0;     //the index of the script in the current dialog
-    displayText = ""; //the text currently being displayed.
-    
   }
 
   // Key Pressed Events
@@ -69,12 +65,12 @@ boolean initValues;
     }
   }
 
-  // Key Released Events
+  // Key Released Events //<>//
   void keyReleased() {
     
   if (keyCode == UP) {
       newt.releaseDirection(MoveDirection.UP);
-    }
+    } //<>// //<>// //<>// //<>// //<>//
     if(keyCode == DOWN){
       newt.releaseDirection(MoveDirection.DOWN);
     }
@@ -87,10 +83,13 @@ boolean initValues;
     if(key == 'h' || key == 'H'){
         hitBoxMode = !hitBoxMode;
     }
-    if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
-        comp.updateDialog(); //<>//
+    if(key == 'b' || key == 'B'){
+       println(); //<>// //<>//
     }
-  }
+    if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
+        display.updateCurrentScript();
+    }
+  } //<>//
 
   // Start the game intro and then the first level
   private void gameStart() {
@@ -106,7 +105,6 @@ boolean initValues;
       gameStart(); 
       initValues = true;
     }
-    
     
     // Run engines to handle incoming events
     state.run();

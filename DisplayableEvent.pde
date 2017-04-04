@@ -1,12 +1,16 @@
-class DisplayableEvent extends Event {
+abstract class DisplayableEvent extends Event {
   
-  DisplayableEvent(){
-    this.type = EventTypeEnum.DISPLAY;
-    
+  // Test for finished event
+  protected boolean isFinished = false;
+
+  // Constructor
+  public DisplayableEvent() {
+    super(EventTypeEnum.DISPLAY);    
   }
   
-  public void send()
-  {
-    dispatcher.sendDisplayable(this);
-  }
+  // Test if display event finished
+  public boolean isFinished() { return this.isFinished; }
+  
+  public void finish() { this.isFinished = true; }
+  
 }
