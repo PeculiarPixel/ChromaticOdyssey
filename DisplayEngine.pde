@@ -58,6 +58,7 @@ void strokeText(String message, float x, float y, int size, int fade){
 
 void fadeOut(){
   fill(104,50,104,alpha);
+  rectMode(CORNER);
   rect(0,0,width,height);
   strokeText("FUK U",width/2,height/2,48,alpha);
   alpha+=5;
@@ -69,6 +70,7 @@ void fadeOut(){
   }
  void fadeIn(){
   fill(104,50,104,theta);
+  rectMode(CORNER);
   rect(0,0,width,height);
   strokeText("FUK U",width/2,height/2,48,theta);
   theta-=5;
@@ -199,10 +201,12 @@ void fadeOut(){
         
     if(transition){
           //  transitionFog.run(transitionFade);
+          println("START TRANSITION");
       if(alpha<255){
         fadeOut();
       }else if(alpha==255){
         transitionEvent.send();
+       //state.setState(state.currentState.nextState);
         fadeIn();
       }
    

@@ -15,8 +15,9 @@ class LevelTransitionTrigger extends Trigger {
   
   // Send off the transition event to swap levels
   public void trigger() {
-    
-      dispatcher.dispatch(transitionEvent);
+      display.transition = true;
+      //dispatcher.dispatch(transitionEvent); // I made it set the transition event in display to do the transition like before
+      display.transitionEvent = transitionEvent;
       triggerEvents();
       
       println("Transitioning to level: " + transitionEvent.toString());
