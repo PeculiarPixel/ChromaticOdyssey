@@ -16,7 +16,7 @@ class Test_Level_0 extends Level {
     newt.setXPos(START_X);
     newt.setYPos(START_Y);
     
-    kit.setXPos(START_X-100);
+    kit.setXPos(START_X);
     kit.setYPos(START_Y);
   }
   

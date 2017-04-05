@@ -57,10 +57,10 @@ ArrayList<MoveDirection> kitMoveRelease;
     
     
     
-   /* for(int i=0;i<20;i++){
+    for(int i=0;i<75;i++){
      kitMoveSet.add(MoveDirection.IDLE_DOWN);
      kitMoveRelease.add(MoveDirection.IDLE_DOWN);
-    }*/
+    }
     
   }
 
@@ -71,7 +71,7 @@ ArrayList<MoveDirection> kitMoveRelease;
     
     if (keyCode == UP) {
       newt.setDirection(MoveDirection.UP);
-     // kitMoveSet.add(MoveDirection.UP);
+      //kitMoveSet.add(MoveDirection.UP);
     }
     if(keyCode == DOWN){
       newt.setDirection(MoveDirection.DOWN);
@@ -79,7 +79,7 @@ ArrayList<MoveDirection> kitMoveRelease;
     }
     if(keyCode == LEFT){
      newt.setDirection(MoveDirection.LEFT);
-    // kitMoveSet.add(MoveDirection.LEFT);
+     //kitMoveSet.add(MoveDirection.LEFT);
     }
     if(keyCode == RIGHT){
       newt.setDirection(MoveDirection.RIGHT);
@@ -92,19 +92,22 @@ ArrayList<MoveDirection> kitMoveRelease;
         kitKeyPress = false;
   if (keyCode == UP) { //<>//
       newt.releaseDirection(MoveDirection.UP); //<>// //<>//
-     // kitMoveRelease.add(MoveDirection.UP);
+      kitMoveRelease.remove(0);      
+      kitMoveRelease.add(MoveDirection.UP);
     }
     if(keyCode == DOWN){
       newt.releaseDirection(MoveDirection.DOWN);
-     // kitMoveRelease.add(MoveDirection.DOWN);
+      kitMoveRelease.remove(0); 
+      kitMoveRelease.add(MoveDirection.DOWN);
     }
     if(keyCode == LEFT){
      newt.releaseDirection(MoveDirection.LEFT);
-    // kitMoveRelease.add(MoveDirection.LEFT);
+     kitMoveRelease.remove(0);     
+     kitMoveRelease.add(MoveDirection.LEFT);
     }
     if(keyCode == RIGHT){
       newt.releaseDirection(MoveDirection.RIGHT);
-    //  kitMoveRelease.add(MoveDirection.RIGHT);
+      kitMoveRelease.add(MoveDirection.RIGHT);
     }
     if(key == 'h' || key == 'H'){
         hitBoxMode = !hitBoxMode;

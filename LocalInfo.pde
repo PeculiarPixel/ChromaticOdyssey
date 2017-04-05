@@ -229,5 +229,6 @@ class LocalInfo {
 
 enum MoveDirection {
   LEFT, RIGHT, UP, DOWN,
-  IDLE_UP, IDLE_DOWN, IDLE_LEFT, IDLE_RIGHT;
+  IDLE_UP, IDLE_DOWN, IDLE_LEFT, IDLE_RIGHT,
+  JUNK;
 }

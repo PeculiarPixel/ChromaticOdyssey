@@ -45,17 +45,21 @@ void run(){
   
   MoveDirection copy = newt.local.getDirection();
   //println("direction:"+copy);
-  if(copy!=MoveDirection.IDLE_DOWN){
   kitMoveSet.add(copy);
-    println("NOT IDLE DOWN"+copy); //FOR some reason kit is moving up all the time regardless of direction
-  }
+  
   clearEvents();
-  kitRelease();
+  //kitRelease();//move this after move Kit?
   moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
+  if(!kitMoveSet.isEmpty()){
+  println("Kit move>", kitMoveSet.get(0));
+}
   moveKit(5.0);
-  
-  //kitMoveRelease.add(copy);
+  println("kit has been moved");
+  kitMoveRelease.add(MoveDirection.JUNK);
+  kitRelease();//seems to work
+  println("kit has been released");
+
 
   
   //if(runLevelPrompt){   
@@ -156,11 +160,10 @@ void run(){
 
  private void moveCheck(float xChange, float yChange, GameCharacter character) { 
    
-    for (GameCharacter c : players ) {
-       //<>// //<>// //<>//
+  //  for (GameCharacter c : players ) { //<>//
       // Collision for triggers
       for (Area a : triggers) {  
-        computeIntersection(a, c.getHitbox(), xChange, yChange);
+        computeIntersection(a, character.getHitbox(), xChange, yChange);
       }
       
       for (Trigger t : triggers) {
@@ -169,17 +172,17 @@ void run(){
         }
       }
      
-      // Collision for hitboxes //<>// //<>//
+      // Collision for hitboxes  //<>//
       for (Area a : hitboxes) { //<>//
         
-        computeIntersection(a, c.getHitbox(), xChange, yChange); //<>// //<>// //<>//
+        computeIntersection(a, character.getHitbox(), xChange, yChange);  //<>//
          //<>//
-        if (c.local.hitbox.isHitX) xChange = 0; //<>// //<>//
-        if (c.local.hitbox.isHitY) yChange = 0;
+        if (character.local.hitbox.isHitX) xChange = 0;  //<>//
+        if (character.local.hitbox.isHitY) yChange = 0;
       
       }
       
-    }
+   // }
     
   
       // Compute color change
@@ -233,8 +236,24 @@ void run(){
     
     
     if(!kitMoveSet.isEmpty()){
-      //kit.setDirection(MoveDirection.RIGHT);//kitMoveSet.get(0)
-      moveCheck(0.0,-speed, kit);
+      
+      if(kitMoveSet.get(0) == MoveDirection.UP) {
+        kit.setDirection(kitMoveSet.get(0));
+        moveCheck(0.0,-speed, kit);
+      }
+      if(kitMoveSet.get(0) == MoveDirection.DOWN){
+        kit.setDirection(kitMoveSet.get(0));
+        moveCheck(0.0,speed, kit);
+      }
+      if(kitMoveSet.get(0) == MoveDirection.LEFT){
+        kit.setDirection(kitMoveSet.get(0));
+        moveCheck(-speed,0.0,kit);
+      }
+      if(kitMoveSet.get(0) == MoveDirection.RIGHT){
+        kit.setDirection(kitMoveSet.get(0));
+        moveCheck(speed,0.0,kit);
+      }
+
       kitMoveSet.remove(0);
       //kit.setDirection(kitMoveSet.get(0));
     }
@@ -266,9 +285,18 @@ void run(){
   }
   
   void kitRelease(){
+    println("lets start the release");
     if(!kitMoveRelease.isEmpty()){
-    kit.releaseDirection(kitMoveRelease.get(0));
+              println("inside if check");
+        if(kitMoveRelease.get(0)!=MoveDirection.JUNK){      
+        kit.releaseDirection(kitMoveRelease.get(0));
+        }
+            println("released");
+        kitMoveRelease.remove(0);
+                println("removed the release from list");
     }
+    
+
  /*   if(!kitKeyPress){
     if(kit.getDirection()== MoveDirection.RIGHT){
         kit.releaseDirection(MoveDirection.RIGHT);
