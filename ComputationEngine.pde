@@ -43,14 +43,17 @@ void run(){
       print("Computed Event\n");
   }
   
-  //MoveDirection copy = newt.local.getDirection();
- // kitMoveSet.add(copy);
-
+  MoveDirection copy = newt.local.getDirection();
+  //println("direction:"+copy);
+  if(copy!=MoveDirection.IDLE_DOWN){
+  kitMoveSet.add(copy);
+    println("NOT IDLE DOWN"+copy); //FOR some reason kit is moving up all the time regardless of direction
+  }
   clearEvents();
   kitRelease();
   moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
-  //moveKit(5.0);
+  moveKit(5.0);
   
   //kitMoveRelease.add(copy);
 
@@ -229,12 +232,12 @@ void run(){
     void moveKit(float speed) {  //this is really moveKit
     
     
-
-      kit.setDirection(kitMoveSet.get(0));
+    if(!kitMoveSet.isEmpty()){
+      //kit.setDirection(MoveDirection.RIGHT);//kitMoveSet.get(0)
       moveCheck(0.0,-speed, kit);
       kitMoveSet.remove(0);
       //kit.setDirection(kitMoveSet.get(0));
-      
+    }
     
     
   /*      if(kitKeyPress){
