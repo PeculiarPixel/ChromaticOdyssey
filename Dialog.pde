@@ -4,7 +4,7 @@ class Dialog {
   private ArrayList<String> lines;       // This is the scipt for the current conversation
   private int currentLine = 0;              // This is the index used to pick each line out of the script
   private int currentChar = 0;
-  private String author;     // The author of the person saying the event
+  private String author;                 // The author of the person saying the event
   private PImage image;                  // Image to display for the line
   private int dialogSize;
   
@@ -15,6 +15,7 @@ class Dialog {
     this.author = author; 
     this.lines = content;
     this.dialogSize = content.size();
+    this.image = spriteLibrary.getDialogBoxImage(author);
     
   } 
   
