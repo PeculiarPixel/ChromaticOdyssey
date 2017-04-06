@@ -22,7 +22,7 @@ class GlobalInfo {
 
   // Update sprite animation based on direction
   public void updateSpriteDirection(MoveDirection direction) {
-    
+          if(direction!=null){
     // Reset current animation counts
     resetAnimation(this.currentAnimation);
       
@@ -52,7 +52,7 @@ class GlobalInfo {
         this.currentAnimation = animations.get("IDLE_RIGHT");
         break;
     }
-    
+          }
   }
   
   // Reset sprite animations to base

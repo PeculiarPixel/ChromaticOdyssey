@@ -37,7 +37,7 @@ class LocalInfo {
     
     // Set character local direction
     public void setDirection(MoveDirection direction) {
-      
+      if(direction!=null){
       // Change direction only if direction is new
       if (isDirectionChange(direction)) {
        
@@ -62,7 +62,7 @@ class LocalInfo {
         //println("Current direction: " + this.direction.toString());
         
       }
-        
+    }
          
     }
     
@@ -109,7 +109,7 @@ class LocalInfo {
     
     // Release movement direction
     public boolean releaseDirection(MoveDirection direction) {
-      
+            if(direction!=null){
       MoveDirection releaseDirection;
         
       switch(direction) {
@@ -166,7 +166,7 @@ class LocalInfo {
         }
         
         return false;
-  
+            }else{return false;}
     }
     
     // Check if character is currently moving
