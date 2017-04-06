@@ -119,42 +119,45 @@ class DisplayEngine {
    if (state.currentState.name == LevelName.INTRO){
       image(introScreen, 0, 0, width, height);
     }
+    
    else {
    
-   camera.fixedUpdate(); // Update camera positions //<>// //<>//
-    //<>// //<>//
-   pushMatrix();       //  In order to move the world around the character you must translate the frame of reference when you display everything
-   translate(px, py);  //  Perform that translate
-   
-    // Draw background layer
-    imageMode(CORNER); //<>// //<>//
-    image(state.currentState.backgroundImage, 0, 0); //<>// //<>//
-    
-    // Display characters
-    displayCharacters();
-    
-    // Draw foreground
-    imageMode(CORNER);
-    image(state.currentState.foregroundImage, 0, 0); 
-    
-    //imageMode(CENTER);
-    // Draws castle enter prompt
-    //if(comp.runLevelPrompt){
-      //image(state.currentState.enterCastlePrompt,newt.getXPos()-200,newt.getYPos()-100); 
-    //}
-    
-    // Display landscapes
-    displayLandscapes();
-    displayTriggers();
-    
-    state.currentState.fog.run(-1);
-
-    // Pop translate matrix
-    popMatrix(); 
+     camera.fixedUpdate(); // Update camera positions //<>// //<>//
+      //<>// //<>//
+     pushMatrix();       //  In order to move the world around the character you must translate the frame of reference when you display everything
+     translate(px, py);  //  Perform that translate
+     
+      // Draw background layer
+      imageMode(CORNER); //<>// //<>//
+      image(state.currentState.backgroundImage, 0, 0); //<>// //<>//
+      
+      // Display characters
+      displayCharacters();
+      
+      // Draw foreground
+      imageMode(CORNER);
+      image(state.currentState.foregroundImage, 0, 0); 
+      
+      //imageMode(CENTER);
+      // Draws castle enter prompt
+      //if(comp.runLevelPrompt){
+        //image(state.currentState.enterCastlePrompt,newt.getXPos()-200,newt.getYPos()-100); 
+      //}
+      
+      // Display landscapes
+      displayLandscapes();
+      displayTriggers();
+      
+      state.currentState.fog.run(-1);
   
-    newt.local.hitboxDisplay = hitBoxMode;
+      // Pop translate matrix
+      popMatrix(); 
     
-    displayDialog();
+      newt.local.hitboxDisplay = hitBoxMode;
+      
+      displayDialog();
+    
+    }
             
     for (DisplayableEvent e : events) { if (!e.isFinished()) e.send(); }
     
@@ -162,7 +165,7 @@ class DisplayEngine {
     
     inactiveEvents.clear();
     
-  }
+  
   }
 
 }

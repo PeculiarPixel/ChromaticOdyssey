@@ -1,15 +1,8 @@
 import processing.video.*;
 import ddf.minim.*; //<>// //<>// //<>//
 
-  
-boolean initValues; //<>// //<>// //<>// //<>//
-boolean kitKeyPress;
 PApplet master = this;
-Movie introScreen; 
-
-ArrayList<MoveDirection> kitMoveSet;
-ArrayList<MoveDirection> kitMoveRelease;
-
+ //<>//
   // Setup Game
   void setup() {
     size(1024, 768, P2D);
@@ -26,16 +19,10 @@ ArrayList<MoveDirection> kitMoveRelease;
     println("Loading file a.wav");
     AudioPlayer song = minim.loadFile("a.wav");
     //song.loop();
-     
-    //println("Opening Beepbox-Song.wav");
-    //SoundFile song = new SoundFile(this, "a.wav");
-    
-    //println("Looping song");
-    
-    //song.loop();
-    
+  
     introScreen = new Movie(master, "TitleScreen.mp4");
     introScreen.loop();
+    
     
   }
 

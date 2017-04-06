@@ -40,28 +40,30 @@ class ComputationEngine {
   public void IntroButton(){ //<>//
     //state.events.add(new StateEvent(LevelName.TEST_0));
     //dispatcher.dispatch(new StateEvent(LevelName.TEST_0)); //<>//
-    state.setState(LevelName.TEST_0);
+    state.setStateFadeIn(LevelName.TEST_0);
     println("running");
   }
   
 
-void run(){
+void run() {
   
   // Loop through all registered computation events //<>// //<>//
  
-  println(mouseX + ","+ mouseY);
+  //println(mouseX + ","+ mouseY);
   if(mousePressed == true && state.currentState.name == LevelName.INTRO) {
     if(mouseX > 511 && mouseX < 827 && mouseY > 385 && mouseY < 552){
       println("SWAP TIME");
       introScreen.stop();
-      IntroButton();
+      //state.cleanupEngineStates();
+      println("Stopped Video");
+      dispatcher.dispatch(new LevelTransitionEvent(LevelName.TEST_0));
     }
   }
 
   // Loop through all registered computation events
   for(ComputationEvent e : events) {
       e.send(); //<>// //<>// //<>// //<>// //<>//
-      print("Computed Event\n");
+      //print("Computed Event\n");
   }
   
   MoveDirection copy = newt.local.getDirection();
@@ -73,13 +75,13 @@ void run(){
   moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
   if(!kitMoveSet.isEmpty()){
-  println("Kit move>", kitMoveSet.get(0));
+  //println("Kit move>", kitMoveSet.get(0));
 }
   moveKit(5.0);
-  println("kit has been moved");
+  //println("kit has been moved");
   kitMoveRelease.add(MoveDirection.JUNK);
   kitRelease();//seems to work
-  println("kit has been released");
+  //println("kit has been released");
 
 
   
@@ -306,15 +308,15 @@ void run(){
   }
   
   void kitRelease(){
-    println("lets start the release");
+    //println("lets start the release");
     if(!kitMoveRelease.isEmpty()){
-              println("inside if check");
+              //println("inside if check");
         if(kitMoveRelease.get(0)!=MoveDirection.JUNK){      
         kit.releaseDirection(kitMoveRelease.get(0));
         }
-            println("released");
+            //println("released");
         kitMoveRelease.remove(0);
-                println("removed the release from list");
+                //println("removed the release from list");
     }
     
 
