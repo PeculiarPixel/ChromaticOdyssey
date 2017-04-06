@@ -3,7 +3,7 @@ class LevelTransitionFadeInEvent extends DisplayableEvent {
    private int theta;                 // Theta value
    private float transitionFade;      // Fade value
    
-   private final float DT = 5;        // Rate of fade in change
+   private final float DT = 4;        // Rate of fade in change
   
   // Constructor
   public LevelTransitionFadeInEvent() {
@@ -42,7 +42,7 @@ class LevelTransitionFadeInEvent extends DisplayableEvent {
     }
 
     // Fade in complete, 
-    if (this.theta == 0) {
+    if (this.theta <= 0) {
       dispatcher.dispatchClear(this);    // Clear event
       display.setTransition(false);      // Turn off display transition setting
       this.finish();                     // Mark as finished

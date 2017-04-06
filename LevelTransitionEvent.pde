@@ -5,7 +5,7 @@ class LevelTransitionEvent extends DisplayableEvent {
    private float alpha;           // Starting alpha value
    private float transitionFade;  // Starting fade value
    
-   private final float DA = 0.5;  // Rate of alpha change
+   private final float DA = 4;  // Rate of alpha change
   
   // Constructor
   public LevelTransitionEvent(LevelName state) {
@@ -44,7 +44,7 @@ class LevelTransitionEvent extends DisplayableEvent {
     }
     
     // Fade complete, begin transition to level & c
-    if (this.alpha == 255) {
+    if (this.alpha >= 255) {
       dispatcher.dispatch(state);        // Transition state when covered
       dispatcher.dispatchClear(this);    // Clear event
       this.finish();                     // Mark as transitioning
