@@ -85,7 +85,7 @@ class Script {
 
          
      // Animate Dialog Text
-     if( frameCount % 3 == 0 
+     if( frameCount % 2 == 0 
          && this.saveSpot < peekDialog().getCurrentLine().length()) {          // Check for frame skips and if the current line has finished typing
          
          
