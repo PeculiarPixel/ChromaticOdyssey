@@ -13,16 +13,18 @@ PApplet master = this;
     frameRate(FRAMES_PER_SECOND_RATE);             // FPS rate
                                 
     initValues = false;
-       
     Minim minim = new Minim(this); 
     
-    println("Loading file a.wav");
-    AudioPlayer song = minim.loadFile("a.wav");
-    //song.loop();
+    if (DEBUG.MUSIC_ON) {
+      println("Loading file a.wav");
+      AudioPlayer song = minim.loadFile("a.wav");
+      song.loop();
+    }
   
-    introScreen = new Movie(master, "TitleScreen.mp4");
-    introScreen.loop();
-    
+    if (DEBUG.INTRO_ON) {
+      introScreen = new Movie(master, "TitleScreen.mp4");
+      introScreen.loop();
+    }
     
   }
 
@@ -47,9 +49,7 @@ PApplet master = this;
     kitKeyPress = false;
     kitMoveSet = new ArrayList<MoveDirection>();
     kitMoveRelease = new ArrayList<MoveDirection>();
-    
-    
-    
+   
     for(int i=0;i<75;i++){
      kitMoveSet.add(MoveDirection.IDLE_DOWN);
      kitMoveRelease.add(MoveDirection.IDLE_DOWN);
@@ -115,17 +115,21 @@ PApplet master = this;
 
   // Start the game intro and then the first level
   private void gameStart() {
-    state.setState(LevelName.INTRO);
+    if (DEBUG.INTRO_ON) state.setState(LevelName.INTRO); //<>// //<>//
+    else state.setState(LevelName.TEST_0);
   }
 
-  void movieEvent(Movie m) {
+  // Handle movie event
+  public void movieEvent(Movie m) {
     m.read();
   }
 
 
   // Draw game loop
   void draw(){  
-    if(initValues==false){
+    
+    // Setup global values if first run
+    if (initValues == false) {
       initializeGlobals();
       gameStart(); 
       initValues = true;
@@ -135,8 +139,5 @@ PApplet master = this;
     state.run();
     comp.run();
     display.run();
-    
-    //println(mouseX - px, mouseY - py);
-    //println("newt", newt.getXPos(), newt.getYPos());
     
   }

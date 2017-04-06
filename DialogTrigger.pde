@@ -26,7 +26,7 @@ class DialogTrigger extends Trigger {
       
       this.isActive = true;  // Disarm dialog event (one time action)
       
-      print("Triggered Dialog Event\n");
+      if (DEBUG.EVENT_LOGGING) print("Triggered Dialog Event\n");
   }
   
 }

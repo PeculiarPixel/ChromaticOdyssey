@@ -36,26 +36,13 @@ class ComputationEngine {
     this.players.add(c);
   }
   
-  //swaps state when button is clicked
-  public void IntroButton(){ //<>//
-    //state.events.add(new StateEvent(LevelName.TEST_0));
-    //dispatcher.dispatch(new StateEvent(LevelName.TEST_0)); //<>//
-    state.setStateFadeIn(LevelName.TEST_0);
-    println("running");
-  }
-  
 
-void run() {
+void run() { //<>// //<>//
   
-  // Loop through all registered computation events //<>// //<>//
- 
-  //println(mouseX + ","+ mouseY);
+  // Loop through all registered computation events //<>// //<>// //<>// //<>//
   if(mousePressed == true && state.currentState.name == LevelName.INTRO) {
     if(mouseX > 511 && mouseX < 827 && mouseY > 385 && mouseY < 552){
-      println("SWAP TIME");
       introScreen.stop();
-      //state.cleanupEngineStates();
-      println("Stopped Video");
       dispatcher.dispatch(new LevelTransitionEvent(LevelName.TEST_0));
     }
   }
@@ -63,11 +50,11 @@ void run() {
   // Loop through all registered computation events
   for(ComputationEvent e : events) {
       e.send(); //<>// //<>// //<>// //<>// //<>//
-      //print("Computed Event\n");
+      if (DEBUG.COMPUTATION_LOGGING) print("Computed Event\n");
   }
   
   MoveDirection copy = newt.local.getDirection();
-  //println("direction:"+copy);
+  if (DEBUG.MOVE_LOGGING) println("direction:"+copy);
   kitMoveSet.add(copy);
   
   clearEvents();
@@ -75,19 +62,11 @@ void run() {
   moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
   if(!kitMoveSet.isEmpty()){
-  //println("Kit move>", kitMoveSet.get(0));
+  if (DEBUG.MOVE_LOGGING) println("Kit move>", kitMoveSet.get(0));
 }
   moveKit(5.0);
-  //println("kit has been moved");
   kitMoveRelease.add(MoveDirection.JUNK);
-  kitRelease();//seems to work
-  //println("kit has been released");
-
-
-  
-  //if(runLevelPrompt){   
-  //  runLevelPrompt();
-  //}
+  kitRelease();
 
 }
 
@@ -156,17 +135,7 @@ void run() {
       
     }
   //<>// //<>//
-  } //<>//
- 
-
-//void runLevelPrompt(){
-//  println("Enter the castle?");
-//  if(keyCode == ENTER) {
-//    println("Entering the castle");
-//    dispatcher.dispatch(new StateEvent(state.currentState.nextState())); //<>// //<>//
-//    runLevelPrompt = false;
-//  } //<>// //<>// //<>//
-//}
+  } //<>// //<>// //<>//
 
   private void computeColorCheck(GameCharacter c, int xChange, int yChange){ //<>//
     color pixelColor = state.currentState.hitboxImage.get( (int) c.local.getFeetX() + xChange, (int) c.local.getFeetY() + yChange); //<>//

@@ -70,8 +70,8 @@ class DisplayEngine {
   private void displayCharacters() { //<>// //<>//
     imageMode(CORNER); //<>// //<>//
     for (GameCharacter c : state.currentState.characters) {
-     // println("DISPLAYING CHARACTER:"+c.name);
-     // println("position:",c.local.xPos,",",c.local.yPos);
+      if (DEBUG.DISPLAY_LOGGING) println("DISPLAYING CHARACTER: " + c.name);
+      if (DEBUG.DISPLAY_LOGGING) println("position: ",c.local.xPos,", ",c.local.yPos);
       displayCharacter(c);
 
     }
