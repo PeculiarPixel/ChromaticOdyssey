@@ -5,7 +5,7 @@ class LevelCastleApproach extends Level {
 
   // Constructor
   public LevelCastleApproach() {
-    super();
+    super(LevelName.CASTLE_APPROACH);
     loadAssets();
   }
   

@@ -10,8 +10,8 @@ class Test_Level_0 extends Level {
   //private final float START_Y = 1000;
   
   // Constructor
-  private Test_Level_0() {
-    super();
+  public Test_Level_0() {
+    super(LevelName.TEST_0);
     loadAssets();
   }
   
@@ -38,7 +38,7 @@ class Test_Level_0 extends Level {
     this.triggers.add(new DialogTrigger(700, 2550, 100, 100, this.conversations.get(0)));
     this.triggers.add(new DialogTrigger(300, 2750, 100, 100, this.conversations.get(1)));
     this.triggers.add(new LevelTransitionTrigger(3650, 900, 100, 100, LevelName.TEST_1));
-    this.landscapes.add(new Landscape(120, 120, 100, 100));
+    this.landscapes.add(new Landscape(120, 120,  100, 100));
     this.landscapes.add(new Landscape(700, 120, 100, 100));
     
   }

@@ -5,7 +5,7 @@ class Test_Level_1 extends Level {
   private final float START_Y = 900;
   
   public Test_Level_1(){
-    super();
+    super(LevelName.TEST_1);
     loadAssets();
   }
   

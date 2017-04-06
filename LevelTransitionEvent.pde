@@ -5,7 +5,7 @@ class LevelTransitionEvent extends DisplayableEvent {
    private float alpha;           // Starting alpha value
    private float transitionFade;  // Starting fade value
    
-   private final float DA = 0.5;  // Rate of alpha change
+   private final float DA = 4;  // Rate of alpha change
   
   // Constructor
   public LevelTransitionEvent(LevelName state) {
@@ -25,16 +25,18 @@ class LevelTransitionEvent extends DisplayableEvent {
   // Made screen fade out
   private void fadeOut() {
     
+    // Change alpha
+    alpha += DA;
+    
     // Fade settings
-    fill(104, 50, 104, this.alpha);
+    fill(0,0,0, this.alpha);
     rectMode(CORNER);
     rect(0, 0, width, height);
     
     // Draw text
     drawUtils.strokeText("FUK U", width/2, height/2, 48, (int) Math.floor(alpha));
     
-    // Change alpha
-    alpha += DA;
+
     
     // Check if complete
     if (this.transitionFade < 255) {
@@ -44,7 +46,7 @@ class LevelTransitionEvent extends DisplayableEvent {
     }
     
     // Fade complete, begin transition to level & c
-    if (this.alpha == 255) {
+    if (this.alpha >= 255) {
       dispatcher.dispatch(state);        // Transition state when covered
       dispatcher.dispatchClear(this);    // Clear event
       this.finish();                     // Mark as transitioning

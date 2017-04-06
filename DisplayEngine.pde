@@ -7,6 +7,7 @@ class DisplayEngine {
    ArrayList<DisplayableEvent> events;
    ArrayList<DisplayableEvent> inactiveEvents;
    
+
    ScriptQueue scriptQueue;                     // Queue of conversations
    boolean transition;                          //State Transition in progress
    
@@ -17,7 +18,6 @@ class DisplayEngine {
      this.inactiveEvents = new ArrayList<DisplayableEvent>();
      this.scriptQueue = new ScriptQueue();
      this.transition = false;
-     
      
    }
    
@@ -31,7 +31,6 @@ class DisplayEngine {
     fill(hit.showColor, 100);
     rectMode(CENTER);
     rect(hit.xPos, hit.yPos, hit.getWidth(), hit.getHeight());
-    
   }
 
   // Queue up a script to be displayed
@@ -111,46 +110,54 @@ class DisplayEngine {
   public Script getCurrentScript() {
    return null;
   }
- //<>// //<>//
-  // Run display engine //<>// //<>// //<>//
-  void run() { //<>// //<>//
-     //<>// //<>//
-   background(0);      //  Init background //<>// //<>//
-   
-   camera.fixedUpdate(); // Update camera positions //<>// //<>//
-    //<>// //<>//
-   pushMatrix();       //  In order to move the world around the character you must translate the frame of reference when you display everything
-   translate(px, py);  //  Perform that translate
-   
-    // Draw background layer
-    imageMode(CORNER); //<>// //<>//
-    image(state.currentState.backgroundImage, 0, 0); //<>// //<>//
-    
-    // Display characters
-    displayCharacters();
-    
-    // Draw foreground
-    imageMode(CORNER);
-    image(state.currentState.foregroundImage, 0, 0); 
-    
-    //imageMode(CENTER);
-    // Draws castle enter prompt
-    //if(comp.runLevelPrompt){
-      //image(state.currentState.enterCastlePrompt,newt.getXPos()-200,newt.getYPos()-100); 
-    //}
-    
-    // Display landscapes
-    displayLandscapes();
-    displayTriggers();
-    
-    state.currentState.fog.run(-1);
 
-    // Pop translate matrix
-    popMatrix(); 
-  
-    newt.local.hitboxDisplay = hitBoxMode;
+  // Run display engine
+  void run() {
     
-    displayDialog();
+   background(0);      //  Init background
+   
+   if (state.currentState.name == LevelName.INTRO){
+      image(introScreen, 0, 0, width, height);
+    }
+    
+   else {
+   
+     camera.fixedUpdate(); // Update camera positions //<>// //<>//
+      //<>// //<>//
+     pushMatrix();       //  In order to move the world around the character you must translate the frame of reference when you display everything
+     translate(px, py);  //  Perform that translate
+     
+      // Draw background layer
+      imageMode(CORNER); //<>// //<>//
+      image(state.currentState.backgroundImage, 0, 0); //<>// //<>//
+      
+      // Display characters
+      displayCharacters();
+      
+      // Draw foreground
+      imageMode(CORNER);
+      image(state.currentState.foregroundImage, 0, 0); 
+      
+      //imageMode(CENTER);
+      // Draws castle enter prompt
+      //if(comp.runLevelPrompt){
+        //image(state.currentState.enterCastlePrompt,newt.getXPos()-200,newt.getYPos()-100); 
+      //}
+      
+      // Display landscapes
+      displayLandscapes();
+      displayTriggers();
+      
+      state.currentState.fog.run(-1);
+  
+      // Pop translate matrix
+      popMatrix(); 
+    
+      newt.local.hitboxDisplay = hitBoxMode;
+      
+      displayDialog();
+    
+    }
             
     for (DisplayableEvent e : events) { if (!e.isFinished()) e.send(); }
     
@@ -158,6 +165,7 @@ class DisplayEngine {
     
     inactiveEvents.clear();
     
+  
   }
 
 }

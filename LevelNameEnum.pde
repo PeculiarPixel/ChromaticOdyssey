@@ -12,5 +12,6 @@ public enum LevelName {
   KIT_BEDROOM,
   SPIRE, 
   TEST_0, 
-  TEST_1;
+  TEST_1,
+  INTRO;
 }

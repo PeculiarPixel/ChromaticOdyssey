@@ -2,7 +2,7 @@
 class LevelSpire extends Level {
 
    public LevelSpire() {
-     super();
+     super(LevelName.SPIRE);
      loadAssets();
    }
    

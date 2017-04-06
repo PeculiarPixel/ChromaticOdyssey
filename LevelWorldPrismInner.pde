@@ -3,7 +3,7 @@ class LevelWorldPrismInner extends Level {
 
    // Constructor
    public LevelWorldPrismInner() {
-     super();
+     super(LevelName.WORLD_PRISM_INNER);
      loadAssets();
    }
    

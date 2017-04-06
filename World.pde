@@ -20,6 +20,7 @@ public class World {
   private LevelSpire Level_Spire;
   private LevelThroneRoom Level_Throne_Room;
   private LevelWorldPrismInner Level_World_Prism_Inner;
+  private LevelIntro Level_Intro;
   
   // Constructor
   public World() {
@@ -50,6 +51,7 @@ public class World {
     this.levels.put(LevelName.SPIRE, Level_Spire);
     this.levels.put(LevelName.THRONE_ROOM, Level_Throne_Room);
     this.levels.put(LevelName.WORLD_PRISM_INNER, Level_World_Prism_Inner);
+    this.levels.put(LevelName.INTRO, Level_Intro);
     
   }
   

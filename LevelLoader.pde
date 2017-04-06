@@ -50,6 +50,9 @@ public class LevelLoader {
         case SPIRE:
           level = new LevelSpire();
           break;    
+        case INTRO:
+          level = new LevelIntro();
+          break;    
       }
     
     // Return level

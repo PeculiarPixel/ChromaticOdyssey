@@ -3,7 +3,7 @@ class LevelLibrary extends Level {
 
    // Constructor
    public LevelLibrary() {
-     super();
+     super(LevelName.LIBRARY);
      loadAssets();
    }
    

@@ -1,13 +1,8 @@
 import processing.video.*;
-import ddf.minim.*; //<>// //<>//
+import ddf.minim.*; //<>// //<>// //<>//
 
-  
-boolean initValues; //<>// //<>// //<>//
-boolean kitKeyPress;
-
-ArrayList<MoveDirection> kitMoveSet;
-ArrayList<MoveDirection> kitMoveRelease;
-
+PApplet master = this;
+ //<>//
   // Setup Game
   void setup() {
     size(1024, 768, P2D);
@@ -23,14 +18,11 @@ ArrayList<MoveDirection> kitMoveRelease;
     
     println("Loading file a.wav");
     AudioPlayer song = minim.loadFile("a.wav");
-    song.loop();
-     
-    //println("Opening Beepbox-Song.wav");
-    //SoundFile song = new SoundFile(this, "a.wav");
-    
-    //println("Looping song");
-    
     //song.loop();
+  
+    introScreen = new Movie(master, "TitleScreen.mp4");
+    introScreen.loop();
+    
     
   }
 
@@ -82,11 +74,11 @@ ArrayList<MoveDirection> kitMoveRelease;
      newt.setDirection(MoveDirection.LEFT);
      //kitMoveSet.add(MoveDirection.LEFT);
     }
-    if(keyCode == RIGHT){
+    if(keyCode == RIGHT){ //<>//
       newt.setDirection(MoveDirection.RIGHT);
      // kitMoveSet.add(MoveDirection.RIGHT);
-    }
-  }
+    } //<>//
+  } //<>//
 
   // Key Released Events //<>// //<>//
   void keyReleased() {
@@ -105,12 +97,12 @@ ArrayList<MoveDirection> kitMoveRelease;
      newt.releaseDirection(MoveDirection.LEFT);
      kitMoveRelease.remove(0);     
      kitMoveRelease.add(MoveDirection.LEFT);
-    }
+    } //<>//
     if(keyCode == RIGHT){
       newt.releaseDirection(MoveDirection.RIGHT);
       kitMoveRelease.add(MoveDirection.RIGHT);
     }
-    if(key == 'h' || key == 'H'){
+    if(key == 'h' || key == 'H'){ //<>//
         hitBoxMode = !hitBoxMode;
     }
     if(key == 'b' || key == 'B'){
@@ -123,9 +115,12 @@ ArrayList<MoveDirection> kitMoveRelease;
 
   // Start the game intro and then the first level
   private void gameStart() {
-    state.setState(LevelName.TEST_0);
+    state.setState(LevelName.INTRO);
   }
 
+  void movieEvent(Movie m) {
+    m.read();
+  }
 
 
   // Draw game loop
