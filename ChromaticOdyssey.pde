@@ -45,6 +45,7 @@ ArrayList<MoveDirection> kitMoveRelease;
     display = new DisplayEngine();
     dispatcher = new EventDispatcher();
     camera = new GameCamera();
+    drawUtils = new DrawUtilities();
     
     px = 0; //px is the world translation in the x direction
     py = 0; //py is the world translation in the y direction

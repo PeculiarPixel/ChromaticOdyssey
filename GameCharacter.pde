@@ -112,10 +112,3 @@ class GameCharacter {
     public void initialize() { comp.addCharacter(this); }
     
 }
-
-// Characters identifiers
-
-
-enum GameCharacterName {
-  NEWT, KIT, MYTHRA, RUSS, FAISAL, PRAGMA, KNIGHT;
-}

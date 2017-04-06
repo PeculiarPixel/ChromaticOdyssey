@@ -8,16 +8,7 @@ class DisplayEngine {
    ArrayList<DisplayableEvent> inactiveEvents;
    
    ScriptQueue scriptQueue;                     // Queue of conversations
-   
-   //State Transition in progress
-   boolean transition;
-   //State Transition Event copy
-   StateEvent transitionEvent;
-   //values to control the fade
-   int alpha;
-   int theta;
-   float transitionFade;
-   Fog transitionFog;   
+   boolean transition;                          //State Transition in progress
    
    // Constructor
    public DisplayEngine() {
@@ -25,16 +16,14 @@ class DisplayEngine {
      this.events = new ArrayList<DisplayableEvent>();
      this.inactiveEvents = new ArrayList<DisplayableEvent>();
      this.scriptQueue = new ScriptQueue();
-     
-     transition = false;
-     alpha=0;
-     theta = 255;
-     transitionFade = 0;
-     transitionFog = new Fog(width/2,height/2,5);
+     this.transition = false;
      
      
    }
-
+   
+   // Set display as being in the middle of a transition event
+   public void setTransition(boolean value) { this.transition = value; }
+  
   // Display hitboxes
   public void displayArea(Area hit) {
     fill(255,255,255);
@@ -44,42 +33,6 @@ class DisplayEngine {
     rect(hit.xPos, hit.yPos, hit.getWidth(), hit.getHeight());
     
   }
-
-void strokeText(String message, float x, float y, int size, int fade){ 
-  textSize(size);
-  fill(255,255,255,fade); 
-  text(message, x-2, y); 
-  text(message, x, y-2); 
-  text(message, x+2, y); 
-  text(message, x, y+2); 
-  fill(0,0,0,fade); 
-  text(message, x, y);
-} 
-
-void fadeOut(){
-  fill(104,50,104,alpha);
-  rectMode(CORNER);
-  rect(0,0,width,height);
-  strokeText("FUK U",width/2,height/2,48,alpha);
-  alpha+=5;
-  if(transitionFade<255){
-  transitionFade = alpha+5;
-  }else{
-    transitionFade = 255;
-  }
-  }
- void fadeIn(){
-  fill(104,50,104,theta);
-  rectMode(CORNER);
-  rect(0,0,width,height);
-  strokeText("FUK U",width/2,height/2,48,theta);
-  theta-=5;
-  if(transitionFade>0){
-  transitionFade = theta-5;
-  }else{
-  transitionFade =0;
-  }
-} 
 
   // Queue up a script to be displayed
   public void queueScript(Script s) { this.scriptQueue.enqueue(s); }
@@ -198,28 +151,6 @@ void fadeOut(){
     newt.local.hitboxDisplay = hitBoxMode;
     
     displayDialog();
-        
-    if(transition){
-          //  transitionFog.run(transitionFade);
-          println("START TRANSITION");
-      if(alpha<255){
-        fadeOut();
-      }else if(alpha==255){
-        transitionEvent.send();
-       //state.setState(state.currentState.nextState);
-        fadeIn();
-      }
-   
-      if(theta ==0){
-        theta = 255;
-        transition = false;
-        alpha =0;
-        transitionFade=0;
-      }
-      
-
-    }
-    
             
     for (DisplayableEvent e : events) { if (!e.isFinished()) e.send(); }
     

@@ -13,10 +13,4 @@ class StateEvent extends Event {
     state.setState(nextState);// might want to fix this
     }
     
-    
-    
-    
-    
   }
-  
-//}
