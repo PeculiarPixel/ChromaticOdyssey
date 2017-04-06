@@ -281,7 +281,6 @@ class FightManager
           g2d.drawImage(fireball, x, y, null);
         }
         
-        
       }
      
       // Perform game logic processing and explosion animation:
