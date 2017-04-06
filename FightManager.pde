@@ -89,6 +89,9 @@ class FightManager
   
   public CombatColor constructNewtColor(Color myColor, int[] modifiers, int meterIndex, String string)
   {
+    // Load fireball sprites:
+    
+    
     // Call CombatColor and CombatMove constructors:
     CombatColor newColor = new CombatColor(myColor, modifiers, meterIndex);
     CombatMove base = new CombatMove(1, 1);
