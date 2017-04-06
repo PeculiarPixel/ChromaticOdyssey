@@ -41,3 +41,4 @@ int[] inventory;
 FightManager fightManager;
 ImageMaker imageMaker;
 boolean inCombat;
+boolean lockMouseInput;

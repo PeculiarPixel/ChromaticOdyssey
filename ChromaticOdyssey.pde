@@ -93,6 +93,7 @@ boolean initValues;
    fightManager = new FightManager(player,enemy,inventory);  
    
    inCombat = false;
+   lockMouseInput = false;
   }
 
   // Key Pressed Events
@@ -138,8 +139,8 @@ boolean initValues;
           // Trigger combat
           inCombat = !inCombat;
         }
-        
-        if(key == 'b' || key == 'B'){ //<>//
+         //<>//
+        if(key == 'b' || key == 'B'){
            println(); //<>// //<>//
         }
         if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
@@ -185,12 +186,12 @@ boolean initValues;
   
   void mousePressed()
 {
-  if(inCombat)
+  if(inCombat && !lockMouseInput)
     fightManager.pressCheck();
 }
 
 void mouseMoved()
 {
-  if(inCombat)
+  if(inCombat  && !lockMouseInput)
     fightManager.hoverCheck();
 }
