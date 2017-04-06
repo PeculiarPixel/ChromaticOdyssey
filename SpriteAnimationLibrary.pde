@@ -2,12 +2,15 @@
 public class SpriteAnimationLibrary {
 
   private HashMap AnimationDirPathMap;
+  private HashMap<String, SpriteAnimation> Animations;
   private String basePath;
   
   // Constructor
   SpriteAnimationLibrary() {
-    AnimationDirPathMap = new HashMap(); 
+    AnimationDirPathMap = new HashMap<String, String>(); 
+    Animations = new HashMap<String, SpriteAnimation>();
     loadAnimationPaths();
+    loadAnimations();
   }
   
   private void loadAnimationPaths() {
@@ -39,6 +42,41 @@ public class SpriteAnimationLibrary {
     
   }
   
+  // Load animations using the dirpaths given
+  private void loadAnimations() {
+    
+    try {
+    
+    // NEWT
+    Animations.put("NEWT_IDLE_UP", getSpriteAnimation("NEWT_IDLE_UP", IDLE_ANIMATION_RATE));
+    Animations.put("NEWT_IDLE_DOWN", getSpriteAnimation("NEWT_IDLE_DOWN", IDLE_ANIMATION_RATE));
+    Animations.put("NEWT_IDLE_LEFT", getSpriteAnimation("NEWT_IDLE_LEFT", IDLE_ANIMATION_RATE));
+    Animations.put("NEWT_IDLE_RIGHT", getSpriteAnimation("NEWT_IDLE_RIGHT", IDLE_ANIMATION_RATE));
+    Animations.put("NEWT_WALK_UP", getSpriteAnimation("NEWT_WALK_UP", WALK_ANIMATION_RATE));
+    Animations.put("NEWT_WALK_DOWN", getSpriteAnimation("NEWT_WALK_DOWN", WALK_ANIMATION_RATE));
+    Animations.put("NEWT_WALK_LEFT", getSpriteAnimation("NEWT_WALK_LEFT", WALK_ANIMATION_RATE));
+    Animations.put("NEWT_WALK_RIGHT", getSpriteAnimation("NEWT_WALK_RIGHT", WALK_ANIMATION_RATE));
+    
+    // KIT
+    Animations.put("KIT_IDLE_UP", getSpriteAnimation("KIT_IDLE_UP", IDLE_ANIMATION_RATE));
+    Animations.put("KIT_IDLE_DOWN", getSpriteAnimation("KIT_IDLE_DOWN", IDLE_ANIMATION_RATE));
+    Animations.put("KIT_IDLE_LEFT", getSpriteAnimation("KIT_IDLE_LEFT", IDLE_ANIMATION_RATE));
+    Animations.put("KIT_IDLE_RIGHT", getSpriteAnimation("KIT_IDLE_RIGHT", IDLE_ANIMATION_RATE));
+    Animations.put("KIT_WALK_UP", getSpriteAnimation("KIT_WALK_UP", WALK_ANIMATION_RATE));
+    Animations.put("KIT_WALK_DOWN", getSpriteAnimation("KIT_WALK_DOWN", WALK_ANIMATION_RATE));
+    Animations.put("KIT_WALK_LEFT", getSpriteAnimation("KIT_WALK_LEFT", WALK_ANIMATION_RATE));
+    Animations.put("KIT_WALK_RIGHT", getSpriteAnimation("KIT_WALK_RIGHT", WALK_ANIMATION_RATE));
+    Animations.put("KIT_HURT", getSpriteAnimation("KIT_HURT", IDLE_ANIMATION_RATE));
+    Animations.put("KIT_ATTACK", getSpriteAnimation("KIT_ATTACK", IDLE_ANIMATION_RATE));
+    
+    } catch (NoDirPathEntryFoundException e) {
+      println(e.getLocalizedMessage());
+    } catch (DirectoryNotFoundException e) {
+      println(e.getLocalizedMessage());
+    }
+    
+  }
+  
   // Return path for string
   private String getDirPathByKey(String pathKey) throws NoDirPathEntryFoundException {
       
@@ -56,7 +94,7 @@ public class SpriteAnimationLibrary {
   
   
   // Return designated SpriteAnimation using key of the path
-  public SpriteAnimation getSpriteAnimation(String pathKey, int ANIMATION_RATE) throws DirectoryNotFoundException, NoDirPathEntryFoundException {
+  private SpriteAnimation getSpriteAnimation(String pathKey, int ANIMATION_RATE) throws DirectoryNotFoundException, NoDirPathEntryFoundException {
     
     String path = getDirPathByKey(pathKey);                            // Get path from library
     PImage[] images = fileUtils.getSpriteAnimations(path);             // Get all the images designated
@@ -71,35 +109,30 @@ public class SpriteAnimationLibrary {
     // Setup animations for character
     HashMap<String, SpriteAnimation> animations = new HashMap<String, SpriteAnimation>();
     
-    try {
       switch(name) {
         case NEWT:
-            animations.put("IDLE_UP", getSpriteAnimation("NEWT_IDLE_UP", IDLE_ANIMATION_RATE));
-            animations.put("IDLE_DOWN", getSpriteAnimation("NEWT_IDLE_DOWN", IDLE_ANIMATION_RATE));
-            animations.put("IDLE_LEFT", getSpriteAnimation("NEWT_IDLE_LEFT", IDLE_ANIMATION_RATE));
-            animations.put("IDLE_RIGHT", getSpriteAnimation("NEWT_IDLE_RIGHT", IDLE_ANIMATION_RATE));
-            animations.put("WALK_UP", getSpriteAnimation("NEWT_WALK_UP", WALK_ANIMATION_RATE));
-            animations.put("WALK_DOWN", getSpriteAnimation("NEWT_WALK_DOWN", WALK_ANIMATION_RATE));
-            animations.put("WALK_LEFT", getSpriteAnimation("NEWT_WALK_LEFT", WALK_ANIMATION_RATE));
-            animations.put("WALK_RIGHT", getSpriteAnimation("NEWT_WALK_RIGHT", WALK_ANIMATION_RATE));
+            animations.put("IDLE_UP", Animations.get("NEWT_IDLE_UP"));
+            animations.put("IDLE_DOWN", Animations.get("NEWT_IDLE_DOWN"));
+            animations.put("IDLE_LEFT", Animations.get("NEWT_IDLE_LEFT"));
+            animations.put("IDLE_RIGHT", Animations.get("NEWT_IDLE_RIGHT"));
+            animations.put("WALK_UP", Animations.get("NEWT_WALK_UP"));
+            animations.put("WALK_DOWN", Animations.get("NEWT_WALK_DOWN"));
+            animations.put("WALK_LEFT", Animations.get("NEWT_WALK_LEFT"));
+            animations.put("WALK_RIGHT", Animations.get("NEWT_WALK_RIGHT"));
             break;
         case KIT:
-            animations.put("IDLE_UP", getSpriteAnimation("KIT_IDLE_UP", IDLE_ANIMATION_RATE));
-            animations.put("IDLE_DOWN", getSpriteAnimation("KIT_IDLE_DOWN", IDLE_ANIMATION_RATE));
-            animations.put("IDLE_LEFT", getSpriteAnimation("KIT_IDLE_LEFT", IDLE_ANIMATION_RATE));
-            animations.put("IDLE_RIGHT", getSpriteAnimation("KIT_IDLE_RIGHT", IDLE_ANIMATION_RATE));
-            animations.put("WALK_UP", getSpriteAnimation("KIT_WALK_UP", WALK_ANIMATION_RATE));
-            animations.put("WALK_DOWN", getSpriteAnimation("KIT_WALK_DOWN", WALK_ANIMATION_RATE));
-            animations.put("WALK_LEFT", getSpriteAnimation("KIT_WALK_LEFT", WALK_ANIMATION_RATE));
-            animations.put("WALK_RIGHT", getSpriteAnimation("KIT_WALK_RIGHT", WALK_ANIMATION_RATE));
+            animations.put("IDLE_UP", Animations.get("KIT_IDLE_UP"));
+            animations.put("IDLE_DOWN", Animations.get("KIT_IDLE_DOWN"));
+            animations.put("IDLE_LEFT", Animations.get("KIT_IDLE_LEFT"));
+            animations.put("IDLE_RIGHT", Animations.get("KIT_IDLE_RIGHT"));
+            animations.put("WALK_UP", Animations.get("KIT_WALK_UP"));
+            animations.put("WALK_DOWN", Animations.get("KIT_WALK_DOWN"));
+            animations.put("WALK_LEFT", Animations.get("KIT_WALK_LEFT"));
+            animations.put("WALK_RIGHT", Animations.get("KIT_WALK_RIGHT"));
+            break;
         default:
-          println("Character animations unknown");
+          println("Character animations unknown: " + name.toString());
       }
-    } catch (NoDirPathEntryFoundException e) {
-      println(e.getLocalizedMessage());
-    } catch (DirectoryNotFoundException e) {
-      println(e.getLocalizedMessage());
-    }
     
    
     return animations;

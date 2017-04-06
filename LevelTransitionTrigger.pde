@@ -19,7 +19,7 @@ class LevelTransitionTrigger extends Trigger {
       dispatcher.dispatch(transitionEvent);
       triggerEvents();
       
-      println("Transitioning to level: " + transitionEvent.getState().toString());
+      println("Transitioning to level: " + transitionEvent.toString());
       
   }
   

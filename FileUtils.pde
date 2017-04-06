@@ -18,20 +18,50 @@ class FileUtils {
   }
   
   // Get a script from file
-  public ArrayList<Dialog> getLevelConversations(String dirPath)  throws DirectoryNotFoundException {
-   println("get level conversations");
+  public ArrayList<Script> getLevelConversations(String dirPath) throws DirectoryNotFoundException {
+    
     File[] levelConversationFiles = getFileListOfDirectory(dirPath);     // Get files
-   println("files obtained");
-    ArrayList<Dialog> levelConversations = new ArrayList<Dialog>();        // Script collection
+    ArrayList<Script> scripts = new ArrayList<Script>();      // Script collection
 
-
-  //This bit below loads all the conversations
-    for (int i = 0; i < levelConversationFiles.length; i++) {
-        levelConversations.add(new Dialog(loadStrings(levelConversationFiles[i].getAbsolutePath())));// loadStrings(levelConversationFiles[i].getAbsolutePath());
+    // Load conversations
+    for (File f : levelConversationFiles) {   
+        
+        ArrayList<Dialog> dialogs = new ArrayList<Dialog>();  // Create new dialog list        
+        String[] lines = loadStrings(f.getAbsolutePath());    // Load lines from file
+        int currentIndex;                                     // Save current index
+        
+        // For each line in file, sort out the authors and their content
+        for(currentIndex = 0; currentIndex < lines.length;) {
+         
+          String[] descrip = lines[currentIndex].split("[\\s']");  // Split description
+          ArrayList<String> content = new ArrayList<String>();     // Get content lines
+          int content_limit = Integer.parseInt(descrip[2]);        // Get number of content lines
+          
+          // Add content
+          int content_index;
+          for(content_index = 1; content_index <= content_limit; content_index++) {
+            content.add(lines[currentIndex + content_index]);
+          }
+          
+          // Add to dialogs
+          dialogs.add(new Dialog(descrip[0], descrip[1], content));
+          // Increment index to next description line
+          currentIndex += content_index;
+          
+          print("Adding new script with author " + descrip[0] + " image key " + descrip[1] + " and content:\n");
+          for (String st : content) {
+            println(st);
+          }
+            
+        }
+        
+        // Add level script
+        scripts.add(new Script(dialogs));
     }
-   println("script converted from file to dialog");
-
-    return levelConversations;
+    
+    println("Got conversation from: " + dirPath);
+    return scripts;
+    
   }
   
   

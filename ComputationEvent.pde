@@ -2,9 +2,7 @@ abstract class ComputationEvent extends Event {
   
   // Constructor
   ComputationEvent() {
-    this.type = EventTypeEnum.COMPUTATION;
+    super(EventTypeEnum.COMPUTATION);
   }
-  
-  abstract void compute(); 
-  
+
 }

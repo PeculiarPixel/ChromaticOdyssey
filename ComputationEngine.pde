@@ -36,10 +36,10 @@ class ComputationEngine {
   }
 
 void run(){
-
-  // Loop through all registered computation events
+  
+  // Loop through all registered computation events //<>//
   for(ComputationEvent e : events) {
-      e.compute(); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+      e.send(); //<>// //<>// //<>//
       print("Computed Event\n");
   }
   
@@ -47,10 +47,6 @@ void run(){
   
   moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
-  
-  //if(runLevelPrompt){   
-  //  runLevelPrompt();
-  //}
 
 }
 
@@ -118,20 +114,7 @@ void run(){
       runLevelPrompt = false;
       
     }
-  
-    //if(hBox1.designation =="EventBox" && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this check to see if the hitbox being intersected is an "EventBox", or one that triggers a switch
-      
-    //}
-    
-    //if(hBox1.designation == AreaTypeEnum.DAMAGE_HITBOX && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test computable event
-    //  dispatcher.dispatch(new ComputationEvent(-10,newt)); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
-    //}
-    //if(hBox1.designation == AreaTypeEnum.DIALOG_TRIGGER && (hBox1.isHitX || hBox1.isHitY)){  // Nathan - I added this to test dialog
-    //  dialog = true;  
-    //  hBox1.isHitX = false;
-    //  hBox1.isHitY = false;
-    //  conversationIndex = hBox1.conversationIndex;
-    //}
+ 
   }
  
 
@@ -139,9 +122,9 @@ void run(){
 //  println("Enter the castle?");
 //  if(keyCode == ENTER) {
 //    println("Entering the castle");
-//    dispatcher.dispatch(new StateEvent(state.currentState.nextState()));
+//    dispatcher.dispatch(new StateEvent(state.currentState.nextState())); //<>//
 //    runLevelPrompt = false;
-//  }
+//  } //<>// //<>//
 //}
 
   private void computeColorCheck(GameCharacter c, int xChange, int yChange){
@@ -156,11 +139,9 @@ void run(){
       }
   }
 
- //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
- private void moveCheck(float xChange, float yChange) { //this assumes that the player's hitbox is initialized and added to the computation engine first, player is hitboxes[0]
-     //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+ private void moveCheck(float xChange, float yChange) { //this assumes that the player's hitbox is initialized and added to the computation engine first, player is hitboxes[0] //<>// //<>//
     for (GameCharacter c : players ) {
-      
+       //<>// //<>//
       // Collision for triggers
       for (Area a : triggers) {  
         computeIntersection(a, c.getHitbox(), xChange, yChange);
@@ -173,11 +154,11 @@ void run(){
       }
      
       // Collision for hitboxes
-      for (Area a : hitboxes) {
+      for (Area a : hitboxes) { //<>//
         
-        computeIntersection(a, c.getHitbox(), xChange, yChange);
+        computeIntersection(a, c.getHitbox(), xChange, yChange); //<>// //<>// //<>//
         
-        if (c.local.hitbox.isHitX) xChange = 0;
+        if (c.local.hitbox.isHitX) xChange = 0; //<>// //<>//
         if (c.local.hitbox.isHitY) yChange = 0;
         
       }
@@ -199,13 +180,13 @@ void run(){
     //for(int i = 0; i < hitboxes.size(); i++) {
     //  computeIntersection(hitboxes.get(i), players.get(0).getHitbox(), xChange, yChange); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
     //  //computeColorCheck((int)xChange,(int)yChange);
-    //  if(players.get(0).local.hitbox.isHitX)
+    //  if(players.get(0).local.hitbox.isHitX) //<>// //<>//
     //    xChange = 0;
     //  if(players.get(0).local.hitbox.isHitY)
     //    yChange = 0;
     //} //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
     
-    for (GameCharacter c : players) {
+    for (GameCharacter c : players) { //<>// //<>//
       
       c.moveX(xChange);
       c.moveY(yChange);
@@ -214,15 +195,15 @@ void run(){
       c.setHitboxYPos(c.getYPos());
     
     }
-    
+     //<>//
   } 
-
+ //<>// //<>//
 
   void moveCharacter(float speed) {
     
-    if (newt.local.isMoving()) {
+    if (newt.local.isMoving()) { //<>//
       if(newt.local.moveUp) {
-        moveCheck(0.0,-speed);
+        moveCheck(0.0,-speed); //<>// //<>//
       }
       if(newt.local.moveDown){
         moveCheck(0.0,speed);
@@ -279,41 +260,5 @@ void run(){
     //clampCameraToWorld();
     
   } 
-
-   public void updateDialog() {            //Nathan- Partially implemented dialog test.  Works for one conversation, need to update to pull conversations from file, and when to trigger conversations
-   
-      if (dialog == false) { 
-        
-        //dialog = true;   // make the window appear
-        println("Currently No Dialog To Update\n");
-        
-      } else {
-        
-        println("Executing Dialog...");
-        
-        if (state.currentState.conversations.get(conversationIndex).currentLine 
-              < state.currentState.conversations.get(conversationIndex).script.size() - 1) { //you press enter to go to the next line of conversation
-              
-           saveSpot = 0;
-           displayText = "";
-           
-           state.currentState.conversations.get(conversationIndex).currentLine++;  //go to next line of conversation
-
-        } else {
-          
-           // Reset Conversation, Remove Dialog Box
-           saveSpot = 0;
-           displayText = "";
-           state.currentState.conversations.get(conversationIndex).currentLine = 0;           
-           dialog = false;
-           
-        }
-      }
-}
-
-  // Set the conversation index
-  public void setConversationIndex(int conversationIndex) {
-    this.conversationIndex = conversationIndex;
-  }
   
 }

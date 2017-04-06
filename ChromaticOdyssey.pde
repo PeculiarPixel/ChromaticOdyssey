@@ -74,7 +74,7 @@ boolean initValues;
     
   CombatColor defaultColor = new CombatColor(Color.GRAY, modifiers, 2);
   
-  int[] inventory = new int[]{1, 2, 3, 4, 5, 6};
+  inventory = new int[]{1, 2, 3, 4, 5, 6};
   
   int[][] meterMods = new int[3][3];
    meterMods[0][0] = 5;
@@ -114,7 +114,7 @@ boolean initValues;
     }
   }
 
-  // Key Released Events
+  // Key Released Events //<>//
   void keyReleased() {
     
       if (keyCode == UP) {
@@ -138,9 +138,14 @@ boolean initValues;
           // Trigger combat
           inCombat = !inCombat;
         }
-        if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
-            comp.updateDialog(); //<>//
+        
+        if(key == 'b' || key == 'B'){ //<>//
+           println(); //<>// //<>//
         }
+        if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
+            display.updateCurrentScript();
+        }
+  
   }
 
   // Start the game intro and then the first level
@@ -159,7 +164,6 @@ boolean initValues;
       gameStart(); 
       initValues = true;
     }
-     
     // Run engines to handle incoming events
     if(!inCombat)
     {

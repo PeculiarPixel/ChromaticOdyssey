@@ -36,6 +36,8 @@ int saveSpot ;                            //index of the current string animatio
 
 // Combat globals
 
+int[] inventory;
+
 FightManager fightManager;
 ImageMaker imageMaker;
 boolean inCombat;

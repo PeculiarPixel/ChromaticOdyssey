@@ -4,13 +4,13 @@ class StateEvent extends Event {
   
   // Constructor
   public StateEvent(LevelName nextState) {
-    type = EventTypeEnum.STATE;
+    super(EventTypeEnum.STATE);
     this.nextState = nextState;
   }
   
   // Get level to transition to
-  public LevelName getState() {
-    return nextState;
+  public void send() {
+    state.setState(nextState);
   }
   
 }
