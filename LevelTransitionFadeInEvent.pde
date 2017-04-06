@@ -1,5 +1,7 @@
 class LevelTransitionFadeInEvent extends DisplayableEvent {
   
+   private String description = "";
+  
    private int theta;                 // Theta value
    private float transitionFade;      // Fade value
    
@@ -12,6 +14,17 @@ class LevelTransitionFadeInEvent extends DisplayableEvent {
     // Fade in starting values
     this.theta = 255;
     this.transitionFade = 255;
+    
+  }
+  
+  // Constructor
+  public LevelTransitionFadeInEvent(LevelName toState) {
+    super();
+    
+    // Fade in starting values
+    this.theta = 255;
+    this.transitionFade = 255;
+    this.description = toState.getDescription();
     
   }
   
@@ -33,7 +46,8 @@ class LevelTransitionFadeInEvent extends DisplayableEvent {
     rect(0,0,width,height);
     
     // Draw text
-    drawUtils.strokeText("FUK U",width/2,height/2,48,theta);
+    textAlign(CENTER);
+    drawUtils.strokeText(description, width / 2, height / 2, 48, theta);
     
     
     // Check if faded 

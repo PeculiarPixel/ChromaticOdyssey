@@ -10,17 +10,16 @@ class LevelTransitionTrigger extends Trigger {
   protected LevelTransitionTrigger(float x, float y, float w, float h, LevelName level_name) {
     super(x, y, w, h, AreaTypeEnum.TRANSITION_TRIGGER);
     setColor(TRANSITION_TRIGGER_COLOR);    
-    this.transitionEvent = new LevelTransitionEvent(level_name);
+    this.transitionEvent = new LevelTransitionEvent(level_name, level_name.getDescription());
   }
   
   // Send off the transition event to swap levels
   public void trigger() {
       display.setTransition(true);
-      dispatcher.dispatch(transitionEvent); // I made it set the transition event in display to do the transition like before
-      //display.transitionEvent = transitionEvent;
+      dispatcher.dispatch(transitionEvent);
       triggerEvents();
       
-      println("Transitioning to level: " + transitionEvent.toString());
+      if (DEBUG.EVENT_LOGGING) println("Transitioning to level: " + transitionEvent.toString());
       
   }
   

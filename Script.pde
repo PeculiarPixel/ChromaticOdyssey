@@ -71,7 +71,6 @@ class Script {
     
     if (this.isFinished()) {
       resetState();
-      println("finished");
       return true;
     }
     
@@ -87,9 +86,6 @@ class Script {
      // Animate Dialog Text
      if( frameCount % 3 == 0 
          && this.saveSpot < peekDialog().getCurrentLine().length()) {          // Check for frame skips and if the current line has finished typing
-         
-         
-         //println("printing");
          
       displayText += peekDialog().getCurrentLine().charAt(saveSpot);        // Add the next character to the display text
       

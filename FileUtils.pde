@@ -10,7 +10,6 @@ class FileUtils {
     // Load all images into the sprite array
     for (int i = 0; i < animationFiles.length; i++) {
       sprites[i] = loadImage(animationFiles[i].getAbsolutePath());
-     // sprites[i].resize(sprites[i].width/3, sprites[i].height/3);
     }
     
     return sprites;    // Return the array of sprites
@@ -48,9 +47,11 @@ class FileUtils {
           // Increment index to next description line
           currentIndex += content_index;
           
-          print("Adding new script with author " + descrip[0] + " image key " + descrip[1] + " and content:\n");
-          for (String st : content) {
-            println(st);
+          if (DEBUG.DIALOG_LOGGING) {
+            print("Adding new script with author " + descrip[0] + " image key " + descrip[1] + " and content:\n");
+            for (String st : content) {
+              println(st);
+            }
           }
             
         }
@@ -59,7 +60,7 @@ class FileUtils {
         scripts.add(new Script(dialogs));
     }
     
-    println("Got conversation from: " + dirPath);
+    if (DEBUG.DIALOG_LOGGING) println("Got conversation from: " + dirPath);
     return scripts;
     
   }
@@ -69,7 +70,7 @@ class FileUtils {
   // Setup a file collection from dir path
   private File[] getFileListOfDirectory(String dirPath) throws DirectoryNotFoundException {
     
-      println(dataPath(dirPath));
+      if (DEBUG.FILE_LOGGING) println(dataPath(dirPath));
     
       File dir = new File(dataPath(dirPath));  // Get directory by path
       
