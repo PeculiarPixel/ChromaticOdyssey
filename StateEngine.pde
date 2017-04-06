@@ -44,6 +44,15 @@ class StateEngine {
       Level nextState = world.getLevel(levelIndex);
       cleanupEngineStates();
       swapState(nextState);
+      display.setTransition(false);
+  }
+  
+  // Swap the current state to the new state
+  public void setStateFadeIn(LevelName levelIndex) {    
+      Level nextState = world.getLevel(levelIndex);
+      cleanupEngineStates();
+      swapState(nextState);
+      dispatcher.dispatch(new LevelTransitionFadeInEvent());
   }
   
   // Initialize and swap into the next state

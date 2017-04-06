@@ -3,14 +3,20 @@ public class SpriteAnimationLibrary {
 
   private HashMap AnimationDirPathMap;
   private HashMap<String, SpriteAnimation> Animations;
+  private HashMap<String, PImage> DialogBoxImages;
   private String basePath;
   
   // Constructor
   SpriteAnimationLibrary() {
+    
     AnimationDirPathMap = new HashMap<String, String>(); 
     Animations = new HashMap<String, SpriteAnimation>();
+    DialogBoxImages = new HashMap<String, PImage>();
+    
     loadAnimationPaths();
     loadAnimations();
+    loadDialogBoxes();
+    
   }
   
   private void loadAnimationPaths() {
@@ -75,6 +81,21 @@ public class SpriteAnimationLibrary {
       println(e.getLocalizedMessage());
     }
     
+  }
+  
+  // Load dialog box images
+  private void loadDialogBoxes() {
+    
+     DialogBoxImages.put("NEWT", loadImage("DialogBoxes/DialogBoxNewt.png"));
+     DialogBoxImages.put("KIT", loadImage("DialogBoxes/DialogBoxKit.png"));
+     DialogBoxImages.put("PRAGMA", loadImage("DialogBoxes/DialogBoxPragma.png"));
+     DialogBoxImages.put("MYTHRA", loadImage("DialogBoxes/DialogBoxMythra.png"));
+  
+  }
+  
+  // Get dialog box for this dialog line
+  public PImage getDialogBoxImage(String name) {
+    return DialogBoxImages.get(name.toUpperCase());
   }
   
   // Return path for string

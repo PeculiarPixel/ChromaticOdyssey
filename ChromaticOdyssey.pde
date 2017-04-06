@@ -1,6 +1,12 @@
 import processing.video.*;
-import ddf.minim.*; //<>//
-boolean initValues;
+import ddf.minim.*; //<>// //<>//
+
+  
+boolean initValues; //<>// //<>// //<>//
+boolean kitKeyPress;
+
+ArrayList<MoveDirection> kitMoveSet;
+ArrayList<MoveDirection> kitMoveRelease;
 
   // Setup Game
   void setup() {
@@ -10,9 +16,7 @@ boolean initValues;
     surface.setResizable(false);                   // Disable resize
     background(BACKGROUND_COLOR);                  // Background refresh color
     frameRate(FRAMES_PER_SECOND_RATE);             // FPS rate
-    println("before globals");
-    //initializeGlobals();                           // Initialize Globals
-    println("after globals");                                  // Show title screen
+                                
     initValues = false;
        
     Minim minim = new Minim(this); 
@@ -41,55 +45,81 @@ boolean initValues;
     display = new DisplayEngine();
     dispatcher = new EventDispatcher();
     camera = new GameCamera();
+    drawUtils = new DrawUtilities();
     
     px = 0; //px is the world translation in the x direction
     py = 0; //py is the world translation in the y direction
     saveX = newt.getXPos();  //this saves newt's previous x position for movement delta purposes
     saveY = newt.getYPos();  //this saves newt's previous y position for movement delta purposes
     
+    kitKeyPress = false;
+    kitMoveSet = new ArrayList<MoveDirection>();
+    kitMoveRelease = new ArrayList<MoveDirection>();
+    
+    
+    
+    for(int i=0;i<75;i++){
+     kitMoveSet.add(MoveDirection.IDLE_DOWN);
+     kitMoveRelease.add(MoveDirection.IDLE_DOWN);
+    }
+    
   }
 
   // Key Pressed Events
   void keyPressed() {
+    
+    kitKeyPress = true;
+    
     if (keyCode == UP) {
       newt.setDirection(MoveDirection.UP);
+      //kitMoveSet.add(MoveDirection.UP);
     }
     if(keyCode == DOWN){
       newt.setDirection(MoveDirection.DOWN);
+     // kitMoveSet.add(MoveDirection.DOWN);
     }
     if(keyCode == LEFT){
      newt.setDirection(MoveDirection.LEFT);
+     //kitMoveSet.add(MoveDirection.LEFT);
     }
     if(keyCode == RIGHT){
       newt.setDirection(MoveDirection.RIGHT);
+     // kitMoveSet.add(MoveDirection.RIGHT);
     }
   }
 
-  // Key Released Events //<>//
+  // Key Released Events //<>// //<>//
   void keyReleased() {
-    
-  if (keyCode == UP) {
-      newt.releaseDirection(MoveDirection.UP);
-    } //<>// //<>// //<>// //<>// //<>//
+        kitKeyPress = false;
+  if (keyCode == UP) { //<>//
+      newt.releaseDirection(MoveDirection.UP); //<>// //<>//
+      kitMoveRelease.remove(0);      
+      kitMoveRelease.add(MoveDirection.UP);
+    }
     if(keyCode == DOWN){
       newt.releaseDirection(MoveDirection.DOWN);
+      kitMoveRelease.remove(0); 
+      kitMoveRelease.add(MoveDirection.DOWN);
     }
     if(keyCode == LEFT){
      newt.releaseDirection(MoveDirection.LEFT);
+     kitMoveRelease.remove(0);     
+     kitMoveRelease.add(MoveDirection.LEFT);
     }
     if(keyCode == RIGHT){
       newt.releaseDirection(MoveDirection.RIGHT);
+      kitMoveRelease.add(MoveDirection.RIGHT);
     }
     if(key == 'h' || key == 'H'){
         hitBoxMode = !hitBoxMode;
     }
     if(key == 'b' || key == 'B'){
-       println(); //<>// //<>//
+       println(); //<>// //<>// //<>//
     }
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
         display.updateCurrentScript();
     }
-  } //<>//
+  } //<>// //<>//
 
   // Start the game intro and then the first level
   private void gameStart() {

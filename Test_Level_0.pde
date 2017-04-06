@@ -1,11 +1,16 @@
 // Default Test Level 0
 class Test_Level_0 extends Level {
   
+  
   private final float START_X = 235;
   private final float START_Y = 2750;
   
+  // Saved coords for starting close to transition
+  //private final float START_X = 3550;
+  //private final float START_Y = 1000;
+  
   // Constructor
-  public Test_Level_0() {
+  private Test_Level_0() {
     super();
     loadAssets();
   }
@@ -15,12 +20,16 @@ class Test_Level_0 extends Level {
     GameCharacter newt = this.characters.get(0);
     newt.setXPos(START_X);
     newt.setYPos(START_Y);
+    
+    kit.setXPos(START_X);
+    kit.setYPos(START_Y);
   }
   
   // Load level necessary characters
   private void loadCharacters() {
     this.characters.add(newt);
-    //this.characters.add(kit);
+    this.characters.add(kit);
+
   }
   
   // Load all level landscapes (Hitboxes, Triggers, Objects)
