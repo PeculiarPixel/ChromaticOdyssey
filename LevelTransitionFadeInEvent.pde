@@ -23,16 +23,18 @@ class LevelTransitionFadeInEvent extends DisplayableEvent {
   // Fade in function
   private void fadeIn()  {
     
+    // Change theta
+    this.theta -= DT;
+    
+    
     // Set fill settings
-    fill(104,50,104,theta);
+    fill(0,0,0,theta);
     rectMode(CORNER);
     rect(0,0,width,height);
     
     // Draw text
     drawUtils.strokeText("FUK U",width/2,height/2,48,theta);
     
-    // Change theta
-    this.theta -= DT;
     
     // Check if faded 
     if(this.transitionFade > 0) {

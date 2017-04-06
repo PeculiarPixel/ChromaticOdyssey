@@ -25,16 +25,18 @@ class LevelTransitionEvent extends DisplayableEvent {
   // Made screen fade out
   private void fadeOut() {
     
+    // Change alpha
+    alpha += DA;
+    
     // Fade settings
-    fill(104, 50, 104, this.alpha);
+    fill(0,0,0, this.alpha);
     rectMode(CORNER);
     rect(0, 0, width, height);
     
     // Draw text
     drawUtils.strokeText("FUK U", width/2, height/2, 48, (int) Math.floor(alpha));
     
-    // Change alpha
-    alpha += DA;
+
     
     // Check if complete
     if (this.transitionFade < 255) {
