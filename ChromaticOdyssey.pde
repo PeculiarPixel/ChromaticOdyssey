@@ -29,7 +29,7 @@ boolean initValues;
     
     println("Loading file a.wav");
     AudioPlayer song = minim.loadFile("a.wav");
-    song.loop();
+    //song.loop();
      
     //println("Opening Beepbox-Song.wav");
     //SoundFile song = new SoundFile(this, "a.wav");
