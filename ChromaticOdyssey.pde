@@ -97,46 +97,50 @@ boolean initValues;
 
   // Key Pressed Events
   void keyPressed() {
-    if (keyCode == UP) {
-      newt.setDirection(MoveDirection.UP);
-    }
-    if(keyCode == DOWN){
-      newt.setDirection(MoveDirection.DOWN);
-    }
-    if(keyCode == LEFT){
-     newt.setDirection(MoveDirection.LEFT);
-    }
-    if(keyCode == RIGHT){
-      newt.setDirection(MoveDirection.RIGHT);
+    if(!inCombat)
+    {
+      if (keyCode == UP) {
+        newt.setDirection(MoveDirection.UP);
+      }
+      if(keyCode == DOWN){
+        newt.setDirection(MoveDirection.DOWN);
+      }
+      if(keyCode == LEFT){
+       newt.setDirection(MoveDirection.LEFT);
+      }
+      if(keyCode == RIGHT){
+        newt.setDirection(MoveDirection.RIGHT);
+      }
     }
   }
 
   // Key Released Events
   void keyReleased() {
     
-  if (keyCode == UP) {
-      newt.releaseDirection(MoveDirection.UP);
-    }
-    if(keyCode == DOWN){
-      newt.releaseDirection(MoveDirection.DOWN);
-    }
-    if(keyCode == LEFT){
-     newt.releaseDirection(MoveDirection.LEFT);
-    }
-    if(keyCode == RIGHT){
-      newt.releaseDirection(MoveDirection.RIGHT);
-    }
-    if(key == 'h' || key == 'H'){
-        hitBoxMode = !hitBoxMode;
-    }
-    if(key == 'c' || key == 'C')
-    {
-      // Trigger combat
-      inCombat = !inCombat;
-    }
-    if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
-        comp.updateDialog(); //<>//
-    }
+      if (keyCode == UP) {
+          newt.releaseDirection(MoveDirection.UP);
+        }
+        if(keyCode == DOWN){
+          newt.releaseDirection(MoveDirection.DOWN);
+        }
+        if(keyCode == LEFT){
+         newt.releaseDirection(MoveDirection.LEFT);
+        }
+        if(keyCode == RIGHT){
+          newt.releaseDirection(MoveDirection.RIGHT);
+        }
+    
+        if(key == 'h' || key == 'H'){
+            hitBoxMode = !hitBoxMode;
+        }
+        if(key == 'c' || key == 'C')
+        {
+          // Trigger combat
+          inCombat = !inCombat;
+        }
+        if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
+            comp.updateDialog(); //<>//
+        }
   }
 
   // Start the game intro and then the first level
