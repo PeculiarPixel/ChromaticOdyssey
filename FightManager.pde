@@ -284,12 +284,14 @@ class FightManager
     for(CombatMove move : movesBySpeed)
     {
       Combatant player = move.getUser();
-      
+      println("Move logic has begun");
       // Perform move animations:
       if(! (move instanceof CombatItem))
       {
         // Fireball animation
-        //BufferedImage fireball = move.getFireball();
+        println("Fireball animation has begun");
+        // Having a dedicated FireballDisplay would be a better idea
+        BufferedImage fireball = move.getFireballSprite();
         int startTime = millis();
         int xTerminal = 0;
         int xInitial = 1024;
@@ -303,9 +305,9 @@ class FightManager
             x += xSpeed;
             startTime = millis();
           }
-          //g2d.drawImage(fireball, x, y, null);
+          g2d.drawImage(fireball, x, y, null);
         }
-        
+        println("Fireball animation is ending");
       }
      
       // Perform game logic processing and explosion animation:

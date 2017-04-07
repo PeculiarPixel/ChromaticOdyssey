@@ -10,10 +10,11 @@ class CombatMove
  private BufferedImage fireballSprite;
  private BufferedImage[] explosionSprites;
  
- public CombatMove(float dmgMultiplier, int meterBoost, BufferedImage[] explosionSprites)
+ public CombatMove(float dmgMultiplier, int meterBoost, BufferedImage[] explosionSprites, BufferedImage fireballSprite)
  {
    this(dmgMultiplier, meterBoost);
    this.explosionSprites = explosionSprites;
+   this.fireballSprite = fireballSprite;
  }
  
  public CombatMove(float dmgMultiplier, int meterBoost)
@@ -36,6 +37,16 @@ class CombatMove
  public ArbitraryButton getButton()
  {
    return button;
+ }
+ 
+ public BufferedImage getFireballSprite() 
+ {
+   return fireballSprite;
+ }
+ 
+ public BufferedImage[] getExplosionSprites()
+ {
+   return explosionSprites;
  }
  
  public Combatant getUser()

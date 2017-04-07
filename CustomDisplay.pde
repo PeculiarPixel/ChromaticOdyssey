@@ -128,6 +128,58 @@ public class NameFrame extends CustomDisplay
   
 }
 
+class FireballDisplay extends CustomDisplay
+{
+  private Graphics2D g2;
+  private int x;
+  private int y = 256; 
+  static final private int speed = 8;
+  private int xInitial = 0;
+  private int xTerminal = 768;
+  private boolean suspended;
+  private BufferedImage activeFireball;
+  
+  private int frameStartTime;
+  
+  public FireballDisplay()
+  {
+    super(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB), new Point(0, 0));
+    x = xInitial;
+    suspended = true;
+  }
+  
+  public void update()
+  {
+    if(!suspended)
+    {
+       if(millis() - frameStartTime >= 17)
+       {
+         frameStartTime = millis();
+         x += speed;
+       }
+       // Clear base image
+       g2.clearRect(0, 0, 1024, 768);
+       // Draw activeFireball at (x, y)
+       g2.drawImage(activeFireball, x, y, null);
+       
+       if(x >= xTerminal)
+       {
+         suspended = true;
+         // Clear base image
+         g2.clearRect(0, 0, 1024, 768);
+       }
+    }
+  }
+  
+  public void setActiveFireball(BufferedImage activeFireball)
+  {
+    // Check if user == enemy, flip accordingly if necessary
+    this.activeFireball = activeFireball;
+  }
+  
+  
+}
+
 class BackgroundDisplay extends CustomDisplay
 {
   private Graphics2D g;
