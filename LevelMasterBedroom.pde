@@ -2,8 +2,8 @@
 class LevelMasterBedroom extends Level {
 
    
-  private float START_X = 1000;
-  private float START_Y = 1400;
+  private float START_X = 2400;
+  private float START_Y = 900;
   
   
   // Constructor
@@ -62,7 +62,7 @@ class LevelMasterBedroom extends Level {
   // Load all level related assets
   public void loadAssets() {
     
-    this.hitboxImage = loadImage("LevelBackgrounds/MasterBedroom/HitboxBlank.png");    
+    this.hitboxImage = loadImage("LevelBackgrounds/MasterBedroom/HitboxLayer.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/MasterBedroom/Bottom.png");
 
     this.foregroundImage = loadImage("LevelBackgrounds/MasterBedroom/Top.png");
