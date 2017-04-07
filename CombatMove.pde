@@ -7,6 +7,7 @@ class CombatMove
  private ArbitraryButton button;
  private ArrayList<ArbitraryFunction> effects;
  
+ private BufferedImage fireballSprite;
  private BufferedImage[] explosionSprites;
  
  public CombatMove(float dmgMultiplier, int meterBoost, BufferedImage[] explosionSprites)

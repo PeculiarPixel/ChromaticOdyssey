@@ -91,9 +91,28 @@ class FightManager
   {
     // Load fireball sprites:
     
+    /*
     BufferedImage redFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackRed.png").getNative();
     BufferedImage blueFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlue.png").getNative();
     BufferedImage yellowFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackYellow.png").getNative();
+    */
+    
+    BufferedImage fireball;
+    
+    if (myColor == Color.RED)
+    {
+          fireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackRed.png").getNative();
+    }
+    
+    else if (myColor == Color.BLUE)
+    {
+      fireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlue.png").getNative();
+    }
+    
+    else if (myColor == Color.YELLOW)
+    {
+       fireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackYellow.png").getNative(); 
+    }
     
     // Call CombatColor and CombatMove constructors:
     CombatColor newColor = new CombatColor(myColor, modifiers, meterIndex);
