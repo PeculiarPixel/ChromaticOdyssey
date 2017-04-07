@@ -69,17 +69,17 @@ PApplet master = this;
      newt.setDirection(MoveDirection.LEFT);
      //kitMoveSet.add(MoveDirection.LEFT);
     }
-    if(keyCode == RIGHT){ //<>//
+    if(keyCode == RIGHT){ //<>// //<>//
       newt.setDirection(MoveDirection.RIGHT);
      // kitMoveSet.add(MoveDirection.RIGHT);
-    } //<>//
-  } //<>//
+    } //<>// //<>//
+  } //<>// //<>//
 
-  // Key Released Events //<>// //<>//
+  // Key Released Events //<>// //<>// //<>//
   void keyReleased() {
         kitKeyPress = false;
-  if (keyCode == UP) { //<>//
-      newt.releaseDirection(MoveDirection.UP); //<>// //<>//
+  if (keyCode == UP) { //<>// //<>//
+      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>//
       kitMoveRelease.remove(0);      
       kitMoveRelease.add(MoveDirection.UP);
     }
@@ -97,16 +97,16 @@ PApplet master = this;
       newt.releaseDirection(MoveDirection.RIGHT);
       kitMoveRelease.add(MoveDirection.RIGHT);
     }
-    if(key == 'h' || key == 'H'){ //<>//
+    if(key == 'h' || key == 'H'){ //<>// //<>//
         hitBoxMode = !hitBoxMode;
     }
     if(key == 'b' || key == 'B'){
-       println();  //<>//
+       println();  //<>// //<>//
     }
     if(key == 'p' || key == 'P'){
         if (DEBUG.DEV_MODE) println("Newt X: " + newt.getXPos());
         if (DEBUG.DEV_MODE) println("Newt Y: " + newt.getYPos());
-    } //<>// //<>//
+    } //<>// //<>// //<>//
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
         display.updateCurrentScript();
     }
