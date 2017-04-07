@@ -48,7 +48,7 @@ class LevelTransitionFadeInEvent extends DisplayableEvent {
     // Draw text
     textAlign(CENTER);
     drawUtils.strokeText(description, width / 2, height / 2, 48, theta);
-    
+    textAlign(LEFT);
     
     // Check if faded 
     if(this.transitionFade > 0) {

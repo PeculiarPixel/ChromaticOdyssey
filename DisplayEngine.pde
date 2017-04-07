@@ -105,6 +105,7 @@ class DisplayEngine {
   
   public void clearEngine() {
     clearEvents();
+    clearScriptQueue();
   } //<>// //<>//
    //<>// //<>//
   public Script getCurrentScript() {

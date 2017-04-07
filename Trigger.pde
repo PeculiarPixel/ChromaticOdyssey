@@ -8,6 +8,7 @@ abstract class Trigger extends Area {
   }
   
   public void initialize() {
+    this.clearHit();
     comp.addTrigger(this);
   }
   
@@ -19,8 +20,19 @@ abstract class Trigger extends Area {
     return this.isActive;
   }
   
+  // Activate the trigger
+  protected void activate() {
+    this.isActive = true;
+  }
+  
+  // Deactivate and rearm the trigger
+  protected void deactivate() {
+    this.isActive = false;
+  }
+  
   protected void triggerEvents() {
     this.clearHit();
+    this.activate();
   }
   
 }

@@ -2,6 +2,7 @@ class LevelTransitionEvent extends DisplayableEvent {
   
    private StateEventFadeIn state;      // State to change to
    private String description = "";
+   private long timeSent = 0;
    
    private float alpha;           // Starting alpha value
    private float transitionFade;  // Starting fade value
@@ -15,6 +16,7 @@ class LevelTransitionEvent extends DisplayableEvent {
     this.state = new StateEventFadeIn(state);    // State to transition to once fade complete
     this.alpha = 0;                              // Starting alpha
     this.transitionFade = 0;                     // Starting fade
+    this.timeSent = System.currentTimeMillis();
     
   }
   
@@ -26,7 +28,13 @@ class LevelTransitionEvent extends DisplayableEvent {
     this.alpha = 0;                              // Starting alpha
     this.transitionFade = 0;                     // Starting fade
     this.description = description;
+    this.timeSent = System.currentTimeMillis();
     
+  }
+  
+  // Set sent time 
+  public void setSentTime() {
+    this.timeSent = System.currentTimeMillis();
   }
 
   // Send the fade in event
@@ -36,6 +44,9 @@ class LevelTransitionEvent extends DisplayableEvent {
   
   // Made screen fade out
   private void fadeOut() {
+    
+    long timeDraw = System.currentTimeMillis();
+    long duration = (timeDraw - timeSent) / 1000;
     
     // Change alpha
     alpha += DA;
@@ -48,7 +59,7 @@ class LevelTransitionEvent extends DisplayableEvent {
     // Draw text
     textAlign(CENTER);
     drawUtils.strokeText(description, width/2, height/2, 48, (int) Math.floor(alpha));
-    
+    textAlign(LEFT);
 
     
     // Check if complete
@@ -59,7 +70,7 @@ class LevelTransitionEvent extends DisplayableEvent {
     }
     
     // Fade complete, begin transition to level & c
-    if (this.alpha >= 255) {
+    if (this.alpha >= 255 && duration > 1) {
       dispatcher.dispatch(state);        // Transition state when covered
       dispatcher.dispatchClear(this);    // Clear event
       this.finish();                     // Mark as transitioning

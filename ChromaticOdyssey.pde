@@ -106,7 +106,11 @@ PApplet master = this;
         hitBoxMode = !hitBoxMode;
     }
     if(key == 'b' || key == 'B'){
-       println(); //<>// //<>// //<>//
+       println();  //<>//
+    }
+    if(key == 'p' || key == 'P'){
+        if (DEBUG.DEV_MODE) println("Newt X: " + newt.getXPos());
+        if (DEBUG.DEV_MODE) println("Newt Y: " + newt.getYPos());
     }
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
         display.updateCurrentScript();
