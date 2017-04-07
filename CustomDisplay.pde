@@ -139,7 +139,7 @@ class FireballDisplay extends CustomDisplay
   private boolean suspended;
   private BufferedImage activeFireball;
   
-  private int frameStartTime;
+  private int frameStartTime = 0;
   
   public FireballDisplay()
   {
@@ -156,17 +156,18 @@ class FireballDisplay extends CustomDisplay
        {
          frameStartTime = millis();
          x += speed;
+         g2.clearRect(0, 0, 1024, 768);
+         g2.drawImage(activeFireball, x, y, null);
        }
        // Clear base image
-       g2.clearRect(0, 0, 1024, 768);
        // Draw activeFireball at (x, y)
-       g2.drawImage(activeFireball, x, y, null);
        
        if(x >= xTerminal)
        {
          suspended = true;
          // Clear base image
          g2.clearRect(0, 0, 1024, 768);
+         frameStartTime = 0;
        }
     }
   }
@@ -175,6 +176,8 @@ class FireballDisplay extends CustomDisplay
   {
     // Check if user == enemy, flip accordingly if necessary
     this.activeFireball = activeFireball;
+    this.suspended = false;
+    x = xInitial;
   }
   
   
