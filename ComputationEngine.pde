@@ -43,7 +43,7 @@ void run() { //<>// //<>// //<>//
   if(mousePressed == true && state.currentState.name == LevelName.INTRO) {
     if(mouseX > 511 && mouseX < 827 && mouseY > 385 && mouseY < 552){
       introScreen.stop();
-      dispatcher.dispatch(new LevelTransitionEvent(LevelName.TEST_0));
+      dispatcher.dispatch(new LevelTransitionEvent(LevelName.CASTLE_APPROACH));
     }
   }
 

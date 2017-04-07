@@ -67,11 +67,11 @@ class Test_Level_0 extends Level {
     
     this.hitboxImage = loadImage("LevelBackgrounds/CastleApproach/hitboxLayer.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkup.png");
-    /*backgroundImage.loadPixels();
+    backgroundImage.loadPixels();
     for(int i =0; i<backgroundImage.pixels.length;i++){
-      backgroundImage.pixels[i] =  color();
+      backgroundImage.pixels[i] =  color(255,255,0);
     }
-    backgroundImage.updatePixels();*/
+    backgroundImage.updatePixels();
     this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkupTopLayer.png");
     this.fog = new Fog(3500,2000,1500);
     

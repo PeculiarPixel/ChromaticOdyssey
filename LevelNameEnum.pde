@@ -20,7 +20,7 @@ public enum LevelName {
   private String description;
   
   // Constructor
-  LevelName(String description) {
+  private LevelName(String description) {
     this.description = description;
   }
   
