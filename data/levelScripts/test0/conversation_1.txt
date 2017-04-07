@@ -1,7 +1,7 @@
-Newt Reg 3
-this is a different hitbox
-seems to work good
-GG
+Kit Sad 1
+Newt...We will save your home.  Both of our homes.
+Newt Sad 1
+I hope so.  But noone's ever returned from the darkness...
 Kit Sad 2
-Hey it works
-Look at this!
+Let's go find the edge of the darkness.
+Maybe this time will be different...
