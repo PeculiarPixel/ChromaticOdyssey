@@ -1,8 +1,8 @@
 // Main Castle Hub Level
 class LevelLuminousRuinHub extends Level {
    
-  private float START_X = 400;
-  private float START_Y = 1000;
+  private float START_X = 600;
+  private float START_Y = 900;
   
   // Saved coords for starting close to transition
   //private final float START_X = 3550;
@@ -64,7 +64,7 @@ class LevelLuminousRuinHub extends Level {
   // Load all level related assets
   public void loadAssets() {
     
-    this.hitboxImage = loadImage("LevelBackgrounds/LuminousRuinHub/HitboxBlank.png");    
+    this.hitboxImage = loadImage("LevelBackgrounds/LuminousRuinHub/HitboxLayer.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/LuminousRuinHub/HubBottom.png");
 
     this.foregroundImage = loadImage("LevelBackgrounds/LuminousRuinHub/HubTop.png");

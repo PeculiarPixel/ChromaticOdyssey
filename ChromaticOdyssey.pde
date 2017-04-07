@@ -106,7 +106,7 @@ PApplet master = this;
     if(key == 'p' || key == 'P'){
         if (DEBUG.DEV_MODE) println("Newt X: " + newt.getXPos());
         if (DEBUG.DEV_MODE) println("Newt Y: " + newt.getYPos());
-    } //<>// //<>// //<>//
+    } //<>// //<>// //<>// //<>//
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
         display.updateCurrentScript();
     }
@@ -114,8 +114,8 @@ PApplet master = this;
 
   // Start the game intro and then the first level
   private void gameStart() {
-    if (DEBUG.INTRO_ON) state.setState(LevelName.INTRO);
-    else state.setState(LevelName.CASTLE_APPROACH);
+    if (DEBUG.INTRO_ON) state.setState(LevelName.INTRO); //<>// //<>//
+    else state.setState(LevelName.CASTLE_HUB);
   }
 
   // Handle movie event
