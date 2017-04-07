@@ -10,7 +10,7 @@ class StateEvent extends Event {
   
   // Get level to transition to
   public void send() {
-    state.setState(nextState);
+    state.setState(nextState);// might want to fix this
+    }
+    
   }
-  
-}

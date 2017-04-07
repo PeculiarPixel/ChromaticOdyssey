@@ -2,7 +2,7 @@
 class LevelMasterBedroom extends Level {
 
    public LevelMasterBedroom() {
-     super();
+     super(LevelName.MASTER_BEDROOM);
      loadAssets();
    }
    

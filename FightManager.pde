@@ -270,10 +270,10 @@ class FightManager
       if(! (move instanceof CombatItem))
       {
         // Fireball animation
-        BufferedImage fireball = move.getFireball();
+        //BufferedImage fireball = move.getFireball();
         int startTime = millis();
         int xTerminal = 0;
-        int xOrigin = 1024;
+        int xInitial = 1024;
         int y = 0;
         int x = xInitial;
         int xSpeed = 8;
@@ -284,7 +284,7 @@ class FightManager
             x += xSpeed;
             startTime = millis();
           }
-          g2d.drawImage(fireball, x, y, null);
+          //g2d.drawImage(fireball, x, y, null);
         }
         
       }

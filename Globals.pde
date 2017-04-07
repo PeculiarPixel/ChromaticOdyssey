@@ -3,6 +3,13 @@ GameCharacter newt;               // Main character, Newt
 GameCharacter kit;
 
 boolean hitBoxMode = false;       // Default hitbox mode setting
+boolean initValues;
+boolean kitKeyPress;
+
+Movie introScreen;
+
+ArrayList<MoveDirection> kitMoveSet;
+ArrayList<MoveDirection> kitMoveRelease;
 
 // Screen size & FPS rate
 final static int SCREEN_WIDTH = 1024;        
@@ -21,7 +28,8 @@ DisplayEngine display;                  // Display Engine
 EventDispatcher dispatcher;             // Event Dispatcher
 SpriteAnimationLibrary spriteLibrary;   // Sprite Animation Library
 FileUtils fileUtils;                    // File I/O Utilities
-GameCamera camera;
+GameCamera camera;                      // Game camera view
+DrawUtilities drawUtils;                // Draw utilities
 
 //movement variables
   float px;

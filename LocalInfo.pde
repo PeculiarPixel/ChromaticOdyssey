@@ -37,7 +37,7 @@ class LocalInfo {
     
     // Set character local direction
     public void setDirection(MoveDirection direction) {
-      
+      if(direction!=null){
       // Change direction only if direction is new
       if (isDirectionChange(direction)) {
        
@@ -59,10 +59,10 @@ class LocalInfo {
         }
         
         // Log direction
-        println("Current direction: " + this.direction.toString());
+        //println("Current direction: " + this.direction.toString());
         
       }
-        
+    }
          
     }
     
@@ -109,7 +109,7 @@ class LocalInfo {
     
     // Release movement direction
     public boolean releaseDirection(MoveDirection direction) {
-      
+            if(direction!=null){
       MoveDirection releaseDirection;
         
       switch(direction) {
@@ -133,7 +133,7 @@ class LocalInfo {
              releaseDirection = MoveDirection.DOWN;
         }    
         
-        println("Releasing direction: " + releaseDirection);
+       // println("Releasing direction: " + releaseDirection);
         
       
         if (!isMoving()) {
@@ -155,7 +155,7 @@ class LocalInfo {
               this.direction = MoveDirection.IDLE_DOWN;
           }
           
-          println("Current direction: " + this.direction);
+          //println("Current direction: " + this.direction);
           return true;
           
         }
@@ -166,7 +166,7 @@ class LocalInfo {
         }
         
         return false;
-  
+            }else{return false;}
     }
     
     // Check if character is currently moving
@@ -228,6 +228,7 @@ class LocalInfo {
 }
 
 enum MoveDirection {
-  LEFT, RIGHT, UP, DOWN, IDLE,
-  IDLE_UP, IDLE_DOWN, IDLE_LEFT, IDLE_RIGHT;
+  LEFT, RIGHT, UP, DOWN,
+  IDLE_UP, IDLE_DOWN, IDLE_LEFT, IDLE_RIGHT,
+  JUNK;
 }

@@ -3,7 +3,7 @@ class LevelLuminousRuinHub extends Level {
 
    // Constructor
    public LevelLuminousRuinHub() {
-     super();
+     super(LevelName.CASTLE_HUB);
      loadAssets();
    }
    

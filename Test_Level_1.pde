@@ -5,15 +5,15 @@ class Test_Level_1 extends Level {
   private final float START_Y = 900;
   
   public Test_Level_1(){
-    super();
+    super(LevelName.TEST_1);
     loadAssets();
   }
   
   public void setStartPosition() {
     newt.setXPos(START_X);
     newt.setYPos(START_Y);  
-    //kit.setXPos(START_X - 30);
-    //kit.setYPos(START_Y - 30);  
+    kit.setXPos(START_X - 30);
+    kit.setYPos(START_Y - 30);  
   }
   
   // Load all assets for this level
