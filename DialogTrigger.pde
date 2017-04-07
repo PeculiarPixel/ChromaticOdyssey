@@ -24,7 +24,7 @@ class DialogTrigger extends Trigger {
       setColor(ACTIVATED_DIALOG_TRIGGER_COLOR);
       triggerEvents();
       
-      this.isActive = true;  // Disarm dialog event (one time action)
+      this.activate();  // Disarm dialog event (one time action)
       
       if (DEBUG.EVENT_LOGGING) print("Triggered Dialog Event\n");
   }
