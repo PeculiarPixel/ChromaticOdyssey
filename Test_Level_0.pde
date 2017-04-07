@@ -2,8 +2,8 @@
 class Test_Level_0 extends Level {
   
   
-  private final float START_X = 235;
-  private final float START_Y = 2750;
+  private float START_X = 235;
+  private float START_Y = 2750;
   
   // Saved coords for starting close to transition
   //private final float START_X = 3550;
@@ -12,6 +12,12 @@ class Test_Level_0 extends Level {
   // Constructor
   public Test_Level_0() {
     super(LevelName.TEST_0);
+    
+    if (DEBUG.QUICK_TRANSITION) {
+      this.START_X = 3550;
+      this.START_Y = 1000;
+    }
+    
     loadAssets();
   }
   

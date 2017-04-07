@@ -59,7 +59,7 @@ class LocalInfo {
         }
         
         // Log direction
-        //println("Current direction: " + this.direction.toString());
+        if (DEBUG.MOVE_LOGGING) println("Current direction: " + this.direction.toString());
         
       }
     }
@@ -133,7 +133,7 @@ class LocalInfo {
              releaseDirection = MoveDirection.DOWN;
         }    
         
-       // println("Releasing direction: " + releaseDirection);
+        if (DEBUG.MOVE_LOGGING) println("Releasing direction: " + releaseDirection);
         
       
         if (!isMoving()) {
@@ -155,7 +155,7 @@ class LocalInfo {
               this.direction = MoveDirection.IDLE_DOWN;
           }
           
-          //println("Current direction: " + this.direction);
+          if (DEBUG.MOVE_LOGGING) println("Current direction: " + this.direction);
           return true;
           
         }
