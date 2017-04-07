@@ -1,8 +1,8 @@
 // Main Castle Hub Level
 class LevelLuminousRuinHub extends Level {
    
-  private float START_X = 600;
-  private float START_Y = 900;
+  private float START_X = 1000;
+  private float START_Y = 1400;
   
   // Saved coords for starting close to transition
   //private final float START_X = 3550;
@@ -44,7 +44,7 @@ class LevelLuminousRuinHub extends Level {
    // this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
    // this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
   //  this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
-  //  this.triggers.add(new LevelTransitionTrigger(3650, 900, 100, 100, LevelName.TEST_1));
+    this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.MASTER_BEDROOM));
   //  this.landscapes.add(new Landscape(120, 120,  100, 100));
   //  this.landscapes.add(new Landscape(700, 120, 100, 100));
     
