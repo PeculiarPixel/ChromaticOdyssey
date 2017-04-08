@@ -42,7 +42,7 @@ class LevelMasterBedroom extends Level {
    // this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
    // this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
   //  this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
-   // this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.MASTER_BEDROOM));
+    this.triggers.add(new LevelTransitionTrigger(2500, 900, 100, 600, LevelName.CASTLE_HUB));
   //  this.landscapes.add(new Landscape(120, 120,  100, 100));
   //  this.landscapes.add(new Landscape(700, 120, 100, 100));
     
