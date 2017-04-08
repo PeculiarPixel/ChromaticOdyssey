@@ -83,6 +83,8 @@ class BaseCombatMenu extends CustomMenu
   private static final int ITEM = 2;
   private static final int COLOR = 3;
   
+  FireballDisplay fireballDisplay;
+  
   public BaseCombatMenu(FightManager manager)
   {
     super();
@@ -98,12 +100,23 @@ class BaseCombatMenu extends CustomMenu
     baseDisplays.add(new SpriteFrame(new Point(640, 128), enemy));
     baseDisplays.add(new NameFrame(new Point(128, 0), player));
     baseDisplays.add(new NameFrame(new Point(640, 0), enemy));
-
-    FireballDisplay fireballDisplay = new FireballDisplay();
+    
+    fireballDisplay = new FireballDisplay(manager);
+    baseDisplays.add(fireballDisplay);
     
     super.buttons.addAll(manager.getBaseButtons());
     super.displays.addAll(baseDisplays);
    }
+   
+   public void triggerFireball(BufferedImage fireballSprite)
+  {
+    fireballDisplay.triggerFireball(fireballSprite);
+  }
+  
+  public void updateFireballDisplay()
+  {
+    fireballDisplay.update();
+  }
 }
 
 class ColorCombatMenu extends CustomMenu
@@ -129,14 +142,16 @@ class ColorCombatMenu extends CustomMenu
 class AttackCombatMenu extends CustomMenu
 {
   //FightManager manager;
-  
+    
   public AttackCombatMenu(FightManager manager)
   {
     super();
     //this.manager = manager;
     super.buttons.addAll(manager.getBaseButtons());
   }
-  
+    
+ 
+   
 }
 
 class ItemCombatMenu extends CustomMenu

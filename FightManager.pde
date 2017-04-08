@@ -21,6 +21,11 @@ class FightManager
   
   private Random rand;
   
+  private boolean fireballTriggered;
+  
+  private BaseCombatMenu  baseMenu;
+  private AttackCombatMenu attackMenu;
+  
   CombatColor[] newtColors;
   CombatColor colorBad;
   
@@ -44,6 +49,8 @@ class FightManager
    
    activeMenu = menus.get(BASE);
    activeMenu.updateDisplays();
+   
+   fireballTriggered = false;
   }
   
   // =====================================
@@ -97,11 +104,11 @@ class FightManager
     BufferedImage yellowFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackYellow.png").getNative();
     */
     
-    BufferedImage fireball;
+    BufferedImage fireball = null;
     
     if (myColor == Color.RED)
     {
-          fireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackRed.png").getNative();
+      fireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackRed.png").getNative();
     }
     
     else if (myColor == Color.BLUE)
@@ -119,6 +126,11 @@ class FightManager
     CombatMove base = new CombatMove(1, 1);
     CombatMove emp = new CombatMove(2);
     CombatMove ult = new CombatMove(4);
+    
+    base.setFireball(fireball);
+    emp.setFireball(fireball);
+    ult.setFireball(fireball);
+    
     
     // Construct Buttons and assosciate with respective CombatMoves:
     base.setButton(new MoveButton(new Point(0, 128), string + " Base", this, base));
@@ -161,8 +173,11 @@ class FightManager
     baseButtons.add(new MenuButton(this, ITEM, "Item", new Point(212, 72), new Point(512, 512)));
     baseButtons.add(new MenuButton(this, COLOR, "Color", new Point(212, 72), new Point(512, 640)));
     
-    menus.add(new BaseCombatMenu(this));
-    menus.add(new AttackCombatMenu(this));    
+    baseMenu = new BaseCombatMenu(this);
+    attackMenu = new AttackCombatMenu(this);
+    
+    menus.add(baseMenu);
+    menus.add(attackMenu);    
     menus.add(new ItemCombatMenu(this));
     menus.add(new ColorCombatMenu(this));
     menus.add(initializeEndMenu());
@@ -193,8 +208,14 @@ class FightManager
   
   public void drawActive()
   {
+    //updateFireballDisplay();
     drawBaseDisplays();
     activeMenu.drawMenu(g2d);
+  }
+  
+  public void updateFireballDisplay()
+  {
+    baseMenu.updateFireballDisplay();
   }
   
   public void drawBase()
@@ -273,6 +294,16 @@ class FightManager
     
     return movesBySpeed;
   }
+  
+  public boolean fireballTriggered()
+  {
+    return fireballTriggered;
+  }
+  
+  public void untriggerFireball()
+  {
+    fireballTriggered = false;
+  }
 
   public void processTurn(CombatMove playerMove)
   {
@@ -290,23 +321,7 @@ class FightManager
       {
         // Fireball animation
         println("Fireball animation has begun");
-        // Having a dedicated FireballDisplay would be a better idea
-        BufferedImage fireball = move.getFireballSprite();
-        int startTime = millis();
-        int xTerminal = 0;
-        int xInitial = 1024;
-        int y = 0;
-        int x = xInitial;
-        int xSpeed = 8;
-        while (x < xTerminal)
-        {
-          if(millis() - startTime >= 17)
-          {
-            x += xSpeed;
-            startTime = millis();
-          }
-          g2d.drawImage(fireball, x, y, null);
-        }
+        baseMenu.triggerFireball(move.getFireballSprite());
         println("Fireball animation is ending");
       }
      

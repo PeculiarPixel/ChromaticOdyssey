@@ -141,43 +141,78 @@ class FireballDisplay extends CustomDisplay
   
   private int frameStartTime = 0;
   
-  public FireballDisplay()
+  private FightManager manager;
+  
+  private javax.swing.Timer timer;
+  
+  public FireballDisplay(FightManager manager)
   {
     super(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB), new Point(0, 0));
+    g2 = super.img.createGraphics();
     x = xInitial;
     suspended = true;
+    this.manager = manager;
+    
+    timer = new javax.swing.Timer(17, new ActionListener()
+    {
+      public void actionPerformed(ActionEvent evt)
+      {
+        timer.stop();
+        
+        println("Updating from timer:");
+        
+        update();       
+        
+        if(!suspended)
+        {
+          println("Suspended false, restarting timer");
+          timer.restart();
+        }
+        
+      }
+    });
+    
   }
   
   public void update()
   {
-    if(!suspended)
-    {
-       if(millis() - frameStartTime >= 17)
-       {
-         frameStartTime = millis();
-         x += speed;
-         g2.clearRect(0, 0, 1024, 768);
-         g2.drawImage(activeFireball, x, y, null);
-       }
-       // Clear base image
-       // Draw activeFireball at (x, y)
-       
-       if(x >= xTerminal)
-       {
-         suspended = true;
+    println("Updating fireball display");
+      if(!suspended)
+      {
+        
+         //if(millis() - frameStartTime >= 17)
+         //{
+           println("Incrementing fireball frame");
+           frameStartTime = millis();
+           x += speed;
+           //g2.clearRect(0, 0, 1024, 768);
+           //g2.scale(2, 2);
+           g2.drawImage(activeFireball, x, y, null);
+         //}
          // Clear base image
-         g2.clearRect(0, 0, 1024, 768);
-         frameStartTime = 0;
-       }
-    }
+         // Draw activeFireball at (x, y)
+         
+         if(x >= xTerminal)
+         {
+           println("Suspending fireball animation");
+           suspended = true;
+           // Clear base image
+           //g2.clearRect(0, 0, 1024, 768);
+           frameStartTime = 0;
+         }
+         
+      }
   }
   
-  public void setActiveFireball(BufferedImage activeFireball)
+  public void triggerFireball(BufferedImage activeFireball)
   {
+    println("Triggering fireballdisplay");
     // Check if user == enemy, flip accordingly if necessary
     this.activeFireball = activeFireball;
     this.suspended = false;
     x = xInitial;
+    timer.start();
+    //manager.untriggerFireball();
   }
   
   
