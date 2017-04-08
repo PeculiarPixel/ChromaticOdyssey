@@ -1,8 +1,8 @@
 import processing.video.*;
-import ddf.minim.*; //<>// //<>// //<>//
+import ddf.minim.*; //<>// //<>// //<>// //<>//
 
 PApplet master = this;
- //<>//
+ //<>// //<>//
   // Setup Game
   void setup() {
     size(1024, 768, P2D);
@@ -40,11 +40,6 @@ PApplet master = this;
     dispatcher = new EventDispatcher();
     camera = new GameCamera();
     drawUtils = new DrawUtilities();
-    
-    px = 0; //px is the world translation in the x direction
-    py = 0; //py is the world translation in the y direction
-    saveX = newt.getXPos();  //this saves newt's previous x position for movement delta purposes
-    saveY = newt.getYPos();  //this saves newt's previous y position for movement delta purposes
     
     kitKeyPress = false;
     kitMoveSet = new ArrayList<MoveDirection>();
@@ -93,11 +88,11 @@ PApplet master = this;
       kitMoveRelease.remove(0); 
       kitMoveRelease.add(MoveDirection.DOWN);
     }
-    if(keyCode == LEFT){
+    if(keyCode == LEFT){ //<>//
      newt.releaseDirection(MoveDirection.LEFT);
      kitMoveRelease.remove(0);     
-     kitMoveRelease.add(MoveDirection.LEFT);
-    } //<>//
+     kitMoveRelease.add(MoveDirection.LEFT); //<>//
+    } //<>// //<>//
     if(keyCode == RIGHT){
       newt.releaseDirection(MoveDirection.RIGHT);
       kitMoveRelease.add(MoveDirection.RIGHT);
@@ -119,12 +114,12 @@ PApplet master = this;
 
   // Start the game intro and then the first level
   private void gameStart() {
-    if (DEBUG.INTRO_ON) state.setState(LevelName.INTRO); //<>// //<>//
+    if (DEBUG.INTRO_ON) state.setState(LevelName.INTRO); //<>// //<>// //<>//
     else state.setState(LevelName.TEST_0);
   }
 
   // Handle movie event
-  public void movieEvent(Movie m) {
+  public void movieEvent(Movie m) { //<>//
     m.read();
   }
 
