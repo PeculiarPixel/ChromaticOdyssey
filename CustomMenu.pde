@@ -86,7 +86,7 @@ class BaseCombatMenu extends CustomMenu
   public BaseCombatMenu(FightManager manager)
   {
     super();
-    // Construct base (menu selection) buttons:
+    // Construct base (menu selection) buttons:  
       
     Combatant player = manager.getPlayer();
     Combatant enemy = manager.getEnemy();
@@ -98,6 +98,8 @@ class BaseCombatMenu extends CustomMenu
     baseDisplays.add(new SpriteFrame(new Point(640, 128), enemy));
     baseDisplays.add(new NameFrame(new Point(128, 0), player));
     baseDisplays.add(new NameFrame(new Point(640, 0), enemy));
+
+    FireballDisplay fireballDisplay = new FireballDisplay();
     
     super.buttons.addAll(manager.getBaseButtons());
     super.displays.addAll(baseDisplays);
