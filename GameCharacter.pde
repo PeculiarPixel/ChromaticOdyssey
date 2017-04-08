@@ -88,11 +88,24 @@ class GameCharacter {
     // Get Y Position of Character
     public float getYPos() { return this.local.getYPos(); }
     
+    
+    // Set position of character
+    public void setPos(float xPos, float yPos) {
+      setXPos(xPos);
+      setYPos(yPos);
+    }
+    
     // Set X Position of Character
-    public void setXPos(float pos) { this.local.setXPos(pos); }
+    public void setXPos(float pos) { 
+      this.local.setXPos(pos);
+      this.setHitboxXPos(pos);
+   }
     
     // Set Y Position of Character
-    public void setYPos(float pos) { this.local.setYPos(pos); }
+    public void setYPos(float pos) { 
+      this.local.setYPos(pos);
+      this.setHitboxYPos(pos);
+    }
     
     // Get Character Hitbox X Position
     public float getHitboxXPos() { return this.local.getHitboxXPos(); }
