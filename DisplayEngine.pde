@@ -30,7 +30,7 @@ class DisplayEngine {
     stroke(10);  
     fill(hit.showColor, 100);
     rectMode(CENTER);
-    rect(hit.xPos - camera.getXPos(), hit.yPos - camera.getYPos(), hit.getWidth(), hit.getHeight());
+    rect(hit.xPos, hit.yPos, hit.getWidth(), hit.getHeight());
   }
 
   // Queue up a script to be displayed
@@ -47,16 +47,16 @@ class DisplayEngine {
   
   // Display game characters
   public void displayCharacter(GameCharacter c) {
-      //<>//
+
     imageMode(CENTER); //<>//
     c.updateSpriteAnimation(); //<>//
-    image(c.getCurrentImage(), c.getXPos() - camera.getXPos(), c.getYPos() - camera.getYPos()); //<>//
-    if(c.local.hitboxDisplay){ //<>//
-      displayArea(c.getHitbox());
+    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>//
+    if(c.local.hitboxDisplay) { //<>//
+      displayArea(c.getHitbox()); //<>//
     } 
-     //<>//
-  } //<>//
-  
+     
+  }  //<>//
+   //<>//
   // Display Landscapes
   public void displayLandscape(Landscape land){
     imageMode(CENTER);
@@ -66,10 +66,10 @@ class DisplayEngine {
   }
   
   // Display all characters in state's current level
-  private void displayCharacters() { //<>// //<>//
-    imageMode(CORNER); //<>// //<>// //<>//
+  private void displayCharacters() {
+    imageMode(CORNER);
     for (GameCharacter c : state.currentState.characters) { //<>//
-      if (DEBUG.DISPLAY_LOGGING) println("DISPLAYING CHARACTER: " + c.name);
+      if (DEBUG.DISPLAY_LOGGING) println("DISPLAYING CHARACTER: " + c.name); //<>//
       if (DEBUG.DISPLAY_LOGGING) println("position: ",c.local.xPos,", ",c.local.yPos);
       displayCharacter(c);
 
@@ -98,50 +98,45 @@ class DisplayEngine {
   }
   
   // Clear Display Engine of Events
-  public void clearEvents() { //<>// //<>//
-    this.events.clear(); //<>// //<>// //<>// //<>// //<>//
-  } //<>// //<>// //<>// //<>//
-   //<>//
-  public void clearEngine() {
+  public void clearEvents() {
+    this.events.clear();
+  } //<>//
+ //<>//
+  public void clearEngine() { //<>//
     clearEvents();
     clearScriptQueue();
-  } //<>// //<>//
-   //<>// //<>// //<>//
+  }
+    //<>//
   public Script getCurrentScript() { //<>//
    return null;
   }
 
-  // Run display engine
-  void run() {
-    
-   background(0);      //  Init background
-   
+  // Run display engine //<>//
+  void run() { //<>//
+     //<>//
+   background(0);      //  Init background //<>//
+    //<>//
    if (state.currentState.name == LevelName.INTRO){
-      image(introScreen, 0, 0, width, height);
-    }
+      image(introScreen, 0, 0, width, height); //<>//
+    } //<>//
     
    else {
      
       pushMatrix();
-      camera.fixedUpdate(); // Update camera positions //<>// //<>// //<>//
+      camera.fixedUpdate(); // Update camera positions //<>//
       //<>//
-     
       // Draw background layer
-      imageMode(CORNER); //<>// //<>//
-      image(state.currentState.backgroundImage, 0 - camera.getXPos(), 0 - camera.getYPos());
-       //<>//
-      // Display characters //<>//
+      imageMode(CORNER); 
+      //image(state.currentState.backgroundImage, 0 - camera.getXPos(), 0 - camera.getYPos());
+      image(state.currentState.backgroundImage, 0, 0);
+      
+      // Display characters
       displayCharacters();
       
       // Draw foreground
       imageMode(CORNER);
-      image(state.currentState.foregroundImage, 0 - camera.getXPos(), 0 - camera.getYPos()); 
-      
-      //imageMode(CENTER);
-      // Draws castle enter prompt
-      //if(comp.runLevelPrompt){
-        //image(state.currentState.enterCastlePrompt,newt.getXPos()-200,newt.getYPos()-100); 
-      //}
+      //image(state.currentState.foregroundImage, 0 - camera.getXPos(), 0 - camera.getYPos());
+      image(state.currentState.foregroundImage, 0, 0);
       
       // Display landscapes
       displayLandscapes();

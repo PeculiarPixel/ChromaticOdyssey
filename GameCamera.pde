@@ -54,8 +54,6 @@ class GameCamera {
   
   // Update and translate world based on camera view
   public void fixedUpdate() {
-  
-    //pushMatrix();
     
     // Get tracked target position
     this.targetX = this.target.getXPos();
@@ -71,11 +69,12 @@ class GameCamera {
     else if (XMinEnabled) targetX = clamp(target.getXPos(), XMin, target.getXPos());
     else if (XMaxEnabled) targetX = clamp(target.getXPos(), target.getXPos(), XMax);
     
+    // Based on center point, find the camera postion (which is always centerX - 0.5 * camera width, centerY - 0.5 * camear height)
     this.cameraXPos = targetX - 512;
     this.cameraYPos = targetY - 334;
     
-    //translate(targetX, targetY);
-    //popMatrix();
+    // Translate world relative to corner of camera position
+    translate(-1 * cameraXPos, -1 * cameraYPos);
   
   }
   
