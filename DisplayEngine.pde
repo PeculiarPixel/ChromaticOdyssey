@@ -47,15 +47,15 @@ class DisplayEngine {
   
   // Display game characters
   public void displayCharacter(GameCharacter c) {
-
-    imageMode(CENTER); //<>//
-    c.updateSpriteAnimation(); //<>//
-    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>//
-    if(c.local.hitboxDisplay) { //<>//
+ //<>//
+    imageMode(CENTER); //<>// //<>//
+    c.updateSpriteAnimation(); //<>// //<>//
+    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>//
+    if(c.local.hitboxDisplay) { //<>// //<>//
       displayArea(c.getHitbox()); //<>//
     } 
-     
-  }  //<>//
+      //<>//
+  }  //<>// //<>//
    //<>//
   // Display Landscapes
   public void displayLandscape(Landscape land){
@@ -66,14 +66,26 @@ class DisplayEngine {
   }
   
   // Display all characters in state's current level
-  private void displayCharacters() {
-    imageMode(CORNER);
-    for (GameCharacter c : state.currentState.characters) { //<>//
-      if (DEBUG.DISPLAY_LOGGING) println("DISPLAYING CHARACTER: " + c.name); //<>//
+  private void displayCharacters() { //<>// //<>//
+    imageMode(CORNER); //<>// //<>// //<>//
+    if(newt.local.yPos<kit.local.yPos){ //<>//
+          displayCharacter(newt);
+          displayCharacter(kit);
+    }else{
+          displayCharacter(kit);
+          displayCharacter(newt);
+    }
+    
+    
+    
+    
+    
+ /*   for (GameCharacter c : state.currentState.characters) {
+      if (DEBUG.DISPLAY_LOGGING) println("DISPLAYING CHARACTER: " + c.name);
       if (DEBUG.DISPLAY_LOGGING) println("position: ",c.local.xPos,", ",c.local.yPos);
       displayCharacter(c);
 
-    }
+    }*/
   }
   
   // Display all landscapes in state's current level
@@ -87,15 +99,15 @@ class DisplayEngine {
   private void displayTriggers() {
     for (Trigger t : state.currentState.triggers) {
       if (newt.local.hitboxDisplay) {
-        displayArea(t);
-      }
-    }
+        displayArea(t); //<>//
+      } //<>//
+    } //<>//
   }
   
   // Draw currently queued script
   private void displayDialog() {
-    if (!this.scriptQueue.isEmpty()) this.scriptQueue.draw();
-  }
+    if (!this.scriptQueue.isEmpty()) this.scriptQueue.draw(); //<>//
+  } //<>//
   
   // Clear Display Engine of Events
   public void clearEvents() {
@@ -111,14 +123,14 @@ class DisplayEngine {
    return null;
   }
 
-  // Run display engine //<>//
-  void run() { //<>//
+  // Run display engine //<>// //<>//
+  void run() { //<>// //<>//
      //<>//
    background(0);      //  Init background //<>//
     //<>//
    if (state.currentState.name == LevelName.INTRO){
-      image(introScreen, 0, 0, width, height); //<>//
-    } //<>//
+      image(introScreen, 0, 0, width, height); //<>// //<>//
+    } //<>// //<>//
     
    else {
      
