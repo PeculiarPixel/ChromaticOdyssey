@@ -40,6 +40,10 @@ class GameCamera {
     this.target = character;
   }
   
+  public float getXPos() { return this.cameraXPos; }
+  
+  public float getYPos() { return this.cameraYPos; }
+  
   // Setup level min & max values for camera
   public void setLevelSize(float minX, float maxX, float minY, float maxY) {
     this.XMin = minX + view_width / 2;
@@ -50,8 +54,6 @@ class GameCamera {
   
   // Update and translate world based on camera view
   public void fixedUpdate() {
-  
-    pushMatrix();
     
     // Get tracked target position
     this.targetX = this.target.getXPos();
@@ -67,8 +69,12 @@ class GameCamera {
     else if (XMinEnabled) targetX = clamp(target.getXPos(), XMin, target.getXPos());
     else if (XMaxEnabled) targetX = clamp(target.getXPos(), target.getXPos(), XMax);
     
-    translate(targetX, targetY);
-    popMatrix();
+    // Based on center point, find the camera postion (which is always centerX - 0.5 * camera width, centerY - 0.5 * camear height)
+    this.cameraXPos = targetX - 512;
+    this.cameraYPos = targetY - 334;
+    
+    // Translate world relative to corner of camera position
+    translate(-1 * cameraXPos, -1 * cameraYPos);
   
   }
   

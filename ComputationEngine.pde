@@ -37,9 +37,9 @@ class ComputationEngine {
   }
   
 
-void run() { //<>// //<>//
+void run() { //<>// //<>// //<>//
   
-  // Loop through all registered computation events //<>// //<>// //<>// //<>//
+  // Loop through all registered computation events //<>// //<>// //<>// //<>// //<>//
   if(mousePressed == true && state.currentState.name == LevelName.INTRO) {
     if(mouseX > 511 && mouseX < 827 && mouseY > 385 && mouseY < 552){
       introScreen.stop();
@@ -59,7 +59,6 @@ void run() { //<>// //<>//
   
   clearEvents();
   //kitRelease();//move this after move Kit?
-  moveWorld();  //probably want to move world before character, bc moveCharacter calculates hitboxes, want to check new ones not old ones.
   moveCharacter(5.0); //input is movespeed
   if(!kitMoveSet.isEmpty()){
   if (DEBUG.MOVE_LOGGING) println("Kit move>", kitMoveSet.get(0));
@@ -133,7 +132,7 @@ void run() { //<>// //<>//
        //<>//
       runLevelPrompt = false;
       
-    }
+    } //<>//
   //<>// //<>//
   } //<>// //<>// //<>//
 
@@ -141,9 +140,9 @@ void run() { //<>// //<>//
     color pixelColor = state.currentState.hitboxImage.get( (int) c.local.getFeetX() + xChange, (int) c.local.getFeetY() + yChange); //<>//
     //println("COLOR="+red(pixelColor)+"<r:"+green(pixelColor)+"<g:"+blue(pixelColor)+"<b:");
       if(red(pixelColor) == 255){ //<>//
-         c.getHitbox().isHitX = true; //<>//
+         c.getHitbox().isHitX = true; //<>// //<>//
          c.getHitbox().isHitY = true; //<>// //<>// //<>//
-      }else{
+      }else{ //<>//
          c.getHitbox().isHitX = false; //<>// //<>//
          c.getHitbox().isHitY = false;
       }
@@ -151,17 +150,17 @@ void run() { //<>// //<>//
  //<>//
 
  private void moveCheck(float xChange, float yChange, GameCharacter character) { 
-   
+    //<>//
   //  for (GameCharacter c : players ) { //<>//
-      // Collision for triggers
+      // Collision for triggers //<>//
       for (Area a : triggers) {  
         computeIntersection(a, character.getHitbox(), xChange, yChange); //<>//
       } //<>//
-      
+       //<>//
       for (Trigger t : triggers) {
         if (t.isHit() && !t.hasActivated()) { //<>//
           t.trigger(); //<>//
-        } //<>//
+        } //<>// //<>//
       } //<>//
      
       // Collision for hitboxes  //<>//
@@ -173,27 +172,16 @@ void run() { //<>// //<>//
         if (character.local.hitbox.isHitY) yChange = 0;
       
       }
-      
+       //<>//
    // } //<>//
-     //<>//
-   //<>//
-      // Compute color change
-      computeColorCheck( character, (int) xChange, (int) yChange );
-      
+   
+      // Compute color change //<>//
+      computeColorCheck( character, (int) xChange, (int) yChange ); //<>//
+       //<>//
     
-    // Stop character movement again for color
+      // Stop character movement again for color
       if(character.local.hitbox.isHitX) xChange = 0; //<>//
       if(character.local.hitbox.isHitY) yChange = 0; //<>//
-    
-    
-    //for(int i = 0; i < hitboxes.size(); i++) { //<>//
-    //  computeIntersection(hitboxes.get(i), players.get(0).getHitbox(), xChange, yChange); //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
-    //  //computeColorCheck((int)xChange,(int)yChange); //<>// //<>//
-    //  if(players.get(0).local.hitbox.isHitX) //<>// //<>//
-    //    xChange = 0;
-    //  if(players.get(0).local.hitbox.isHitY)
-    //    yChange = 0; //<>//
-    //} //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
       
       character.moveX(xChange);
       character.moveY(yChange);
@@ -201,20 +189,19 @@ void run() { //<>// //<>//
       character.setHitboxXPos(character.getXPos());
       character.setHitboxYPos(character.getYPos());
     
-  }  //<>//
- //<>// //<>//
- //<>//
-  void moveCharacter(float speed) { // this is really moveNewt
+  }  
+   //<>//
+  void moveCharacter(float speed) { // this is really moveNewt //<>//
     
     if (newt.local.isMoving()) {
-      if(newt.local.moveUp) {
-        moveCheck(0.0,-speed, newt);
-      } //<>//
-      if(newt.local.moveDown){
+      if(newt.local.moveUp) { //<>//
+        moveCheck(0.0,-speed, newt); //<>//
+      } //<>// //<>//
+      if(newt.local.moveDown){ //<>//
         moveCheck(0.0,speed, newt);
       }
-      if(newt.local.moveLeft){
-        moveCheck(-speed,0.0,newt);
+      if(newt.local.moveLeft){ //<>//
+        moveCheck(-speed,0.0,newt); //<>//
       }
       if(newt.local.moveRight){
         moveCheck(speed,0.0,newt);
@@ -222,9 +209,9 @@ void run() { //<>// //<>//
     }
     
     
-  }
-  
-    void moveKit(float speed) {  //this is really moveKit
+  } //<>//
+   //<>//
+    void moveKit(float speed) {  //this is really moveKit //<>//
     
     
     if(!kitMoveSet.isEmpty()){
@@ -273,7 +260,7 @@ void run() { //<>// //<>//
     }
     
         }*/
-    
+     //<>//
   }
   
   void kitRelease(){
@@ -304,44 +291,5 @@ void run() { //<>// //<>//
   
   
   }
-  
-  
-  //public void setWorld(px, py, saveX, saveY) {
-  
-  //}
-  
-  
-  //private void clampCameraToWorld() {
-    
-  //  // Current level size
-  //  LevelSize current = state.getCurrentStateSize();
-    
-  //  // Screen sizes
-  //  float aspect = width / height;
-    
-  //  // Min / Max clamp positions
-  //  float minX, maxX, minY, maxY;
-    
-  //  minX = width - current.w / 2.0;
-  //  maxX = current.w / 2.0 - width;
-  //  minY = height - current.h / 2.0;
-  //  maxY = current.h / 2.0 - height;
-    
-  // px = clamp(px, minX, maxX);
-  // py = clamp(py, minY, maxY);
-    
-  //}
-  
-  // Move world calculates the translation factor that you will move the background based on character movement
-  public void moveWorld() {
-    
-    px += (saveX - newt.getXPos());
-    py += (saveY - newt.getYPos());
-    saveX = newt.getXPos();
-    saveY = newt.getYPos();
-    
-    //clampCameraToWorld();
-    
-  } 
   
 }

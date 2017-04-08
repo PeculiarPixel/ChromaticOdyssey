@@ -28,6 +28,7 @@ void run(float fade){
     }else{
      tint(255,255,100,fade);
     }
+    
     image(fogImage, xpos+position.get(i).x, ypos+position.get(i).y);
 
     //ellipse(30,30,position.get(i).x, position.get(i).y);

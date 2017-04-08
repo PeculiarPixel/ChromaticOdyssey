@@ -30,9 +30,3 @@ SpriteAnimationLibrary spriteLibrary;   // Sprite Animation Library
 FileUtils fileUtils;                    // File I/O Utilities
 GameCamera camera;                      // Game camera view
 DrawUtilities drawUtils;                // Draw utilities
-
-//movement variables
-float px;
-float py;
-float saveX;
-float saveY;
