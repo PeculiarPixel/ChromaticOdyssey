@@ -1,13 +1,13 @@
 // Throne Room Level
 class LevelThroneRoom extends Level {
    
-  private float START_X = 2400;
-  private float START_Y = 900;
+  public float START_X = 2400;
+  public float START_Y = 900;
   
   
   // Constructor
   public LevelThroneRoom() {
-    super(LevelName.THRONE_ROOM);
+    super(LevelName.THRONE_ROOM,2400,900);
     
     if (DEBUG.QUICK_TRANSITION) {
       this.START_X = 3550;
@@ -41,7 +41,7 @@ class LevelThroneRoom extends Level {
    // this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
    // this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
   //  this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
-    this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.CASTLE_HUB));
+    this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.CASTLE_HUB,1000, 200));
   //  this.landscapes.add(new Landscape(120, 120,  100, 100));
   //  this.landscapes.add(new Landscape(700, 120, 100, 100));
     
@@ -64,7 +64,7 @@ class LevelThroneRoom extends Level {
     this.hitboxImage = loadImage("LevelBackgrounds/ThroneRoom/HitboxBlank.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/ThroneRoom/Bottom.png");
 
-    //this.foregroundImage = loadImage("LevelBackgrounds/MasterBedroom/Top.png");
+    this.foregroundImage = loadImage("LevelBackgrounds/ThroneRoom/Top.png");
    // this.fog = new Fog(3500,2000,1500);
     
     loadConversations();

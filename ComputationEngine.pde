@@ -49,7 +49,7 @@ void run() { //<>// //<>// //<>//
 
   // Loop through all registered computation events
   for(ComputationEvent e : events) {
-      e.send(); //<>// //<>// //<>// //<>// //<>//
+      e.send(); //<>//
       if (DEBUG.COMPUTATION_LOGGING) print("Computed Event\n");
   }
   

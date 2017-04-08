@@ -2,7 +2,7 @@
 class LevelCastleCourtyard extends Level {
 
    public LevelCastleCourtyard() {
-     super(LevelName.CASTLE_COURTYARD);
+     super(LevelName.CASTLE_COURTYARD,0,0);
      loadAssets();
    }
    

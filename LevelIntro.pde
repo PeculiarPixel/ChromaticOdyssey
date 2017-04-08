@@ -8,7 +8,7 @@ class LevelIntro extends Level {
 
   // Constructor
   public LevelIntro() {
-    super(LevelName.INTRO);
+    super(LevelName.INTRO,0,0);
     loadAssets();
   }
   

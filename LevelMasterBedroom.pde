@@ -2,13 +2,13 @@
 class LevelMasterBedroom extends Level {
 
    
-  private float START_X = 2400;
-  private float START_Y = 900;
+  public float START_X = 2400;
+  public float START_Y = 900;
   
   
   // Constructor
   public LevelMasterBedroom() {
-    super(LevelName.MASTER_BEDROOM);
+    super(LevelName.MASTER_BEDROOM,2400,900);
     
     if (DEBUG.QUICK_TRANSITION) {
       this.START_X = 3550;
@@ -42,7 +42,7 @@ class LevelMasterBedroom extends Level {
    // this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
    // this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
   //  this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
-    this.triggers.add(new LevelTransitionTrigger(2500, 900, 100, 600, LevelName.CASTLE_HUB));
+    this.triggers.add(new LevelTransitionTrigger(2500, 900, 100, 600, LevelName.CASTLE_HUB,250, 750));
   //  this.landscapes.add(new Landscape(120, 120,  100, 100));
   //  this.landscapes.add(new Landscape(700, 120, 100, 100));
     

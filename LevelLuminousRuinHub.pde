@@ -1,8 +1,6 @@
 // Main Castle Hub Level
 class LevelLuminousRuinHub extends Level {
    
-  private float START_X = 1000;
-  private float START_Y = 1400;
   
   // Saved coords for starting close to transition
   //private final float START_X = 3550;
@@ -10,7 +8,7 @@ class LevelLuminousRuinHub extends Level {
   
   // Constructor
   public LevelLuminousRuinHub() {
-    super(LevelName.CASTLE_HUB);
+    super(LevelName.CASTLE_HUB,1000,1300);
     
     if (DEBUG.QUICK_TRANSITION) {
       this.START_X = 3550;
@@ -44,9 +42,9 @@ class LevelLuminousRuinHub extends Level {
    // this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
    // this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
   //  this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
-    this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.MASTER_BEDROOM));
-        this.triggers.add(new LevelTransitionTrigger(1000, 75, 600, 100, LevelName.THRONE_ROOM));
-            this.triggers.add(new LevelTransitionTrigger(1000, 2000, 600, 100, LevelName.CASTLE_APPROACH));
+    this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.MASTER_BEDROOM,2400,900));
+        this.triggers.add(new LevelTransitionTrigger(1000, 50, 600, 100, LevelName.THRONE_ROOM,2400,900));
+            this.triggers.add(new LevelTransitionTrigger(1000, 1500, 600, 100, LevelName.CASTLE_APPROACH,3550, 1100));
   //  this.landscapes.add(new Landscape(120, 120,  100, 100));
   //  this.landscapes.add(new Landscape(700, 120, 100, 100));
     

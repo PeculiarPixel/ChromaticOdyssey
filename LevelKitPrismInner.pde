@@ -2,7 +2,7 @@
 class LevelKitPrismInner extends Level {
 
    public LevelKitPrismInner() {
-     super(LevelName.KIT_PRISM_INNER);
+     super(LevelName.KIT_PRISM_INNER,0,0);
      loadAssets();
    }
    
