@@ -59,43 +59,57 @@ PApplet master = this;
     
     if (keyCode == UP) {
       newt.setDirection(MoveDirection.UP);
-      //kitMoveSet.add(MoveDirection.UP);
+    //  kitMoveSet.add(MoveDirection.IDLE_DOWN);
     }
     if(keyCode == DOWN){
       newt.setDirection(MoveDirection.DOWN);
-     // kitMoveSet.add(MoveDirection.DOWN);
+    //  kitMoveSet.add(MoveDirection.IDLE_DOWN);
     }
     if(keyCode == LEFT){
      newt.setDirection(MoveDirection.LEFT);
-     //kitMoveSet.add(MoveDirection.LEFT);
+   // kitMoveSet.add(MoveDirection.IDLE_DOWN);
     }
     if(keyCode == RIGHT){ //<>// //<>//
       newt.setDirection(MoveDirection.RIGHT);
-     // kitMoveSet.add(MoveDirection.RIGHT);
+     //kitMoveSet.add(MoveDirection.IDLE_DOWN);
     } //<>// //<>//
   } //<>// //<>//
 
   // Key Released Events //<>// //<>// //<>//
   void keyReleased() {
         kitKeyPress = false;
+        
+      //  kitMoveRelease.remove(0);
+      //  kitMoveRelease.remove(0);
+      //  kitMoveRelease.add(copy);
+      //  kitMoveRelease.add(secondaryCopy);
   if (keyCode == UP) { //<>// //<>//
       newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>//
+      
+        MoveDirection copy = newt.local.direction;
+       // MoveDirection secondaryCopy = newt.local.secondaryDirection;
       kitMoveRelease.remove(0);      
-      kitMoveRelease.add(MoveDirection.UP);
+      kitMoveRelease.add(copy);
+        //MoveDirection secondaryCopy = newt.local.secondaryDirection;
     }
     if(keyCode == DOWN){
       newt.releaseDirection(MoveDirection.DOWN);
+      
+      MoveDirection copy = newt.local.direction;
       kitMoveRelease.remove(0); 
-      kitMoveRelease.add(MoveDirection.DOWN);
+      kitMoveRelease.add(copy);
     }
     if(keyCode == LEFT){ //<>//
      newt.releaseDirection(MoveDirection.LEFT);
+             MoveDirection copy = newt.local.direction;
      kitMoveRelease.remove(0);     
-     kitMoveRelease.add(MoveDirection.LEFT); //<>//
+     kitMoveRelease.add(copy);
     } //<>// //<>//
     if(keyCode == RIGHT){
-      newt.releaseDirection(MoveDirection.RIGHT);
-      kitMoveRelease.add(MoveDirection.RIGHT);
+      newt.releaseDirection(MoveDirection.RIGHT); //<>//
+              MoveDirection copy = newt.local.direction;
+      kitMoveRelease.remove(0);
+      kitMoveRelease.add(copy);
     }
     if(key == 'h' || key == 'H'){ //<>// //<>//
         hitBoxMode = !hitBoxMode;

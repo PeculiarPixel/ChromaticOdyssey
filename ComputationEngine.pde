@@ -54,9 +54,13 @@ void run() { //<>// //<>// //<>//
   }
   
   MoveDirection copy = newt.local.getDirection();
+  MoveDirection secondaryCopy = newt.local.secondaryDirection;
   if (DEBUG.MOVE_LOGGING) println("direction:"+copy);
+  //if(newt.local.isMoving()){
   kitMoveSet.add(copy);
-  
+  kitMoveSet.add(secondaryCopy); 
+ // }
+ kitMoveSet.add(MoveDirection.JUNK);
   clearEvents();
   //kitRelease();//move this after move Kit?
   moveCharacter(5.0); //input is movespeed
@@ -66,6 +70,9 @@ void run() { //<>// //<>// //<>//
   moveKit(5.0);
   kitMoveRelease.add(MoveDirection.JUNK);
   kitRelease();
+  
+  
+
 
 }
 
@@ -232,6 +239,26 @@ void run() { //<>// //<>// //<>//
         kit.setDirection(kitMoveSet.get(0));
         moveCheck(speed,0.0,kit);
       }
+      kitMoveSet.remove(0);
+      }
+      ///
+     if(!kitMoveSet.isEmpty()){
+      if(kitMoveSet.get(0) == MoveDirection.UP) {
+        kit.setDirection(kitMoveSet.get(0));
+        moveCheck(0.0,-speed, kit);
+      }
+      if(kitMoveSet.get(0) == MoveDirection.DOWN){
+        kit.setDirection(kitMoveSet.get(0));
+        moveCheck(0.0,speed, kit);
+      }
+      if(kitMoveSet.get(0) == MoveDirection.LEFT){
+        kit.setDirection(kitMoveSet.get(0));
+        moveCheck(-speed,0.0,kit);
+      }
+      if(kitMoveSet.get(0) == MoveDirection.RIGHT){
+        kit.setDirection(kitMoveSet.get(0));
+        moveCheck(speed,0.0,kit);
+      }
 
       kitMoveSet.remove(0);
       //kit.setDirection(kitMoveSet.get(0));
@@ -272,8 +299,14 @@ void run() { //<>// //<>// //<>//
         }
             //println("released");
         kitMoveRelease.remove(0);
+
                 //println("removed the release from list");
+    }else{
+     kitMoveRelease.remove(0);
     }
+      /*  if(!kitMoveSet.isEmpty()){
+        kitMoveSet.remove(0);
+        }*/
     
 
  /*   if(!kitKeyPress){
