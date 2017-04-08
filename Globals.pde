@@ -4,7 +4,12 @@ GameCharacter kit;
 
 boolean hitBoxMode = false;       // Default hitbox mode setting
 boolean initValues;
-boolean kitKeyPress;
+
+
+IntList startTime;
+IntList stopTime;
+
+int kitFollowDelay;
 
 Movie introScreen;
 

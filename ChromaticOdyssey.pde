@@ -41,75 +41,73 @@ PApplet master = this;
     camera = new GameCamera();
     drawUtils = new DrawUtilities();
     
-    kitKeyPress = false;
     kitMoveSet = new ArrayList<MoveDirection>();
     kitMoveRelease = new ArrayList<MoveDirection>();
    
-    for(int i=0;i<75;i++){
-     kitMoveSet.add(MoveDirection.IDLE_DOWN);
-     kitMoveRelease.add(MoveDirection.IDLE_DOWN);
-    }
+    startTime = new IntList();
+    stopTime = new IntList();
+    kitFollowDelay = 700;
+
     
   }
 
   // Key Pressed Events
   void keyPressed() {
-    
-    kitKeyPress = true;
+
     
     if (keyCode == UP) {
       newt.setDirection(MoveDirection.UP);
-    //  kitMoveSet.add(MoveDirection.IDLE_DOWN);
+     // kit.setDirection(MoveDirection.UP);
+      kitMoveSet.add(MoveDirection.UP);
+      startTime.append(millis());
     }
     if(keyCode == DOWN){
       newt.setDirection(MoveDirection.DOWN);
-    //  kitMoveSet.add(MoveDirection.IDLE_DOWN);
+      //kit.setDirection(MoveDirection.DOWN);
+      kitMoveSet.add(MoveDirection.DOWN);
+      startTime.append(millis());
     }
     if(keyCode == LEFT){
      newt.setDirection(MoveDirection.LEFT);
-   // kitMoveSet.add(MoveDirection.IDLE_DOWN);
+     //kit.setDirection(MoveDirection.LEFT);
+     kitMoveSet.add(MoveDirection.LEFT);
+     startTime.append(millis());
     }
     if(keyCode == RIGHT){ //<>// //<>//
       newt.setDirection(MoveDirection.RIGHT);
-     //kitMoveSet.add(MoveDirection.IDLE_DOWN);
+     // kit.setDirection(MoveDirection.RIGHT);
+      kitMoveSet.add(MoveDirection.RIGHT);
+      startTime.append(millis());
     } //<>// //<>//
   } //<>// //<>//
 
   // Key Released Events //<>// //<>// //<>//
   void keyReleased() {
-        kitKeyPress = false;
+        //kitKeyRelease = false;
         
-      //  kitMoveRelease.remove(0);
-      //  kitMoveRelease.remove(0);
-      //  kitMoveRelease.add(copy);
-      //  kitMoveRelease.add(secondaryCopy);
   if (keyCode == UP) { //<>// //<>//
       newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>//
-      
-        MoveDirection copy = newt.local.direction;
-       // MoveDirection secondaryCopy = newt.local.secondaryDirection;
-      kitMoveRelease.remove(0);      
-      kitMoveRelease.add(copy);
-        //MoveDirection secondaryCopy = newt.local.secondaryDirection;
+     // kit.releaseDirection(MoveDirection.UP);
+      kitMoveRelease.add(MoveDirection.UP);
+      stopTime.append(millis());
     }
     if(keyCode == DOWN){
       newt.releaseDirection(MoveDirection.DOWN);
-      
-      MoveDirection copy = newt.local.direction;
-      kitMoveRelease.remove(0); 
-      kitMoveRelease.add(copy);
+     // kit.releaseDirection(MoveDirection.DOWN);
+      kitMoveRelease.add(MoveDirection.DOWN);
+      stopTime.append(millis());
     }
     if(keyCode == LEFT){ //<>//
      newt.releaseDirection(MoveDirection.LEFT);
-             MoveDirection copy = newt.local.direction;
-     kitMoveRelease.remove(0);     
-     kitMoveRelease.add(copy);
+     //kit.releaseDirection(MoveDirection.LEFT);
+     kitMoveRelease.add(MoveDirection.LEFT); 
+     stopTime.append(millis()); 
     } //<>// //<>//
     if(keyCode == RIGHT){
-      newt.releaseDirection(MoveDirection.RIGHT); //<>//
-              MoveDirection copy = newt.local.direction;
-      kitMoveRelease.remove(0);
-      kitMoveRelease.add(copy);
+      newt.releaseDirection(MoveDirection.RIGHT);
+      //kit.releaseDirection(MoveDirection.RIGHT);
+      kitMoveRelease.add(MoveDirection.RIGHT); //<>//
+      stopTime.append(millis());
     }
     if(key == 'h' || key == 'H'){ //<>// //<>//
         hitBoxMode = !hitBoxMode;

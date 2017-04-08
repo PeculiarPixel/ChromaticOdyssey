@@ -37,7 +37,7 @@ class ComputationEngine {
   }
   
 
-void run() { //<>// //<>// //<>//
+void run() {  //<>//
   
   // Loop through all registered computation events //<>// //<>// //<>// //<>// //<>//
   if(mousePressed == true && state.currentState.name == LevelName.INTRO) {
@@ -52,28 +52,33 @@ void run() { //<>// //<>// //<>//
       e.send(); //<>//
       if (DEBUG.COMPUTATION_LOGGING) print("Computed Event\n");
   }
+    
+  //This is the check that moves kit.  newt's move is copied on key press, along with the time. this delays when the corresponding movement is applied
+  if( !kitMoveSet.isEmpty()){
+    if(millis() - startTime.get(0)>kitFollowDelay){
+    kit.setDirection(kitMoveSet.get(0));
+    kitMoveSet.remove(0);
+    startTime.remove(0);//
+    }
+  }
+  //This is the check that releases.  newt's release is copied on key release, along with the time. this delays when the corresponding movement is released
+  if( !kitMoveRelease.isEmpty()){
+    if(millis() - stopTime.get(0)>kitFollowDelay){
+    kit.releaseDirection(kitMoveRelease.get(0));
+    kitMoveRelease.remove(0);
+    stopTime.remove(0);//
+    }
+  }
   
-  MoveDirection copy = newt.local.getDirection();
-  MoveDirection secondaryCopy = newt.local.secondaryDirection;
-  if (DEBUG.MOVE_LOGGING) println("direction:"+copy);
-  //if(newt.local.isMoving()){
-  kitMoveSet.add(copy);
-  kitMoveSet.add(secondaryCopy); 
- // }
- kitMoveSet.add(MoveDirection.JUNK);
+ 
+  if (DEBUG.MOVE_LOGGING) println("direction:");
+
   clearEvents();
-  //kitRelease();//move this after move Kit?
   moveCharacter(5.0); //input is movespeed
   if(!kitMoveSet.isEmpty()){
   if (DEBUG.MOVE_LOGGING) println("Kit move>", kitMoveSet.get(0));
 }
   moveKit(5.0);
-  kitMoveRelease.add(MoveDirection.JUNK);
-  kitRelease();
-  
-  
-
-
 }
 
   // Clears computation engine events
@@ -214,115 +219,25 @@ void run() { //<>// //<>// //<>//
         moveCheck(speed,0.0,newt);
       }
     }
-    
-    
-  } //<>//
-   //<>//
-    void moveKit(float speed) {  //this is really moveKit //<>//
-    
-    
-    if(!kitMoveSet.isEmpty()){
-      
-      if(kitMoveSet.get(0) == MoveDirection.UP) {
-        kit.setDirection(kitMoveSet.get(0));
-        moveCheck(0.0,-speed, kit);
-      }
-      if(kitMoveSet.get(0) == MoveDirection.DOWN){
-        kit.setDirection(kitMoveSet.get(0));
-        moveCheck(0.0,speed, kit);
-      }
-      if(kitMoveSet.get(0) == MoveDirection.LEFT){
-        kit.setDirection(kitMoveSet.get(0));
-        moveCheck(-speed,0.0,kit);
-      }
-      if(kitMoveSet.get(0) == MoveDirection.RIGHT){
-        kit.setDirection(kitMoveSet.get(0));
-        moveCheck(speed,0.0,kit);
-      }
-      kitMoveSet.remove(0);
-      }
-      ///
-     if(!kitMoveSet.isEmpty()){
-      if(kitMoveSet.get(0) == MoveDirection.UP) {
-        kit.setDirection(kitMoveSet.get(0));
-        moveCheck(0.0,-speed, kit);
-      }
-      if(kitMoveSet.get(0) == MoveDirection.DOWN){
-        kit.setDirection(kitMoveSet.get(0));
-        moveCheck(0.0,speed, kit);
-      }
-      if(kitMoveSet.get(0) == MoveDirection.LEFT){
-        kit.setDirection(kitMoveSet.get(0));
-        moveCheck(-speed,0.0,kit);
-      }
-      if(kitMoveSet.get(0) == MoveDirection.RIGHT){
-        kit.setDirection(kitMoveSet.get(0));
-        moveCheck(speed,0.0,kit);
-      }
-
-      kitMoveSet.remove(0);
-      //kit.setDirection(kitMoveSet.get(0));
-    }
-    
-    
-  /*      if(kitKeyPress){
-    if (newt.local.isMoving()) { //<>// //<>//
-      if(newt.local.moveUp) {
-        kit.setDirection(MoveDirection.UP);
-      println("pressing up");
-        moveCheck(0.0,-speed, kit);
-      }
-      if(newt.local.moveDown){
-        kit.setDirection(MoveDirection.DOWN);
-        moveCheck(0.0,speed, kit);
-      }
-      if(newt.local.moveLeft){
-        kit.setDirection(MoveDirection.LEFT);
-        moveCheck(-speed,0.0,kit);
-      }
-      if(newt.local.moveRight){
-        kit.setDirection(MoveDirection.RIGHT);
-        moveCheck(speed,0.0,kit);
-      }
-    }
-    
-        }*/
-     //<>//
   }
   
-  void kitRelease(){
-    //println("lets start the release");
-    if(!kitMoveRelease.isEmpty()){
-              //println("inside if check");
-        if(kitMoveRelease.get(0)!=MoveDirection.JUNK){      
-        kit.releaseDirection(kitMoveRelease.get(0));
-        }
-            //println("released");
-        kitMoveRelease.remove(0);
-
-                //println("removed the release from list");
-    }else{
-     kitMoveRelease.remove(0);
-    }
-      /*  if(!kitMoveSet.isEmpty()){
-        kitMoveSet.remove(0);
-        }*/
+    void moveKit(float change) {  //this is really moveKit
+       
+     if (kit.local.isMoving()) {
+      if(kit.local.moveUp) {
+        moveCheck(0.0,-change, kit);
+      }
+      if(kit.local.moveDown){
+        moveCheck(0.0,change, kit);
+      }
+      if(kit.local.moveLeft){
+        moveCheck(-change,0.0,kit);
+      }
+      if(kit.local.moveRight){
+        moveCheck(change,0.0,kit);
+      }
+    } 
     
-
- /*   if(!kitKeyPress){
-    if(kit.getDirection()== MoveDirection.RIGHT){
-        kit.releaseDirection(MoveDirection.RIGHT);
-    }else if(kit.getDirection()== MoveDirection.LEFT){
-        kit.releaseDirection(MoveDirection.LEFT);
-    }else if(kit.getDirection()== MoveDirection.UP){
-            println("releasing up");
-        kit.releaseDirection(MoveDirection.UP);
-    }else if(kit.getDirection()== MoveDirection.DOWN){
-        kit.releaseDirection(MoveDirection.DOWN);
-    }  
-    }*/
-  
-  
   }
   
 }
