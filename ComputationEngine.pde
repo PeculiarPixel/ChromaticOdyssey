@@ -7,6 +7,8 @@ class ComputationEngine {
   private ArrayList<ComputationEvent> events;
   public int conversationIndex;
   private boolean runLevelPrompt = false;
+  
+  private boolean switched = false;
  
  
   // Constructor
@@ -35,16 +37,26 @@ class ComputationEngine {
   public void addCharacter(GameCharacter c) {
     this.players.add(c);
   }
-  
+   //<>//
 
-void run() {  //<>//
+void run() { //<>// //<>// //<>//
   
-  // Loop through all registered computation events //<>// //<>// //<>// //<>// //<>//
+  // Loop through all registered computation events //<>// //<>// //<>// //<>//
+  if(key == 's' || key == 'S' && state.currentState.name == LevelName.INTRO){
+    introStory.jump(introStory.duration());
+  }
+  
   if(mousePressed == true && state.currentState.name == LevelName.INTRO) {
-    if(mouseX > 511 && mouseX < 827 && mouseY > 385 && mouseY < 552){
+    if(mouseX > 511 && mouseX < 827 && mouseY > 385 && mouseY < 552 && runIntroStory == false){
       introScreen.stop();
-      dispatcher.dispatch(new LevelTransitionEvent(LevelName.CASTLE_APPROACH));
+      introStory.play(); //<>//
+      runIntroStory = true;
     }
+  }
+  
+  if(introStory.time() == introStory.duration() && switched == false){
+    switched = true;
+        dispatcher.dispatch(new LevelTransitionEvent(LevelName.TEST_0));
   }
 
   // Loop through all registered computation events
@@ -105,7 +117,7 @@ void run() {  //<>//
           
         if( hBox1.getDesignation() != AreaTypeEnum.CHARACTER_HITBOX ) {
           
-          hBox2.setHitX(true);    //character
+          hBox2.setHitX(true);    //character //<>//
           hBox1.setHitX(true);    //box checking
           
         }
@@ -113,9 +125,9 @@ void run() {  //<>//
         runLevelPrompt = true;
         
       }
-    else {
+    else { //<>//
       
-      hBox2.setHitX(false);
+      hBox2.setHitX(false); //<>//
       hBox2.setHitX(false);
        //<>//
       runLevelPrompt = false;
@@ -123,31 +135,30 @@ void run() {  //<>//
     }
   
     if((hBox1.xPos + hBox1.getWidth()/2 >= hBox2.xPos - hBox2.getWidth()/2 &&
-    hBox1.xPos - hBox1.getWidth()/2 <= hBox2.xPos + hBox2.getWidth()/2) &&
+    hBox1.xPos - hBox1.getWidth()/2 <= hBox2.xPos + hBox2.getWidth()/2) && //<>//
     (hBox1.yPos + hBox1.getHeight()/2 >= hBox2.yPos - hBox2.getHeight()/2 + yChange &&
-    hBox1.yPos - hBox1.getHeight()/2 <= hBox2.yPos + hBox2.getHeight()/2 + yChange)) { //<>//
+    hBox1.yPos - hBox1.getHeight()/2 <= hBox2.yPos + hBox2.getHeight()/2 + yChange)) { //<>// //<>//
             
           if ( hBox1.getDesignation() != AreaTypeEnum.CHARACTER_HITBOX ) { //<>//
             
-            hBox2.setHitY(true);
+            hBox2.setHitY(true); //<>//
             hBox1.setHitY(true);
             
           }
-          
-          runLevelPrompt = true;
            //<>//
-      }
-    else { //<>//
+          runLevelPrompt = true; //<>//
+           //<>//
+      } //<>//
+    else { //<>// //<>//
       
-      hBox2.setHitY(false);
-      hBox1.setHitY(false);
-       //<>//
+      hBox2.setHitY(false); //<>//
+      hBox1.setHitY(false); //<>//
+       //<>// //<>//
       runLevelPrompt = false;
-      
     } //<>//
   //<>// //<>//
   } //<>// //<>// //<>//
-
+ //<>//
   private void computeColorCheck(GameCharacter c, int xChange, int yChange){ //<>//
     color pixelColor = state.currentState.hitboxImage.get( (int) c.local.getFeetX() + xChange, (int) c.local.getFeetY() + yChange); //<>//
     //println("COLOR="+red(pixelColor)+"<r:"+green(pixelColor)+"<g:"+blue(pixelColor)+"<b:");
@@ -158,9 +169,9 @@ void run() {  //<>//
          c.getHitbox().isHitX = false; //<>// //<>//
          c.getHitbox().isHitY = false;
       }
-  }
+  } //<>//
+ //<>// //<>//
  //<>//
-
  private void moveCheck(float xChange, float yChange, GameCharacter character) { 
     //<>//
   //  for (GameCharacter c : players ) { //<>//
@@ -181,8 +192,8 @@ void run() {  //<>//
         computeIntersection(a, character.getHitbox(), xChange, yChange);  //<>//
          //<>//
         if (character.local.hitbox.isHitX) xChange = 0;  //<>//
-        if (character.local.hitbox.isHitY) yChange = 0;
-      
+        if (character.local.hitbox.isHitY) yChange = 0; //<>//
+       //<>//
       }
        //<>//
    // } //<>//
@@ -197,7 +208,7 @@ void run() {  //<>//
       
       character.moveX(xChange);
       character.moveY(yChange);
-      
+       //<>//
       character.setHitboxXPos(character.getXPos());
       character.setHitboxYPos(character.getYPos());
     
