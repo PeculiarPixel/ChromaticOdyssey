@@ -15,7 +15,8 @@ PApplet master = this;
   {
     //size(1024, 768, P2D);
     size(1024, 768);
-    smooth(); //<>// //<>// //<>//
+    smooth(); //<>// //<>// //<>// //<>//
+
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
     background(BACKGROUND_COLOR);                  // Background refresh color
@@ -123,14 +124,14 @@ PApplet master = this;
       
       kitKeyPress = true;
     }
-  }
- //<>// //<>// //<>//
-  // Key Released Events //<>// //<>// //<>//
-  void keyReleased() { //<>//
-     //<>// //<>//
-        kitKeyPress = false; //<>//
-  if (keyCode == UP) { //<>//
-      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>//
+  } //<>//
+ //<>// //<>// //<>// //<>//
+  // Key Released Events //<>// //<>// //<>// //<>//
+  void keyReleased() { //<>// //<>//
+     //<>// //<>// //<>//
+        kitKeyPress = false; //<>// //<>//
+  if (keyCode == UP) { //<>// //<>//
+      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>// //<>//
       kitMoveRelease.remove(0);       //<>//
       kitMoveRelease.add(MoveDirection.UP);
     }
@@ -139,24 +140,24 @@ PApplet master = this;
       kitMoveRelease.remove(0); 
       kitMoveRelease.add(MoveDirection.DOWN);
     }
-    if(keyCode == LEFT){
+    if(keyCode == LEFT){ //<>//
      newt.releaseDirection(MoveDirection.LEFT);
      kitMoveRelease.remove(0);     
-     kitMoveRelease.add(MoveDirection.LEFT);
-    } //<>//
-    if(keyCode == RIGHT){ //<>//
+     kitMoveRelease.add(MoveDirection.LEFT); //<>// //<>//
+    } //<>// //<>// //<>//
+    if(keyCode == RIGHT){
       newt.releaseDirection(MoveDirection.RIGHT);
       kitMoveRelease.add(MoveDirection.RIGHT);
-    }
-    if(key == 'h' || key == 'H'){ //<>//
+    } //<>//
+    if(key == 'h' || key == 'H'){ //<>// //<>//
         hitBoxMode = !hitBoxMode; //<>//
     }
     if(key == 'c' || key == 'C')
         {
           // Trigger combat
           inCombat = !inCombat;
-        }
-    if(key == 'b' || key == 'B'){ //<>// //<>//
+        } //<>//
+    if(key == 'b' || key == 'B'){ //<>// //<>// //<>//
        println();  //<>//
     }
     if(key == 'p' || key == 'P'){
@@ -165,17 +166,17 @@ PApplet master = this;
     }
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
         display.updateCurrentScript();
-    }
-  } //<>// //<>//
+    } //<>//
+  } //<>// //<>// //<>//
  //<>//
   // Start the game intro and then the first level
-  private void gameStart() {
-    if (DEBUG.INTRO_ON) state.setState(LevelName.INTRO); //<>// //<>//
+  private void gameStart() { //<>//
+    if (DEBUG.INTRO_ON) state.setState(LevelName.INTRO); //<>// //<>// //<>//
     else state.setState(LevelName.TEST_0);
   }
 
   // Handle movie event
-  public void movieEvent(Movie m) {
+  public void movieEvent(Movie m) { //<>//
     m.read();
   }
 
