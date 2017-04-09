@@ -179,6 +179,9 @@ PApplet master = this;
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
         display.updateCurrentScript();
     }
+    if (key == 's' || key == 'S' && state.currentState.name == LevelName.INTRO) {
+      introStory.jump(introStory.duration());
+    }
   } 
 
   // Start the game intro and then the first level
@@ -223,8 +226,20 @@ PApplet master = this;
   
   void mousePressed()
 {
-  if(inCombat && !lockMouseInput)
+  if(inCombat && !lockMouseInput) {
     fightManager.pressCheck();
+    return;
+  }
+   
+  if (state.currentState.name == LevelName.INTRO) {
+      if (mouseX > 511 && mouseX < 827 && mouseY > 385 && mouseY < 552 && runIntroStory == false) {
+      introScreen.stop();
+      introStory.play(); //<>// //<>//
+      runIntroStory = true;
+      return;
+    }
+  }
+    
 }
 
 void mouseMoved()

@@ -37,27 +37,14 @@ class ComputationEngine {
   public void addCharacter(GameCharacter c) {
     this.players.add(c);
   }
-   //<>//
 
-void run() { //<>// //<>// //<>//
+void run() {
   
-  // Loop through all registered computation events //<>// //<>// //<>// //<>//
-  if(key == 's' || key == 'S' && state.currentState.name == LevelName.INTRO){
-    introStory.jump(introStory.duration());
-  }
-  
-  if(mousePressed == true && state.currentState.name == LevelName.INTRO) {
-    if(mouseX > 511 && mouseX < 827 && mouseY > 385 && mouseY < 552 && runIntroStory == false){
-      introScreen.stop();
-      introStory.play(); //<>// //<>//
-      runIntroStory = true;
-    }
-  }
-  
+  // Loop through all registered computation events
   if (DEBUG.INTRO_ON) {
     if(introStory.time() == introStory.duration() && switched == false){
       switched = true;
-      dispatcher.dispatch(new LevelTransitionEvent(LevelName.TEST_0));
+      dispatcher.dispatch(new LevelTransitionEvent(LevelName.CASTLE_APPROACH));
     }
   }
 
@@ -161,48 +148,44 @@ void run() { //<>// //<>// //<>//
   //<>// //<>//
   } //<>// //<>// //<>//
  //<>//
-  private void computeColorCheck(GameCharacter c, int xChange, int yChange){ //<>//
+  private void computeColorCheck(GameCharacter c, int xChange, int yChange) {
     color pixelColor = state.currentState.hitboxImage.get( (int) c.local.getFeetX() + xChange, (int) c.local.getFeetY() + yChange); //<>//
-    //println("COLOR="+red(pixelColor)+"<r:"+green(pixelColor)+"<g:"+blue(pixelColor)+"<b:");
-      if(red(pixelColor) == 255){ //<>//
-         c.getHitbox().isHitX = true; //<>// //<>//
-         c.getHitbox().isHitY = true; //<>// //<>// //<>//
-      }else{ //<>//
-         c.getHitbox().isHitX = false; //<>// //<>//
+    if (DEBUG.COLOR_LOGGING) println("COLOR = " + red(pixelColor) + "<r:" + green(pixelColor) + "<g:"+blue(pixelColor) + "<b:");
+      if(red(pixelColor) == 255) {
+         c.getHitbox().isHitX = true;
+         c.getHitbox().isHitY = true; 
+      }else {
+         c.getHitbox().isHitX = false;
          c.getHitbox().isHitY = false;
       }
-  } //<>//
- //<>// //<>//
- //<>//
+  }
+  
  private void moveCheck(float xChange, float yChange, GameCharacter character) { 
-    //<>//
-  //  for (GameCharacter c : players ) { //<>//
-      // Collision for triggers //<>//
+   
+      // Collision for triggers
       for (Area a : triggers) {  
         computeIntersection(a, character.getHitbox(), xChange, yChange); //<>//
-      } //<>//
-       //<>//
+      }
+       
       for (Trigger t : triggers) {
-        if (t.isHit() && !t.hasActivated()) { //<>//
-          t.trigger(); //<>//
-        } //<>// //<>//
-      } //<>//
+        if (t.isHit() && !t.hasActivated()) {
+          t.trigger();
+        }
+      } 
      
-      // Collision for hitboxes  //<>//
-      for (Area a : hitboxes) { //<>// //<>//
-         //<>//
+      // Collision for hitboxes
+      for (Area a : hitboxes) {
+     
         computeIntersection(a, character.getHitbox(), xChange, yChange);  //<>//
-         //<>//
+     
         if (character.local.hitbox.isHitX) xChange = 0;  //<>//
         if (character.local.hitbox.isHitY) yChange = 0; //<>//
-       //<>//
+     
       }
-       //<>//
-   // } //<>//
+     
    
       // Compute color change //<>//
-      computeColorCheck( character, (int) xChange, (int) yChange ); //<>//
-       //<>//
+      computeColorCheck(character, (int) xChange, (int) yChange );
     
       // Stop character movement again for color
       if(character.local.hitbox.isHitX) xChange = 0; //<>//

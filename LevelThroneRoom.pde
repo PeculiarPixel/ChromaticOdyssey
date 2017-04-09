@@ -1,8 +1,8 @@
 // Throne Room Level
 class LevelThroneRoom extends Level {
    
-  public float START_X = 2400;
-  public float START_Y = 900;
+  public float START_X = 500;
+  public float START_Y = 1450;
   
   
   // Constructor
@@ -41,7 +41,8 @@ class LevelThroneRoom extends Level {
    // this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
    // this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
   //  this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
-    this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.CASTLE_HUB,1000, 200));
+    this.triggers.add(new LevelTransitionTrigger(500, 1600, 600, 100, LevelName.CASTLE_HUB,1000, 200));
+    this.triggers.add(new LevelTransitionTrigger(500, 100, 100, 100, LevelName.SPIRE,1000, 200));
   //  this.landscapes.add(new Landscape(120, 120,  100, 100));
   //  this.landscapes.add(new Landscape(700, 120, 100, 100));
     
