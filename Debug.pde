@@ -15,5 +15,6 @@ static class DEBUG {
   public static final boolean DISPLAY_LOGGING = false;         // Turn on logging in DisplayEngine
   public static final boolean FILE_LOGGING = false;            // Turn on file input logging
   public static final boolean DIALOG_LOGGING = false;          // Turn on dialog logging
+  public static final boolean COLOR_LOGGING = false;
   
 }
