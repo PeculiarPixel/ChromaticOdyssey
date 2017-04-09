@@ -11,17 +11,16 @@ class LevelOutro extends Level {
     loadAssets();
   }
   
-  public void setStartPosition() {}
+  public void setStartPosition() {
+    newt.setXPos(START_X);
+    newt.setYPos(START_Y);    
+  }
   
   public void initialize() {}
   
   // Load image assets
   public void loadAssets() {
     this.characters.add(newt);
-    newt.setXPos(START_X);
-    newt.setYPos(START_Y);
-  
-  
   }
   
   public void movieEvent(Movie m) {
