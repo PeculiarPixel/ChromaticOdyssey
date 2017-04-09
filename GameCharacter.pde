@@ -14,11 +14,11 @@ class GameCharacter {
       HashMap<String, SpriteAnimation> animations = spriteLibrary.getCharacterAnimations(name);
       
       // Global info
-      global = new GlobalInfo(100, 100, animations);
+      global = new GlobalInfo(100, 100, animations, name);
       
       // Local info
       local = new LocalInfo(width/2, height/2, 
-                            getCurrentImage().width, getCurrentImage().height, 
+                            getCurrentImage().width, 188, 
                              100, 0, 100);
     }
     

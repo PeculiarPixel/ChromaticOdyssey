@@ -42,7 +42,7 @@ class LevelThroneRoom extends Level {
    // this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
   //  this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
     this.triggers.add(new LevelTransitionTrigger(500, 1600, 600, 100, LevelName.CASTLE_HUB,1000, 200));
-    this.triggers.add(new LevelTransitionTrigger(475, 200, 125, 100, LevelName.SPIRE,1000,1100));
+    this.triggers.add(new LevelTransitionTrigger(475, 150, 125, 100, LevelName.SPIRE,1000,1100));
   //  this.landscapes.add(new Landscape(120, 120,  100, 100));
   //  this.landscapes.add(new Landscape(700, 120, 100, 100));
     
@@ -62,7 +62,7 @@ class LevelThroneRoom extends Level {
   // Load all level related assets
   public void loadAssets() {
     
-    this.hitboxImage = loadImage("LevelBackgrounds/ThroneRoom/HitboxBlank.png");    
+    this.hitboxImage = loadImage("LevelBackgrounds/ThroneRoom/HitboxLayer.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/ThroneRoom/Bottom.png");
 
     this.foregroundImage = loadImage("LevelBackgrounds/ThroneRoom/Top.png");

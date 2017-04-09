@@ -25,13 +25,16 @@ class LevelSpire extends Level {
     
     kit.setXPos(START_X);
     kit.setYPos(START_Y);
+    
+    pragma.setXPos(START_X+100);
+    pragma.setYPos(START_Y-500);
   }
   
   // Load level necessary characters
   private void loadCharacters() {
     this.characters.add(newt);
     this.characters.add(kit);
-
+    this.characters.add(pragma);
   }
   
   // Load all level landscapes (Hitboxes, Triggers, Objects)
@@ -62,7 +65,7 @@ class LevelSpire extends Level {
   // Load all level related assets
   public void loadAssets() {
     
-    this.hitboxImage = loadImage("LevelBackgrounds/Spire/HitboxBlank.png");    
+    this.hitboxImage = loadImage("LevelBackgrounds/Spire/HitboxLayer.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/Spire/Bottom.png");
 
     this.foregroundImage = loadImage("LevelBackgrounds/Spire/Top.png");

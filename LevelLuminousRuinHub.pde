@@ -51,12 +51,12 @@ class LevelLuminousRuinHub extends Level {
       this.triggers.add(new DialogTrigger(1000, 350, 400, 100, this.conversations.get(1)));
                         
       // Hitbox to block the throne room
-      this.landscapes.add(new Landscape(1050, 200, 500, 200));
+     // this.landscapes.add(new Landscape(1050, 200, 500, 200));
     
     }
    
    // Transition triggers
-    this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.MASTER_BEDROOM, 2400, 900));
+    this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.MASTER_BEDROOM, 2400, 700));
     this.triggers.add(new LevelTransitionTrigger(1000, 50, 600, 100, LevelName.THRONE_ROOM, 2400, 900));
     this.triggers.add(new LevelTransitionTrigger(1000, 1500, 600, 100, LevelName.CASTLE_APPROACH, 3550, 1100));
     

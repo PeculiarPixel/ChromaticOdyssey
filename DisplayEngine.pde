@@ -47,18 +47,18 @@ class DisplayEngine {
   }
   
   
-  // Display game characters //<>//
-  public void displayCharacter(GameCharacter c) { //<>//
- //<>// //<>//
-    imageMode(CENTER); //<>// //<>// //<>//
-    c.updateSpriteAnimation(); //<>// //<>// //<>//
-    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>//
-    if(c.local.hitboxDisplay) { //<>// //<>//
-      displayArea(c.getHitbox()); //<>// //<>//
-    }  //<>//
-      //<>//
-  }  //<>// //<>//
-   //<>//
+  // Display game characters //<>// //<>//
+  public void displayCharacter(GameCharacter c) { //<>// //<>//
+ //<>// //<>// //<>//
+    imageMode(CENTER); //<>// //<>// //<>// //<>//
+    c.updateSpriteAnimation(); //<>// //<>// //<>// //<>//
+    image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>//
+    if(c.local.hitboxDisplay) { //<>// //<>// //<>//
+      displayArea(c.getHitbox()); //<>// //<>// //<>//
+    }  //<>// //<>//
+      //<>// //<>//
+  }  //<>// //<>// //<>//
+   //<>// //<>//
   // Display Landscapes
   public void displayLandscape(Landscape land){
     imageMode(CENTER);
@@ -67,9 +67,14 @@ class DisplayEngine {
     }
   }
   
-  // Display all characters in state's current level //<>//
-  private void displayCharacters() { //<>// //<>// //<>//
-    imageMode(CORNER); //<>// //<>// //<>//
+  // Display all characters in state's current level //<>// //<>//
+  private void displayCharacters() { //<>// //<>// //<>// //<>//
+    imageMode(CORNER); //<>// //<>// //<>// //<>//
+     //<>//
+    for(int i=2;i<state.currentState.characters.size();i++){
+      displayCharacter(state.currentState.characters.get(i));
+    }
+    
     if(newt.local.yPos<kit.local.yPos){ //<>//
           displayCharacter(newt);
           displayCharacter(kit);
@@ -94,43 +99,43 @@ class DisplayEngine {
   private void displayLandscapes() {
     for (Landscape l : state.currentState.landscapes) {
       displayLandscape(l);
-    }
-  }
-  
-  // Display triggers
-  private void displayTriggers() {
+    } //<>//
+  } //<>//
+   //<>//
+  // Display triggers //<>//
+  private void displayTriggers() { //<>//
     for (Trigger t : state.currentState.triggers) { //<>//
       if (newt.local.hitboxDisplay) { //<>//
-        displayArea(t); //<>// //<>//
-      } //<>//
-    } //<>//
-  }
+        displayArea(t); //<>// //<>// //<>//
+      } //<>// //<>//
+    } //<>// //<>//
+  } //<>//
   
   // Draw currently queued script //<>//
   private void displayDialog() { //<>//
     if (!this.scriptQueue.isEmpty()) this.scriptQueue.draw(); //<>//
-  } //<>//
-  
-  // Clear Display Engine of Events
+  } //<>// //<>//
+   //<>//
+  // Clear Display Engine of Events //<>//
   public void clearEvents() {
     this.events.clear();
   } //<>//
- //<>//
-  public void clearEngine() { //<>//
+ //<>// //<>//
+  public void clearEngine() { //<>// //<>//
     clearEvents();
-    clearScriptQueue();
-  }
-    //<>//
-  public Script getCurrentScript() { //<>//
-   return null;
+    clearScriptQueue(); //<>//
   } //<>//
- //<>//
-  // Run display engine //<>// //<>//
+    //<>// //<>//
+  public Script getCurrentScript() { //<>// //<>//
+   return null; //<>//
+  } //<>// //<>//
+ //<>// //<>//
+  // Run display engine //<>// //<>// //<>//
   void run() { //<>// //<>//
      //<>//
    background(0);      //  Init background //<>//
     //<>// //<>//
-   if (state.currentState.name == LevelName.INTRO){ //<>//
+   if (state.currentState.name == LevelName.INTRO){ //<>// //<>//
      if(runIntroStory == false){
       image(introScreen, 0, 0, width, height);
       }
@@ -140,16 +145,16 @@ class DisplayEngine {
         fill(255, 255, 255, occupacity);
         text("Press \"s\" to skip", width -180, height-40);
         if(introStory.time() > 2 && introStory.time() < 10){
-          occupacity++;
+          occupacity++; //<>//
         }
         else{
           occupacity--;
         }
-      } //<>//
+      } //<>// //<>//
    }
     
-  
-    
+   //<>//
+     //<>//
    else { //<>//
      
       pushMatrix();

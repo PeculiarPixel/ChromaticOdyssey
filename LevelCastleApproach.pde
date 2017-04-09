@@ -26,12 +26,17 @@ class LevelCastleApproach extends Level {
     
     kit.setXPos(START_X);
     kit.setYPos(START_Y);
+    
+    //pragma.setXPos(START_X);
+  //  pragma.setYPos(START_Y);
+    
   }
   
   // Load level necessary characters
   private void loadCharacters() {
     this.characters.add(newt);
     this.characters.add(kit);
+   // this.characters.add(pragma);
   }
   
   // Load all level landscapes (Hitboxes, Triggers, Objects)
@@ -63,7 +68,7 @@ class LevelCastleApproach extends Level {
   // Load all level related assets
   public void loadAssets() {
     
-    this.hitboxImage = loadImage("LevelBackgrounds/CastleApproach/hitboxLayer.png");    
+    this.hitboxImage = loadImage("LevelBackgrounds/CastleApproach/HitboxLayer.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/Bottom.png");
     /*backgroundImage.loadPixels();
     for(int i =0; i<backgroundImage.pixels.length;i++){
