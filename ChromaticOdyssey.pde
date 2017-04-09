@@ -112,8 +112,8 @@ PApplet master = this;
        newt.setDirection(MoveDirection.LEFT);
        //kit.setDirection(MoveDirection.LEFT);
        kitMoveSet.add(MoveDirection.LEFT);
-       startTime.append(millis());
-      } //<>// //<>// //<>//
+       startTime.append(millis()); //<>//
+      }
       if(keyCode == RIGHT){ //<>// //<>// //<>//
         newt.setDirection(MoveDirection.RIGHT);
        // kit.setDirection(MoveDirection.RIGHT);

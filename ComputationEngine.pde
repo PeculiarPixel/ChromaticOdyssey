@@ -49,14 +49,16 @@ void run() { //<>// //<>// //<>//
   if(mousePressed == true && state.currentState.name == LevelName.INTRO) {
     if(mouseX > 511 && mouseX < 827 && mouseY > 385 && mouseY < 552 && runIntroStory == false){
       introScreen.stop();
-      introStory.play(); //<>//
+      introStory.play(); //<>// //<>//
       runIntroStory = true;
     }
   }
   
-  if(introStory.time() == introStory.duration() && switched == false){
-    switched = true;
-        dispatcher.dispatch(new LevelTransitionEvent(LevelName.TEST_0));
+  if (DEBUG.INTRO_ON) {
+    if(introStory.time() == introStory.duration() && switched == false){
+      switched = true;
+      dispatcher.dispatch(new LevelTransitionEvent(LevelName.TEST_0));
+    }
   }
 
   // Loop through all registered computation events
