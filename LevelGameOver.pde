@@ -1,10 +1,10 @@
-class GameOver extends Level {
+class LevelGameOver extends Level {
   
   
-
   // Constructor
-  public LevelIntro() {
-    super(LevelName.GAME_OVER,0,0);
+  public LevelGameOver() {
+    super(LevelName.GAME_OVER, width/2 , height/2);
+    
     loadAssets();
   }
   
@@ -13,7 +13,12 @@ class GameOver extends Level {
   public void initialize() {}
   
   // Load image assets
-  public void loadAssets() {}
+  public void loadAssets() {
+    this.characters.add(newt);
+    newt.setXPos(START_X);
+    newt.setYPos(START_Y);
+  
+  }
   
   public void movieEvent(Movie m) {
     m.read();

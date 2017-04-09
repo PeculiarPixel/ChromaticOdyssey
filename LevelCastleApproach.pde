@@ -20,7 +20,7 @@ class LevelCastleApproach extends Level {
   
   // Set Newt Starting Position
   public void setStartPosition() {
-    GameCharacter newt = this.characters.get(0);
+
     newt.setXPos(START_X);
     newt.setYPos(START_Y);
     

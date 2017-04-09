@@ -3,12 +3,11 @@
 
 class LevelOutro extends Level {
   
-  // Image for castle enter prompt
   
-
   // Constructor
-  public LevelIntro() {
-    super(LevelName.OUTRO,0,0);
+  public LevelOutro() {
+    super(LevelName.OUTRO, width/2 , height/2);
+    
     loadAssets();
   }
   
@@ -17,10 +16,15 @@ class LevelOutro extends Level {
   public void initialize() {}
   
   // Load image assets
-  public void loadAssets() {}
+  public void loadAssets() {
+    this.characters.add(newt);
+    newt.setXPos(START_X);
+    newt.setYPos(START_Y);
+  
+  
+  }
   
   public void movieEvent(Movie m) {
     m.read();
   }
-  
 }

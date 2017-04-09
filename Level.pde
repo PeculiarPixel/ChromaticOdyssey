@@ -64,7 +64,8 @@ abstract class Level {
     
     // Set Starting position for level
     setStartPosition();
-    camera.setTrackTarget(this.characters.get(0));
+    
+    camera.setTrackTarget(newt);
     camera.setLevelSize(0, getStateSize().w, 0, getStateSize().h);
     
     if (DEBUG.MUSIC_ON) sounds.playLevelTheme(name);

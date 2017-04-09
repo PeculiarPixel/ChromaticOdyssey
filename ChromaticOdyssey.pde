@@ -43,11 +43,10 @@ PApplet master = this;
     if (DEBUG.INTRO_ON) {
       introScreen = new Movie(master, "TitleScreen.mp4");
       introStory = new Movie(master, "Intro.mp4");
-      Outro = new Movie(master, "Outro.mp4");
-      gameOver = new Movie(master, "Game Over.mp4");
       introScreen.loop();
     }
-  
+      OUTRO = new Movie(master, "Outro.mp4");
+      GAME_OVER = new Movie(master, "Game Over.mp4");
     // Combat module initializations:
     imageMaker = new ImageMaker();
   

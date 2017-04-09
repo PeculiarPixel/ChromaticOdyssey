@@ -52,7 +52,13 @@ public class LevelLoader {
           break;    
         case INTRO:
           level = new LevelIntro();
-          break;    
+          break;
+        case GAME_OVER:
+          level = new LevelGameOver();
+          break; 
+        case OUTRO:
+          level = new LevelOutro();
+          break; 
       }
     
     // Return level

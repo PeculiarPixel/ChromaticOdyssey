@@ -132,7 +132,15 @@ class DisplayEngine {
      //<>// //<>//
    background(0);      //  Init background //<>// //<>//
     //<>// //<>//
-   if (state.currentState.name == LevelName.INTRO){ //<>// //<>//
+   if (state.currentState.name == LevelName.OUTRO){ //<>//  
+     OUTRO.play();
+     imageMode(CORNER);
+     image(OUTRO,0, 98, width, 572); 
+  }else if (state.currentState.name == LevelName.GAME_OVER){ //<>//  
+     GAME_OVER.play();
+     imageMode(CORNER);
+     image(GAME_OVER, 0, 98, width, 572); 
+  }else if (state.currentState.name == LevelName.INTRO){ //<>// //<>//
      if(runIntroStory == false){
       image(introScreen, 0, 0, width, height);
       }
@@ -147,11 +155,8 @@ class DisplayEngine {
         else{
           occupacity--;
         }
-      } //<>// //<>//
+      } //<>//     //<>//
    }
-   if (state.currentState.name == LevelName.GAME_OVER){
-        image(gameOver, 0, 0, width, height);
-      }
     
    //<>//
      //<>//

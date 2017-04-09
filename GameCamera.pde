@@ -33,6 +33,7 @@ class GameCamera {
   public GameCamera() {
     this.view_width = width;
     this.view_height = height;
+    this.target = newt;
   }
   
   // Set track target
