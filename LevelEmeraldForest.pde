@@ -2,7 +2,7 @@
 class LevelEmeraldForest extends Level {
 
    public LevelEmeraldForest() {
-     super(LevelName.EMERALD_FOREST);
+     super(LevelName.EMERALD_FOREST,0,0);
      loadAssets();
    }
    

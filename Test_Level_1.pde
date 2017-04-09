@@ -5,7 +5,7 @@ class Test_Level_1 extends Level {
   private final float START_Y = 900;
   
   public Test_Level_1(){
-    super(LevelName.TEST_1);
+    super(LevelName.TEST_1,3650,900);
     loadAssets();
   }
   
@@ -40,7 +40,7 @@ class Test_Level_1 extends Level {
   private void loadLandscapes() {
   
     this.landscapes.add(new Landscape(350, 350,100,100)); 
-    this.triggers.add(new LevelTransitionTrigger(235, 2750, 100, 100, LevelName.TEST_0));
+    //this.triggers.add(new LevelTransitionTrigger(235, 2750, 100, 100, LevelName.TEST_0));
     this.landscapes.add(new Landscape(300, 120, 100, 100));
     this.landscapes.add(new Landscape(700, 120, 100, 100));
     

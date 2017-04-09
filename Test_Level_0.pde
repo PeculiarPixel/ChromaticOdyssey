@@ -11,7 +11,7 @@ class Test_Level_0 extends Level {
   
   // Constructor
   public Test_Level_0() {
-    super(LevelName.TEST_0);
+    super(LevelName.TEST_0,235,2750);
     
     if (DEBUG.QUICK_TRANSITION) {
       this.START_X = 3550;
@@ -45,7 +45,7 @@ class Test_Level_0 extends Level {
     this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
     this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
     this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
-    this.triggers.add(new LevelTransitionTrigger(3650, 900, 100, 100, LevelName.TEST_1));
+ //   this.triggers.add(new LevelTransitionTrigger(3650, 900, 100, 100, LevelName.TEST_1));
     this.landscapes.add(new Landscape(120, 120,  100, 100));
     this.landscapes.add(new Landscape(700, 120, 100, 100));
     
@@ -67,11 +67,11 @@ class Test_Level_0 extends Level {
     
     this.hitboxImage = loadImage("LevelBackgrounds/CastleApproach/hitboxLayer.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkup.png");
-    /*backgroundImage.loadPixels();
+    backgroundImage.loadPixels();
     for(int i =0; i<backgroundImage.pixels.length;i++){
-      backgroundImage.pixels[i] =  color();
+      backgroundImage.pixels[i] =  color(255,255,0);
     }
-    backgroundImage.updatePixels();*/
+    backgroundImage.updatePixels();
     this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkupTopLayer.png");
     this.fog = new Fog(3500,2000,1500);
     

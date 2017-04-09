@@ -24,14 +24,22 @@ class GameCharacter {
     
     // Set character move direction
     void setDirection(MoveDirection direction) {
-      
-      if (checkTwoMoveKeyLimit()) return;
+      if(name == GameCharacterName.KIT){
+        if (checkTwoMoveKeyLimit()) return;
       
       if (isDirectionChange(direction)) {
         this.local.setDirection(direction);
         updateSprite(local.getDirection());
       }
       
+      }else{
+      if (checkTwoMoveKeyLimit()) return;
+      
+      if (isDirectionChange(direction)) {
+        this.local.setDirection(direction);
+        updateSprite(local.getDirection());
+      }
+      }
     }
     
     // Check that we have only up to two move keys pressed

@@ -6,7 +6,8 @@ abstract class Level {
   protected ArrayList<Hitbox> hitboxes;
   protected ArrayList<Script> conversations;
   protected LevelName name;
-  
+  protected float START_X;
+  protected float START_Y;
   //public ArrayList<Movie> cutscenes;
   //public ArrayList<Item> items;
   //public ArrayList<Menu> menus;
@@ -17,7 +18,7 @@ abstract class Level {
   
   
   protected Fog fog;
-  protected Level(LevelName inputName) {
+  protected Level(LevelName inputName, float x, float y) {
     
     this.characters = new ArrayList<GameCharacter>();
     this.landscapes = new ArrayList<Landscape>();
@@ -26,7 +27,8 @@ abstract class Level {
     this.hitboxes = new ArrayList<Hitbox>();
     this.fog = new Fog(0,0,0);
     this.name = inputName;
-    
+    this.START_X =x;
+    this.START_Y =y;
   }
   
   abstract void loadAssets();
@@ -37,8 +39,18 @@ abstract class Level {
   public LevelSize getStateSize() {
     return new LevelSize(backgroundImage.width, backgroundImage.height);
   }
- 
-  
+  //Set Level spawn point
+  public void setStart(float x, float y){
+    this.START_X = x;
+    this.START_Y = y;
+  }
+  //Get Level spawn point
+  public float getSTART_X(){
+    return this.START_X;
+  }
+  public float getSTART_Y(){
+    return this.START_Y;
+  }
   // Initialize all assets, characters, &c into comp engine
   public void initialize() {
     
