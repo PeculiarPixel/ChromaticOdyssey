@@ -1,5 +1,4 @@
 import processing.video.*;
-import ddf.minim.*;
 
 // Combat module libraries:
 import java.awt.*;
@@ -24,13 +23,8 @@ PApplet master = this;
     frameRate(FRAMES_PER_SECOND_RATE);             // FPS rate
                                 
     initValues = false;
-    Minim minim = new Minim(this); 
     
-    if (DEBUG.MUSIC_ON) {
-      println("Loading file a.wav");
-      AudioPlayer song = minim.loadFile("a.wav");
-      song.loop();
-    }
+    minim = new Minim(this);
   
     if (DEBUG.INTRO_ON) {
       introScreen = new Movie(master, "TitleScreen.mp4");
@@ -45,6 +39,7 @@ PApplet master = this;
    
     fileUtils = new FileUtils();
     spriteLibrary = new SpriteAnimationLibrary();
+    sounds = new SoundLibrary();
     world = new World();
     comp  = new ComputationEngine();
     state  = new StateEngine();
@@ -180,7 +175,9 @@ PApplet master = this;
         display.updateCurrentScript();
     }
     if (key == 's' || key == 'S' && state.currentState.name == LevelName.INTRO) {
-      introStory.jump(introStory.duration());
+      if (DEBUG.INTRO_ON) {
+        introStory.jump(introStory.duration());
+      }
     }
   } 
 

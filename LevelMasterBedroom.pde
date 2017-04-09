@@ -37,14 +37,13 @@ class LevelMasterBedroom extends Level {
   
   // Load all level landscapes (Hitboxes, Triggers, Objects)
   private void loadLandscapes() {
-    
-  //  this.triggers.add(new DialogTrigger(300, 2750, 100, 400, this.conversations.get(0)));
-   // this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
-   // this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
-  //  this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
-    this.triggers.add(new LevelTransitionTrigger(2500, 900, 100, 600, LevelName.CASTLE_HUB,250, 750));
-  //  this.landscapes.add(new Landscape(120, 120,  100, 100));
-  //  this.landscapes.add(new Landscape(700, 120, 100, 100));
+  
+   // Dialog
+  this.triggers.add(new DialogTrigger(2300, 950, 100, 400, this.conversations.get(0)));
+  this.triggers.add(new DialogTrigger(1250, 950, 100, 400, this.conversations.get(1)));
+  
+  // Transition back to HUB
+  this.triggers.add(new LevelTransitionTrigger(2500, 900, 100, 600, LevelName.CASTLE_HUB, 250, 750));
     
   }
   

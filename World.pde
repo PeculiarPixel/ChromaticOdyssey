@@ -7,6 +7,9 @@ public class World {
   private HashMap<LevelName, Level> levels;                        // Collection of all levels
   private boolean gameStarted = false;                             // Boolean if the game has started
   
+  private boolean mythra_defeated = false;
+  private boolean game_finished = false;
+  
   private Test_Level_0 test_0;
   private Test_Level_1 test_1;
   private LevelEmeraldForest Level_Emerald_Forest;
@@ -59,6 +62,8 @@ public class World {
   private void setupCharacters() {
     newt = new GameCharacter(GameCharacterName.NEWT);
     kit = new GameCharacter(GameCharacterName.KIT);
+    //mythra = new GameCharacter(GameCharacterName.MYTHRA);
+    //pragma = new GameCharacter(GameCharacterName.PRAGMA);
   }
   
   // Unload a level from memory
@@ -87,6 +92,17 @@ public class World {
     
   }
   
-  public Level getMainMenu() { return null; }
+  // Set Mythra boss to be defeated 
+  public void setMythraDefeated() { this.mythra_defeated = true; }
+  
+  // Set game to be finished
+  public void setGameFinished() { this.game_finished = true; }
+  
+  // Check if mythra is defeated
+  public boolean isMythraDefeated() { return this.mythra_defeated; }
+  
+  // Check if game is finished
+  public boolean isGameFinished() { return this.game_finished; }
+  
 
 }

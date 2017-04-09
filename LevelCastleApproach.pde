@@ -32,7 +32,6 @@ class LevelCastleApproach extends Level {
   private void loadCharacters() {
     this.characters.add(newt);
     this.characters.add(kit);
-
   }
   
   // Load all level landscapes (Hitboxes, Triggers, Objects)
@@ -49,9 +48,6 @@ class LevelCastleApproach extends Level {
     this.landscapes.add(new Landscape(700, 120, 100, 100));
     
   }
-  
-  
-  
   
   // Load level conversations
   private void loadConversations() {
