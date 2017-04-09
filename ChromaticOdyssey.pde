@@ -201,7 +201,7 @@ PApplet master = this;
     {
       fightManager.drawActive();
       // Image has to be offset to the center of the screen, presumably due to matrix transform issues:
-      image(fightManager.getAsPImage(), 512, 384);
+      image(fightManager.getAsPImage(fightManager.getImg()), 512, 384);
     }
     
     //println(mouseX - px, mouseY - py);
