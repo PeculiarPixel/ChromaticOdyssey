@@ -10,8 +10,10 @@ IntList startTime;
 IntList stopTime;
 
 int kitFollowDelay;
+boolean runIntroStory = false;
 
 Movie introScreen;
+Movie introStory;
 
 ArrayList<MoveDirection> kitMoveSet;
 ArrayList<MoveDirection> kitMoveRelease;
@@ -35,17 +37,6 @@ SpriteAnimationLibrary spriteLibrary;   // Sprite Animation Library
 FileUtils fileUtils;                    // File I/O Utilities
 GameCamera camera;                      // Game camera view
 DrawUtilities drawUtils;                // Draw utilities
-
-//movement variables
-  float px;
-  float py;
-  float saveX;
-  float saveY;
-  
-//globals for tracking
-boolean dialog;                           //is dialog window up
-String displayText;                       //the text currently being shown in the dialog window
-int saveSpot ;                            //index of the current string animation
 
 // Combat globals
 
