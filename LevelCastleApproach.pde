@@ -64,13 +64,13 @@ class LevelCastleApproach extends Level {
   public void loadAssets() {
     
     this.hitboxImage = loadImage("LevelBackgrounds/CastleApproach/hitboxLayer.png");    
-    this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkup.png");
+    this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/Bottom.png");
     /*backgroundImage.loadPixels();
     for(int i =0; i<backgroundImage.pixels.length;i++){
       backgroundImage.pixels[i] =  color();
     }
     backgroundImage.updatePixels();*/
-    this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkupTopLayer.png");
+    this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/Top.png");
     this.fog = new Fog(3500,2000,1500);
     
     loadConversations();

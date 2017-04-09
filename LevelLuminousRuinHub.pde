@@ -82,9 +82,9 @@ class LevelLuminousRuinHub extends Level {
   public void loadAssets() {
     
     this.hitboxImage = loadImage("LevelBackgrounds/LuminousRuinHub/HitboxLayer.png");    
-    this.backgroundImage = loadImage("LevelBackgrounds/LuminousRuinHub/HubBottom.png");
+    this.backgroundImage = loadImage("LevelBackgrounds/LuminousRuinHub/Bottom.png");
 
-    this.foregroundImage = loadImage("LevelBackgrounds/LuminousRuinHub/HubTop.png");
+    this.foregroundImage = loadImage("LevelBackgrounds/LuminousRuinHub/Top.png");
    // this.fog = new Fog(3500,2000,1500);
     
     loadConversations();
