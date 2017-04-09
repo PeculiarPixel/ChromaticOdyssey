@@ -32,6 +32,7 @@ PApplet master = this;
   
     if (DEBUG.INTRO_ON) {
       introScreen = new Movie(master, "TitleScreen.mp4");
+      introStory = new Movie(master, "Intro.mp4");
       introScreen.loop();
     }
     
@@ -111,7 +112,7 @@ PApplet master = this;
        newt.setDirection(MoveDirection.LEFT);
        //kit.setDirection(MoveDirection.LEFT);
        kitMoveSet.add(MoveDirection.LEFT);
-       startTime.append(millis());
+       startTime.append(millis()); //<>//
       }
       if(keyCode == RIGHT){ //<>// //<>// //<>//
         newt.setDirection(MoveDirection.RIGHT);

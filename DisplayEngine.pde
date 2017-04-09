@@ -11,6 +11,8 @@ class DisplayEngine {
    ScriptQueue scriptQueue;                     // Queue of conversations
    boolean transition;                          //State Transition in progress
    
+   int occupacity = 0;
+   
    // Constructor
    public DisplayEngine() {
      
@@ -45,15 +47,15 @@ class DisplayEngine {
   }
   
   
-  // Display game characters
-  public void displayCharacter(GameCharacter c) {
- //<>//
-    imageMode(CENTER); //<>// //<>//
-    c.updateSpriteAnimation(); //<>// //<>//
+  // Display game characters //<>//
+  public void displayCharacter(GameCharacter c) { //<>//
+ //<>// //<>//
+    imageMode(CENTER); //<>// //<>// //<>//
+    c.updateSpriteAnimation(); //<>// //<>// //<>//
     image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>//
     if(c.local.hitboxDisplay) { //<>// //<>//
-      displayArea(c.getHitbox()); //<>//
-    } 
+      displayArea(c.getHitbox()); //<>// //<>//
+    }  //<>//
       //<>//
   }  //<>// //<>//
    //<>//
@@ -65,8 +67,8 @@ class DisplayEngine {
     }
   }
   
-  // Display all characters in state's current level
-  private void displayCharacters() { //<>// //<>//
+  // Display all characters in state's current level //<>//
+  private void displayCharacters() { //<>// //<>// //<>//
     imageMode(CORNER); //<>// //<>// //<>//
     if(newt.local.yPos<kit.local.yPos){ //<>//
           displayCharacter(newt);
@@ -97,15 +99,15 @@ class DisplayEngine {
   
   // Display triggers
   private void displayTriggers() {
-    for (Trigger t : state.currentState.triggers) {
-      if (newt.local.hitboxDisplay) {
-        displayArea(t); //<>//
+    for (Trigger t : state.currentState.triggers) { //<>//
+      if (newt.local.hitboxDisplay) { //<>//
+        displayArea(t); //<>// //<>//
       } //<>//
     } //<>//
   }
   
-  // Draw currently queued script
-  private void displayDialog() {
+  // Draw currently queued script //<>//
+  private void displayDialog() { //<>//
     if (!this.scriptQueue.isEmpty()) this.scriptQueue.draw(); //<>//
   } //<>//
   
@@ -121,18 +123,34 @@ class DisplayEngine {
     //<>//
   public Script getCurrentScript() { //<>//
    return null;
-  }
-
+  } //<>//
+ //<>//
   // Run display engine //<>// //<>//
   void run() { //<>// //<>//
      //<>//
    background(0);      //  Init background //<>//
-    //<>//
-   if (state.currentState.name == LevelName.INTRO){
-      image(introScreen, 0, 0, width, height); //<>// //<>//
-    } //<>// //<>//
+    //<>// //<>//
+   if (state.currentState.name == LevelName.INTRO){ //<>//
+     if(runIntroStory == false){
+      image(introScreen, 0, 0, width, height);
+      }
+      else{
+        image(introStory, 0, 98, width, 572); //<>//
+        textSize(20);
+        fill(255, 255, 255, occupacity);
+        text("Press \"s\" to skip", width -180, height-40);
+        if(introStory.time() > 2 && introStory.time() < 10){
+          occupacity++;
+        }
+        else{
+          occupacity--;
+        }
+      } //<>//
+   }
     
-   else {
+  
+    
+   else { //<>//
      
       pushMatrix();
       camera.fixedUpdate(); // Update camera positions //<>//
