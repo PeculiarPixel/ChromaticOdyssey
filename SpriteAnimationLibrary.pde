@@ -67,6 +67,11 @@ public class SpriteAnimationLibrary {
     AnimationDirPathMap.put("MYTHRA_HURT", "SpriteAnimations/Mythra/HurtAnimation");
     AnimationDirPathMap.put("MYTHRA_IDLE_COMBAT", "SpriteAnimations/Mythra/IdleCombatAnimation");
 
+    
+    // Lake
+    AnimationDirPathMap.put("LAKE", "SpriteAnimations/Lake");
+    
+    
   }
   
   // Load animations using the dirpaths given
@@ -117,6 +122,9 @@ public class SpriteAnimationLibrary {
     Animations.put("MYTHRA_HURT", getSpriteAnimation("MYTHRA_HURT", IDLE_ANIMATION_RATE));
     Animations.put("MYTHRA_ATTACK", getSpriteAnimation("MYTHRA_ATTACK", IDLE_ANIMATION_RATE));
     Animations.put("MYTHRA_IDLE_COMBAT", getSpriteAnimation("MYTHRA_IDLE_COMBAT", IDLE_ANIMATION_RATE));
+    
+    // Lake
+    Animations.put("LAKE", getSpriteAnimation("LAKE", 20));
     
     } catch (NoDirPathEntryFoundException e) {
       println(e.getLocalizedMessage());
@@ -223,6 +231,27 @@ public class SpriteAnimationLibrary {
       }
     
    
+    return animations;
+    
+  }
+  
+  
+  // Get sprite animations for object
+  public HashMap<String, SpriteAnimation> getObjectAnimation(String object_name) {
+    
+    // Setup animations for object
+    HashMap<String, SpriteAnimation> animations = new HashMap<String, SpriteAnimation>();
+    
+    // Return animations of object
+    switch(object_name.toUpperCase()) {
+      case "LAKE":
+        animations.put("DEFAULT", Animations.get("LAKE"));
+        break;
+       default:
+         println("Object animations unknown: " + object_name);
+    }
+    
+    // Return animations
     return animations;
     
   }

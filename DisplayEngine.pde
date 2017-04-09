@@ -61,10 +61,7 @@ class DisplayEngine {
    //<>// //<>//
   // Display Landscapes
   public void displayLandscape(Landscape land){
-    imageMode(CENTER);
-    if(newt.local.hitboxDisplay){
-      displayArea(land.hitboxes.get(0));
-    }
+    land.draw();
   }
   
   // Display all characters in state's current level //<>// //<>//

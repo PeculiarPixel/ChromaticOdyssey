@@ -49,8 +49,7 @@ class LevelCastleApproach extends Level {
     
     this.triggers.add(new LevelTransitionTrigger(3650, 850, 400, 125, LevelName.CASTLE_HUB,1000,1300));
     
-    this.landscapes.add(new Landscape(120, 120,  100, 100));
-    this.landscapes.add(new Landscape(700, 120, 100, 100));
+    this.landscapes.add(new LandscapeLake(1625, 2550, 0, 0));
     
   }
   

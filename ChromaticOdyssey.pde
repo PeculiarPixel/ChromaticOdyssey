@@ -22,18 +22,12 @@ PApplet master = this;
                                 
     initValues = false;
     
-    minim = new Minim(this);
-  
-    if (DEBUG.INTRO_ON) {
-      introScreen = new Movie(master, "TitleScreen.mp4");
-      introStory = new Movie(master, "Intro.mp4");
-      introScreen.loop();
-    }
-    
   }
 
   // Instantiate newt, engines, event dispatcher, spriteLibrary, &c
   private void initializeGlobals() {
+    
+    minim = new Minim(this);
    
     fileUtils = new FileUtils();
     spriteLibrary = new SpriteAnimationLibrary();
@@ -45,6 +39,12 @@ PApplet master = this;
     dispatcher = new EventDispatcher();
     camera = new GameCamera();
     drawUtils = new DrawUtilities();
+  
+    if (DEBUG.INTRO_ON) {
+      introScreen = new Movie(master, "TitleScreen.mp4");
+      introStory = new Movie(master, "Intro.mp4");
+      introScreen.loop();
+    }
   
     // Combat module initializations:
     imageMaker = new ImageMaker();
