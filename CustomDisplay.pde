@@ -132,9 +132,9 @@ class FireballDisplay extends CustomDisplay
 {
   private Graphics2D g2;
   private int x;
-  private int y = 256; 
+  private int y = 334; 
   static final private int speed = 8;
-  private int xInitial = 0;
+  private int xInitial = 256;
   private int xTerminal = 768;
   private boolean suspended;
   private BufferedImage activeFireball;
@@ -144,6 +144,8 @@ class FireballDisplay extends CustomDisplay
   private FightManager manager;
   
   private javax.swing.Timer timer;
+  
+  private PImage pActiveFireball;
   
   public FireballDisplay(FightManager manager)
   {
@@ -171,7 +173,7 @@ class FireballDisplay extends CustomDisplay
         
       }
     });
-    
+        
   }
   
   public void update()
@@ -190,12 +192,15 @@ class FireballDisplay extends CustomDisplay
            super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
            g2 = super.img.createGraphics();
            g2.drawImage(activeFireball, x, y, null);
+           //image(pActiveFireball, x, y);
          //}
          // Clear base image
          // Draw activeFireball at (x, y)
          
          if(x >= xTerminal)
          {
+           super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
+           g2 = super.img.createGraphics();
            println("Suspending fireball animation");
            suspended = true;
            // Clear base image
@@ -211,6 +216,7 @@ class FireballDisplay extends CustomDisplay
     println("Triggering fireballdisplay");
     // Check if user == enemy, flip accordingly if necessary
     this.activeFireball = activeFireball;
+    //pActiveFireball = fightManager.getAsPImage(activeFireball);
     this.suspended = false;
     x = xInitial;
     timer.start();

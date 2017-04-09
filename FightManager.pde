@@ -316,7 +316,7 @@ class FightManager
     
     for(CombatMove move : movesBySpeed)
     {
-      Combatant player = move.getUser();
+      //Combatant player = move.getUser();
       println("Move logic has begun");
       // Perform move animations:
       if(! (move instanceof CombatItem))
@@ -363,11 +363,16 @@ class FightManager
   // =====================================
   
   // Make PImage for Processing draw loop:
-  
-  public PImage getAsPImage()
+
+  public BufferedImage getImg()
   {
-    PImage pimg =new PImage(img.getWidth(),img.getHeight(),PConstants.ARGB);
-    img.getRGB(0, 0, pimg.width, pimg.height, pimg.pixels, 0, pimg.width);
+    return img;
+  }
+    
+  public PImage getAsPImage(BufferedImage image)
+  {
+    PImage pimg = new PImage(image.getWidth(),image.getHeight(),PConstants.ARGB);
+    image.getRGB(0, 0, pimg.width, pimg.height, pimg.pixels, 0, pimg.width);
     pimg.updatePixels();
     return pimg;
   }
