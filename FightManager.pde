@@ -79,8 +79,13 @@ class FightManager
     CombatMove bad1 = new CombatMove(1);
     CombatMove bad2 = new CombatMove(2);
     
+    BufferedImage blackFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlack.png").getNative();
+    
     bad1.setButton(constructMoveButton(new Point (0, 128), "Baddie 1"));
     bad2.setButton(constructMoveButton(new Point (0, 128), "Baddie 2"));
+
+    bad1.setFireball(blackFireball);
+    bad2.setFireball(blackFireball);
     
     baddieMoves.add(bad1);
     baddieMoves.add(bad2);
@@ -230,9 +235,9 @@ class FightManager
     activeMenu.drawMenu(g2d);
   }
   
-  public void updateFireballDisplay()
+  public void updateNewtFireballDisplay()
   {
-    baseMenu.updateFireballDisplay();
+    baseMenu.updateNewtFireballDisplay();
   }
   
   public void drawBase()
@@ -321,6 +326,13 @@ class FightManager
   {
     fireballTriggered = false;
   }
+  
+  public void startNewFight(Combatant enemy)
+  {
+    this.enemy = enemy;
+    //player.resetStats();
+    activeMenu = menus.get(0);
+  }
 
   public void processTurn(CombatMove playerMove)
   {
@@ -333,15 +345,24 @@ class FightManager
     {
       //Combatant player = move.getUser();
       println("Move logic has begun");
+      /*
       // Perform move animations:
       if(! (move instanceof CombatItem))
       {
         // Fireball animation
         println("Fireball animation has begun");
-        baseMenu.triggerFireball(move.getFireballSprite());
+        if(move.getUser() == player)
+        {
+          baseMenu.triggerNewtFireball(move.getFireballSprite());
+        }
+        else
+        {
+          baseMenu.triggerEnemyFireball(move.getFireballSprite());
+        }
+        
         println("Fireball animation is ending");
       }
-     
+       */
       // Perform game logic processing and explosion animation:
       move.execute();    
       

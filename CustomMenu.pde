@@ -66,7 +66,9 @@ class CustomMenu
       }
       
       else
+      {
         button.drawBase(g2d);
+      }
     }
   }
   
@@ -83,7 +85,8 @@ class BaseCombatMenu extends CustomMenu
   private static final int ITEM = 2;
   private static final int COLOR = 3;
   
-  FireballDisplay fireballDisplay;
+  FireballDisplay newtFireballDisplay;
+  FireballDisplay enemyFireballDisplay;
   
   public BaseCombatMenu(FightManager manager)
   {
@@ -103,21 +106,33 @@ class BaseCombatMenu extends CustomMenu
     baseDisplays.add(new NameFrame(new Point(128, 0), player));
     baseDisplays.add(new NameFrame(new Point(640, 0), enemy));
     
-    fireballDisplay = new FireballDisplay(manager);
-    baseDisplays.add(fireballDisplay);
+    newtFireballDisplay = new FireballDisplay(manager, 256, 640);
+    enemyFireballDisplay = new FireballDisplay(manager, 640, 256);
+    baseDisplays.add(newtFireballDisplay);
+    baseDisplays.add(enemyFireballDisplay);
     
     super.buttons.addAll(manager.getBaseButtons());
     super.displays.addAll(baseDisplays);
    }
    
-   public void triggerFireball(BufferedImage fireballSprite)
+   public void triggerNewtFireball(BufferedImage fireballSprite)
   {
-    fireballDisplay.triggerFireball(fireballSprite);
+    newtFireballDisplay.triggerFireball(fireballSprite);
   }
   
-  public void updateFireballDisplay()
+  public void triggerEnemyFireball(BufferedImage fireballSprite)
   {
-    fireballDisplay.update();
+    enemyFireballDisplay.triggerFireball(fireballSprite);
+  }
+  
+  public void updateEnemyFireballDisplay()
+  {
+    enemyFireballDisplay.update();
+  }
+  
+  public void updateNewtFireballDisplay()
+  {
+    newtFireballDisplay.update();
   }
 }
 
@@ -131,7 +146,8 @@ class ColorCombatMenu extends CustomMenu
     ArrayList<ArbitraryButton> colorButtons = new ArrayList<ArbitraryButton>();
     CombatColor[] newtColors = manager.getNewtColors();
    
-    super.buttons.addAll(manager.getBaseButtons());
+    // Basebuttons disabled when in ColorMenu to force user to select a color
+    //super.buttons.addAll(manager.getBaseButtons());
    
     // Build and add color selection buttons:
     colorButtons.add(new ColorButton(manager, newtColors[0], new Point(128, 256)));
@@ -196,8 +212,6 @@ class EndGameMenu extends CustomMenu
 {
   public EndGameMenu(FightManager manager)
   {
-    super();
-    
-    
+    super();   
   }
 }

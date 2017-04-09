@@ -12,6 +12,8 @@ class Combatant
   
   private int[] statusCounters;
   
+  private boolean  isActing;
+  
   private CustomDisplay spriteFrame;
   private CustomDisplay nameFrame;
   
@@ -49,9 +51,7 @@ class Combatant
     
     this.sprite = sprite;
 
-    statusCounters = new int[2];
-    statusCounters[LETHARGY] = 0;
-    statusCounters[MANIA] = 0;
+    this.isActing = false;
   }
   
   public int getDamage()

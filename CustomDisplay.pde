@@ -147,10 +147,12 @@ class FireballDisplay extends CustomDisplay
   
   private PImage pActiveFireball;
   
-  public FireballDisplay(FightManager manager)
+  public FireballDisplay(FightManager manager, int xInitial, int xTerminal)
   {
     super(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB), new Point(0, 0));
     g2 = super.img.createGraphics();
+    this.xInitial = xInitial;
+    this.xTerminal = xTerminal;
     x = xInitial;
     suspended = true;
     this.manager = manager;
