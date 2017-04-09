@@ -1,8 +1,8 @@
 // Throne Room Level
 class LevelSpire extends Level {
 
- public float START_X = 900;
- public float START_Y = 1200;
+ public float START_X = 1150;
+ public float START_Y = 1100;
   
   
   // Constructor
@@ -25,13 +25,16 @@ class LevelSpire extends Level {
     
     kit.setXPos(START_X);
     kit.setYPos(START_Y);
+    
+    pragma.setXPos(START_X+100);
+    pragma.setYPos(START_Y-500);
   }
   
   // Load level necessary characters
   private void loadCharacters() {
     this.characters.add(newt);
     this.characters.add(kit);
-
+    this.characters.add(pragma);
   }
   
   // Load all level landscapes (Hitboxes, Triggers, Objects)
@@ -41,7 +44,7 @@ class LevelSpire extends Level {
    // this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
    // this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
   //  this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
-    this.triggers.add(new LevelTransitionTrigger(900, 1400, 600, 100, LevelName.THRONE_ROOM,1000, 200));
+   // this.triggers.add(new LevelTransitionTrigger(1000, 1300, 600, 100, LevelName.THRONE_ROOM,475, 500));
     //this.triggers.add(new LevelTransitionTrigger(500, 100, 100, 100, LevelName.SPIRE,1000, 200));
   //  this.landscapes.add(new Landscape(120, 120,  100, 100));
   //  this.landscapes.add(new Landscape(700, 120, 100, 100));
@@ -62,7 +65,7 @@ class LevelSpire extends Level {
   // Load all level related assets
   public void loadAssets() {
     
-    this.hitboxImage = loadImage("LevelBackgrounds/Spire/HitboxBlank.png");    
+    this.hitboxImage = loadImage("LevelBackgrounds/Spire/HitboxLayer.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/Spire/Bottom.png");
 
     this.foregroundImage = loadImage("LevelBackgrounds/Spire/Top.png");

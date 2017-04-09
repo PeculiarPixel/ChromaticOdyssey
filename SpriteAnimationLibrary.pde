@@ -32,6 +32,10 @@ public class SpriteAnimationLibrary {
     AnimationDirPathMap.put("NEWT_WALK_DOWN", "SpriteAnimations/Newt/WalkAnimationDown");
     AnimationDirPathMap.put("NEWT_WALK_LEFT", "SpriteAnimations/Newt/WalkAnimationLeft");
     AnimationDirPathMap.put("NEWT_WALK_RIGHT", "SpriteAnimations/Newt/WalkAnimationRight");
+        //combat
+    AnimationDirPathMap.put("NEWT_ATTACK", "SpriteAnimations/Newt/AttackAnimation");
+    AnimationDirPathMap.put("NEWT_HURT", "SpriteAnimations/Newt/HurtAnimation");
+    AnimationDirPathMap.put("NEWT_IDLE_COMBAT", "SpriteAnimations/Newt/IdleCombatAnimation");  
     
     // Kit
     AnimationDirPathMap.put("KIT_IDLE_UP", "SpriteAnimations/Kit/IdleAnimationUp");
@@ -42,8 +46,30 @@ public class SpriteAnimationLibrary {
     AnimationDirPathMap.put("KIT_WALK_DOWN", "SpriteAnimations/Kit/WalkAnimationDown");
     AnimationDirPathMap.put("KIT_WALK_LEFT", "SpriteAnimations/Kit/WalkAnimationLeft");
     AnimationDirPathMap.put("KIT_WALK_RIGHT", "SpriteAnimations/Kit/WalkAnimationRight");
+        //combat
     AnimationDirPathMap.put("KIT_ATTACK", "SpriteAnimations/Kit/AttackAnimation");
     AnimationDirPathMap.put("KIT_HURT", "SpriteAnimations/Kit/HurtAnimation");
+    AnimationDirPathMap.put("KIT_IDLE_COMBAT", "SpriteAnimations/Kit/IdleCombatAnimation");
+    
+    // Pragma
+    AnimationDirPathMap.put("PRAGMA_IDLE_LEFT", "SpriteAnimations/Pragma/IdleAnimationLeft");
+    AnimationDirPathMap.put("PRAGMA_IDLE_RIGHT", "SpriteAnimations/Pragma/IdleAnimationRight");
+        //combat
+    AnimationDirPathMap.put("PRAGMA_ATTACK", "SpriteAnimations/Pragma/AttackAnimation");
+    AnimationDirPathMap.put("PRAGMA_HURT", "SpriteAnimations/Pragma/HurtAnimation");
+    AnimationDirPathMap.put("PRAGMA_IDLE_COMBAT", "SpriteAnimations/Pragma/IdleCombatAnimation");
+    
+    //Mythra
+    AnimationDirPathMap.put("MYTHRA_IDLE_LEFT", "SpriteAnimations/Mythra/IdleAnimationLeft");
+    AnimationDirPathMap.put("MYTHRA_IDLE_RIGHT", "SpriteAnimations/Mythra/IdleAnimationRight");
+        //combat
+    AnimationDirPathMap.put("MYTHRA_ATTACK", "SpriteAnimations/Mythra/AttackAnimation");
+    AnimationDirPathMap.put("MYTHRA_HURT", "SpriteAnimations/Mythra/HurtAnimation");
+    AnimationDirPathMap.put("MYTHRA_IDLE_COMBAT", "SpriteAnimations/Mythra/IdleCombatAnimation");
+
+    
+    // Lake
+    AnimationDirPathMap.put("LAKE", "SpriteAnimations/Lake");
     
     
   }
@@ -62,7 +88,11 @@ public class SpriteAnimationLibrary {
     Animations.put("NEWT_WALK_DOWN", getSpriteAnimation("NEWT_WALK_DOWN", WALK_ANIMATION_RATE));
     Animations.put("NEWT_WALK_LEFT", getSpriteAnimation("NEWT_WALK_LEFT", WALK_ANIMATION_RATE));
     Animations.put("NEWT_WALK_RIGHT", getSpriteAnimation("NEWT_WALK_RIGHT", WALK_ANIMATION_RATE));
-    
+        //combat
+    Animations.put("NEWT_HURT", getSpriteAnimation("NEWT_HURT", IDLE_ANIMATION_RATE));
+    Animations.put("NEWT_ATTACK", getSpriteAnimation("NEWT_ATTACK", IDLE_ANIMATION_RATE));
+    Animations.put("NEWT_IDLE_COMBAT", getSpriteAnimation("NEWT_IDLE_COMBAT", IDLE_ANIMATION_RATE));    
+   
     // KIT
     Animations.put("KIT_IDLE_UP", getSpriteAnimation("KIT_IDLE_UP", IDLE_ANIMATION_RATE));
     Animations.put("KIT_IDLE_DOWN", getSpriteAnimation("KIT_IDLE_DOWN", IDLE_ANIMATION_RATE));
@@ -72,8 +102,29 @@ public class SpriteAnimationLibrary {
     Animations.put("KIT_WALK_DOWN", getSpriteAnimation("KIT_WALK_DOWN", WALK_ANIMATION_RATE));
     Animations.put("KIT_WALK_LEFT", getSpriteAnimation("KIT_WALK_LEFT", WALK_ANIMATION_RATE));
     Animations.put("KIT_WALK_RIGHT", getSpriteAnimation("KIT_WALK_RIGHT", WALK_ANIMATION_RATE));
+        //combat
     Animations.put("KIT_HURT", getSpriteAnimation("KIT_HURT", IDLE_ANIMATION_RATE));
     Animations.put("KIT_ATTACK", getSpriteAnimation("KIT_ATTACK", IDLE_ANIMATION_RATE));
+    Animations.put("KIT_IDLE_COMBAT", getSpriteAnimation("KIT_IDLE_COMBAT", IDLE_ANIMATION_RATE));      
+    
+    //PRAGMA   
+    Animations.put("PRAGMA_IDLE_LEFT", getSpriteAnimation("PRAGMA_IDLE_LEFT", IDLE_ANIMATION_RATE));
+    Animations.put("PRAGMA_IDLE_RIGHT", getSpriteAnimation("PRAGMA_IDLE_RIGHT", IDLE_ANIMATION_RATE));
+        //combat
+    Animations.put("PRAGMA_HURT", getSpriteAnimation("PRAGMA_HURT", IDLE_ANIMATION_RATE));
+    Animations.put("PRAGMA_ATTACK", getSpriteAnimation("PRAGMA_ATTACK", IDLE_ANIMATION_RATE));
+    Animations.put("PRAGMA_IDLE_COMBAT", getSpriteAnimation("PRAGMA_IDLE_COMBAT", IDLE_ANIMATION_RATE));
+
+    //MYTHRA  
+    Animations.put("MYTHRA_IDLE_LEFT", getSpriteAnimation("MYTHRA_IDLE_LEFT", IDLE_ANIMATION_RATE));
+    Animations.put("MYTHRA_IDLE_RIGHT", getSpriteAnimation("MYTHRA_IDLE_RIGHT", IDLE_ANIMATION_RATE));
+        //combat
+    Animations.put("MYTHRA_HURT", getSpriteAnimation("MYTHRA_HURT", IDLE_ANIMATION_RATE));
+    Animations.put("MYTHRA_ATTACK", getSpriteAnimation("MYTHRA_ATTACK", IDLE_ANIMATION_RATE));
+    Animations.put("MYTHRA_IDLE_COMBAT", getSpriteAnimation("MYTHRA_IDLE_COMBAT", IDLE_ANIMATION_RATE));
+    
+    // Lake
+    Animations.put("LAKE", getSpriteAnimation("LAKE", 20));
     
     } catch (NoDirPathEntryFoundException e) {
       println(e.getLocalizedMessage());
@@ -140,6 +191,10 @@ public class SpriteAnimationLibrary {
             animations.put("WALK_DOWN", Animations.get("NEWT_WALK_DOWN"));
             animations.put("WALK_LEFT", Animations.get("NEWT_WALK_LEFT"));
             animations.put("WALK_RIGHT", Animations.get("NEWT_WALK_RIGHT"));
+            //
+            animations.put("ATTACK", Animations.get("NEWT_ATTACK"));
+            animations.put("HURT", Animations.get("NEWT_HURT"));
+            animations.put("IDLE_COMBAT", Animations.get("NEWT_IDLE_COMBAT"));
             break;
         case KIT:
             animations.put("IDLE_UP", Animations.get("KIT_IDLE_UP"));
@@ -150,12 +205,53 @@ public class SpriteAnimationLibrary {
             animations.put("WALK_DOWN", Animations.get("KIT_WALK_DOWN"));
             animations.put("WALK_LEFT", Animations.get("KIT_WALK_LEFT"));
             animations.put("WALK_RIGHT", Animations.get("KIT_WALK_RIGHT"));
+            //
+            animations.put("ATTACK", Animations.get("KIT_ATTACK"));
+            animations.put("HURT", Animations.get("KIT_HURT"));
+            animations.put("IDLE_COMBAT", Animations.get("KIT_IDLE_COMBAT"));
             break;
+        case PRAGMA:
+            animations.put("IDLE_LEFT", Animations.get("PRAGMA_IDLE_LEFT"));
+            animations.put("IDLE_RIGHT", Animations.get("PRAGMA_IDLE_RIGHT"));
+            //
+            animations.put("ATTACK", Animations.get("PRAGMA_ATTACK"));
+            animations.put("HURT", Animations.get("PRAGMA_HURT"));
+            animations.put("IDLE_COMBAT", Animations.get("PRAGMA_IDLE_COMBAT"));
+            break;
+        case MYTHRA:
+            animations.put("IDLE_LEFT", Animations.get("MYTHRA_IDLE_LEFT"));
+            animations.put("IDLE_RIGHT", Animations.get("MYTHRA_IDLE_RIGHT"));
+            //
+            animations.put("ATTACK", Animations.get("MYTHRA_ATTACK"));
+            animations.put("HURT", Animations.get("MYTHRA_HURT"));
+            animations.put("IDLE_COMBAT", Animations.get("MYTHRA_IDLE_COMBAT"));
+            break;     
         default:
           println("Character animations unknown: " + name.toString());
       }
     
    
+    return animations;
+    
+  }
+  
+  
+  // Get sprite animations for object
+  public HashMap<String, SpriteAnimation> getObjectAnimation(String object_name) {
+    
+    // Setup animations for object
+    HashMap<String, SpriteAnimation> animations = new HashMap<String, SpriteAnimation>();
+    
+    // Return animations of object
+    switch(object_name.toUpperCase()) {
+      case "LAKE":
+        animations.put("DEFAULT", Animations.get("LAKE"));
+        break;
+       default:
+         println("Object animations unknown: " + object_name);
+    }
+    
+    // Return animations
     return animations;
     
   }

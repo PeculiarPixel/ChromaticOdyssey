@@ -26,12 +26,17 @@ class LevelCastleApproach extends Level {
     
     kit.setXPos(START_X);
     kit.setYPos(START_Y);
+    
+    //pragma.setXPos(START_X);
+  //  pragma.setYPos(START_Y);
+    
   }
   
   // Load level necessary characters
   private void loadCharacters() {
     this.characters.add(newt);
     this.characters.add(kit);
+   // this.characters.add(pragma);
   }
   
   // Load all level landscapes (Hitboxes, Triggers, Objects)
@@ -44,8 +49,7 @@ class LevelCastleApproach extends Level {
     
     this.triggers.add(new LevelTransitionTrigger(3650, 850, 400, 125, LevelName.CASTLE_HUB,1000,1300));
     
-    this.landscapes.add(new Landscape(120, 120,  100, 100));
-    this.landscapes.add(new Landscape(700, 120, 100, 100));
+    this.landscapes.add(new LandscapeLake(1625, 2550, 0, 0));
     
   }
   
@@ -63,14 +67,14 @@ class LevelCastleApproach extends Level {
   // Load all level related assets
   public void loadAssets() {
     
-    this.hitboxImage = loadImage("LevelBackgrounds/CastleApproach/hitboxLayer.png");    
-    this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkup.png");
+    this.hitboxImage = loadImage("LevelBackgrounds/CastleApproach/HitboxLayer.png");    
+    this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/Bottom.png");
     /*backgroundImage.loadPixels();
     for(int i =0; i<backgroundImage.pixels.length;i++){
       backgroundImage.pixels[i] =  color();
     }
     backgroundImage.updatePixels();*/
-    this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkupTopLayer.png");
+    this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/Top.png");
     this.fog = new Fog(3500,2000,1500);
     
     loadConversations();

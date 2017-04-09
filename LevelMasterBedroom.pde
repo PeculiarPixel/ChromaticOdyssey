@@ -3,7 +3,7 @@ class LevelMasterBedroom extends Level {
 
    
   public float START_X = 2400;
-  public float START_Y = 900;
+  public float START_Y = 700;
   
   
   // Constructor
@@ -26,12 +26,16 @@ class LevelMasterBedroom extends Level {
     
     kit.setXPos(START_X);
     kit.setYPos(START_Y);
+    
+    mythra.setXPos(START_X-1600);
+    mythra.setYPos(START_Y-200);
   }
   
   // Load level necessary characters
   private void loadCharacters() {
     this.characters.add(newt);
     this.characters.add(kit);
+    this.characters.add(mythra);
 
   }
   
@@ -43,7 +47,7 @@ class LevelMasterBedroom extends Level {
   this.triggers.add(new DialogTrigger(1250, 950, 100, 400, this.conversations.get(1)));
   
   // Transition back to HUB
-  this.triggers.add(new LevelTransitionTrigger(2500, 900, 100, 600, LevelName.CASTLE_HUB, 250, 750));
+  this.triggers.add(new LevelTransitionTrigger(2500, 700, 100, 600, LevelName.CASTLE_HUB, 250, 750));
     
   }
   
