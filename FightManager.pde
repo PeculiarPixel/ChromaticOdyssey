@@ -345,7 +345,7 @@ class FightManager
     {
       //Combatant player = move.getUser();
       println("Move logic has begun");
-      /*
+      
       // Perform move animations:
       if(! (move instanceof CombatItem))
       {
@@ -362,7 +362,7 @@ class FightManager
         
         println("Fireball animation is ending");
       }
-       */
+       
       // Perform game logic processing and explosion animation:
       move.execute();    
       

@@ -106,7 +106,12 @@ PApplet master = this;
      meterMods[2][2] = 5;
     
      Combatant player = new Combatant(GameCharacterName.NEWT, p1i, defaultColor, baseStats, meterMods);
-     Combatant enemy = new Combatant(GameCharacterName.KIT, p2i, defaultColor, baseStats, meterMods);
+     Combatant enemy = new Combatant(GameCharacterName.PRAGMA, p2i, defaultColor, baseStats, meterMods);
+     
+     Combatant newtCombatant = new Combatant(GameCharacterName.NEWT, p1i, defaultColor, baseStats, meterMods);
+     Combatant kitCombatant = new Combatant(GameCharacterName.KIT, p2i, defaultColor, baseStats, meterMods);
+     Combatant mythraCombatant = new Combatant(GameCharacterName.MYTHRA, null, defaultColor, baseStats, meterMods);
+     Combatant pragmaCombatant = new Combatant(GameCharacterName.PRAGMA, null, defaultColor, baseStats, meterMods);
     
      fightManager = new FightManager(player,enemy,inventory);  
      
@@ -119,27 +124,27 @@ PApplet master = this;
       startTime = new IntList();
       stopTime = new IntList();
       kitFollowDelay = 700;
-    
-  }
-
-  // Key Pressed Events
-  void keyPressed() {
+     //<>//
+  } //<>//
+ //<>//
+  // Key Pressed Events //<>//
+  void keyPressed() { //<>//
  //<>//
     if(!inCombat) { //<>// //<>//
       if (keyCode == UP) { //<>// //<>//
-        newt.setDirection(MoveDirection.UP); //<>// //<>//
-       // kit.setDirection(MoveDirection.UP); //<>// //<>//
-        kitMoveSet.add(MoveDirection.UP); //<>// //<>//
-        startTime.append(millis()); //<>// //<>//
-      } //<>// //<>//
+        newt.setDirection(MoveDirection.UP); //<>//
+       // kit.setDirection(MoveDirection.UP); //<>//
+        kitMoveSet.add(MoveDirection.UP); //<>//
+        startTime.append(millis()); //<>//
+      } //<>//
       if(keyCode == DOWN){ //<>//
         newt.setDirection(MoveDirection.DOWN);
         //kit.setDirection(MoveDirection.DOWN);
         kitMoveSet.add(MoveDirection.DOWN);
         startTime.append(millis());
       }
-      if(keyCode == LEFT){
-       newt.setDirection(MoveDirection.LEFT);
+      if(keyCode == LEFT){ //<>//
+       newt.setDirection(MoveDirection.LEFT); //<>//
        //kit.setDirection(MoveDirection.LEFT);
        kitMoveSet.add(MoveDirection.LEFT);
        startTime.append(millis()); //<>// //<>//
@@ -148,29 +153,29 @@ PApplet master = this;
         newt.setDirection(MoveDirection.RIGHT); //<>// //<>//
        // kit.setDirection(MoveDirection.RIGHT); //<>//
         kitMoveSet.add(MoveDirection.RIGHT); //<>//
-        startTime.append(millis()); //<>// //<>//
-      } //<>// //<>// //<>//
+        startTime.append(millis()); //<>//
+      } //<>// //<>//
     } //<>//
-  }
-
+  } //<>//
+ //<>//
   // Key Released Events //<>// //<>// //<>//
   void keyReleased() {
         
-  if (keyCode == UP) { //<>// //<>// //<>//
-      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>// //<>// //<>//
+  if (keyCode == UP) { //<>// //<>//
+      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>// //<>//
      // kit.releaseDirection(MoveDirection.UP); //<>//
       kitMoveRelease.add(MoveDirection.UP);
       stopTime.append(millis());
-    } //<>//
-    if(keyCode == DOWN){ //<>//
+    } //<>// //<>//
+    if(keyCode == DOWN){ //<>// //<>//
       newt.releaseDirection(MoveDirection.DOWN);
      // kit.releaseDirection(MoveDirection.DOWN);
-      kitMoveRelease.add(MoveDirection.DOWN);
-      stopTime.append(millis()); //<>// //<>//
-    } //<>// //<>// //<>//
+      kitMoveRelease.add(MoveDirection.DOWN); //<>//
+      stopTime.append(millis()); //<>//
+    } //<>// //<>//
     if(keyCode == LEFT){ //<>// //<>//
      newt.releaseDirection(MoveDirection.LEFT);
-     //kit.releaseDirection(MoveDirection.LEFT); //<>//
+     //kit.releaseDirection(MoveDirection.LEFT);
      kitMoveRelease.add(MoveDirection.LEFT);  //<>//
      stopTime.append(millis()); 
     } //<>// //<>//

@@ -40,14 +40,7 @@ class Combatant
     curHP = maxHP;
 
     this.animations = spriteLibrary.getCharacterAnimations(name);
-    if(name == GameCharacterName.NEWT)
-    {
-      this.currentAnimation = animations.get("IDLE_RIGHT");
-    }
-    else
-    {
-      this.currentAnimation = animations.get("IDLE_LEFT");
-    }
+    this.currentAnimation = animations.get("IDLE_COMBAT");
     
     meters = new int[3];
     meters[RED] = 0;
@@ -263,6 +256,10 @@ class Combatant
   
   public BufferedImage getCurrentSprite()
   {
+    if(curHP <= 100)
+    {
+      currentAnimation = animations.get("HURT");
+    }
     BufferedImage spriteImage = (BufferedImage) currentAnimation.getCurrentImage().getNative();
     currentAnimation.update();
     return spriteImage;
