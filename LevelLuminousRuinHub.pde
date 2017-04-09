@@ -8,7 +8,7 @@ class LevelLuminousRuinHub extends Level {
   
   // Constructor
   public LevelLuminousRuinHub() {
-    super(LevelName.CASTLE_HUB,1000,1300);
+    super(LevelName.CASTLE_HUB, 1000, 1300);
     
     if (DEBUG.QUICK_TRANSITION) {
       this.START_X = 3550;
@@ -38,16 +38,29 @@ class LevelLuminousRuinHub extends Level {
   // Load all level landscapes (Hitboxes, Triggers, Objects)
   private void loadLandscapes() {
     
-  //  this.triggers.add(new DialogTrigger(300, 2750, 100, 400, this.conversations.get(0)));
-   // this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
-   // this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
-  //  this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
-    this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.MASTER_BEDROOM,2400,900));
-    this.triggers.add(new LevelTransitionTrigger(1000, 50, 600, 100, LevelName.THRONE_ROOM,2400,900));
-    this.triggers.add(new LevelTransitionTrigger(1000, 1500, 600, 100, LevelName.CASTLE_APPROACH,3550, 1100));
-    this.triggers.add(new CombatTransitionTrigger(1000, 1000, 100, 100, null));
-  //  this.landscapes.add(new Landscape(120, 120,  100, 100));
-  //  this.landscapes.add(new Landscape(700, 120, 100, 100));
+    // Pre-mythra fight events
+    if (world.isMythraDefeated()) {
+      
+      // Dialog event
+      this.triggers.add(new DialogTrigger(700, 800, 100, 400, this.conversations.get(2)));
+      
+    } else {
+      
+      // Dialog events
+      this.triggers.add(new DialogTrigger(1000, 1300, 400, 100, this.conversations.get(0)));
+      this.triggers.add(new DialogTrigger(1000, 350, 400, 100, this.conversations.get(1)));
+                        
+      // Hitbox to block the throne room
+      this.landscapes.add(new Landscape(1050, 200, 500, 200));
+    
+    }
+   
+   // Transition triggers
+    this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.MASTER_BEDROOM, 2400, 900));
+    this.triggers.add(new LevelTransitionTrigger(1000, 50, 600, 100, LevelName.THRONE_ROOM, 2400, 900));
+    this.triggers.add(new LevelTransitionTrigger(1000, 1500, 600, 100, LevelName.CASTLE_APPROACH, 3550, 1100));
+    
+    // Combat triggers
     
   }
   
