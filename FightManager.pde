@@ -78,14 +78,13 @@ class FightManager
     ArrayList<CombatMove> baddieMoves = new ArrayList<CombatMove>();
     CombatMove bad1 = new CombatMove(1);
     CombatMove bad2 = new CombatMove(2);
-    
-    BufferedImage blackFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlack.png").getNative();
-    
+         
     bad1.setButton(constructMoveButton(new Point (0, 128), "Baddie 1"));
     bad2.setButton(constructMoveButton(new Point (0, 128), "Baddie 2"));
 
     bad1.setFireball(blackFireball);
     bad2.setFireball(blackFireball);
+    println("blackFireball associated with enemy moveset");
     
     baddieMoves.add(bad1);
     baddieMoves.add(bad2);
@@ -353,11 +352,8 @@ class FightManager
         println("Fireball animation has begun");
         if(move.getUser() == player)
         {
+          println("Newt fireball firing");
           baseMenu.triggerNewtFireball(move.getFireballSprite());
-        }
-        else
-        {
-          baseMenu.triggerEnemyFireball(move.getFireballSprite());
         }
         
         println("Fireball animation is ending");

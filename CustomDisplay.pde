@@ -139,7 +139,7 @@ class FireballDisplay extends CustomDisplay
   private Graphics2D g2;
   private int x;
   private int y = 334; 
-  static final private int speed = 8;
+  private int speed = 8;
   private int xInitial = 256;
   private int xTerminal = 640;
   private boolean suspended;
@@ -169,13 +169,15 @@ class FireballDisplay extends CustomDisplay
       {
         timer.stop();
         
-        println("Updating from timer:");
+        //println("Updating from timer:");
         
         update();       
         
         if(!suspended)
         {
-          println("Suspended false, restarting timer");
+          //println("Suspended false, restarting timer");                     
+          lockMouseInput = false;
+
           timer.restart();
         }
         
@@ -186,20 +188,19 @@ class FireballDisplay extends CustomDisplay
   
   public void update()
   {
-    println("Updating fireball display");
+    //println("Updating fireball display");
       if(!suspended)
       {
         
          //if(millis() - frameStartTime >= 17)
          //{
-           println("Incrementing fireball frame");
+           //println("Incrementing fireball frame");
            frameStartTime = millis();
            x += speed;
            //g2.clearRect(0, 0, 1024, 768);
            super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
            g2 = super.img.createGraphics();
            g2.scale(2, 2);
-
            g2.drawImage(activeFireball, x/2, y/2, null);
            //image(pActiveFireball, x, y);
          //}
@@ -208,13 +209,25 @@ class FireballDisplay extends CustomDisplay
          
          if(x >= xTerminal)
          {
+           // Time to start drawing opponent's fireball:
            super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
            g2 = super.img.createGraphics();
-           println("Suspending fireball animation");
-           suspended = true;
+           activeFireball = blackFireball;
+           //println("Suspending fireball animation");
+           //suspended = true;
            // Clear base image
            //g2.clearRect(0, 0, 1024, 768);
            frameStartTime = 0;
+           speed = -speed;
+         }
+         
+         if(x <= xInitial - 1)
+         {
+           super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
+           g2 = super.img.createGraphics();
+           suspended = true;
+           frameStartTime = 0;
+           speed = -speed;
          }
          
       }
@@ -229,6 +242,7 @@ class FireballDisplay extends CustomDisplay
     this.suspended = false;
     x = xInitial;
     timer.start();
+    lockMouseInput = true;
     //manager.untriggerFireball();
   }
   

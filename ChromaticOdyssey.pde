@@ -112,6 +112,10 @@ PApplet master = this;
      Combatant kitCombatant = new Combatant(GameCharacterName.KIT, p2i, defaultColor, baseStats, meterMods);
      Combatant mythraCombatant = new Combatant(GameCharacterName.MYTHRA, null, defaultColor, baseStats, meterMods);
      Combatant pragmaCombatant = new Combatant(GameCharacterName.PRAGMA, null, defaultColor, baseStats, meterMods);
+
+     blackFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlack.png").getNative();
+     println("blackFireball loaded");
+
     
      fightManager = new FightManager(player,enemy,inventory);  
      
