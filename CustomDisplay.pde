@@ -187,6 +187,8 @@ class FireballDisplay extends CustomDisplay
            x += speed;
            //g2.clearRect(0, 0, 1024, 768);
            //g2.scale(2, 2);
+           super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
+           g2 = super.img.createGraphics();
            g2.drawImage(activeFireball, x, y, null);
          //}
          // Clear base image
