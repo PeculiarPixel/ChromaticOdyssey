@@ -1,7 +1,7 @@
 class Combatant
 {
   private BufferedImage sprite;
-  private String name;
+  private GameCharacterName name;
   private CombatColor activeColor;
   private int maxHP;
   private int curHP;
@@ -12,7 +12,11 @@ class Combatant
   
   private int[] statusCounters;
   
-  private boolean  isActing;
+  private SpriteAnimation currentAnimation;
+  private HashMap<String, SpriteAnimation> animations; 
+  
+  private boolean isActing;
+  private boolean isAttacking;
   
   private CustomDisplay spriteFrame;
   private CustomDisplay nameFrame;
@@ -28,12 +32,22 @@ class Combatant
   private static final int LETHARGY = 0;
   private static final int MANIA = 1;
   
-  public Combatant(String name, BufferedImage sprite, CombatColor combatColor, int[] baseStats, int[][] meterMods)
+  public Combatant(GameCharacterName name, BufferedImage sprite, CombatColor combatColor, int[] baseStats, int[][] meterMods)
   {
     this.baseStats = baseStats;
     this.name = name;
     maxHP = 200;
     curHP = maxHP;
+
+    this.animations = spriteLibrary.getCharacterAnimations(name);
+    if(name == GameCharacterName.NEWT)
+    {
+      this.currentAnimation = animations.get("IDLE_RIGHT");
+    }
+    else
+    {
+      this.currentAnimation = animations.get("IDLE_LEFT");
+    }
     
     meters = new int[3];
     meters[RED] = 0;
@@ -200,7 +214,7 @@ class Combatant
   
   public String getName()
   {
-    return name;
+    return name.toString();
   }
   
   public int[] getStats()
@@ -245,6 +259,13 @@ class Combatant
   public BufferedImage getSprite()
   {
     return sprite;
+  }
+  
+  public BufferedImage getCurrentSprite()
+  {
+    BufferedImage spriteImage = (BufferedImage) currentAnimation.getCurrentImage().getNative();
+    currentAnimation.update();
+    return spriteImage;
   }
   
   public CombatMove getRandomMove()

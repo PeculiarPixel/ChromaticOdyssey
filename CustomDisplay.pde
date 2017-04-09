@@ -54,9 +54,15 @@ public class SpriteFrame extends CustomDisplay
     combatant.setSpriteFrame(this);
   }
   
+  public void drawImage(Graphics2D g2d)
+  {
+    update();
+    g2d.drawImage(super.img, null, super.origin.x, super.origin.y);
+  }
+  
   public void update()
   {
-    setImg(combatant.getSprite());
+    setImg(combatant.getCurrentSprite());
   }
 }
 

@@ -15,7 +15,7 @@ PApplet master = this;
   void setup() 
   {
     //size(1024, 768, P2D); //<>//
-    size(1024, 768); //<>//
+    size(1024, 768); //<>// //<>//
     smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
@@ -51,10 +51,11 @@ PApplet master = this;
     // Combat module initializations:
     imageMaker = new ImageMaker();
   
-    //BufferedImage p1i = imageMaker.drawTestSprite(Color.RED);
-    //BufferedImage p2i = imageMaker.drawTestSprite(Color.BLUE);
+    BufferedImage p1i = imageMaker.drawTestSprite(Color.RED);
+    BufferedImage p2i = imageMaker.drawTestSprite(Color.BLUE);
     
-    BufferedImage p1i = (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreathRight-01.png").getNative();
+    /*
+    BufferedImage p1i = (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreatheRight-24-23.png").getNative();
     
     BufferedImage p2i = (BufferedImage) loadImage("/SpriteAnimations/Kit/IdleAnimationLeft/KitBreathe-11.png").getNative();
 
@@ -78,7 +79,7 @@ PApplet master = this;
     BufferedImage[] mythraCombatIdleSprites = new BufferedImage[2];
     BufferedImage mythraCombatHurtSprite;
     BufferedImage mythraCombatAttackingSprite;
-
+*/
     //try
     //{ 
       //BufferedImage p1i = ImageIO.read(new File("/SpriteAnimations/"));
@@ -104,8 +105,8 @@ PApplet master = this;
      meterMods[2][1] = -2;
      meterMods[2][2] = 5;
     
-     Combatant player = new Combatant("Newt", p1i, defaultColor, baseStats, meterMods);
-     Combatant enemy = new Combatant("Enemy", p2i, defaultColor, baseStats, meterMods);
+     Combatant player = new Combatant(GameCharacterName.NEWT, p1i, defaultColor, baseStats, meterMods);
+     Combatant enemy = new Combatant(GameCharacterName.KIT, p2i, defaultColor, baseStats, meterMods);
     
      fightManager = new FightManager(player,enemy,inventory);  
      
@@ -123,14 +124,14 @@ PApplet master = this;
 
   // Key Pressed Events
   void keyPressed() {
-
-    if(!inCombat) { //<>//
-      if (keyCode == UP) { //<>//
-        newt.setDirection(MoveDirection.UP); //<>//
-       // kit.setDirection(MoveDirection.UP); //<>//
-        kitMoveSet.add(MoveDirection.UP); //<>//
-        startTime.append(millis()); //<>//
-      } //<>//
+ //<>//
+    if(!inCombat) { //<>// //<>//
+      if (keyCode == UP) { //<>// //<>//
+        newt.setDirection(MoveDirection.UP); //<>// //<>//
+       // kit.setDirection(MoveDirection.UP); //<>// //<>//
+        kitMoveSet.add(MoveDirection.UP); //<>// //<>//
+        startTime.append(millis()); //<>// //<>//
+      } //<>// //<>//
       if(keyCode == DOWN){ //<>//
         newt.setDirection(MoveDirection.DOWN);
         //kit.setDirection(MoveDirection.DOWN);
@@ -142,21 +143,21 @@ PApplet master = this;
        //kit.setDirection(MoveDirection.LEFT);
        kitMoveSet.add(MoveDirection.LEFT);
        startTime.append(millis()); //<>// //<>//
-      } //<>//
-      if(keyCode == RIGHT){ //<>// //<>// //<>// //<>// //<>//
+      } //<>// //<>//
+      if(keyCode == RIGHT){ //<>// //<>// //<>// //<>// //<>// //<>//
         newt.setDirection(MoveDirection.RIGHT); //<>// //<>//
        // kit.setDirection(MoveDirection.RIGHT); //<>//
         kitMoveSet.add(MoveDirection.RIGHT); //<>//
-        startTime.append(millis()); //<>//
-      } //<>// //<>//
+        startTime.append(millis()); //<>// //<>//
+      } //<>// //<>// //<>//
     } //<>//
   }
 
   // Key Released Events //<>// //<>// //<>//
   void keyReleased() {
         
-  if (keyCode == UP) { //<>// //<>//
-      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>// //<>//
+  if (keyCode == UP) { //<>// //<>// //<>//
+      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>// //<>// //<>//
      // kit.releaseDirection(MoveDirection.UP); //<>//
       kitMoveRelease.add(MoveDirection.UP);
       stopTime.append(millis());
@@ -165,11 +166,11 @@ PApplet master = this;
       newt.releaseDirection(MoveDirection.DOWN);
      // kit.releaseDirection(MoveDirection.DOWN);
       kitMoveRelease.add(MoveDirection.DOWN);
-      stopTime.append(millis()); //<>//
-    } //<>// //<>//
+      stopTime.append(millis()); //<>// //<>//
+    } //<>// //<>// //<>//
     if(keyCode == LEFT){ //<>// //<>//
      newt.releaseDirection(MoveDirection.LEFT);
-     //kit.releaseDirection(MoveDirection.LEFT);
+     //kit.releaseDirection(MoveDirection.LEFT); //<>//
      kitMoveRelease.add(MoveDirection.LEFT);  //<>//
      stopTime.append(millis()); 
     } //<>// //<>//
