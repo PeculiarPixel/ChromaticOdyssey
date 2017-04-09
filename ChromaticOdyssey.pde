@@ -168,7 +168,9 @@ PApplet master = this;
         display.updateCurrentScript();
     }
     if (key == 's' || key == 'S' && state.currentState.name == LevelName.INTRO) {
-      introStory.jump(introStory.duration());
+      if (DEBUG.INTRO_ON) {
+        introStory.jump(introStory.duration());
+      }
     }
   } 
 

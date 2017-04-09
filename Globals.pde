@@ -1,6 +1,8 @@
 
 GameCharacter newt;               // Main character, Newt
 GameCharacter kit;
+GameCharacter mythra;
+GameCharacter pragma;
 
 boolean hitBoxMode = false;       // Default hitbox mode setting
 boolean initValues;

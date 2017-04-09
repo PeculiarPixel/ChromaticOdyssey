@@ -60,6 +60,9 @@ class LevelLuminousRuinHub extends Level {
     this.triggers.add(new LevelTransitionTrigger(1000, 50, 600, 100, LevelName.THRONE_ROOM, 2400, 900));
     this.triggers.add(new LevelTransitionTrigger(1000, 1500, 600, 100, LevelName.CASTLE_APPROACH, 3550, 1100));
     
+    // Hitbox to block the side hallway
+    this.landscapes.add(new Landscape(1900, 800, 200, 500));
+    
     // Combat triggers
     
   }

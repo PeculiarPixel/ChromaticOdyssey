@@ -62,6 +62,8 @@ public class World {
   private void setupCharacters() {
     newt = new GameCharacter(GameCharacterName.NEWT);
     kit = new GameCharacter(GameCharacterName.KIT);
+    //mythra = new GameCharacter(GameCharacterName.MYTHRA);
+    //pragma = new GameCharacter(GameCharacterName.PRAGMA);
   }
   
   // Unload a level from memory
