@@ -15,7 +15,7 @@ PApplet master = this;
   void setup() 
   {
     //size(1024, 768, P2D); //<>//
-    size(1024, 768);
+    size(1024, 768); //<>//
     smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
@@ -55,7 +55,29 @@ PApplet master = this;
     //BufferedImage p2i = imageMaker.drawTestSprite(Color.BLUE);
     
     BufferedImage p1i = (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreathRight-01.png").getNative();
+    
     BufferedImage p2i = (BufferedImage) loadImage("/SpriteAnimations/Kit/IdleAnimationLeft/KitBreathe-11.png").getNative();
+
+    BufferedImage[] newtCombatIdleSprites = new BufferedImage[2];
+    newtCombatIdleSprites[0] =  (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreathRight-01.png").getNative();
+    newtCombatIdleSprites[1] =  (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreathRight-02.png").getNative();
+    BufferedImage newtCombatHurtSprite = (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreathRight-01.png").getNative();
+    BufferedImage newtCombatAttackingSprite =  (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreathRight-01.png").getNative();
+
+    BufferedImage[] kitCombatIdleSprites = new BufferedImage[2];
+    kitCombatIdleSprites[0] =  (BufferedImage) loadImage("/SpriteAnimations/Kit/IdleAnimationLeft/KitBreathe-11.png").getNative();
+    kitCombatIdleSprites[1] =  (BufferedImage) loadImage("/SpriteAnimations/Kit/IdleAnimationLeft/KitBreathe-12.png").getNative();
+    BufferedImage kitCombatHurtSprite =  (BufferedImage) loadImage("/SpriteAnimations/Kit/HurtAnimation/KitHurt-05.png").getNative();
+    BufferedImage kitCombatAttackingSprite =  (BufferedImage) loadImage("/SpriteAnimations/Kit/IdleAnimationRight/KitAttack-06.png").getNative();;
+    
+    
+    BufferedImage[] pragmaCombatIdleSprites = new BufferedImage[2];
+    BufferedImage pragmaCombatHurtSprite;
+    BufferedImage pragmaCombatAttackingSprite;
+    
+    BufferedImage[] mythraCombatIdleSprites = new BufferedImage[2];
+    BufferedImage mythraCombatHurtSprite;
+    BufferedImage mythraCombatAttackingSprite;
 
     //try
     //{ 
@@ -102,14 +124,14 @@ PApplet master = this;
   // Key Pressed Events
   void keyPressed() {
 
-    if(!inCombat) {
-      if (keyCode == UP) {
-        newt.setDirection(MoveDirection.UP);
-       // kit.setDirection(MoveDirection.UP);
-        kitMoveSet.add(MoveDirection.UP);
-        startTime.append(millis());
-      }
-      if(keyCode == DOWN){
+    if(!inCombat) { //<>//
+      if (keyCode == UP) { //<>//
+        newt.setDirection(MoveDirection.UP); //<>//
+       // kit.setDirection(MoveDirection.UP); //<>//
+        kitMoveSet.add(MoveDirection.UP); //<>//
+        startTime.append(millis()); //<>//
+      } //<>//
+      if(keyCode == DOWN){ //<>//
         newt.setDirection(MoveDirection.DOWN);
         //kit.setDirection(MoveDirection.DOWN);
         kitMoveSet.add(MoveDirection.DOWN);
@@ -121,21 +143,21 @@ PApplet master = this;
        kitMoveSet.add(MoveDirection.LEFT);
        startTime.append(millis()); //<>// //<>//
       } //<>//
-      if(keyCode == RIGHT){ //<>// //<>// //<>// //<>//
-        newt.setDirection(MoveDirection.RIGHT); //<>//
+      if(keyCode == RIGHT){ //<>// //<>// //<>// //<>// //<>//
+        newt.setDirection(MoveDirection.RIGHT); //<>// //<>//
        // kit.setDirection(MoveDirection.RIGHT); //<>//
         kitMoveSet.add(MoveDirection.RIGHT); //<>//
         startTime.append(millis()); //<>//
-      } //<>//
-    }
+      } //<>// //<>//
+    } //<>//
   }
 
   // Key Released Events //<>// //<>// //<>//
   void keyReleased() {
         
   if (keyCode == UP) { //<>// //<>//
-      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>//
-     // kit.releaseDirection(MoveDirection.UP);
+      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>// //<>//
+     // kit.releaseDirection(MoveDirection.UP); //<>//
       kitMoveRelease.add(MoveDirection.UP);
       stopTime.append(millis());
     } //<>//
@@ -144,11 +166,11 @@ PApplet master = this;
      // kit.releaseDirection(MoveDirection.DOWN);
       kitMoveRelease.add(MoveDirection.DOWN);
       stopTime.append(millis()); //<>//
-    } //<>//
-    if(keyCode == LEFT){ //<>//
+    } //<>// //<>//
+    if(keyCode == LEFT){ //<>// //<>//
      newt.releaseDirection(MoveDirection.LEFT);
      //kit.releaseDirection(MoveDirection.LEFT);
-     kitMoveRelease.add(MoveDirection.LEFT); 
+     kitMoveRelease.add(MoveDirection.LEFT);  //<>//
      stopTime.append(millis()); 
     } //<>// //<>//
     if(keyCode == RIGHT){ //<>//
