@@ -7,6 +7,7 @@ import java.awt.image.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 PApplet master = this;
@@ -112,7 +113,7 @@ PApplet master = this;
       if (keyCode == UP) {
         newt.setDirection(MoveDirection.UP);
       }
-      if(keyCode == DOWN){
+      if(keyCode == DOWN){ //<>//
         newt.setDirection(MoveDirection.DOWN);
       }
       if(keyCode == LEFT){

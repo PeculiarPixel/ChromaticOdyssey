@@ -106,20 +106,22 @@ class FightManager
     
     BufferedImage fireball = null;
     
+    try {
     if (myColor == Color.RED)
     {
-      fireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackRed.png").getNative();
+      fireball = ImageIO.read(new File("/SpriteAnimations/Combat/AttackRed.png"));
     }
     
     else if (myColor == Color.BLUE)
     {
-      fireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlue.png").getNative();
+      fireball = ImageIO.read(new File("/SpriteAnimations/Combat/AttackBlue.png"));
     }
     
     else if (myColor == Color.YELLOW)
     {
-       fireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackYellow.png").getNative(); 
+       fireball = ImageIO.read(new File("/SpriteAnimations/Combat/AttackYellow.png")); 
     }
+    } catch(IOException e) {}
     
     // Call CombatColor and CombatMove constructors:
     CombatColor newColor = new CombatColor(myColor, modifiers, meterIndex);
