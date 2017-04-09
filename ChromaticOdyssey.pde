@@ -1,10 +1,19 @@
 import processing.video.*;
 import ddf.minim.*;
 
+// Combat module libraries:
+import java.awt.*;
+import java.awt.image.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
 PApplet master = this;
 
-  // Setup Game
-  void setup() {
+  void setup() 
+  {
     size(1024, 768, P2D);
     smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
@@ -40,50 +49,81 @@ PApplet master = this;
     dispatcher = new EventDispatcher();
     camera = new GameCamera();
     drawUtils = new DrawUtilities();
+  
+    // Combat module initializations:
+    imageMaker = new ImageMaker();
+  
+    BufferedImage p1i = imageMaker.drawTestSprite(Color.RED);
+    BufferedImage p2i = imageMaker.drawTestSprite(Color.BLUE);
     
-    kitMoveSet = new ArrayList<MoveDirection>();
-    kitMoveRelease = new ArrayList<MoveDirection>();
-   
-    startTime = new IntList();
-    stopTime = new IntList();
-    kitFollowDelay = 700;
-
+    int[] modifiers = {0, 0, 0};
+    int[] baseStats = {10, 10, 10};
+      
+    CombatColor defaultColor = new CombatColor(Color.GRAY, modifiers, 2);
+    
+    inventory = new int[]{1, 2, 3, 4, 5, 6};
+    
+    int[][] meterMods = new int[3][3];
+     meterMods[0][0] = 5;
+     meterMods[0][1] = -2;
+     meterMods[0][2] = -2;
+     meterMods[1][0] = -2;
+     meterMods[1][1] = 5;
+     meterMods[1][2] = -2;
+     meterMods[2][0] = -2;
+     meterMods[2][1] = -2;
+     meterMods[2][2] = 5;
+    
+     Combatant player = new Combatant("Player", p1i, defaultColor, baseStats, meterMods);
+     Combatant enemy = new Combatant("Enemy", p2i, defaultColor, baseStats, meterMods);
+    
+     fightManager = new FightManager(player,enemy,inventory);  
+     
+     inCombat = false;
+     lockMouseInput = false;
+  
+      kitMoveSet = new ArrayList<MoveDirection>();
+      kitMoveRelease = new ArrayList<MoveDirection>();
+     
+      startTime = new IntList();
+      stopTime = new IntList();
+      kitFollowDelay = 700;
     
   }
 
   // Key Pressed Events
   void keyPressed() {
 
-    
-    if (keyCode == UP) {
-      newt.setDirection(MoveDirection.UP);
-     // kit.setDirection(MoveDirection.UP);
-      kitMoveSet.add(MoveDirection.UP);
-      startTime.append(millis());
+    if(!inCombat) {
+      if (keyCode == UP) {
+        newt.setDirection(MoveDirection.UP);
+       // kit.setDirection(MoveDirection.UP);
+        kitMoveSet.add(MoveDirection.UP);
+        startTime.append(millis());
+      }
+      if(keyCode == DOWN){
+        newt.setDirection(MoveDirection.DOWN);
+        //kit.setDirection(MoveDirection.DOWN);
+        kitMoveSet.add(MoveDirection.DOWN);
+        startTime.append(millis());
+      }
+      if(keyCode == LEFT){
+       newt.setDirection(MoveDirection.LEFT);
+       //kit.setDirection(MoveDirection.LEFT);
+       kitMoveSet.add(MoveDirection.LEFT);
+       startTime.append(millis());
+      }
+      if(keyCode == RIGHT){ //<>// //<>// //<>//
+        newt.setDirection(MoveDirection.RIGHT);
+       // kit.setDirection(MoveDirection.RIGHT);
+        kitMoveSet.add(MoveDirection.RIGHT);
+        startTime.append(millis());
+      }
     }
-    if(keyCode == DOWN){
-      newt.setDirection(MoveDirection.DOWN);
-      //kit.setDirection(MoveDirection.DOWN);
-      kitMoveSet.add(MoveDirection.DOWN);
-      startTime.append(millis());
-    }
-    if(keyCode == LEFT){
-     newt.setDirection(MoveDirection.LEFT);
-     //kit.setDirection(MoveDirection.LEFT);
-     kitMoveSet.add(MoveDirection.LEFT);
-     startTime.append(millis());
-    }
-    if(keyCode == RIGHT){ //<>// //<>//
-      newt.setDirection(MoveDirection.RIGHT);
-     // kit.setDirection(MoveDirection.RIGHT);
-      kitMoveSet.add(MoveDirection.RIGHT);
-      startTime.append(millis());
-    } //<>// //<>//
-  } //<>// //<>//
+  }
 
   // Key Released Events //<>// //<>// //<>//
   void keyReleased() {
-        //kitKeyRelease = false;
         
   if (keyCode == UP) { //<>// //<>//
       newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>//
@@ -108,6 +148,10 @@ PApplet master = this;
       //kit.releaseDirection(MoveDirection.RIGHT);
       kitMoveRelease.add(MoveDirection.RIGHT); //<>//
       stopTime.append(millis());
+    }
+    if(key == 'c' || key == 'C') {
+          // Trigger combat
+          inCombat = !inCombat;
     }
     if(key == 'h' || key == 'H'){ //<>// //<>//
         hitBoxMode = !hitBoxMode;
@@ -145,10 +189,33 @@ PApplet master = this;
       gameStart(); 
       initValues = true;
     }
-    
     // Run engines to handle incoming events
-    state.run();
-    comp.run();
-    display.run();
+    if(!inCombat)
+    {
+      state.run();
+      comp.run();
+      display.run();
+    }
+    else
+    {
+      fightManager.drawActive();
+      // Image has to be offset to the center of the screen, presumably due to matrix transform issues:
+      image(fightManager.getAsPImage(fightManager.getImg()), 512, 384);
+    }
+    
+    //println(mouseX - px, mouseY - py);
+    //println("newt", newt.getXPos(), newt.getYPos());
     
   }
+  
+  void mousePressed()
+{
+  if(inCombat && !lockMouseInput)
+    fightManager.pressCheck();
+}
+
+void mouseMoved()
+{
+  if(inCombat  && !lockMouseInput)
+    fightManager.hoverCheck();
+}
