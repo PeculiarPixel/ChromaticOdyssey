@@ -96,8 +96,10 @@ class BaseCombatMenu extends CustomMenu
     // Construct base displays (spriteFrames and nameFrames):
     ArrayList<CustomDisplay> baseDisplays = new ArrayList<CustomDisplay>();
     baseDisplays.add(new BackgroundDisplay());
-    baseDisplays.add(new SpriteFrame(new Point(128, 128), player));
-    baseDisplays.add(new SpriteFrame(new Point(640, 128), enemy));
+    //baseDisplays.add(new SpriteFrame(new Point(128, 128), player));
+    //baseDisplays.add(new SpriteFrame(new Point(640, 128), enemy));
+    baseDisplays.add(new SpriteFrame(new Point(256, 256), player));
+    baseDisplays.add(new SpriteFrame(new Point(640, 256), enemy));
     baseDisplays.add(new NameFrame(new Point(128, 0), player));
     baseDisplays.add(new NameFrame(new Point(640, 0), enemy));
     

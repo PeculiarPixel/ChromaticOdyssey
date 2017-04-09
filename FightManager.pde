@@ -100,30 +100,43 @@ class FightManager
     
     
     BufferedImage redFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackRed.png").getNative();
-    //BufferedImage blueFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlue.png").getNative();
-    //BufferedImage yellowFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackYellow.png").getNative();
+    BufferedImage blueFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlue.png").getNative();
+    BufferedImage yellowFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackYellow.png").getNative();
     
     
     BufferedImage fireball = null;
     
-    try {
+    //try {
+      //String urlString;
+      //URL url = new URL(getCodeBase(), "examples/strawberry.jpg");
+      
+      
     if (myColor == Color.RED)
     {
-      fireball = ImageIO.read(new File("/SpriteAnimations/Combat/AttackRed.png"));
+      //fireball = ImageIO.read(new File("Data/SpriteAnimations/Combat/AttackRed.png"));
+      fireball = redFireball;
+      //urlString = "Data/SpriteAnimations/Combat/AttackRed.png";
     }
     
     else if (myColor == Color.BLUE)
     {
-      fireball = ImageIO.read(new File("/SpriteAnimations/Combat/AttackBlue.png"));
+      //fireball = ImageIO.read(new File("Data/SpriteAnimations/Combat/AttackBlue.png"));
+      fireball = blueFireball;
+      //urlString = "Data/SpriteAnimations/Combat/AttackBlue.png";
+
     }
     
     else if (myColor == Color.YELLOW)
     {
-       fireball = ImageIO.read(new File("/SpriteAnimations/Combat/AttackYellow.png")); 
+       //fireball = ImageIO.read(new File("Data/SpriteAnimations/Combat/AttackYellow.png")); 
+       fireball = yellowFireball;
+       //urlString = "Data/SpriteAnimations/Combat/AttackYellow.png";
+ 
     }
-    } catch(IOException e) {}
     
-    fireball = redFireball;
+    //} catch(IOException e) {println("IO Exception!");}
+    
+    //fireball = redFireball;
     
     // Call CombatColor and CombatMove constructors:
     CombatColor newColor = new CombatColor(myColor, modifiers, meterIndex);

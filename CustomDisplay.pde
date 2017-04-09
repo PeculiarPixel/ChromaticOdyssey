@@ -135,7 +135,7 @@ class FireballDisplay extends CustomDisplay
   private int y = 334; 
   static final private int speed = 8;
   private int xInitial = 256;
-  private int xTerminal = 768;
+  private int xTerminal = 640;
   private boolean suspended;
   private BufferedImage activeFireball;
   
@@ -188,10 +188,11 @@ class FireballDisplay extends CustomDisplay
            frameStartTime = millis();
            x += speed;
            //g2.clearRect(0, 0, 1024, 768);
-           //g2.scale(2, 2);
            super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
            g2 = super.img.createGraphics();
-           g2.drawImage(activeFireball, x, y, null);
+           g2.scale(2, 2);
+
+           g2.drawImage(activeFireball, x/2, y/2, null);
            //image(pActiveFireball, x, y);
          //}
          // Clear base image

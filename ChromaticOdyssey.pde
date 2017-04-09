@@ -9,12 +9,14 @@ import java.util.*;
 import javax.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.net.*;
 
 PApplet master = this;
 
   void setup() 
   {
-    size(1024, 768, P2D);
+    //size(1024, 768, P2D); //<>//
+    size(1024, 768);
     smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
@@ -54,8 +56,18 @@ PApplet master = this;
     // Combat module initializations:
     imageMaker = new ImageMaker();
   
-    BufferedImage p1i = imageMaker.drawTestSprite(Color.RED);
-    BufferedImage p2i = imageMaker.drawTestSprite(Color.BLUE);
+    //BufferedImage p1i = imageMaker.drawTestSprite(Color.RED);
+    //BufferedImage p2i = imageMaker.drawTestSprite(Color.BLUE);
+    
+    BufferedImage p1i = (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreathRight-01.png").getNative();
+    BufferedImage p2i = (BufferedImage) loadImage("/SpriteAnimations/Kit/IdleAnimationLeft/KitBreathe-11.png").getNative();
+
+    //try
+    //{ 
+      //BufferedImage p1i = ImageIO.read(new File("/SpriteAnimations/"));
+    //}
+    
+    //fireball = ImageIO.read(new File("/SpriteAnimations/Combat/AttackRed.png"));
     
     int[] modifiers = {0, 0, 0};
     int[] baseStats = {10, 10, 10};
@@ -75,7 +87,7 @@ PApplet master = this;
      meterMods[2][1] = -2;
      meterMods[2][2] = 5;
     
-     Combatant player = new Combatant("Player", p1i, defaultColor, baseStats, meterMods);
+     Combatant player = new Combatant("Newt", p1i, defaultColor, baseStats, meterMods);
      Combatant enemy = new Combatant("Enemy", p2i, defaultColor, baseStats, meterMods);
     
      fightManager = new FightManager(player,enemy,inventory);  
@@ -112,14 +124,14 @@ PApplet master = this;
        newt.setDirection(MoveDirection.LEFT);
        //kit.setDirection(MoveDirection.LEFT);
        kitMoveSet.add(MoveDirection.LEFT);
-       startTime.append(millis()); //<>//
-      }
-      if(keyCode == RIGHT){ //<>// //<>// //<>//
-        newt.setDirection(MoveDirection.RIGHT);
-       // kit.setDirection(MoveDirection.RIGHT);
-        kitMoveSet.add(MoveDirection.RIGHT);
-        startTime.append(millis());
-      }
+       startTime.append(millis()); //<>// //<>//
+      } //<>//
+      if(keyCode == RIGHT){ //<>// //<>// //<>// //<>//
+        newt.setDirection(MoveDirection.RIGHT); //<>//
+       // kit.setDirection(MoveDirection.RIGHT); //<>//
+        kitMoveSet.add(MoveDirection.RIGHT); //<>//
+        startTime.append(millis()); //<>//
+      } //<>//
     }
   }
 
@@ -131,21 +143,21 @@ PApplet master = this;
      // kit.releaseDirection(MoveDirection.UP);
       kitMoveRelease.add(MoveDirection.UP);
       stopTime.append(millis());
-    }
-    if(keyCode == DOWN){
+    } //<>//
+    if(keyCode == DOWN){ //<>//
       newt.releaseDirection(MoveDirection.DOWN);
      // kit.releaseDirection(MoveDirection.DOWN);
       kitMoveRelease.add(MoveDirection.DOWN);
-      stopTime.append(millis());
-    }
+      stopTime.append(millis()); //<>//
+    } //<>//
     if(keyCode == LEFT){ //<>//
      newt.releaseDirection(MoveDirection.LEFT);
      //kit.releaseDirection(MoveDirection.LEFT);
      kitMoveRelease.add(MoveDirection.LEFT); 
      stopTime.append(millis()); 
     } //<>// //<>//
-    if(keyCode == RIGHT){
-      newt.releaseDirection(MoveDirection.RIGHT);
+    if(keyCode == RIGHT){ //<>//
+      newt.releaseDirection(MoveDirection.RIGHT); //<>//
       //kit.releaseDirection(MoveDirection.RIGHT);
       kitMoveRelease.add(MoveDirection.RIGHT); //<>//
       stopTime.append(millis());
@@ -154,11 +166,11 @@ PApplet master = this;
           // Trigger combat
           inCombat = !inCombat;
     }
-    if(key == 'h' || key == 'H'){ //<>// //<>//
-        hitBoxMode = !hitBoxMode;
+    if(key == 'h' || key == 'H'){ //<>// //<>// //<>//
+        hitBoxMode = !hitBoxMode; //<>//
     }
     if(key == 'b' || key == 'B'){
-       println();  //<>// //<>//
+       println();  //<>// //<>// //<>//
     }
     if(key == 'p' || key == 'P'){
         if (DEBUG.DEV_MODE) println("Newt X: " + newt.getXPos());
