@@ -47,15 +47,15 @@ class DisplayEngine {
   }
   
   
-  // Display game characters //<>// //<>//
-  public void displayCharacter(GameCharacter c) { //<>// //<>//
- //<>// //<>// //<>//
-    imageMode(CENTER); //<>// //<>// //<>// //<>//
-    c.updateSpriteAnimation(); //<>// //<>// //<>// //<>//
+  // Display game characters //<>// //<>// //<>//
+  public void displayCharacter(GameCharacter c) { //<>// //<>// //<>//
+ //<>// //<>// //<>// //<>//
+    imageMode(CENTER); //<>// //<>// //<>// //<>// //<>//
+    c.updateSpriteAnimation(); //<>// //<>// //<>// //<>// //<>//
     image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>//
     if(c.local.hitboxDisplay) { //<>// //<>// //<>//
-      displayArea(c.getHitbox()); //<>// //<>// //<>//
-    }  //<>// //<>//
+      displayArea(c.getHitbox()); //<>// //<>// //<>// //<>//
+    }  //<>// //<>// //<>//
       //<>// //<>//
   }  //<>// //<>// //<>//
    //<>// //<>//
@@ -67,8 +67,8 @@ class DisplayEngine {
   // Display all characters in state's current level //<>// //<>//
   private void displayCharacters() { //<>// //<>// //<>// //<>//
     imageMode(CORNER); //<>// //<>// //<>// //<>//
-     //<>//
-    for(int i=2;i<state.currentState.characters.size();i++){
+     //<>// //<>//
+    for(int i=2;i<state.currentState.characters.size();i++){ //<>//
       displayCharacter(state.currentState.characters.get(i));
     }
     
@@ -99,15 +99,15 @@ class DisplayEngine {
     } //<>//
   } //<>//
    //<>//
-  // Display triggers //<>//
-  private void displayTriggers() { //<>//
-    for (Trigger t : state.currentState.triggers) { //<>//
+  // Display triggers //<>// //<>//
+  private void displayTriggers() { //<>// //<>//
+    for (Trigger t : state.currentState.triggers) { //<>// //<>//
       if (newt.local.hitboxDisplay) { //<>//
         displayArea(t); //<>// //<>// //<>//
       } //<>// //<>//
     } //<>// //<>//
-  } //<>//
-  
+  } //<>// //<>//
+   //<>//
   // Draw currently queued script //<>//
   private void displayDialog() { //<>//
     if (!this.scriptQueue.isEmpty()) this.scriptQueue.draw(); //<>//
@@ -123,14 +123,14 @@ class DisplayEngine {
     clearScriptQueue(); //<>//
   } //<>//
     //<>// //<>//
-  public Script getCurrentScript() { //<>// //<>//
-   return null; //<>//
+  public Script getCurrentScript() { //<>// //<>// //<>//
+   return null; //<>// //<>//
   } //<>// //<>//
  //<>// //<>//
   // Run display engine //<>// //<>// //<>//
   void run() { //<>// //<>//
-     //<>//
-   background(0);      //  Init background //<>//
+     //<>// //<>//
+   background(0);      //  Init background //<>// //<>//
     //<>// //<>//
    if (state.currentState.name == LevelName.INTRO){ //<>// //<>//
      if(runIntroStory == false){
@@ -149,6 +149,9 @@ class DisplayEngine {
         }
       } //<>// //<>//
    }
+   if (state.currentState.name == LevelName.GAME_OVER){
+        image(gameOver, 0, 0, width, height);
+      }
     
    //<>//
      //<>//
