@@ -8,14 +8,19 @@ class GlobalInfo {
   private SpriteAnimation currentAnimation;             // Current animation
   
   // Constructor
-  public GlobalInfo(int h, int m, HashMap<String, SpriteAnimation> animations) {
+  public GlobalInfo(int h, int m, HashMap<String, SpriteAnimation> animations, GameCharacterName name) {
       
       this.maxHealth = h;
       this.maxMana = m;
       
       // Get all animations
       this.animations = animations;
-      this.currentAnimation = animations.get("IDLE_DOWN");
+
+      if(name == GameCharacterName.PRAGMA ||name == GameCharacterName.MYTHRA){
+            this.currentAnimation = animations.get("IDLE_LEFT");
+      }else{
+            this.currentAnimation = animations.get("IDLE_DOWN");
+      }
       
   }
     
