@@ -5,6 +5,7 @@ abstract class Level {
   protected ArrayList<Trigger> triggers;
   protected ArrayList<Hitbox> hitboxes;
   protected ArrayList<Script> conversations;
+  protected AudioPlayer theme;
   protected LevelName name;
   protected float START_X;
   protected float START_Y;
@@ -29,6 +30,7 @@ abstract class Level {
     this.name = inputName;
     this.START_X =x;
     this.START_Y =y;
+    
   }
   
   abstract void loadAssets();
@@ -54,8 +56,6 @@ abstract class Level {
   // Initialize all assets, characters, &c into comp engine
   public void initialize() {
     
-    
-    
     // Loop through all assets and add initialize them
     for (GameCharacter c : characters) { c.initialize(); }
     for (Landscape l : landscapes) { l.initialize(); }
@@ -66,6 +66,8 @@ abstract class Level {
     setStartPosition();
     camera.setTrackTarget(this.characters.get(0));
     camera.setLevelSize(0, getStateSize().w, 0, getStateSize().h);
+    
+    if (DEBUG.MUSIC_ON) sounds.playLevelTheme(name);
     
   }
   

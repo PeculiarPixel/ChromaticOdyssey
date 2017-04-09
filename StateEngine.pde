@@ -39,6 +39,10 @@ class StateEngine {
     clearEvents();
   }
   
+  public void stopLevelTheme() {
+    sounds.stopCurrentTrack();
+  }
+  
   // Swap the current state to the new state
   public void setState(LevelName levelIndex) {    
       Level nextState = world.getLevel(levelIndex);
@@ -63,6 +67,7 @@ class StateEngine {
  
   // Clean all engines of queued events before swapping states
   private void cleanupEngineStates() {
+      stopLevelTheme();
       comp.clearEngine();
       display.clearEngine();
   }
