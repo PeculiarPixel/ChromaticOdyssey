@@ -174,13 +174,16 @@ class DisplayEngine {
       // Display characters
       displayCharacters();
       
+            // Display landscapes
+      displayLandscapes();
+      
       // Draw foreground
       imageMode(CORNER);
       //image(state.currentState.foregroundImage, 0 - camera.getXPos(), 0 - camera.getYPos());
       image(state.currentState.foregroundImage, 0, 0);
       
       // Display landscapes
-      displayLandscapes();
+     // displayLandscapes();
       displayTriggers();
       
       for (Fog f : state.currentState.fogs ) {
