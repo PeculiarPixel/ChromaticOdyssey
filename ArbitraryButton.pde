@@ -178,7 +178,7 @@ class ColorButton extends ArbitraryButton
     this.combatColor = combatColor;
     attackMenu = manager.getMenu(1);
     player = manager.getPlayer();
-    //super.setBaseImage(imageMaker.drawBaseCircImage(DIAMETER, combatColor.getColor()));
+    super.setBaseImage(imageMaker.drawBaseCircImage(DIAMETER, combatColor.getColor()));
     super.setBaseImage(combatColor.getSelectorImage());
     super.setHoverImage(imageMaker.drawHoverCircImage(DIAMETER, combatColor.getColor()));
   }
