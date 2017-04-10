@@ -4,7 +4,7 @@ static class DEBUG {
   
   public static LevelName DEBUG_START_LEVEL = LevelName.CASTLE_HUB; // Set starting level
   
-  public static final boolean INTRO_ON = true;                         // Turn on intro screen for game
+  public static final boolean INTRO_ON = false;                         // Turn on intro screen for game
   public static final boolean MUSIC_ON = true;                          // Turn on music
   
   public static final boolean MOVE_LOGGING = false;                     // Turn on logging for movement

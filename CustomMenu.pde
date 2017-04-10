@@ -101,8 +101,8 @@ class BaseCombatMenu extends CustomMenu
     baseDisplays.add(new BackgroundDisplay());
     //baseDisplays.add(new SpriteFrame(new Point(128, 128), player));
     //baseDisplays.add(new SpriteFrame(new Point(640, 128), enemy));
-    baseDisplays.add(new SpriteFrame(new Point(128, 128), player));
-    baseDisplays.add(new SpriteFrame(new Point(704, 128), enemy));
+    baseDisplays.add(new SpriteFrame(new Point(128, 192), player));
+    baseDisplays.add(new SpriteFrame(new Point(704, 192), enemy));
     baseDisplays.add(new NameFrame(new Point(128, 0), player));
     baseDisplays.add(new NameFrame(new Point(640, 0), enemy));
     

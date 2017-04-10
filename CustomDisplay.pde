@@ -74,19 +74,37 @@ public class NameFrame extends CustomDisplay
   private Graphics2D g2d;
   private Color[] colors;
   
+  private BufferedImage redSelector;
+  private BufferedImage blueSelector;
+  private BufferedImage yellowSelector;
+  private BufferedImage blackSelector;
+  
   public NameFrame(Point origin, Combatant combatant)
   {
-    super(imageMaker.constructNameFrameImage(), origin);
+    super(new BufferedImage(294, 187, BufferedImage.TYPE_INT_ARGB), origin);
     this.combatant = combatant;
     combatant.setNameFrame(this);
     baseImage = super.img;
-    baseFrame = new BufferedImage(baseImage.getWidth(), baseImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+    try
+    {
+    baseFrame = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/Combat-UI-screen.png")));
+    redSelector = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/ColorSelector-RED.png")));
+    blueSelector = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/ColorSelector-BLUE.png")));
+    yellowSelector = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/ColorSelector-YELLOW.png")));
+    blackSelector = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/ColorSelector-BLACK.png")));
+    }
+    catch(IOException exception){println("Unable to open Combat UI nameframe file");}
     g2d = (Graphics2D) baseImage.createGraphics();
     
+    g2d.setRenderingHint( RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON );
+    
+    /*
     Graphics2D g2 = (Graphics2D) baseFrame.createGraphics();
     g2.drawImage(baseImage, 0, 0, null);
     g2.dispose();
-    
+    */
+    g2d.drawImage(baseFrame, 0, 0, null);
     colors = new Color[3];
     colors[0] = Color.RED;
     colors[1] = Color.BLUE;
@@ -95,22 +113,24 @@ public class NameFrame extends CustomDisplay
   
   public void update()
   {
-    g2d.setBackground(new Color(0, 0, 0, 0));
-    g2d.clearRect(0, 0, 256, 128);
+    //g2d.setBackground(new Color(0, 0, 0, 0));
+    //g2d.clearRect(0, 0, 256, 128);
+    
+    
     g2d.drawImage(baseFrame, 0, 0, null);
     
     g2d.setColor(Color.BLACK);
-    g2d.drawString(combatant.getName(), 20, 20);
+    g2d.drawString(combatant.getName(), 70, 50);
     
     int[] stats = combatant.getStats();
-    g2d.drawString("HP: " + combatant.getHPString(), 20, 40);
-    g2d.drawString("DAM: " + stats[0], 20, 60);
-    g2d.drawString("DEF: " + stats[1], 20, 80);
-    g2d.drawString("SPD: " + stats[2], 20, 100);
+    g2d.drawString(combatant.getHPString(), 80, 80);
+    g2d.drawString("" + stats[0], 85, 110);
+    g2d.drawString("" + stats[1], 85, 138);
+    g2d.drawString("" + stats[2], 85, 165);
       
     for(int i = 0; i < 3; i++)
     {
-      int y = (i * 21) + 65;
+      int y = (i * 21) + 120;
       int meter = combatant.getMeter(i);
       for(int j = 0; j < 5; j++)
       {
@@ -128,8 +148,28 @@ public class NameFrame extends CustomDisplay
       
     }
 
-    g2d.setColor(combatant.getActiveColor().getColor());
-    g2d.fillRect(150, 14, 50, 50);
+    Color activeColor = combatant.getActiveColor().getColor();
+    BufferedImage selector = null;
+    if(activeColor == Color.RED)
+    {
+      selector = redSelector;
+    }
+    else if (activeColor == Color.BLUE)
+    {
+      selector = blueSelector;
+    }
+    else if (activeColor == Color.YELLOW)
+    {
+      selector = yellowSelector;
+    }
+    else if (activeColor == Color.BLACK)
+    {
+      selector = blackSelector;
+    }
+    g2d.scale(0.5, 0.5);
+     
+    g2d.drawImage(selector, 300, 32, null);
+    g2d.scale(2, 2);
   }
   
 }

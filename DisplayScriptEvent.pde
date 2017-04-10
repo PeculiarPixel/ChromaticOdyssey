@@ -15,7 +15,6 @@ class DisplayScriptEvent extends DisplayableEvent {
      display.queueScript(script);
      dispatcher.dispatchClear(this);
      this.finish();
-  
   }
   
 }
