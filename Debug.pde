@@ -2,10 +2,12 @@ static class DEBUG {
   
   public static final boolean DEV_MODE = true;                 // Game dev mode
   
+  public static LevelName DEBUG_START_LEVEL = LevelName.MASTER_BEDROOM;
+  
   public static final boolean QUICK_TRANSITION = false;         // Set quick transition for newt to the tranistion event
   
   public static final boolean INTRO_ON = false;                // Turn on intro screen for game
-  public static final boolean MUSIC_ON = false;                // Turn on music
+  public static final boolean MUSIC_ON = true;                // Turn on music
   
   public static final boolean MOVE_LOGGING = false;            // Turn on logging for movement
   public static final boolean POSITION_LOGGING = false;

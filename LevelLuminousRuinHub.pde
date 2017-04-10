@@ -53,7 +53,7 @@ class LevelLuminousRuinHub extends Level {
       this.triggers.add(new DialogTrigger(1000, 350, 400, 100, this.conversations.get(1)));
                         
       // Hitbox to block the throne room
-      //this.landscapes.add(new Landscape(1050, 200, 500, 200));
+      this.landscapes.add(new Landscape(1050, 200, 500, 200));
     
     }
    

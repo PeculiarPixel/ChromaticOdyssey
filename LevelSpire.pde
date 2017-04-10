@@ -42,14 +42,8 @@ class LevelSpire extends Level {
   // Load all level landscapes (Hitboxes, Triggers, Objects)
   private void loadLandscapes() {
     
-  //  this.triggers.add(new DialogTrigger(300, 2750, 100, 400, this.conversations.get(0)));
-   // this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
-   // this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
-  //  this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
-   // this.triggers.add(new LevelTransitionTrigger(1000, 1300, 600, 100, LevelName.THRONE_ROOM,475, 500));
-    //this.triggers.add(new LevelTransitionTrigger(500, 100, 100, 100, LevelName.SPIRE,1000, 200));
-  //  this.landscapes.add(new Landscape(120, 120,  100, 100));
-  //  this.landscapes.add(new Landscape(700, 120, 100, 100));
+    this.triggers.add(new DialogTrigger(1000, 1100, 1200, 50, this.conversations.get(0), new FadeToCombatEvent(GameCharacterName.PRAGMA, this.name, 840, 560)));
+    if (DEBUG.DEV_MODE) this.triggers.add(new LevelTransitionTrigger(1000, 1300, 600, 100, LevelName.THRONE_ROOM, 1000, 100));
     
   }
   

@@ -205,11 +205,13 @@ PApplet master = this;
 
   // Start the game intro and then the first level
   private void gameStart() {
-    if (DEBUG.INTRO_ON){  //<>//
-      state.setState(LevelName.INTRO); 
-    }else state.setState(LevelName.CASTLE_HUB);
+     //<>//
+    if (DEBUG.INTRO_ON) state.setState(LevelName.INTRO); 
+    else if (DEBUG.DEBUG_START_LEVEL != null) state.setState(DEBUG.DEBUG_START_LEVEL); 
+    else state.setState(LevelName.CASTLE_APPROACH);
+    
   }
-
+ //<>//
   // Handle movie event
   public void movieEvent(Movie m) { //<>//
     m.read();

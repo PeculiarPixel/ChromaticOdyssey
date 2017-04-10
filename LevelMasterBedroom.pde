@@ -45,11 +45,11 @@ class LevelMasterBedroom extends Level {
   private void loadLandscapes() {
   
    // Dialog
-  this.triggers.add(new DialogTrigger(2300, 950, 100, 400, this.conversations.get(0)));
-  this.triggers.add(new DialogTrigger(1250, 950, 100, 400, this.conversations.get(1), new FadeToCombatEvent(GameCharacterName.MYTHRA, this.name, 840, 560)));
+  this.triggers.add(new DialogTrigger(2300, 650, 50, 500, this.conversations.get(0)));
+  this.triggers.add(new DialogTrigger(1250, 650, 50, 600, this.conversations.get(1), new FadeToCombatEvent(GameCharacterName.MYTHRA, this.name, 840, 560)));
   
   // Transition back to HUB
-  this.triggers.add(new LevelTransitionTrigger(2500, 700, 100, 600, LevelName.CASTLE_HUB, 250, 750));
+  if (world.isMythraDefeated()) this.triggers.add(new LevelTransitionTrigger(2500, 700, 100, 600, LevelName.CASTLE_HUB, 250, 750));
     
   }
   
