@@ -17,7 +17,9 @@ class LevelIntro extends Level {
   public void initialize() {}
   
   // Load image assets
-  public void loadAssets() {}
+  public void loadAssets() {
+      introScreen.loop();
+  }
   
   public void movieEvent(Movie m) {
     m.read();

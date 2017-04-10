@@ -26,7 +26,7 @@ public class World {
   private LevelIntro Level_Intro;
   private LevelGameOver Level_Game_Over;
   private LevelOutro Level_Outro;
-  private LevelMythraDefeated Level_Mythra_Defeated;
+  private LevelMythraDefeated LevelMythraDefeated;
   // Constructor
   public World() {
    
