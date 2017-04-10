@@ -190,9 +190,9 @@ class FightManager
     //menus.add(initializeBaseMenu());
     baseButtons = new ArrayList<ArbitraryButton>();
       
-    baseButtons.add(new MenuButton(this, ATTACK + 1, "Attack", new Point(200, 72), new Point(0, 512)));
-    baseButtons.add(new ExitButton(this, "Flee", new Point(212, 72), new Point(0, 640)));
-    baseButtons.add(new MenuButton(this, ITEM, "Item", new Point(212, 72), new Point(512, 512)));
+    baseButtons.add(new MenuButton(this, ATTACK + 1, "Attack", new Point(200, 72), new Point(0, 640)));
+    //baseButtons.add(new ExitButton(this, "Flee", new Point(212, 72), new Point(0, 640)));
+    //baseButtons.add(new MenuButton(this, ITEM, "Item", new Point(212, 72), new Point(512, 512)));
     baseButtons.add(new MenuButton(this, COLOR, "Color", new Point(212, 72), new Point(512, 640)));
     
     baseMenu = new BaseCombatMenu(this);
@@ -375,7 +375,7 @@ class FightManager
     }
     updateAttackMenuButtons();
     activeMenu = menus.get(BASE);
-    lockMouseInput = false;
+    //lockMouseInput = false;
   }
   
   public void endGame()
