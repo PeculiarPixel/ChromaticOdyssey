@@ -9,11 +9,6 @@ class LevelSpire extends Level {
   public LevelSpire() {
     super(LevelName.SPIRE,2400,900);
     
-    if (DEBUG.QUICK_TRANSITION) {
-      this.START_X = 3550;
-      this.START_Y = 1000;
-    }
-    
     loadAssets();
   }
   

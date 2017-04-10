@@ -10,11 +10,6 @@ class LevelLuminousRuinHub extends Level {
   public LevelLuminousRuinHub() {
     super(LevelName.CASTLE_HUB, 1000, 1300);
     
-    if (DEBUG.QUICK_TRANSITION) {
-      this.START_X = 3550;
-      this.START_Y = 1000;
-    }
-    
     loadAssets();
   }
   

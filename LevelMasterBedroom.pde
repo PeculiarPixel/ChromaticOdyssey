@@ -10,11 +10,6 @@ class LevelMasterBedroom extends Level {
   public LevelMasterBedroom() {
     super(LevelName.MASTER_BEDROOM,2400,900);
     
-    if (DEBUG.QUICK_TRANSITION) {
-      this.START_X = 3550;
-      this.START_Y = 1000;
-    }
-    
     loadAssets();
   }
   
