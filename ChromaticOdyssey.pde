@@ -177,14 +177,14 @@ PApplet master = this;
     }
     if(key == 'c' || key == 'C') {
           // Trigger combat
-          inCombat = !inCombat; //<>//
-    }
+          if (DEBUG.DEV_MODE) inCombat = !inCombat; //<>//
+    } //<>//
     if(key == 'h' || key == 'H'){ //<>// //<>// //<>//
-        hitBoxMode = !hitBoxMode; //<>//
+        if (DEBUG.DEV_MODE) hitBoxMode = !hitBoxMode; //<>//
     }
     if(key == 'b' || key == 'B'){
-       println();  //<>// //<>// //<>//
-    }
+       if (DEBUG.DEV_MODE) println();  //<>// //<>// //<>//
+    } //<>//
     if(key == 'p' || key == 'P'){
         if (DEBUG.DEV_MODE) println("Newt X: " + newt.getXPos());
         if (DEBUG.DEV_MODE) println("Newt Y: " + newt.getYPos());
@@ -199,7 +199,7 @@ PApplet master = this;
     }
     if(key == 'm' || key == 'M')
     {
-      dispatcher.dispatch(new FadeToCombatEvent(GameCharacterName.MYTHRA, state.currentState.name));
+      if (DEBUG.DEV_MODE) dispatcher.dispatch(new FadeToCombatEvent(GameCharacterName.MYTHRA, state.currentState.name));
     }
   } 
 
