@@ -30,8 +30,8 @@ class LevelCastleApproach extends Level {
   private void loadLandscapes() {
     
     this.triggers.add(new DialogTrigger(300, 2750, 100, 400, this.conversations.get(0)));
-    this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
-    this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
+    this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(1)));
+    this.triggers.add(new DialogTrigger(1850, 2100, 100, 400, this.conversations.get(2)));
     
     this.triggers.add(new LevelTransitionTrigger(3650, 850, 400, 125, LevelName.CASTLE_HUB,1000,1300));
     
