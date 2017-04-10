@@ -10,8 +10,11 @@ class LevelGameOver extends Level {
   
   public void checkpointReset(){
     if(GAME_OVER.time()==GAME_OVER.duration()){
-      runIntroStory = false;
-      setup();
+      introScreen = new Movie(master, "TitleScreen.mp4");
+      introStory = new Movie(master, "Intro.mp4");
+      OUTRO = new Movie(master, "Outro.mp4");
+      GAME_OVER = new Movie(master, "Game Over.mp4");
+      state.setState(state.checkpoint.getName());
     }
   }
   

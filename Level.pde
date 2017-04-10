@@ -36,7 +36,9 @@ abstract class Level {
   abstract void loadAssets();
   abstract void setStartPosition();
   abstract void checkpointReset();
-  
+  public LevelName getName(){
+    return this.name;
+  }
   // Get level size
   public LevelSize getStateSize() {
     return new LevelSize(backgroundImage.width, backgroundImage.height);

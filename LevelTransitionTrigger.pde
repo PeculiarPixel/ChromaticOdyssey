@@ -26,6 +26,7 @@ class LevelTransitionTrigger extends Trigger {
   public void trigger() {
     
     if ( !this.hasActivated() ) {
+      state.checkpoint.name = state.currentState.getName();
       
       display.setTransition(true);
       dispatcher.dispatch(new LevelTransitionEvent(level_name, level_name.getDescription()));

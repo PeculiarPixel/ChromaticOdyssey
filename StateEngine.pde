@@ -5,10 +5,12 @@ class StateEngine {
   
   ArrayList<StateEvent> events;    // Queue of state events
   Level currentState;                                            // Current set level
-  
+  public Level checkpoint;
   // Constructor
    public StateEngine() {
      this.events = new ArrayList<StateEvent>();
+      checkpoint = new LevelCastleApproach();
+      checkpoint.name = LevelName.CASTLE_APPROACH;
     }
   
   // Run the StateEngine to check for state changes
