@@ -14,8 +14,8 @@ PApplet master = this;
 
   void setup() 
   {
-    //size(1024, 768, P2D); //<>// //<>//
-    size(1024, 768); //<>// //<>// //<>//
+    size(1024, 768, P2D); //<>// //<>//
+    //size(1024, 768); //<>// //<>// //<>// //<>//
     smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
@@ -124,14 +124,14 @@ PApplet master = this;
       if (keyCode == UP) {
         newt.setDirection(MoveDirection.UP); //<>//
        // kit.setDirection(MoveDirection.UP); //<>//
-        kitMoveSet.add(MoveDirection.UP);
-        startTime.append(millis()); //<>//
-      } //<>//
-      if(keyCode == DOWN){ //<>//
-        newt.setDirection(MoveDirection.DOWN); //<>//
-        //kit.setDirection(MoveDirection.DOWN); //<>//
-        kitMoveSet.add(MoveDirection.DOWN); //<>// //<>//
-        startTime.append(millis()); //<>//
+        kitMoveSet.add(MoveDirection.UP); //<>//
+        startTime.append(millis()); //<>// //<>//
+      } //<>// //<>//
+      if(keyCode == DOWN){ //<>// //<>//
+        newt.setDirection(MoveDirection.DOWN); //<>// //<>//
+        //kit.setDirection(MoveDirection.DOWN); //<>// //<>//
+        kitMoveSet.add(MoveDirection.DOWN); //<>// //<>// //<>//
+        startTime.append(millis()); //<>// //<>//
       } //<>//
       if(keyCode == LEFT){ //<>//
        newt.setDirection(MoveDirection.LEFT); //<>// //<>//
@@ -143,21 +143,21 @@ PApplet master = this;
         newt.setDirection(MoveDirection.RIGHT); //<>//
        // kit.setDirection(MoveDirection.RIGHT); //<>//
         kitMoveSet.add(MoveDirection.RIGHT); //<>//
-        startTime.append(millis()); //<>//
-      }
+        startTime.append(millis()); //<>// //<>//
+      } //<>//
     } //<>//
   } //<>//
  //<>//
-  // Key Released Events //<>// //<>// //<>//
-  void keyReleased() { //<>//
+  // Key Released Events //<>// //<>// //<>// //<>//
+  void keyReleased() { //<>// //<>//
          //<>//
   if (keyCode == UP) { //<>// //<>// //<>//
       newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>// //<>// //<>//
      // kit.releaseDirection(MoveDirection.UP); //<>//
       kitMoveRelease.add(MoveDirection.UP);
       stopTime.append(millis()); //<>//
-    } //<>// //<>//
-    if(keyCode == DOWN){ //<>// //<>// //<>//
+    } //<>// //<>// //<>//
+    if(keyCode == DOWN){ //<>// //<>// //<>// //<>//
       newt.releaseDirection(MoveDirection.DOWN); //<>//
      // kit.releaseDirection(MoveDirection.DOWN); //<>//
       kitMoveRelease.add(MoveDirection.DOWN); //<>//
@@ -166,11 +166,11 @@ PApplet master = this;
     if(keyCode == LEFT){ //<>// //<>//
      newt.releaseDirection(MoveDirection.LEFT);
      //kit.releaseDirection(MoveDirection.LEFT);
-     kitMoveRelease.add(MoveDirection.LEFT);  //<>//
-     stopTime.append(millis()); 
+     kitMoveRelease.add(MoveDirection.LEFT);  //<>// //<>//
+     stopTime.append(millis());  //<>//
     } //<>// //<>// //<>//
     if(keyCode == RIGHT){ //<>// //<>//
-      newt.releaseDirection(MoveDirection.RIGHT); //<>//
+      newt.releaseDirection(MoveDirection.RIGHT); //<>// //<>//
       //kit.releaseDirection(MoveDirection.RIGHT);
       kitMoveRelease.add(MoveDirection.RIGHT); //<>// //<>//
       stopTime.append(millis());
