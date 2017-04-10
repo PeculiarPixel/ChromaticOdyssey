@@ -64,7 +64,8 @@ class LevelLuminousRuinHub extends Level {
     
     if (DEBUG.DEV_MODE) {
       this.triggers.add(new LevelTransitionTrigger(1700, 750, 100, 100, LevelName.GAME_OVER, width/2, height/2));
-      this.triggers.add(new LevelTransitionTrigger(1700, 1000, 100, 100, LevelName.OUTRO, width/2, height/2));
+      this.triggers.add(new LevelTransitionTrigger(1700, 1000, 100, 100, LevelName.OUTRO, width/2, height/2));     
+      this.triggers.add(new LevelTransitionTrigger(1000,600, 100, 100, LevelName.MYTHRA_DEFEATED, width/2, height/2));
     }
     
     // Hitbox to block the side hallway

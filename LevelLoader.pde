@@ -59,6 +59,9 @@ public class LevelLoader {
         case OUTRO:
           level = new LevelOutro();
           break; 
+        case MYTHRA_DEFEATED:
+          level = new LevelMythraDefeated();
+          break;
       }
     
     // Return level

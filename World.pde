@@ -26,7 +26,7 @@ public class World {
   private LevelIntro Level_Intro;
   private LevelGameOver Level_Game_Over;
   private LevelOutro Level_Outro;
-  
+  private LevelMythraDefeated Level_Mythra_Defeated;
   // Constructor
   public World() {
    
@@ -60,6 +60,7 @@ public class World {
     
     this.levels.put(LevelName.GAME_OVER, Level_Game_Over);
     this.levels.put(LevelName.OUTRO, Level_Outro);
+    this.levels.put(LevelName.MYTHRA_DEFEATED, LevelMythraDefeated);
   }
   
   // Setup characters
