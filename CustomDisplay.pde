@@ -239,8 +239,7 @@ class FireballDisplay extends CustomDisplay
            //g2.clearRect(0, 0, 1024, 768);
            super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
            g2 = super.img.createGraphics();
-           g2.scale(2, 2);
-           g2.drawImage(activeFireball, x/2, y/2, null);
+           g2.drawImage(activeFireball, x, y, null);
            //image(pActiveFireball, x, y);
          //}
          // Clear base image
@@ -251,6 +250,7 @@ class FireballDisplay extends CustomDisplay
            // Time to start drawing opponent's fireball:
            super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
            g2 = super.img.createGraphics();
+           g2.scale(2, 2);
            activeFireball = blackFireball;
            //println("Suspending fireball animation");
            //suspended = true;
@@ -264,6 +264,7 @@ class FireballDisplay extends CustomDisplay
          {
            super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
            g2 = super.img.createGraphics();
+           
            suspended = true;
            frameStartTime = 0;
            speed = -speed;
