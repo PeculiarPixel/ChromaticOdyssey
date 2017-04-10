@@ -54,9 +54,15 @@ public class SpriteFrame extends CustomDisplay
     combatant.setSpriteFrame(this);
   }
   
+  public void drawImage(Graphics2D g2d)
+  {
+    update();
+    g2d.drawImage(super.img, null, super.origin.x, super.origin.y);
+  }
+  
   public void update()
   {
-    setImg(combatant.getSprite());
+    setImg(combatant.getCurrentSprite());
   }
 }
 
@@ -133,24 +139,25 @@ class FireballDisplay extends CustomDisplay
   private Graphics2D g2;
   private int x;
   private int y = 334; 
-  static final private int speed = 8;
+  private int speed = 8;
   private int xInitial = 256;
-  private int xTerminal = 768;
+  private int xTerminal = 640;
   private boolean suspended;
   private BufferedImage activeFireball;
-  
+  private BufferedImage enemyFireball;  
   private int frameStartTime = 0;
   
   private FightManager manager;
   
   private javax.swing.Timer timer;
   
-  private PImage pActiveFireball;
   
-  public FireballDisplay(FightManager manager)
+  public FireballDisplay(FightManager manager, int xInitial, int xTerminal)
   {
     super(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB), new Point(0, 0));
     g2 = super.img.createGraphics();
+    this.xInitial = xInitial;
+    this.xTerminal = xTerminal;
     x = xInitial;
     suspended = true;
     this.manager = manager;
@@ -161,13 +168,15 @@ class FireballDisplay extends CustomDisplay
       {
         timer.stop();
         
-        println("Updating from timer:");
+        //println("Updating from timer:");
         
         update();       
         
         if(!suspended)
         {
-          println("Suspended false, restarting timer");
+          //println("Suspended false, restarting timer");                     
+          lockMouseInput = false;
+
           timer.restart();
         }
         
@@ -178,20 +187,20 @@ class FireballDisplay extends CustomDisplay
   
   public void update()
   {
-    println("Updating fireball display");
+    //println("Updating fireball display");
       if(!suspended)
       {
         
          //if(millis() - frameStartTime >= 17)
          //{
-           println("Incrementing fireball frame");
+           //println("Incrementing fireball frame");
            frameStartTime = millis();
            x += speed;
            //g2.clearRect(0, 0, 1024, 768);
-           //g2.scale(2, 2);
            super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
            g2 = super.img.createGraphics();
-           g2.drawImage(activeFireball, x, y, null);
+           g2.scale(2, 2);
+           g2.drawImage(activeFireball, x/2, y/2, null);
            //image(pActiveFireball, x, y);
          //}
          // Clear base image
@@ -199,27 +208,39 @@ class FireballDisplay extends CustomDisplay
          
          if(x >= xTerminal)
          {
+           // Time to start drawing opponent's fireball:
            super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
            g2 = super.img.createGraphics();
-           println("Suspending fireball animation");
-           suspended = true;
+           activeFireball = blackFireball;
+           //println("Suspending fireball animation");
+           //suspended = true;
            // Clear base image
            //g2.clearRect(0, 0, 1024, 768);
            frameStartTime = 0;
+           speed = -speed;
+         }
+         
+         if(x <= xInitial - 1)
+         {
+           super.setImg(new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB));
+           g2 = super.img.createGraphics();
+           suspended = true;
+           frameStartTime = 0;
+           speed = -speed;
          }
          
       }
   }
   
-  public void triggerFireball(BufferedImage activeFireball)
+  public void triggerFireball(BufferedImage activeFireball, BufferedImage enemyFireball)
   {
     println("Triggering fireballdisplay");
     // Check if user == enemy, flip accordingly if necessary
     this.activeFireball = activeFireball;
-    //pActiveFireball = fightManager.getAsPImage(activeFireball);
     this.suspended = false;
     x = xInitial;
     timer.start();
+    lockMouseInput = true;
     //manager.untriggerFireball();
   }
   

@@ -8,12 +8,14 @@ import java.util.*;
 import javax.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.net.*;
 
 PApplet master = this;
 
   void setup() 
   {
-    size(1024, 768, P2D);
+    //size(1024, 768, P2D); //<>// //<>//
+    size(1024, 768); //<>// //<>// //<>//
     smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
@@ -59,8 +61,17 @@ PApplet master = this;
     BufferedImage p1i = imageMaker.drawTestSprite(Color.RED);
     BufferedImage p2i = imageMaker.drawTestSprite(Color.BLUE);
     
+    //try
+    //{ 
+      //BufferedImage p1i = ImageIO.read(new File("/SpriteAnimations/"));
+    //}
+    
+    //fireball = ImageIO.read(new File("/SpriteAnimations/Combat/AttackRed.png"));
+    
     int[] modifiers = {0, 0, 0};
     int[] baseStats = {10, 10, 10};
+    
+    
       
     CombatColor defaultColor = new CombatColor(Color.GRAY, modifiers, 2);
     
@@ -77,102 +88,118 @@ PApplet master = this;
      meterMods[2][1] = -2;
      meterMods[2][2] = 5;
     
-     Combatant player = new Combatant("Player", p1i, defaultColor, baseStats, meterMods);
-     Combatant enemy = new Combatant("Enemy", p2i, defaultColor, baseStats, meterMods);
-     //<>//
-     fightManager = new FightManager(player,enemy,inventory);  
+     Combatant player = new Combatant(GameCharacterName.NEWT, p1i, defaultColor, baseStats, meterMods);
+     Combatant enemy = new Combatant(GameCharacterName.PRAGMA, p2i, defaultColor, baseStats, meterMods);
      
-     inCombat = false; //<>//
-     lockMouseInput = false; //<>//
-  
-      kitMoveSet = new ArrayList<MoveDirection>(); //<>//
-      kitMoveRelease = new ArrayList<MoveDirection>();
-     
-      startTime = new IntList(); //<>//
-      stopTime = new IntList(); //<>//
-      kitFollowDelay = 700;
-    
-  }
+     Combatant newtCombatant = new Combatant(GameCharacterName.NEWT, p1i, defaultColor, baseStats, meterMods);
+     Combatant kitCombatant = new Combatant(GameCharacterName.KIT, p2i, defaultColor, baseStats, meterMods);
+     Combatant mythraCombatant = new Combatant(GameCharacterName.MYTHRA, null, defaultColor, baseStats, meterMods);
+     Combatant pragmaCombatant = new Combatant(GameCharacterName.PRAGMA, null, defaultColor, baseStats, meterMods);
 
+     //blackFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlack.png").getNative();
+     try{
+     blackFireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AttackBlack.png")));
+     } catch(IOException e) {println("blackFireball failed to load");}
+     println("blackFireball loaded");
+
+     fightManager = new FightManager(player,enemy,inventory);  
+      //<>//
+     inCombat = false; //<>// //<>//
+     lockMouseInput = false; //<>// //<>//
+   //<>//
+      kitMoveSet = new ArrayList<MoveDirection>(); //<>// //<>//
+      kitMoveRelease = new ArrayList<MoveDirection>(); //<>//
+      //<>//
+      startTime = new IntList(); //<>// //<>//
+      stopTime = new IntList(); //<>// //<>//
+      kitFollowDelay = 700; //<>//
+ //<>//
+     //<>//
+  } //<>//
+ //<>//
   // Key Pressed Events
   void keyPressed() {
 
     if(!inCombat) {
       if (keyCode == UP) {
-        newt.setDirection(MoveDirection.UP);
-       // kit.setDirection(MoveDirection.UP);
+        newt.setDirection(MoveDirection.UP); //<>//
+       // kit.setDirection(MoveDirection.UP); //<>//
         kitMoveSet.add(MoveDirection.UP);
         startTime.append(millis()); //<>//
-      }
-      if(keyCode == DOWN){
-        newt.setDirection(MoveDirection.DOWN);
-        //kit.setDirection(MoveDirection.DOWN);
-        kitMoveSet.add(MoveDirection.DOWN); //<>//
-        startTime.append(millis());
-      }
-      if(keyCode == LEFT){
-       newt.setDirection(MoveDirection.LEFT); //<>//
-       //kit.setDirection(MoveDirection.LEFT);
-       kitMoveSet.add(MoveDirection.LEFT);
-       startTime.append(millis()); //<>//
+      } //<>//
+      if(keyCode == DOWN){ //<>//
+        newt.setDirection(MoveDirection.DOWN); //<>//
+        //kit.setDirection(MoveDirection.DOWN); //<>//
+        kitMoveSet.add(MoveDirection.DOWN); //<>// //<>//
+        startTime.append(millis()); //<>//
+      } //<>//
+      if(keyCode == LEFT){ //<>//
+       newt.setDirection(MoveDirection.LEFT); //<>// //<>//
+       //kit.setDirection(MoveDirection.LEFT); //<>//
+       kitMoveSet.add(MoveDirection.LEFT); //<>//
+       startTime.append(millis()); //<>// //<>//
       }
       if(keyCode == RIGHT){ //<>// //<>// //<>//
-        newt.setDirection(MoveDirection.RIGHT);
-       // kit.setDirection(MoveDirection.RIGHT);
-        kitMoveSet.add(MoveDirection.RIGHT);
+        newt.setDirection(MoveDirection.RIGHT); //<>//
+       // kit.setDirection(MoveDirection.RIGHT); //<>//
+        kitMoveSet.add(MoveDirection.RIGHT); //<>//
         startTime.append(millis()); //<>//
       }
-    }
-  }
+    } //<>//
+  } //<>//
  //<>//
   // Key Released Events //<>// //<>// //<>//
-  void keyReleased() {
-        
-  if (keyCode == UP) { //<>// //<>//
-      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>//
-     // kit.releaseDirection(MoveDirection.UP);
+  void keyReleased() { //<>//
+         //<>//
+  if (keyCode == UP) { //<>// //<>// //<>//
+      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>// //<>// //<>//
+     // kit.releaseDirection(MoveDirection.UP); //<>//
       kitMoveRelease.add(MoveDirection.UP);
-      stopTime.append(millis());
-    }
-    if(keyCode == DOWN){
-      newt.releaseDirection(MoveDirection.DOWN);
-     // kit.releaseDirection(MoveDirection.DOWN);
-      kitMoveRelease.add(MoveDirection.DOWN);
-      stopTime.append(millis());
-    }
-    if(keyCode == LEFT){ //<>//
+      stopTime.append(millis()); //<>//
+    } //<>// //<>//
+    if(keyCode == DOWN){ //<>// //<>// //<>//
+      newt.releaseDirection(MoveDirection.DOWN); //<>//
+     // kit.releaseDirection(MoveDirection.DOWN); //<>//
+      kitMoveRelease.add(MoveDirection.DOWN); //<>//
+      stopTime.append(millis()); //<>// //<>//
+    } //<>// //<>//
+    if(keyCode == LEFT){ //<>// //<>//
      newt.releaseDirection(MoveDirection.LEFT);
      //kit.releaseDirection(MoveDirection.LEFT);
-     kitMoveRelease.add(MoveDirection.LEFT); 
+     kitMoveRelease.add(MoveDirection.LEFT);  //<>//
      stopTime.append(millis()); 
-    } //<>// //<>//
-    if(keyCode == RIGHT){
-      newt.releaseDirection(MoveDirection.RIGHT);
+    } //<>// //<>// //<>//
+    if(keyCode == RIGHT){ //<>// //<>//
+      newt.releaseDirection(MoveDirection.RIGHT); //<>//
       //kit.releaseDirection(MoveDirection.RIGHT);
-      kitMoveRelease.add(MoveDirection.RIGHT); //<>//
+      kitMoveRelease.add(MoveDirection.RIGHT); //<>// //<>//
       stopTime.append(millis());
     }
     if(key == 'c' || key == 'C') {
           // Trigger combat
-          inCombat = !inCombat;
+          inCombat = !inCombat; //<>//
     }
-    if(key == 'h' || key == 'H'){ //<>// //<>//
-        hitBoxMode = !hitBoxMode;
+    if(key == 'h' || key == 'H'){ //<>// //<>// //<>//
+        hitBoxMode = !hitBoxMode; //<>//
     }
     if(key == 'b' || key == 'B'){
-       println();  //<>// //<>//
+       println();  //<>// //<>// //<>//
     }
     if(key == 'p' || key == 'P'){
         if (DEBUG.DEV_MODE) println("Newt X: " + newt.getXPos());
         if (DEBUG.DEV_MODE) println("Newt Y: " + newt.getYPos());
     } //<>// //<>// //<>// //<>//
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
-        display.updateCurrentScript();
+        display.updateCurrentScript(); //<>//
     }
     if (key == 's' || key == 'S' && state.currentState.name == LevelName.INTRO) {
       if (DEBUG.INTRO_ON) {
         introStory.jump(introStory.duration());
-      }
+      } //<>//
+    }
+    if(key == 'm' || key == 'M')
+    {
+      dispatcher.dispatch(new FadeToCombatEvent(GameCharacterName.MYTHRA, state.currentState.name));
     }
   } 
 
@@ -211,7 +238,7 @@ PApplet master = this;
       // Image has to be offset to the center of the screen, presumably due to matrix transform issues:
       image(fightManager.getAsPImage(fightManager.getImg()), 512, 384);
     }
-    
+     //<>//
     //println(mouseX - px, mouseY - py);
     //println("newt", newt.getXPos(), newt.getYPos());
     

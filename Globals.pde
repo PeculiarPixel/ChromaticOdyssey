@@ -52,3 +52,8 @@ FightManager fightManager;
 ImageMaker imageMaker;
 boolean inCombat;
 boolean lockMouseInput;
+
+BufferedImage blackFireball;
+BufferedImage redSelector;
+BufferedImage blueSelector;
+BufferedImage yellowSelector;

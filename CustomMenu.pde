@@ -66,7 +66,9 @@ class CustomMenu
       }
       
       else
+      {
         button.drawBase(g2d);
+      }
     }
   }
   
@@ -83,7 +85,8 @@ class BaseCombatMenu extends CustomMenu
   private static final int ITEM = 2;
   private static final int COLOR = 3;
   
-  FireballDisplay fireballDisplay;
+  FireballDisplay newtFireballDisplay;
+  FireballDisplay enemyFireballDisplay;
   
   public BaseCombatMenu(FightManager manager)
   {
@@ -96,26 +99,34 @@ class BaseCombatMenu extends CustomMenu
     // Construct base displays (spriteFrames and nameFrames):
     ArrayList<CustomDisplay> baseDisplays = new ArrayList<CustomDisplay>();
     baseDisplays.add(new BackgroundDisplay());
+    //baseDisplays.add(new SpriteFrame(new Point(128, 128), player));
+    //baseDisplays.add(new SpriteFrame(new Point(640, 128), enemy));
     baseDisplays.add(new SpriteFrame(new Point(128, 128), player));
-    baseDisplays.add(new SpriteFrame(new Point(640, 128), enemy));
+    baseDisplays.add(new SpriteFrame(new Point(704, 128), enemy));
     baseDisplays.add(new NameFrame(new Point(128, 0), player));
     baseDisplays.add(new NameFrame(new Point(640, 0), enemy));
     
-    fireballDisplay = new FireballDisplay(manager);
-    baseDisplays.add(fireballDisplay);
+    newtFireballDisplay = new FireballDisplay(manager, 256, 640);
+    baseDisplays.add(newtFireballDisplay);
     
     super.buttons.addAll(manager.getBaseButtons());
     super.displays.addAll(baseDisplays);
    }
    
-   public void triggerFireball(BufferedImage fireballSprite)
+   public void triggerNewtFireball(BufferedImage fireballSprite)
   {
-    fireballDisplay.triggerFireball(fireballSprite);
+    newtFireballDisplay.triggerFireball(fireballSprite, blackFireball);
   }
   
-  public void updateFireballDisplay()
+  
+  public void updateEnemyFireballDisplay()
   {
-    fireballDisplay.update();
+    enemyFireballDisplay.update();
+  }
+  
+  public void updateNewtFireballDisplay()
+  {
+    newtFireballDisplay.update();
   }
 }
 
@@ -129,7 +140,8 @@ class ColorCombatMenu extends CustomMenu
     ArrayList<ArbitraryButton> colorButtons = new ArrayList<ArbitraryButton>();
     CombatColor[] newtColors = manager.getNewtColors();
    
-    super.buttons.addAll(manager.getBaseButtons());
+    // Basebuttons disabled when in ColorMenu to force user to select a color
+    //super.buttons.addAll(manager.getBaseButtons());
    
     // Build and add color selection buttons:
     colorButtons.add(new ColorButton(manager, newtColors[0], new Point(128, 256)));
@@ -194,8 +206,6 @@ class EndGameMenu extends CustomMenu
 {
   public EndGameMenu(FightManager manager)
   {
-    super();
-    
-    
+    super();   
   }
 }

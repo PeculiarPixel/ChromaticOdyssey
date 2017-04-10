@@ -73,14 +73,18 @@ class FightManager
     
     // Initialize enemy's test CombatColor:
     
-    colorBad = new CombatColor(Color.GREEN, new int[]{0, 0, 0}, 3);
+    colorBad = new CombatColor(Color.BLACK, new int[]{0, 0, 0}, 3);
     
     ArrayList<CombatMove> baddieMoves = new ArrayList<CombatMove>();
     CombatMove bad1 = new CombatMove(1);
     CombatMove bad2 = new CombatMove(2);
-    
+         
     bad1.setButton(constructMoveButton(new Point (0, 128), "Baddie 1"));
     bad2.setButton(constructMoveButton(new Point (0, 128), "Baddie 2"));
+
+    bad1.setFireball(blackFireball);
+    bad2.setFireball(blackFireball);
+    println("blackFireball associated with enemy moveset");
     
     baddieMoves.add(bad1);
     baddieMoves.add(bad2);
@@ -98,30 +102,46 @@ class FightManager
   {
     // Load fireball sprites:
     
-    /*
-    BufferedImage redFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackRed.png").getNative();
-    BufferedImage blueFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlue.png").getNative();
-    BufferedImage yellowFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackYellow.png").getNative();
-    */
+    
+    //BufferedImage redFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackRed.png").getNative();
+    //BufferedImage blueFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlue.png").getNative();
+    //BufferedImage yellowFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackYellow.png").getNative();
+    
     
     BufferedImage fireball = null;
     
     try {
+      //String urlString;
+      //URL url = new URL(getCodeBase(), "examples/strawberry.jpg");
+      
+      
     if (myColor == Color.RED)
     {
-      fireball = ImageIO.read(new File("/SpriteAnimations/Combat/AttackRed.png"));
+      //fireball = ImageIO.read(new File("C:/Users/Wylie/Desktop/ChromaticOdysseyPrototype/ChromaticOdyssey/data/SpriteAnimations/Combat/AttackRed.png"));
+      fireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AttackRed.png")));
+      //fireball = redFireball;
+      //urlString = "Data/SpriteAnimations/Combat/AttackRed.png";
     }
     
     else if (myColor == Color.BLUE)
     {
-      fireball = ImageIO.read(new File("/SpriteAnimations/Combat/AttackBlue.png"));
+      fireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AttackBlue.png")));
+      //fireball = blueFireball;
+      //urlString = "Data/SpriteAnimations/Combat/AttackBlue.png";
+
     }
     
     else if (myColor == Color.YELLOW)
     {
-       fireball = ImageIO.read(new File("/SpriteAnimations/Combat/AttackYellow.png")); 
+       fireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AttackYellow.png"))); 
+       //fireball = yellowFireball;
+       //urlString = "Data/SpriteAnimations/Combat/AttackYellow.png";
+ 
     }
-    } catch(IOException e) {}
+    
+    } catch(IOException e) {println("IO Exception!");}
+    
+    //fireball = redFireball;
     
     // Call CombatColor and CombatMove constructors:
     CombatColor newColor = new CombatColor(myColor, modifiers, meterIndex);
@@ -170,9 +190,9 @@ class FightManager
     //menus.add(initializeBaseMenu());
     baseButtons = new ArrayList<ArbitraryButton>();
       
-    baseButtons.add(new MenuButton(this, ATTACK + 1, "Attack", new Point(200, 72), new Point(0, 512)));
-    baseButtons.add(new ExitButton(this, "Flee", new Point(212, 72), new Point(0, 640)));
-    baseButtons.add(new MenuButton(this, ITEM, "Item", new Point(212, 72), new Point(512, 512)));
+    baseButtons.add(new MenuButton(this, ATTACK + 1, "Attack", new Point(200, 72), new Point(0, 640)));
+    //baseButtons.add(new ExitButton(this, "Flee", new Point(212, 72), new Point(0, 640)));
+    //baseButtons.add(new MenuButton(this, ITEM, "Item", new Point(212, 72), new Point(512, 512)));
     baseButtons.add(new MenuButton(this, COLOR, "Color", new Point(212, 72), new Point(512, 640)));
     
     baseMenu = new BaseCombatMenu(this);
@@ -215,9 +235,9 @@ class FightManager
     activeMenu.drawMenu(g2d);
   }
   
-  public void updateFireballDisplay()
+  public void updateNewtFireballDisplay()
   {
-    baseMenu.updateFireballDisplay();
+    baseMenu.updateNewtFireballDisplay();
   }
   
   public void drawBase()
@@ -306,10 +326,21 @@ class FightManager
   {
     fireballTriggered = false;
   }
+  
+  public void startNewFight(GameCharacterName enemyName)
+  {
+    player.resetStats();
+    //enemy.resetStats();
+    enemy.changeIdentity(enemyName);
+    activeMenu = menus.get(0);
+    activeMenu.updateDisplays();
+    activeMenu.drawMenu(g2d);
+    inCombat = true;
+  }
 
   public void processTurn(CombatMove playerMove)
   {
-    lockMouseInput = true;
+   // lockMouseInput = true;
     
     CombatMove enemyMove = enemy.getRandomMove();
     CombatMove[] movesBySpeed = getMovesBySpeed(playerMove, enemyMove);
@@ -318,15 +349,21 @@ class FightManager
     {
       //Combatant player = move.getUser();
       println("Move logic has begun");
+      
       // Perform move animations:
       if(! (move instanceof CombatItem))
       {
         // Fireball animation
         println("Fireball animation has begun");
-        baseMenu.triggerFireball(move.getFireballSprite());
+        if(move.getUser() == player)
+        {
+          println("Newt fireball firing");
+          baseMenu.triggerNewtFireball(move.getFireballSprite());
+        }
+        
         println("Fireball animation is ending");
       }
-     
+       
       // Perform game logic processing and explosion animation:
       move.execute();    
       
@@ -338,16 +375,37 @@ class FightManager
     }
     updateAttackMenuButtons();
     activeMenu = menus.get(BASE);
-    lockMouseInput = false;
+    //lockMouseInput = false;
   }
   
   public void endGame()
   {
     // Update the base displays to reflect results of ending turn:
+    if(player.isDead())
+    {
+      dispatcher.dispatch(new LevelTransitionEvent(LevelName.GAME_OVER, LevelName.GAME_OVER.getDescription()));
+    }
+    if(enemy.isDead())
+    {
+      if(enemy.getName() == "MYTHRA")
+      {
+        world.setMythraDefeated();
+        // dispatch post-Mythra cutscene
+        dispatcher.dispatch(new LevelTransitionEvent(LevelName.MYTHRA_DEFEATED, LevelName.MYTHRA_DEFEATED.getDescription()));
+      }
+      else if (enemy.getName() == "PRAGMA")
+      {
+        dispatcher.dispatch(new LevelTransitionEvent(LevelName.OUTRO, LevelName.OUTRO.getDescription()));
+      }
+    }
+    
+    /*
     updateBaseDisplays();
     drawBase();
     //menus.get(END).updateDisplays();
     activeMenu = menus.get(END); 
+    */
+    inCombat = false;
   }
   
   public Combatant getPlayer()

@@ -17,6 +17,18 @@ class DialogTrigger extends Trigger {
     
   }
   
+  // Constructor
+  public DialogTrigger(float x, float y, float w, float h, Script script, FadeToCombatEvent combatEvent) {
+    super(x, y, w, h, AreaTypeEnum.DIALOG_TRIGGER);
+    setColor(DIALOG_TRIGGER_COLOR);
+    
+    script.setPostEvent(combatEvent);
+    
+    // Set dialog conversation index
+    this.dialogEvent = new DisplayScriptEvent(script);
+    
+  }
+  
   // Trigger
   public void trigger() {
     
