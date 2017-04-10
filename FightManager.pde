@@ -381,6 +381,8 @@ class FightManager
   public void endGame()
   {
     // Update the base displays to reflect results of ending turn:
+    inCombat = false;
+    
     if(player.isDead())
     {
       dispatcher.dispatch(new LevelTransitionEvent(LevelName.GAME_OVER, LevelName.GAME_OVER.getDescription()));
@@ -398,14 +400,13 @@ class FightManager
         dispatcher.dispatch(new LevelTransitionEvent(LevelName.OUTRO, LevelName.OUTRO.getDescription()));
       }
     }
-    
     /*
     updateBaseDisplays();
     drawBase();
     //menus.get(END).updateDisplays();
     activeMenu = menus.get(END); 
     */
-    inCombat = false;
+    
   }
   
   public Combatant getPlayer()
