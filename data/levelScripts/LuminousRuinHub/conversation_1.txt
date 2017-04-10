@@ -3,7 +3,5 @@ The darkness here is too strong.
 We can’t make it through!
 Newt Reg 1
 Maybe we can find another way in if we explore?
-Kit Sad 3
-Good idea.
-Let’s check my parents’ room.
-They may have something that can help us.
+Kit Sad 1
+Good idea. Let's check my parents' room to the west.

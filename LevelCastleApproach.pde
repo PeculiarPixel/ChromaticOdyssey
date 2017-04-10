@@ -1,20 +1,9 @@
 class LevelCastleApproach extends Level {
   
-
-  
-  // Saved coords for starting close to transition
-  //private final float START_X = 3550;
-  //private final float START_Y = 1000;
-  
   // Constructor
   public LevelCastleApproach() {
     super(LevelName.CASTLE_APPROACH, 235, 2750);
-    
-    if (DEBUG.QUICK_TRANSITION) {
-      this.START_X = 3550;
-      this.START_Y = 1000;
-    }
-    
+
     loadAssets();
   }
   
@@ -28,17 +17,13 @@ class LevelCastleApproach extends Level {
     
     kit.setXPos(START_X);
     kit.setYPos(START_Y);
-    
-    //pragma.setXPos(START_X);
-  //  pragma.setYPos(START_Y);
-    
+
   }
   
   // Load level necessary characters
   private void loadCharacters() {
     this.characters.add(newt);
     this.characters.add(kit);
-   // this.characters.add(pragma);
   }
   
   // Load all level landscapes (Hitboxes, Triggers, Objects)
@@ -47,7 +32,6 @@ class LevelCastleApproach extends Level {
     this.triggers.add(new DialogTrigger(300, 2750, 100, 400, this.conversations.get(0)));
     this.triggers.add(new DialogTrigger(800, 2650, 100, 400, this.conversations.get(1)));
     this.triggers.add(new DialogTrigger(1500, 2100, 100, 400, this.conversations.get(2)));
-    this.triggers.add(new DialogTrigger(1900, 2100, 100, 400, this.conversations.get(3)));
     
     this.triggers.add(new LevelTransitionTrigger(3650, 850, 400, 125, LevelName.CASTLE_HUB,1000,1300));
     

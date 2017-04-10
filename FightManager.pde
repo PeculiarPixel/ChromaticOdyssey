@@ -335,6 +335,8 @@ class FightManager
     activeMenu = menus.get(0);
     activeMenu.updateDisplays();
     activeMenu.drawMenu(g2d);
+    if (enemyName == GameCharacterName.PRAGMA) sounds.playLevelTheme("PRAGMA_FIGHT");
+    else if (enemyName == GameCharacterName.MYTHRA) sounds.playLevelTheme("MYTHRA_FIGHT");
     inCombat = true;
   }
 
@@ -380,11 +382,15 @@ class FightManager
   
   public void endGame()
   {
+    // Stop theme music
+    sounds.stopCurrentTrack();
     // Update the base displays to reflect results of ending turn:
     inCombat = false;
     
     if(player.isDead())
     {
+      if (enemy.getName() == "MYTHRA") world.setDiedToMythra();
+      else if (enemy.getName() == "PRAGMA") world.setDiedToPragma();
       dispatcher.dispatch(new LevelTransitionEvent(LevelName.GAME_OVER, LevelName.GAME_OVER.getDescription()));
     }
     if(enemy.isDead())

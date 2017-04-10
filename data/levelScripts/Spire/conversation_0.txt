@@ -1,17 +1,15 @@
-﻿Kit Reg 1
-There it is…wait!
-Kit Sup 1
-Newt, that is my father, Pragma!
+Kit Reg 1
+Father!
 Newt Sup 1
-The King?
+King Pragma?
 Pragma Reg 3
-I am no King…I do not deserve such a title.
+I am no King. I do not deserve such a title.
 Katarina, at last you have returned.
 I lost you once, never again shall you leave my sight!
 Kit Sad 1
-Newt, he is just like mom…
+Newt, he is just like mom...
 Kit Det 1
 If we can stop him, we can restore him and the Prism!
 Newt Reg 2
-We can’t give up now.
-Let’s end this!
+We cannot give up now.
+Let's end this!

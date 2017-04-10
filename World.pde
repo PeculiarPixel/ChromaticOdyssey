@@ -1,4 +1,4 @@
-public class World {
+public class World implements ObservableMythra, ObservableGameOverCombatTriggers {
   
   private LevelLoader Loader;
   
@@ -6,9 +6,6 @@ public class World {
   private HashMap<GameCharacterName, GameCharacter> characters;    // Collection of all characters
   private HashMap<LevelName, Level> levels;                        // Collection of all levels
   private boolean gameStarted = false;                             // Boolean if the game has started
-  
-  private boolean mythra_defeated = false;
-  private boolean game_finished = false;
   
   private Test_Level_0 test_0;
   private Test_Level_1 test_1;
@@ -27,6 +24,7 @@ public class World {
   private LevelGameOver Level_Game_Over;
   private LevelOutro Level_Outro;
   private LevelMythraDefeated LevelMythraDefeated;
+  
   // Constructor
   public World() {
    
@@ -98,16 +96,34 @@ public class World {
   }
   
   // Set Mythra boss to be defeated 
-  public void setMythraDefeated() { this.mythra_defeated = true; }
+  public void setMythraDefeated() { 
+    notifyMythraDefeat();
+  }
   
-  // Set game to be finished
-  public void setGameFinished() { this.game_finished = true; }
+  public void setDiedToMythra() {
+    notifyGameOverToMythra();
+  }
   
-  // Check if mythra is defeated
-  public boolean isMythraDefeated() { return this.mythra_defeated; }
+  public void setDiedToPragma() {
+    notifyGameOverToPragma();
+  }
   
-  // Check if game is finished
-  public boolean isGameFinished() { return this.game_finished; }
+  public void notifyMythraDefeat() {
+    LevelMasterBedroom l = (LevelMasterBedroom) getLevel(LevelName.MASTER_BEDROOM);
+    l.onMythraDefeated();
+    LevelLuminousRuinHub c = (LevelLuminousRuinHub) getLevel(LevelName.CASTLE_HUB);
+    c.onMythraDefeated();
+  }
+  
+  public void notifyGameOverToMythra() {
+    LevelMasterBedroom l = (LevelMasterBedroom) getLevel(LevelName.MASTER_BEDROOM);
+    l.onGameOverToMythra();
+  }
+  
+  public void notifyGameOverToPragma() {
+    LevelSpire l = (LevelSpire) getLevel(LevelName.SPIRE);
+    l.onGameOverToPragma();    
+  }
   
 
 }

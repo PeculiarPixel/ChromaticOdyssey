@@ -13,11 +13,7 @@ class Test_Level_0 extends Level {
   public Test_Level_0() {
     super(LevelName.TEST_0,235,2750);
     
-    if (DEBUG.QUICK_TRANSITION) {
-      this.START_X = 3550;
-      this.START_Y = 1000;
-    }
-    
+
     loadAssets();
   }
     public void checkpointReset(){}
