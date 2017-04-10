@@ -132,7 +132,12 @@ class DisplayEngine {
      //<>// //<>//
    background(0);      //  Init background //<>// //<>//
     //<>// //<>//
-   if (state.currentState.name == LevelName.OUTRO){ //<>// 
+    if (state.currentState.name == LevelName.MYTHRA_DEFEATED){ //<>// 
+     MYTHRA_DEFEATED.play(); 
+     imageMode(CORNER);
+     image(MYTHRA_DEFEATED,0, 98, width, 572);
+     state.currentState.checkpointReset();
+  }else if (state.currentState.name == LevelName.OUTRO){ //<>// 
      OUTRO.play(); 
      imageMode(CORNER);
      image(OUTRO,0, 98, width, 572);

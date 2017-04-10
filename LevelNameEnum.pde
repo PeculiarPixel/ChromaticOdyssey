@@ -16,6 +16,7 @@ public enum LevelName {
   TEST_1 ("Test Level 1"),
   INTRO (""),
   OUTRO (""),
+  MYTHRA_DEFEATED(""),
   GAME_OVER ("");
   // Level transition description
   private String description;

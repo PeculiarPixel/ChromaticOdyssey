@@ -18,7 +18,7 @@ Movie introScreen;
 Movie introStory;
 Movie GAME_OVER;
 Movie OUTRO;
-
+Movie MYTHRA_DEFEATED;
 ArrayList<MoveDirection> kitMoveSet;
 ArrayList<MoveDirection> kitMoveRelease;
 
