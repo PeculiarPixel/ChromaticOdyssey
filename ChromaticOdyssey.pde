@@ -51,9 +51,10 @@ PApplet master = this;
     
       introScreen = new Movie(master, "TitleScreen.mp4");
       introStory = new Movie(master, "Intro.mp4");
-      introScreen.loop();
+        //introScreen.loop();
       OUTRO = new Movie(master, "Outro.mp4");
       GAME_OVER = new Movie(master, "Game Over.mp4");
+      MYTHRA_DEFEATED = new Movie(master, "Mythra.mp4");
     // Combat module initializations:
     imageMaker = new ImageMaker();
   
