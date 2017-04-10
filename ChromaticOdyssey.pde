@@ -54,32 +54,6 @@ PApplet master = this;
     BufferedImage p1i = imageMaker.drawTestSprite(Color.RED);
     BufferedImage p2i = imageMaker.drawTestSprite(Color.BLUE);
     
-    /*
-    BufferedImage p1i = (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreatheRight-24-23.png").getNative();
-    
-    BufferedImage p2i = (BufferedImage) loadImage("/SpriteAnimations/Kit/IdleAnimationLeft/KitBreathe-11.png").getNative();
-
-    BufferedImage[] newtCombatIdleSprites = new BufferedImage[2];
-    newtCombatIdleSprites[0] =  (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreathRight-01.png").getNative();
-    newtCombatIdleSprites[1] =  (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreathRight-02.png").getNative();
-    BufferedImage newtCombatHurtSprite = (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreathRight-01.png").getNative();
-    BufferedImage newtCombatAttackingSprite =  (BufferedImage) loadImage("/SpriteAnimations/Newt/IdleAnimationRight/NewtBreathRight-01.png").getNative();
-
-    BufferedImage[] kitCombatIdleSprites = new BufferedImage[2];
-    kitCombatIdleSprites[0] =  (BufferedImage) loadImage("/SpriteAnimations/Kit/IdleAnimationLeft/KitBreathe-11.png").getNative();
-    kitCombatIdleSprites[1] =  (BufferedImage) loadImage("/SpriteAnimations/Kit/IdleAnimationLeft/KitBreathe-12.png").getNative();
-    BufferedImage kitCombatHurtSprite =  (BufferedImage) loadImage("/SpriteAnimations/Kit/HurtAnimation/KitHurt-05.png").getNative();
-    BufferedImage kitCombatAttackingSprite =  (BufferedImage) loadImage("/SpriteAnimations/Kit/IdleAnimationRight/KitAttack-06.png").getNative();;
-    
-    
-    BufferedImage[] pragmaCombatIdleSprites = new BufferedImage[2];
-    BufferedImage pragmaCombatHurtSprite;
-    BufferedImage pragmaCombatAttackingSprite;
-    
-    BufferedImage[] mythraCombatIdleSprites = new BufferedImage[2];
-    BufferedImage mythraCombatHurtSprite;
-    BufferedImage mythraCombatAttackingSprite;
-*/
     //try
     //{ 
       //BufferedImage p1i = ImageIO.read(new File("/SpriteAnimations/"));

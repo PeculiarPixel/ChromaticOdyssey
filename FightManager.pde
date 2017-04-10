@@ -73,7 +73,7 @@ class FightManager
     
     // Initialize enemy's test CombatColor:
     
-    colorBad = new CombatColor(Color.GREEN, new int[]{0, 0, 0}, 3);
+    colorBad = new CombatColor(Color.BLACK, new int[]{0, 0, 0}, 3);
     
     ArrayList<CombatMove> baddieMoves = new ArrayList<CombatMove>();
     CombatMove bad1 = new CombatMove(1);

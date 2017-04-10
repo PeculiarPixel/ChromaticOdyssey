@@ -144,14 +144,13 @@ class FireballDisplay extends CustomDisplay
   private int xTerminal = 640;
   private boolean suspended;
   private BufferedImage activeFireball;
-  
+  private BufferedImage enemyFireball;  
   private int frameStartTime = 0;
   
   private FightManager manager;
   
   private javax.swing.Timer timer;
   
-  private PImage pActiveFireball;
   
   public FireballDisplay(FightManager manager, int xInitial, int xTerminal)
   {
@@ -233,12 +232,11 @@ class FireballDisplay extends CustomDisplay
       }
   }
   
-  public void triggerFireball(BufferedImage activeFireball)
+  public void triggerFireball(BufferedImage activeFireball, BufferedImage enemyFireball)
   {
     println("Triggering fireballdisplay");
     // Check if user == enemy, flip accordingly if necessary
     this.activeFireball = activeFireball;
-    //pActiveFireball = fightManager.getAsPImage(activeFireball);
     this.suspended = false;
     x = xInitial;
     timer.start();

@@ -7,19 +7,26 @@ class CombatColor
  private int[] activeMods;
  private int meterIndex;
  private int meter;
+ private BufferedImage selectorImage;
  
- public CombatColor(Color colr, int[] modifiers, int meterIndex)
+ public CombatColor(Color colr, int[] modifiers, int meterIndex, BufferedImage selectorImage)
  {
    moves = new ArrayList<CombatMove>();
    this.colr = colr;
    this.modifiers = modifiers;
    this.meterIndex = meterIndex;
+   this.selectorImage = selectorImage;
    meter = 0;
  }
  
  public Color getColor()
  {
    return colr;
+ }
+ 
+ public BufferedImage getSelectorImage()
+ {
+   return selectorImage;
  }
  
  public int getMeterIndex()

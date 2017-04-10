@@ -107,9 +107,7 @@ class BaseCombatMenu extends CustomMenu
     baseDisplays.add(new NameFrame(new Point(640, 0), enemy));
     
     newtFireballDisplay = new FireballDisplay(manager, 256, 640);
-    enemyFireballDisplay = new FireballDisplay(manager, 640, 256);
     baseDisplays.add(newtFireballDisplay);
-    baseDisplays.add(enemyFireballDisplay);
     
     super.buttons.addAll(manager.getBaseButtons());
     super.displays.addAll(baseDisplays);
@@ -117,13 +115,9 @@ class BaseCombatMenu extends CustomMenu
    
    public void triggerNewtFireball(BufferedImage fireballSprite)
   {
-    newtFireballDisplay.triggerFireball(fireballSprite);
+    newtFireballDisplay.triggerFireball(fireballSprite, blackFireball);
   }
   
-  public void triggerEnemyFireball(BufferedImage fireballSprite)
-  {
-    enemyFireballDisplay.triggerFireball(fireballSprite);
-  }
   
   public void updateEnemyFireballDisplay()
   {
