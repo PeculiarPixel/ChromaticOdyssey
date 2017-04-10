@@ -47,15 +47,15 @@ class DisplayEngine {
   }
   
   
-  // Display game characters //<>// //<>//
-  public void displayCharacter(GameCharacter c) { //<>// //<>//
- //<>// //<>// //<>//
-    imageMode(CENTER); //<>// //<>// //<>// //<>//
-    c.updateSpriteAnimation(); //<>// //<>// //<>// //<>//
+  // Display game characters //<>// //<>// //<>//
+  public void displayCharacter(GameCharacter c) { //<>// //<>// //<>//
+ //<>// //<>// //<>// //<>//
+    imageMode(CENTER); //<>// //<>// //<>// //<>// //<>//
+    c.updateSpriteAnimation(); //<>// //<>// //<>// //<>// //<>//
     image(c.getCurrentImage(), c.getXPos(), c.getYPos()); //<>// //<>// //<>//
     if(c.local.hitboxDisplay) { //<>// //<>// //<>//
-      displayArea(c.getHitbox()); //<>// //<>// //<>//
-    }  //<>// //<>//
+      displayArea(c.getHitbox()); //<>// //<>// //<>// //<>//
+    }  //<>// //<>// //<>//
       //<>// //<>//
   }  //<>// //<>// //<>//
    //<>// //<>//
@@ -67,8 +67,8 @@ class DisplayEngine {
   // Display all characters in state's current level //<>// //<>//
   private void displayCharacters() { //<>// //<>// //<>// //<>//
     imageMode(CORNER); //<>// //<>// //<>// //<>//
-     //<>//
-    for(int i=2;i<state.currentState.characters.size();i++){
+     //<>// //<>//
+    for(int i=2;i<state.currentState.characters.size();i++){ //<>//
       displayCharacter(state.currentState.characters.get(i));
     }
     
@@ -99,15 +99,15 @@ class DisplayEngine {
     } //<>//
   } //<>//
    //<>//
-  // Display triggers //<>//
-  private void displayTriggers() { //<>//
-    for (Trigger t : state.currentState.triggers) { //<>//
+  // Display triggers //<>// //<>//
+  private void displayTriggers() { //<>// //<>//
+    for (Trigger t : state.currentState.triggers) { //<>// //<>//
       if (newt.local.hitboxDisplay) { //<>//
         displayArea(t); //<>// //<>// //<>//
       } //<>// //<>//
     } //<>// //<>//
-  } //<>//
-  
+  } //<>// //<>//
+   //<>//
   // Draw currently queued script //<>//
   private void displayDialog() { //<>//
     if (!this.scriptQueue.isEmpty()) this.scriptQueue.draw(); //<>//
@@ -123,20 +123,29 @@ class DisplayEngine {
     clearScriptQueue(); //<>//
   } //<>//
     //<>// //<>//
-  public Script getCurrentScript() { //<>// //<>//
-   return null; //<>//
+  public Script getCurrentScript() { //<>// //<>// //<>//
+   return null; //<>// //<>//
   } //<>// //<>//
  //<>// //<>//
   // Run display engine //<>// //<>// //<>//
   void run() { //<>// //<>//
-     //<>//
-   background(0);      //  Init background //<>//
+     //<>// //<>//
+   background(0);      //  Init background //<>// //<>//
     //<>// //<>//
-   if (state.currentState.name == LevelName.INTRO){ //<>// //<>//
+   if (state.currentState.name == LevelName.OUTRO){ //<>// 
+     OUTRO.play(); 
+     imageMode(CORNER);
+     image(OUTRO,0, 98, width, 572);
+     state.currentState.checkpointReset();
+  }else if (state.currentState.name == LevelName.GAME_OVER){ //<>//  
+     GAME_OVER.play();
+     imageMode(CORNER);
+     image(GAME_OVER, 0, 98, width, 572); 
+     state.currentState.checkpointReset();
+  }else if (state.currentState.name == LevelName.INTRO){ //<>// //<>//
      if(runIntroStory == false){
       image(introScreen, 0, 0, width, height);
-      }
-      else{
+      }else{
         image(introStory, 0, 98, width, 572); //<>//
         textSize(20);
         fill(255, 255, 255, occupacity);
@@ -147,13 +156,8 @@ class DisplayEngine {
         else{
           occupacity--;
         }
-      } //<>// //<>//
-   }
-    
-   //<>//
-     //<>//
-   else { //<>//
-     
+      } //<>//     //<>//
+   } else { //<>// //<>// //<>//
       pushMatrix();
       camera.fixedUpdate(); // Update camera positions //<>//
       //<>//
@@ -174,7 +178,9 @@ class DisplayEngine {
       displayLandscapes();
       displayTriggers();
       
-      state.currentState.fog.run(-1);
+      for (Fog f : state.currentState.fogs ) {
+         f.run(-1); 
+      }
   
       // Pop translate matrix
       popMatrix(); 

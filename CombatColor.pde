@@ -9,13 +9,13 @@ class CombatColor
  private int meter;
  private BufferedImage selectorImage;
  
- public CombatColor(Color colr, int[] modifiers, int meterIndex, BufferedImage selectorImage)
+ public CombatColor(Color colr, int[] modifiers, int meterIndex)
  {
    moves = new ArrayList<CombatMove>();
    this.colr = colr;
    this.modifiers = modifiers;
    this.meterIndex = meterIndex;
-   this.selectorImage = selectorImage;
+   //this.selectorImage = selectorImage;
    meter = 0;
  }
  

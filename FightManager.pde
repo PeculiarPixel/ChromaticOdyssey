@@ -103,42 +103,43 @@ class FightManager
     // Load fireball sprites:
     
     
-    BufferedImage redFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackRed.png").getNative();
-    BufferedImage blueFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlue.png").getNative();
-    BufferedImage yellowFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackYellow.png").getNative();
+    //BufferedImage redFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackRed.png").getNative();
+    //BufferedImage blueFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlue.png").getNative();
+    //BufferedImage yellowFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackYellow.png").getNative();
     
     
     BufferedImage fireball = null;
     
-    //try {
+    try {
       //String urlString;
       //URL url = new URL(getCodeBase(), "examples/strawberry.jpg");
       
       
     if (myColor == Color.RED)
     {
-      //fireball = ImageIO.read(new File("Data/SpriteAnimations/Combat/AttackRed.png"));
-      fireball = redFireball;
+      //fireball = ImageIO.read(new File("C:/Users/Wylie/Desktop/ChromaticOdysseyPrototype/ChromaticOdyssey/data/SpriteAnimations/Combat/AttackRed.png"));
+      fireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AttackRed.png")));
+      //fireball = redFireball;
       //urlString = "Data/SpriteAnimations/Combat/AttackRed.png";
     }
     
     else if (myColor == Color.BLUE)
     {
-      //fireball = ImageIO.read(new File("Data/SpriteAnimations/Combat/AttackBlue.png"));
-      fireball = blueFireball;
+      fireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AttackBlue.png")));
+      //fireball = blueFireball;
       //urlString = "Data/SpriteAnimations/Combat/AttackBlue.png";
 
     }
     
     else if (myColor == Color.YELLOW)
     {
-       //fireball = ImageIO.read(new File("Data/SpriteAnimations/Combat/AttackYellow.png")); 
-       fireball = yellowFireball;
+       fireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AttackYellow.png"))); 
+       //fireball = yellowFireball;
        //urlString = "Data/SpriteAnimations/Combat/AttackYellow.png";
  
     }
     
-    //} catch(IOException e) {println("IO Exception!");}
+    } catch(IOException e) {println("IO Exception!");}
     
     //fireball = redFireball;
     
@@ -326,11 +327,13 @@ class FightManager
     fireballTriggered = false;
   }
   
-  public void startNewFight(Combatant enemy)
+  public void startNewFight(GameCharacterName enemyName)
   {
-    this.enemy = enemy;
-    //player.resetStats();
+    player.resetStats();
+    //enemy.resetStats();
+    enemy.changeIdentity(enemyName);
     activeMenu = menus.get(0);
+    inCombat = true;
   }
 
   public void processTurn(CombatMove playerMove)
@@ -376,10 +379,30 @@ class FightManager
   public void endGame()
   {
     // Update the base displays to reflect results of ending turn:
+    if(player.isDead())
+    {
+      dispatcher.dispatch(new LevelTransitionEvent(LevelName.GAME_OVER, LevelName.GAME_OVER.getDescription()));
+    }
+    if(enemy.isDead())
+    {
+      if(enemy.getName() == "MYTHRA")
+      {
+        world.setMythraDefeated();
+        // dispatch post-Mythra cutscene        
+      }
+      else if (enemy.getName() == "PRAGMA")
+      {
+        dispatcher.dispatch(new LevelTransitionEvent(LevelName.OUTRO, LevelName.OUTRO.getDescription()));
+      }
+    }
+    
+    /*
     updateBaseDisplays();
     drawBase();
     //menus.get(END).updateDisplays();
     activeMenu = menus.get(END); 
+    */
+    inCombat = false;
   }
   
   public Combatant getPlayer()

@@ -18,9 +18,11 @@ class LevelCastleApproach extends Level {
     loadAssets();
   }
   
+  public void checkpointReset(){}
+  
   // Set Newt Starting Position
   public void setStartPosition() {
-    GameCharacter newt = this.characters.get(0);
+
     newt.setXPos(START_X);
     newt.setYPos(START_Y);
     
@@ -75,7 +77,8 @@ class LevelCastleApproach extends Level {
     }
     backgroundImage.updatePixels();*/
     this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/Top.png");
-    this.fog = new Fog(3500,2000,1500);
+    
+    this.fogs.add(new Fog(3500, 2000, 1800, 0.6, 1100, 1100, 0.5));
     
     loadConversations();
     loadLandscapes();

@@ -14,8 +14,9 @@ public enum LevelName {
   SPIRE ("The Spire"), 
   TEST_0 ("Test Level 0"), 
   TEST_1 ("Test Level 1"),
-  INTRO ("");
-  
+  INTRO (""),
+  OUTRO (""),
+  GAME_OVER ("");
   // Level transition description
   private String description;
   

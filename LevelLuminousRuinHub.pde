@@ -18,6 +18,8 @@ class LevelLuminousRuinHub extends Level {
     loadAssets();
   }
   
+    public void checkpointReset(){}
+  
   // Set Newt Starting Position
   public void setStartPosition() {
     GameCharacter newt = this.characters.get(0);
@@ -51,7 +53,7 @@ class LevelLuminousRuinHub extends Level {
       this.triggers.add(new DialogTrigger(1000, 350, 400, 100, this.conversations.get(1)));
                         
       // Hitbox to block the throne room
-     // this.landscapes.add(new Landscape(1050, 200, 500, 200));
+      //this.landscapes.add(new Landscape(1050, 200, 500, 200));
     
     }
    
@@ -60,8 +62,13 @@ class LevelLuminousRuinHub extends Level {
     this.triggers.add(new LevelTransitionTrigger(1000, 50, 600, 100, LevelName.THRONE_ROOM, 2400, 900));
     this.triggers.add(new LevelTransitionTrigger(1000, 1500, 600, 100, LevelName.CASTLE_APPROACH, 3550, 1100));
     
+    if (DEBUG.DEV_MODE) {
+      this.triggers.add(new LevelTransitionTrigger(1700, 750, 100, 100, LevelName.GAME_OVER, width/2, height/2));
+      this.triggers.add(new LevelTransitionTrigger(1700, 1000, 100, 100, LevelName.OUTRO, width/2, height/2));
+    }
+    
     // Hitbox to block the side hallway
-    this.landscapes.add(new Landscape(1900, 800, 200, 500));
+    this.landscapes.add(new Landscape(2100, 800, 200, 500));
     
     // Combat triggers
     
@@ -83,13 +90,16 @@ class LevelLuminousRuinHub extends Level {
     
     this.hitboxImage = loadImage("LevelBackgrounds/LuminousRuinHub/HitboxLayer.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/LuminousRuinHub/Bottom.png");
-
     this.foregroundImage = loadImage("LevelBackgrounds/LuminousRuinHub/Top.png");
-   // this.fog = new Fog(3500,2000,1500);
     
     loadConversations();
     loadLandscapes();
     loadCharacters();
+    
+    // Setup level fog
+    this.fogs.add(new Fog(getStateSize().w / 2, getStateSize().h / 2, 1000, 0.05, width, height, 2));
+    this.fogs.add(new Fog(1025, 100, 1000, 5, 300, 200, 3));
+    this.fogs.add(new Fog(2150, 800, 500, 5, 150, 300, 3));
     
   }
 

@@ -13,7 +13,7 @@ class LevelIntro extends Level {
   }
   
   public void setStartPosition() {}
-  
+    public void checkpointReset(){}
   public void initialize() {}
   
   // Load image assets

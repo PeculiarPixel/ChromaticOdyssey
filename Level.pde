@@ -18,7 +18,7 @@ abstract class Level {
   protected PImage hitboxImage;          // Level's hitbox image
   
   
-  protected Fog fog;
+  protected ArrayList<Fog> fogs;
   protected Level(LevelName inputName, float x, float y) {
     
     this.characters = new ArrayList<GameCharacter>();
@@ -26,7 +26,7 @@ abstract class Level {
     this.conversations = new ArrayList<Script>();
     this.triggers = new ArrayList<Trigger>();
     this.hitboxes = new ArrayList<Hitbox>();
-    this.fog = new Fog(0,0,0);
+    this.fogs = new ArrayList<Fog>();
     this.name = inputName;
     this.START_X =x;
     this.START_Y =y;
@@ -35,8 +35,10 @@ abstract class Level {
   
   abstract void loadAssets();
   abstract void setStartPosition();
-  
-  
+  abstract void checkpointReset();
+  public LevelName getName(){
+    return this.name;
+  }
   // Get level size
   public LevelSize getStateSize() {
     return new LevelSize(backgroundImage.width, backgroundImage.height);
@@ -64,7 +66,8 @@ abstract class Level {
     
     // Set Starting position for level
     setStartPosition();
-    camera.setTrackTarget(this.characters.get(0));
+    
+    camera.setTrackTarget(newt);
     camera.setLevelSize(0, getStateSize().w, 0, getStateSize().h);
     
     if (DEBUG.MUSIC_ON) sounds.playLevelTheme(name);

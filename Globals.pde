@@ -16,6 +16,8 @@ boolean runIntroStory = false;
 
 Movie introScreen;
 Movie introStory;
+Movie GAME_OVER;
+Movie OUTRO;
 
 ArrayList<MoveDirection> kitMoveSet;
 ArrayList<MoveDirection> kitMoveRelease;
@@ -52,3 +54,6 @@ boolean inCombat;
 boolean lockMouseInput;
 
 BufferedImage blackFireball;
+BufferedImage redSelector;
+BufferedImage blueSelector;
+BufferedImage yellowSelector;

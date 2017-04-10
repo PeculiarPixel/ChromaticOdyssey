@@ -1,8 +1,8 @@
 import processing.video.*;
-
+ //<>//
 // Combat module libraries:
 import java.awt.*;
-import java.awt.image.*;
+import java.awt.image.*; //<>//
 import java.awt.event.*;
 import java.util.*;
 import javax.*;
@@ -14,8 +14,8 @@ PApplet master = this;
 
   void setup() 
   {
-    //size(1024, 768, P2D); //<>//
-    size(1024, 768); //<>// //<>//
+    //size(1024, 768, P2D); //<>// //<>//
+    size(1024, 768); //<>// //<>// //<>//
     smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize
@@ -43,11 +43,17 @@ PApplet master = this;
     drawUtils = new DrawUtilities();
   
     if (DEBUG.INTRO_ON) {
+      //introScreen = new Movie(master, "TitleScreen.mp4");
+      //introStory = new Movie(master, "Intro.mp4");
+      //introScreen.loop();
+    }
+    
+    
       introScreen = new Movie(master, "TitleScreen.mp4");
       introStory = new Movie(master, "Intro.mp4");
       introScreen.loop();
-    }
-  
+      OUTRO = new Movie(master, "Outro.mp4");
+      GAME_OVER = new Movie(master, "Game Over.mp4");
     // Combat module initializations:
     imageMaker = new ImageMaker();
   
@@ -63,6 +69,8 @@ PApplet master = this;
     
     int[] modifiers = {0, 0, 0};
     int[] baseStats = {10, 10, 10};
+    
+    
       
     CombatColor defaultColor = new CombatColor(Color.GRAY, modifiers, 2);
     
@@ -87,85 +95,88 @@ PApplet master = this;
      Combatant mythraCombatant = new Combatant(GameCharacterName.MYTHRA, null, defaultColor, baseStats, meterMods);
      Combatant pragmaCombatant = new Combatant(GameCharacterName.PRAGMA, null, defaultColor, baseStats, meterMods);
 
-     blackFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlack.png").getNative();
+     //blackFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlack.png").getNative();
+     try{
+     blackFireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AttackBlack.png")));
+     } catch(IOException e) {println("blackFireball failed to load");}
      println("blackFireball loaded");
 
-    
      fightManager = new FightManager(player,enemy,inventory);  
-     
-     inCombat = false;
-     lockMouseInput = false;
-  
-      kitMoveSet = new ArrayList<MoveDirection>();
-      kitMoveRelease = new ArrayList<MoveDirection>();
-     
-      startTime = new IntList();
-      stopTime = new IntList();
-      kitFollowDelay = 700;
+      //<>//
+     inCombat = false; //<>// //<>//
+     lockMouseInput = false; //<>// //<>//
+   //<>//
+      kitMoveSet = new ArrayList<MoveDirection>(); //<>// //<>//
+      kitMoveRelease = new ArrayList<MoveDirection>(); //<>//
+      //<>//
+      startTime = new IntList(); //<>// //<>//
+      stopTime = new IntList(); //<>// //<>//
+      kitFollowDelay = 700; //<>//
+ //<>//
      //<>//
   } //<>//
  //<>//
-  // Key Pressed Events //<>//
-  void keyPressed() { //<>//
- //<>//
-    if(!inCombat) { //<>// //<>//
-      if (keyCode == UP) { //<>// //<>//
+  // Key Pressed Events
+  void keyPressed() {
+
+    if(!inCombat) {
+      if (keyCode == UP) {
         newt.setDirection(MoveDirection.UP); //<>//
        // kit.setDirection(MoveDirection.UP); //<>//
-        kitMoveSet.add(MoveDirection.UP); //<>//
+        kitMoveSet.add(MoveDirection.UP);
         startTime.append(millis()); //<>//
       } //<>//
       if(keyCode == DOWN){ //<>//
-        newt.setDirection(MoveDirection.DOWN);
-        //kit.setDirection(MoveDirection.DOWN);
-        kitMoveSet.add(MoveDirection.DOWN);
-        startTime.append(millis());
-      }
+        newt.setDirection(MoveDirection.DOWN); //<>//
+        //kit.setDirection(MoveDirection.DOWN); //<>//
+        kitMoveSet.add(MoveDirection.DOWN); //<>// //<>//
+        startTime.append(millis()); //<>//
+      } //<>//
       if(keyCode == LEFT){ //<>//
-       newt.setDirection(MoveDirection.LEFT); //<>//
-       //kit.setDirection(MoveDirection.LEFT);
-       kitMoveSet.add(MoveDirection.LEFT);
+       newt.setDirection(MoveDirection.LEFT); //<>// //<>//
+       //kit.setDirection(MoveDirection.LEFT); //<>//
+       kitMoveSet.add(MoveDirection.LEFT); //<>//
        startTime.append(millis()); //<>// //<>//
-      } //<>// //<>//
-      if(keyCode == RIGHT){ //<>// //<>// //<>// //<>// //<>// //<>//
-        newt.setDirection(MoveDirection.RIGHT); //<>// //<>//
+      }
+      if(keyCode == RIGHT){ //<>// //<>// //<>//
+        newt.setDirection(MoveDirection.RIGHT); //<>//
        // kit.setDirection(MoveDirection.RIGHT); //<>//
         kitMoveSet.add(MoveDirection.RIGHT); //<>//
         startTime.append(millis()); //<>//
-      } //<>// //<>//
+      }
     } //<>//
   } //<>//
  //<>//
   // Key Released Events //<>// //<>// //<>//
-  void keyReleased() {
-        
-  if (keyCode == UP) { //<>// //<>//
-      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>// //<>//
+  void keyReleased() { //<>//
+         //<>//
+  if (keyCode == UP) { //<>// //<>// //<>//
+      newt.releaseDirection(MoveDirection.UP); //<>// //<>// //<>// //<>// //<>//
      // kit.releaseDirection(MoveDirection.UP); //<>//
       kitMoveRelease.add(MoveDirection.UP);
-      stopTime.append(millis());
-    } //<>// //<>//
-    if(keyCode == DOWN){ //<>// //<>//
-      newt.releaseDirection(MoveDirection.DOWN);
-     // kit.releaseDirection(MoveDirection.DOWN);
-      kitMoveRelease.add(MoveDirection.DOWN); //<>//
       stopTime.append(millis()); //<>//
+    } //<>// //<>//
+    if(keyCode == DOWN){ //<>// //<>// //<>//
+      newt.releaseDirection(MoveDirection.DOWN); //<>//
+     // kit.releaseDirection(MoveDirection.DOWN); //<>//
+      kitMoveRelease.add(MoveDirection.DOWN); //<>//
+      stopTime.append(millis()); //<>// //<>//
     } //<>// //<>//
     if(keyCode == LEFT){ //<>// //<>//
      newt.releaseDirection(MoveDirection.LEFT);
      //kit.releaseDirection(MoveDirection.LEFT);
      kitMoveRelease.add(MoveDirection.LEFT);  //<>//
      stopTime.append(millis()); 
-    } //<>// //<>//
-    if(keyCode == RIGHT){ //<>//
+    } //<>// //<>// //<>//
+    if(keyCode == RIGHT){ //<>// //<>//
       newt.releaseDirection(MoveDirection.RIGHT); //<>//
       //kit.releaseDirection(MoveDirection.RIGHT);
-      kitMoveRelease.add(MoveDirection.RIGHT); //<>//
+      kitMoveRelease.add(MoveDirection.RIGHT); //<>// //<>//
       stopTime.append(millis());
     }
     if(key == 'c' || key == 'C') {
           // Trigger combat
-          inCombat = !inCombat;
+          inCombat = !inCombat; //<>//
     }
     if(key == 'h' || key == 'H'){ //<>// //<>// //<>//
         hitBoxMode = !hitBoxMode; //<>//
@@ -178,19 +189,24 @@ PApplet master = this;
         if (DEBUG.DEV_MODE) println("Newt Y: " + newt.getYPos());
     } //<>// //<>// //<>// //<>//
     if(key == ENTER){    //this is the dialog continue check.  Right now it pops up the window, loads the first line in the first conversation, and toggles through it.
-        display.updateCurrentScript();
+        display.updateCurrentScript(); //<>//
     }
     if (key == 's' || key == 'S' && state.currentState.name == LevelName.INTRO) {
       if (DEBUG.INTRO_ON) {
         introStory.jump(introStory.duration());
-      }
+      } //<>//
+    }
+    if(key == 'm' || key == 'M')
+    {
+      fightManager.startNewFight(GameCharacterName.MYTHRA);
     }
   } 
 
   // Start the game intro and then the first level
   private void gameStart() {
-    if (DEBUG.INTRO_ON) state.setState(LevelName.INTRO); //<>// //<>//
-    else state.setState(LevelName.CASTLE_HUB);
+    if (DEBUG.INTRO_ON){  //<>//
+      state.setState(LevelName.INTRO); 
+    }else state.setState(LevelName.CASTLE_HUB);
   }
 
   // Handle movie event
@@ -221,7 +237,7 @@ PApplet master = this;
       // Image has to be offset to the center of the screen, presumably due to matrix transform issues:
       image(fightManager.getAsPImage(fightManager.getImg()), 512, 384);
     }
-    
+     //<>//
     //println(mouseX - px, mouseY - py);
     //println("newt", newt.getXPos(), newt.getYPos());
     

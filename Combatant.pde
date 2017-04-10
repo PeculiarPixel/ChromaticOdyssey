@@ -65,6 +65,32 @@ class Combatant
   {
     return stats[DAMAGE];
   }
+
+  public void changeIdentity(GameCharacterName name)
+  {
+    resetStats();
+    this.name = name;
+    this.animations = spriteLibrary.getCharacterAnimations(name);
+    this.currentAnimation = animations.get("IDLE_COMBAT");
+  }
+
+  public void resetStats()
+  {
+    curHP = maxHP;
+    meters = new int[3];
+    meters[RED] = 0;
+    meters[BLUE] = 0;
+    meters[YELLOW] = 0;
+    
+    //this.activeColor = combatColor;
+    
+    stats = new int[3];
+    stats[DAMAGE] = baseStats[DAMAGE];
+    stats[DEFENSE] = baseStats[DEFENSE];
+    stats[SPEED] = baseStats[SPEED];
+    
+    this.meterMods = meterMods;
+  }
   
   public void setStatusCounter(int index, int counter)
   {

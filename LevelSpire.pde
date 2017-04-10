@@ -17,6 +17,8 @@ class LevelSpire extends Level {
     loadAssets();
   }
   
+  
+    public void checkpointReset(){}
   // Set Newt Starting Position
   public void setStartPosition() {
     GameCharacter newt = this.characters.get(0);
@@ -69,12 +71,13 @@ class LevelSpire extends Level {
     this.backgroundImage = loadImage("LevelBackgrounds/Spire/Bottom.png");
 
     this.foregroundImage = loadImage("LevelBackgrounds/Spire/Top.png");
-
-   // this.fog = new Fog(3500,2000,1500);
     
     loadConversations();
     loadLandscapes();
     loadCharacters();
+    
+    this.fogs.add(new Fog(getStateSize().w / 2, getStateSize().h / 2, 1000, 0.15, width, height, 2));
+    this.fogs.add(new Fog(1250, 650, 30, 0.25, 125, 125, 0.8));
     
   }
 }
