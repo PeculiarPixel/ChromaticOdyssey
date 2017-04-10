@@ -1,4 +1,4 @@
-public class World {
+public class World implements ObservableMythra {
   
   private LevelLoader Loader;
   
@@ -98,7 +98,17 @@ public class World {
   }
   
   // Set Mythra boss to be defeated 
-  public void setMythraDefeated() { this.mythra_defeated = true; }
+  public void setMythraDefeated() { 
+    this.mythra_defeated = true;
+    notifyMythraDefeat();
+  }
+  
+  public void notifyMythraDefeat() {
+    LevelMasterBedroom l = (LevelMasterBedroom) getLevel(LevelName.MASTER_BEDROOM);
+    l.onMythraDefeated();
+    LevelLuminousRuinHub c = (LevelLuminousRuinHub) getLevel(LevelName.CASTLE_HUB);
+    c.onMythraDefeated();
+  }
   
   // Set game to be finished
   public void setGameFinished() { this.game_finished = true; }

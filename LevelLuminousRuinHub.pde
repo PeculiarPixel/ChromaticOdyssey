@@ -1,5 +1,5 @@
 // Main Castle Hub Level
-class LevelLuminousRuinHub extends Level {
+class LevelLuminousRuinHub extends Level implements ObserverMythra {
    
   
   // Saved coords for starting close to transition
@@ -32,25 +32,27 @@ class LevelLuminousRuinHub extends Level {
 
   }
   
+  public void onMythraDefeated() {
+    this.triggers.get(0).activate();
+    this.triggers.get(1).activate();
+    this.triggers.get(2).deactivate();
+    this.landscapes.remove(0);
+    this.fogs.remove(1);
+  }
+  
   // Load all level landscapes (Hitboxes, Triggers, Objects)
   private void loadLandscapes() {
+      
     
-    // Pre-mythra fight events
-    if (world.isMythraDefeated()) {
-      
-      // Dialog event
-      this.triggers.add(new DialogTrigger(700, 800, 100, 400, this.conversations.get(2)));
-      
-    } else {
-      
       // Dialog events
-      this.triggers.add(new DialogTrigger(1000, 1300, 400, 100, this.conversations.get(0)));
-      this.triggers.add(new DialogTrigger(1000, 350, 400, 100, this.conversations.get(1)));
+      this.triggers.add(new DialogTrigger(1000, 1300, 600, 100, this.conversations.get(0)));
+      this.triggers.add(new DialogTrigger(1000, 450, 600, 100, this.conversations.get(1)));
+      
+      this.triggers.add(new DialogTrigger(200, 800, 100, 600, this.conversations.get(2)));
+      this.triggers.get(2).activate();
                         
       // Hitbox to block the throne room
       this.landscapes.add(new Landscape(1050, 200, 500, 200));
-    
-    }
    
    // Transition triggers
     this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.MASTER_BEDROOM, 2400, 700));
