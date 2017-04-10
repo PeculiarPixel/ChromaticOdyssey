@@ -340,7 +340,7 @@ class FightManager
 
   public void processTurn(CombatMove playerMove)
   {
-    lockMouseInput = true;
+   // lockMouseInput = true;
     
     CombatMove enemyMove = enemy.getRandomMove();
     CombatMove[] movesBySpeed = getMovesBySpeed(playerMove, enemyMove);
