@@ -18,6 +18,8 @@ class LevelCastleApproach extends Level {
     loadAssets();
   }
   
+  public void checkpointReset(){}
+  
   // Set Newt Starting Position
   public void setStartPosition() {
 

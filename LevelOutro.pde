@@ -15,7 +15,12 @@ class LevelOutro extends Level {
     newt.setXPos(START_X);
     newt.setYPos(START_Y);    
   }
-  
+    public void checkpointReset(){
+        if(OUTRO.time()==OUTRO.duration()){
+            runIntroStory = false;
+            setup();
+        }
+    }
   public void initialize() {}
   
   // Load image assets

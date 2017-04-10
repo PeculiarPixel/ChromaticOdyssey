@@ -132,19 +132,20 @@ class DisplayEngine {
      //<>// //<>//
    background(0);      //  Init background //<>// //<>//
     //<>// //<>//
-   if (state.currentState.name == LevelName.OUTRO){ //<>//  
-     OUTRO.play();
+   if (state.currentState.name == LevelName.OUTRO){ //<>// 
+     OUTRO.play(); 
      imageMode(CORNER);
-     image(OUTRO,0, 98, width, 572); 
+     image(OUTRO,0, 98, width, 572);
+     state.currentState.checkpointReset();
   }else if (state.currentState.name == LevelName.GAME_OVER){ //<>//  
      GAME_OVER.play();
      imageMode(CORNER);
      image(GAME_OVER, 0, 98, width, 572); 
+     state.currentState.checkpointReset();
   }else if (state.currentState.name == LevelName.INTRO){ //<>// //<>//
      if(runIntroStory == false){
       image(introScreen, 0, 0, width, height);
-      }
-      else{
+      }else{
         image(introStory, 0, 98, width, 572); //<>//
         textSize(20);
         fill(255, 255, 255, occupacity);
@@ -156,12 +157,7 @@ class DisplayEngine {
           occupacity--;
         }
       } //<>//     //<>//
-   }
-    
-   //<>//
-     //<>//
-   else { //<>//
-     
+   } else { //<>// //<>// //<>//
       pushMatrix();
       camera.fixedUpdate(); // Update camera positions //<>//
       //<>//

@@ -41,10 +41,15 @@ PApplet master = this;
     drawUtils = new DrawUtilities();
   
     if (DEBUG.INTRO_ON) {
+      //introScreen = new Movie(master, "TitleScreen.mp4");
+      //introStory = new Movie(master, "Intro.mp4");
+      //introScreen.loop();
+    }
+    
+    
       introScreen = new Movie(master, "TitleScreen.mp4");
       introStory = new Movie(master, "Intro.mp4");
       introScreen.loop();
-    }
       OUTRO = new Movie(master, "Outro.mp4");
       GAME_OVER = new Movie(master, "Game Over.mp4");
     // Combat module initializations:
@@ -172,8 +177,9 @@ PApplet master = this;
 
   // Start the game intro and then the first level
   private void gameStart() {
-    if (DEBUG.INTRO_ON) state.setState(LevelName.INTRO); //<>// //<>//
-    else state.setState(LevelName.CASTLE_HUB);
+    if (DEBUG.INTRO_ON){  //<>//
+      state.setState(LevelName.INTRO); 
+    }else state.setState(LevelName.CASTLE_HUB);
   }
 
   // Handle movie event

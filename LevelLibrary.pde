@@ -9,7 +9,7 @@ class LevelLibrary extends Level {
    
    // Load assets
    public void loadAssets() {}
-   
+     public void checkpointReset(){}
    // Set starting position
    public void setStartPosition() {}
 

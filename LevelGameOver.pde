@@ -7,6 +7,15 @@ class LevelGameOver extends Level {
     loadAssets();
   }
   
+  
+  public void checkpointReset(){
+    if(GAME_OVER.time()==GAME_OVER.duration()){
+      runIntroStory = false;
+      setup();
+    }
+  }
+  
+
   public void setStartPosition() {
       newt.setXPos(START_X);
       newt.setYPos(START_Y);

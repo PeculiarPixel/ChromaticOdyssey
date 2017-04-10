@@ -35,7 +35,7 @@ abstract class Level {
   
   abstract void loadAssets();
   abstract void setStartPosition();
-  
+  abstract void checkpointReset();
   
   // Get level size
   public LevelSize getStateSize() {

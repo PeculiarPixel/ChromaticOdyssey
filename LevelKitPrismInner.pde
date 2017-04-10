@@ -7,7 +7,7 @@ class LevelKitPrismInner extends Level {
    }
    
    public void loadAssets() {}
-   
+    public void checkpointReset(){} 
    public void setStartPosition() {}
 
 }
