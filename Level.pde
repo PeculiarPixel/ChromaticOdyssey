@@ -35,8 +35,10 @@ abstract class Level {
   
   abstract void loadAssets();
   abstract void setStartPosition();
-  
-  
+  abstract void checkpointReset();
+  public LevelName getName(){
+    return this.name;
+  }
   // Get level size
   public LevelSize getStateSize() {
     return new LevelSize(backgroundImage.width, backgroundImage.height);
@@ -64,7 +66,8 @@ abstract class Level {
     
     // Set Starting position for level
     setStartPosition();
-    camera.setTrackTarget(this.characters.get(0));
+    
+    camera.setTrackTarget(newt);
     camera.setLevelSize(0, getStateSize().w, 0, getStateSize().h);
     
     if (DEBUG.MUSIC_ON) sounds.playLevelTheme(name);

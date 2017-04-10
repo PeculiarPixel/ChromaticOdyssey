@@ -18,6 +18,8 @@ class LevelLuminousRuinHub extends Level {
     loadAssets();
   }
   
+    public void checkpointReset(){}
+  
   // Set Newt Starting Position
   public void setStartPosition() {
     GameCharacter newt = this.characters.get(0);
@@ -59,7 +61,8 @@ class LevelLuminousRuinHub extends Level {
     this.triggers.add(new LevelTransitionTrigger(75, 750, 100, 600, LevelName.MASTER_BEDROOM, 2400, 700));
     this.triggers.add(new LevelTransitionTrigger(1000, 50, 600, 100, LevelName.THRONE_ROOM, 2400, 900));
     this.triggers.add(new LevelTransitionTrigger(1000, 1500, 600, 100, LevelName.CASTLE_APPROACH, 3550, 1100));
-    
+    this.triggers.add(new LevelTransitionTrigger(1700, 750, 100, 100, LevelName.GAME_OVER, width/2, height/2));
+    this.triggers.add(new LevelTransitionTrigger(1700, 1000, 100, 100, LevelName.OUTRO, width/2, height/2));
     // Hitbox to block the side hallway
     this.landscapes.add(new Landscape(1900, 800, 200, 500));
     

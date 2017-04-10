@@ -24,6 +24,8 @@ public class World {
   private LevelThroneRoom Level_Throne_Room;
   private LevelWorldPrismInner Level_World_Prism_Inner;
   private LevelIntro Level_Intro;
+  private LevelGameOver Level_Game_Over;
+  private LevelOutro Level_Outro;
   
   // Constructor
   public World() {
@@ -56,6 +58,8 @@ public class World {
     this.levels.put(LevelName.WORLD_PRISM_INNER, Level_World_Prism_Inner);
     this.levels.put(LevelName.INTRO, Level_Intro);
     
+    this.levels.put(LevelName.GAME_OVER, Level_Game_Over);
+    this.levels.put(LevelName.OUTRO, Level_Outro);
   }
   
   // Setup characters

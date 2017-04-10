@@ -16,6 +16,8 @@ boolean runIntroStory = false;
 
 Movie introScreen;
 Movie introStory;
+Movie GAME_OVER;
+Movie OUTRO;
 
 ArrayList<MoveDirection> kitMoveSet;
 ArrayList<MoveDirection> kitMoveRelease;

@@ -15,7 +15,7 @@ class Test_Level_1 extends Level {
     kit.setXPos(START_X - 30);
     kit.setYPos(START_Y - 30);  
   }
-  
+    public void checkpointReset(){}
   // Load all assets for this level
   public void loadAssets() {
     

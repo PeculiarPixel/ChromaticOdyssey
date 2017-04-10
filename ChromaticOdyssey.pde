@@ -1,8 +1,8 @@
 import processing.video.*;
-
+ //<>//
 // Combat module libraries:
 import java.awt.*;
-import java.awt.image.*;
+import java.awt.image.*; //<>//
 import java.awt.event.*;
 import java.util.*;
 import javax.*;
@@ -41,11 +41,17 @@ PApplet master = this;
     drawUtils = new DrawUtilities();
   
     if (DEBUG.INTRO_ON) {
+      //introScreen = new Movie(master, "TitleScreen.mp4");
+      //introStory = new Movie(master, "Intro.mp4");
+      //introScreen.loop();
+    }
+    
+    
       introScreen = new Movie(master, "TitleScreen.mp4");
       introStory = new Movie(master, "Intro.mp4");
       introScreen.loop();
-    }
-  
+      OUTRO = new Movie(master, "Outro.mp4");
+      GAME_OVER = new Movie(master, "Game Over.mp4");
     // Combat module initializations:
     imageMaker = new ImageMaker();
   
@@ -72,17 +78,17 @@ PApplet master = this;
     
      Combatant player = new Combatant("Player", p1i, defaultColor, baseStats, meterMods);
      Combatant enemy = new Combatant("Enemy", p2i, defaultColor, baseStats, meterMods);
-    
+     //<>//
      fightManager = new FightManager(player,enemy,inventory);  
      
-     inCombat = false;
-     lockMouseInput = false;
+     inCombat = false; //<>//
+     lockMouseInput = false; //<>//
   
-      kitMoveSet = new ArrayList<MoveDirection>();
+      kitMoveSet = new ArrayList<MoveDirection>(); //<>//
       kitMoveRelease = new ArrayList<MoveDirection>();
      
-      startTime = new IntList();
-      stopTime = new IntList();
+      startTime = new IntList(); //<>//
+      stopTime = new IntList(); //<>//
       kitFollowDelay = 700;
     
   }
@@ -95,16 +101,16 @@ PApplet master = this;
         newt.setDirection(MoveDirection.UP);
        // kit.setDirection(MoveDirection.UP);
         kitMoveSet.add(MoveDirection.UP);
-        startTime.append(millis());
+        startTime.append(millis()); //<>//
       }
       if(keyCode == DOWN){
         newt.setDirection(MoveDirection.DOWN);
         //kit.setDirection(MoveDirection.DOWN);
-        kitMoveSet.add(MoveDirection.DOWN);
+        kitMoveSet.add(MoveDirection.DOWN); //<>//
         startTime.append(millis());
       }
       if(keyCode == LEFT){
-       newt.setDirection(MoveDirection.LEFT);
+       newt.setDirection(MoveDirection.LEFT); //<>//
        //kit.setDirection(MoveDirection.LEFT);
        kitMoveSet.add(MoveDirection.LEFT);
        startTime.append(millis()); //<>//
@@ -113,11 +119,11 @@ PApplet master = this;
         newt.setDirection(MoveDirection.RIGHT);
        // kit.setDirection(MoveDirection.RIGHT);
         kitMoveSet.add(MoveDirection.RIGHT);
-        startTime.append(millis());
+        startTime.append(millis()); //<>//
       }
     }
   }
-
+ //<>//
   // Key Released Events //<>// //<>// //<>//
   void keyReleased() {
         
@@ -171,8 +177,9 @@ PApplet master = this;
 
   // Start the game intro and then the first level
   private void gameStart() {
-    if (DEBUG.INTRO_ON) state.setState(LevelName.INTRO); //<>// //<>//
-    else state.setState(LevelName.CASTLE_HUB);
+    if (DEBUG.INTRO_ON){  //<>//
+      state.setState(LevelName.INTRO); 
+    }else state.setState(LevelName.CASTLE_HUB);
   }
 
   // Handle movie event

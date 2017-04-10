@@ -17,6 +17,8 @@ class LevelSpire extends Level {
     loadAssets();
   }
   
+  
+    public void checkpointReset(){}
   // Set Newt Starting Position
   public void setStartPosition() {
     GameCharacter newt = this.characters.get(0);
