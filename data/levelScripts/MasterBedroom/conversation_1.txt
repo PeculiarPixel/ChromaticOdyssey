@@ -1,11 +1,11 @@
 Kit Hap 1
 Mother, you're alive!
 Mythra Reg 1
-...leave me, Katarina...
+...YOU LEFT ME...
 Kit Sad 1
 Newt...the darkness has taken her.
 Kit Det 2
-If we can purify her, the darkness will weaken.
-We can make it into the throne room!
+We have to weaken the darkness on her!
+Please forgive me mother.
 Newt Det 1
 Alright, let’s do it!
