@@ -199,7 +199,7 @@ PApplet master = this;
     }
     if(key == 'm' || key == 'M')
     {
-      dispatcher.dispatch(new FadeToCombatEvent(GameCharacterName.MYTHRA));
+      dispatcher.dispatch(new FadeToCombatEvent(GameCharacterName.MYTHRA, state.currentState.name));
     }
   } 
 
