@@ -46,7 +46,7 @@ class LevelMasterBedroom extends Level {
   
    // Dialog
   this.triggers.add(new DialogTrigger(2300, 950, 100, 400, this.conversations.get(0)));
-  this.triggers.add(new DialogTrigger(1250, 950, 100, 400, this.conversations.get(1)));
+  this.triggers.add(new DialogTrigger(1250, 950, 100, 400, this.conversations.get(1), new FadeToCombatEvent(GameCharacterName.MYTHRA)));
   
   // Transition back to HUB
   this.triggers.add(new LevelTransitionTrigger(2500, 700, 100, 600, LevelName.CASTLE_HUB, 250, 750));

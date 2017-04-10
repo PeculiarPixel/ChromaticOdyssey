@@ -199,7 +199,7 @@ PApplet master = this;
     }
     if(key == 'm' || key == 'M')
     {
-      fightManager.startNewFight(GameCharacterName.MYTHRA);
+      dispatcher.dispatch(new FadeToCombatEvent(GameCharacterName.MYTHRA));
     }
   } 
 

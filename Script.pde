@@ -8,6 +8,8 @@ class Script {
   private String displayText = "";        // Display Text Value
   private int saveSpot = 0;               // Saved Character Spot Value
   
+  private Event post_event;
+  
   // Standard Dialog Box Spacing Details
   private final int DIALOG_BOX_HEIGHT = 91;
   private final int DIALOG_BOX_WIDTH = 512;
@@ -22,6 +24,9 @@ class Script {
   public Script(ArrayList<Dialog> dialogs) {    
     this.dialogs = dialogs;
   }
+  
+  // Set a post event
+  public void setPostEvent(Event e) { this.post_event = e; }
   
   // Get the current dialog
   public Dialog peekDialog() { return this.dialogs.get(currentDialogIndex); }
@@ -70,6 +75,10 @@ class Script {
   public boolean draw() {
     
     if (this.isFinished()) {
+      if (this.post_event != null) {
+        println("Sent off event");
+        dispatcher.dispatch((DisplayableEvent) this.post_event);
+      }
       resetState();
       return true;
     }
