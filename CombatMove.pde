@@ -89,6 +89,7 @@ class CombatMove
    System.out.println("Attack Detected");
    System.out.println("takeDmg input: " + (int) dmgMultiplier * user.getDamage());
    target.takeDamage((int) dmgMultiplier * user.getDamage());
+   println("target remaining hp: " + target.getHPString());
    
    for(ArbitraryFunction effect : effects)
      effect.execute();

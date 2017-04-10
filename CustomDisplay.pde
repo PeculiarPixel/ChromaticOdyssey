@@ -240,7 +240,7 @@ class FireballDisplay extends CustomDisplay
     this.suspended = false;
     x = xInitial;
     timer.start();
-    lockMouseInput = true;
+    //lockMouseInput = true;
     //manager.untriggerFireball();
   }
   
