@@ -333,6 +333,8 @@ class FightManager
     //enemy.resetStats();
     enemy.changeIdentity(enemyName);
     activeMenu = menus.get(0);
+    activeMenu.updateDisplays();
+    activeMenu.drawMenu(g2d);
     inCombat = true;
   }
 
