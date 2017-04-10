@@ -29,6 +29,9 @@ class LevelMythraDefeated extends Level {
   
   // Load image assets
   public void loadAssets() {
+    this.hitboxImage = loadImage("LevelBackgrounds/MythraDefeated/HitboxLayer.png");    
+    this.backgroundImage = loadImage("LevelBackgrounds/MythraDefeated/Bottom.png");
+    this.foregroundImage = loadImage("LevelBackgrounds/MythraDefeated/Top.png");
     this.characters.add(newt);
   }
   
