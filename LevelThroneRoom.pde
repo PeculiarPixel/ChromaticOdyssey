@@ -66,13 +66,14 @@ class LevelThroneRoom extends Level {
     
     this.hitboxImage = loadImage("LevelBackgrounds/ThroneRoom/HitboxLayer.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/ThroneRoom/Bottom.png");
-
     this.foregroundImage = loadImage("LevelBackgrounds/ThroneRoom/Top.png");
-   // this.fog = new Fog(3500,2000,1500);
     
     loadConversations();
     loadLandscapes();
     loadCharacters();
+    
+    this.fogs.add(new Fog(getStateSize().w / 2, getStateSize().h / 2 + 500, 1000, 0.05, width, height, 2));
+    this.fogs.add(new Fog(getStateSize().w / 2, getStateSize().h / 2 - 500, 1000, 0.15, width, height, 2));
     
   }
 }

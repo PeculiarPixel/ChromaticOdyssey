@@ -178,7 +178,9 @@ class DisplayEngine {
       displayLandscapes();
       displayTriggers();
       
-      state.currentState.fog.run(-1);
+      for (Fog f : state.currentState.fogs ) {
+         f.run(-1); 
+      }
   
       // Pop translate matrix
       popMatrix(); 

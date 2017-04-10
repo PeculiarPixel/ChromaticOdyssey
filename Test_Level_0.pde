@@ -74,7 +74,7 @@ class Test_Level_0 extends Level {
     }
     backgroundImage.updatePixels();
     this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/CastleWalkupTopLayer.png");
-    this.fog = new Fog(3500,2000,1500);
+    this.fogs.add(new Fog(3500,2000,1500, 0.5, width, height, 2));
     
     loadConversations();
     loadLandscapes();
