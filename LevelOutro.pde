@@ -25,6 +25,11 @@ class LevelOutro extends Level {
   
   // Load image assets
   public void loadAssets() {
+    
+    this.hitboxImage = loadImage("LevelBackgrounds/Outro/HitboxLayer.png");    
+    this.backgroundImage = loadImage("LevelBackgrounds/Outro/Bottom.png");
+    this.foregroundImage = loadImage("LevelBackgrounds/Outro/Top.png");
+    
     this.characters.add(newt);
   }
   

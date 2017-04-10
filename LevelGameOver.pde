@@ -28,6 +28,10 @@ class LevelGameOver extends Level {
   
   // Load image assets
   public void loadAssets() {
+    
+    this.hitboxImage = loadImage("LevelBackgrounds/GameOver/HitboxLayer.png");    
+    this.backgroundImage = loadImage("LevelBackgrounds/GameOver/Bottom.png");
+    this.foregroundImage = loadImage("LevelBackgrounds/GameOver/Top.png");
     this.characters.add(newt);
   }
   

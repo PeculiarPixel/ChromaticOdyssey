@@ -55,11 +55,6 @@ class LevelCastleApproach extends Level {
     
     this.hitboxImage = loadImage("LevelBackgrounds/CastleApproach/HitboxLayer.png");    
     this.backgroundImage = loadImage("LevelBackgrounds/CastleApproach/Bottom.png");
-    /*backgroundImage.loadPixels();
-    for(int i =0; i<backgroundImage.pixels.length;i++){
-      backgroundImage.pixels[i] =  color();
-    }
-    backgroundImage.updatePixels();*/
     this.foregroundImage = loadImage("LevelBackgrounds/CastleApproach/Top.png");
     
     this.fogs.add(new Fog(3500, 2000, 1800, 0.6, 1100, 1100, 0.5));
