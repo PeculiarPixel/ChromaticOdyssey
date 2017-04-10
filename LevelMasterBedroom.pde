@@ -1,5 +1,5 @@
 // MasterBedroom Level
-class LevelMasterBedroom extends Level implements ObserverMythra {
+class LevelMasterBedroom extends Level implements ObserverMythra, ObserverGameOverToMythra {
 
 
   public float START_X = 2400;
@@ -48,11 +48,20 @@ class LevelMasterBedroom extends Level implements ObserverMythra {
   }
 
   public void onMythraDefeated() {
+    
     this.triggers.get(2).deactivate();
-    this.triggers.add(new LevelTransitionTrigger(2500, 700, 100, 600, LevelName.CASTLE_HUB, 250, 750));
-    this.triggers.get(3).initialize();
+    
+    LevelTransitionTrigger t = new LevelTransitionTrigger(2500, 700, 100, 600, LevelName.CASTLE_HUB, 250, 750);
+    this.triggers.add(t);
+    t.initialize();
+    
     this.fogs.remove(1);
     this.combatPositions = true;
+    
+  }
+  
+  public void onGameOverToMythra() {
+    this.triggers.get(3).deactivate();
   }
 
   // Load all level landscapes (Hitboxes, Triggers, Objects)
@@ -61,9 +70,13 @@ class LevelMasterBedroom extends Level implements ObserverMythra {
     // Dialog
     this.triggers.add(new DialogTrigger(2300, 650, 50, 500, this.conversations.get(0)));
     this.triggers.add(new DialogTrigger(1050, 650, 50, 600, this.conversations.get(1), new FadeToCombatEvent(GameCharacterName.MYTHRA, this.name, 840, 560)));
-
+    
     this.triggers.add(new DialogTrigger(800, 650, 50, 600, this.conversations.get(2)));  
     this.triggers.get(2).activate();
+    
+    this.triggers.add(new CombatTransitionTrigger(1000, 650, 100, 600, GameCharacterName.MYTHRA, this.name));
+    this.triggers.get(3).activate();
+    
   }
 
   // Load level conversations

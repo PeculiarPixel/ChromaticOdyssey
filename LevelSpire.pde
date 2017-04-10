@@ -1,5 +1,5 @@
 // Throne Room Level
-class LevelSpire extends Level {
+class LevelSpire extends Level implements ObserverGameOverToPragma {
 
  public float START_X = 1150;
  public float START_Y = 1100;
@@ -34,10 +34,17 @@ class LevelSpire extends Level {
     this.characters.add(pragma);
   }
   
+  public void onGameOverToPragma() {
+    this.triggers.get(1).deactivate();
+  }
+  
   // Load all level landscapes (Hitboxes, Triggers, Objects)
   private void loadLandscapes() {
     
     this.triggers.add(new DialogTrigger(1000, 1100, 1200, 50, this.conversations.get(0), new FadeToCombatEvent(GameCharacterName.PRAGMA, this.name, 840, 560)));
+    this.triggers.add(new CombatTransitionTrigger(1000, 625, 1200, 300, GameCharacterName.PRAGMA, this.name));
+    this.triggers.get(1).activate();
+    
     if (DEBUG.DEV_MODE) this.triggers.add(new LevelTransitionTrigger(1000, 1300, 600, 100, LevelName.THRONE_ROOM, 1000, 100));
     
   }

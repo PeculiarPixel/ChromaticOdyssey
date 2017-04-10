@@ -1,4 +1,4 @@
-public class World implements ObservableMythra {
+public class World implements ObservableMythra, ObservableGameOverCombatTriggers {
   
   private LevelLoader Loader;
   
@@ -6,9 +6,6 @@ public class World implements ObservableMythra {
   private HashMap<GameCharacterName, GameCharacter> characters;    // Collection of all characters
   private HashMap<LevelName, Level> levels;                        // Collection of all levels
   private boolean gameStarted = false;                             // Boolean if the game has started
-  
-  private boolean mythra_defeated = false;
-  private boolean game_finished = false;
   
   private Test_Level_0 test_0;
   private Test_Level_1 test_1;
@@ -27,6 +24,7 @@ public class World implements ObservableMythra {
   private LevelGameOver Level_Game_Over;
   private LevelOutro Level_Outro;
   private LevelMythraDefeated LevelMythraDefeated;
+  
   // Constructor
   public World() {
    
@@ -99,8 +97,15 @@ public class World implements ObservableMythra {
   
   // Set Mythra boss to be defeated 
   public void setMythraDefeated() { 
-    this.mythra_defeated = true;
     notifyMythraDefeat();
+  }
+  
+  public void setDiedToMythra() {
+    notifyGameOverToMythra();
+  }
+  
+  public void setDiedToPragma() {
+    notifyGameOverToPragma();
   }
   
   public void notifyMythraDefeat() {
@@ -110,14 +115,15 @@ public class World implements ObservableMythra {
     c.onMythraDefeated();
   }
   
-  // Set game to be finished
-  public void setGameFinished() { this.game_finished = true; }
+  public void notifyGameOverToMythra() {
+    LevelMasterBedroom l = (LevelMasterBedroom) getLevel(LevelName.MASTER_BEDROOM);
+    l.onGameOverToMythra();
+  }
   
-  // Check if mythra is defeated
-  public boolean isMythraDefeated() { return this.mythra_defeated; }
-  
-  // Check if game is finished
-  public boolean isGameFinished() { return this.game_finished; }
+  public void notifyGameOverToPragma() {
+    LevelSpire l = (LevelSpire) getLevel(LevelName.SPIRE);
+    l.onGameOverToPragma();    
+  }
   
 
 }

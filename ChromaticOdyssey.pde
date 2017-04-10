@@ -14,8 +14,9 @@ PApplet master = this;
 
   void setup() 
   {
-    size(1024, 768, P2D); //<>// //<>//
-    //size(1024, 768); //<>// //<>// //<>// //<>//
+
+    size(1024, 768, P2D);
+    //size(1024, 768);
     smooth();
     surface.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);  // Setup screen width
     surface.setResizable(false);                   // Disable resize

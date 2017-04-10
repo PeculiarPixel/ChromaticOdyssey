@@ -396,6 +396,8 @@ fireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/fireball-blu
     
     if(player.isDead())
     {
+      if (enemy.getName() == "MYTHRA") world.setDiedToMythra();
+      else if (enemy.getName() == "PRAGMA") world.setDiedToPragma();
       dispatcher.dispatch(new LevelTransitionEvent(LevelName.GAME_OVER, LevelName.GAME_OVER.getDescription()));
     }
     if(enemy.isDead())

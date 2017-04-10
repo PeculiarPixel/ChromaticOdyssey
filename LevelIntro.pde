@@ -18,6 +18,10 @@ class LevelIntro extends Level {
   
   // Load image assets
   public void loadAssets() {
+    
+    this.hitboxImage = loadImage("LevelBackgrounds/Intro/HitboxLayer.png");    
+    this.backgroundImage = loadImage("LevelBackgrounds/Intro/Bottom.png");
+    this.foregroundImage = loadImage("LevelBackgrounds/Intro/Top.png");
       introScreen.loop();
   }
   
