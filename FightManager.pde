@@ -388,7 +388,8 @@ class FightManager
       if(enemy.getName() == "MYTHRA")
       {
         world.setMythraDefeated();
-        // dispatch post-Mythra cutscene        
+        // dispatch post-Mythra cutscene
+        dispatcher.dispatch(new LevelTransitionEvent(LevelName.MYTHRA_DEFEATED, LevelName.MYTHRA_DEFEATED.getDescription()));
       }
       else if (enemy.getName() == "PRAGMA")
       {
