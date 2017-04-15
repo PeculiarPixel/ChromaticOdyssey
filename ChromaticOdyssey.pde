@@ -99,7 +99,7 @@ PApplet master = this;
 
      //blackFireball = (BufferedImage) loadImage("/SpriteAnimations/Combat/AttackBlack.png").getNative();
      try{
-     blackFireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AttackBlack.png")));
+     blackFireball = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/AttackBlack.png")));
      } catch(IOException e) {println("blackFireball failed to load");}
      println("blackFireball loaded");
 

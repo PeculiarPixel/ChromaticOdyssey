@@ -194,12 +194,12 @@ class ColorButton extends ArbitraryButton
     }
     try
     {
-    String basePath = ("/SpriteAnimations/Combat/ColorSelector-" + colorString + ".png");
+    String basePath = ("SpriteAnimations/Combat/ColorSelector-" + colorString + ".png");
     println("Basepath = " + basePath);
     BufferedImage base = ImageIO.read(new File(dataPath(basePath)));
     super.setBaseImage(base);
     //super.setHoverImage(imageMaker.drawHoverCircImage(DIAMETER, combatColor.getColor()));
-    BufferedImage hover = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AltColorSelector-" + colorString +".png")));
+    BufferedImage hover = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/AltColorSelector-" + colorString +".png")));
     super.setHoverImage(hover);
     }
     catch(IOException e){println("Couldnt load colorselectors");}

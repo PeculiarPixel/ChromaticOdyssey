@@ -85,13 +85,14 @@ public class NameFrame extends CustomDisplay
     this.combatant = combatant;
     combatant.setNameFrame(this);
     baseImage = super.img;
+    
     try
     {
-    baseFrame = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/Combat-UI-screen.png")));
-    redSelector = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/ColorSelector-RED.png")));
-    blueSelector = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/ColorSelector-BLUE.png")));
-    yellowSelector = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/ColorSelector-YELLOW.png")));
-    blackSelector = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/ColorSelector-BLACK.png")));
+    baseFrame = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/Combat-UI-screen.png")));
+    redSelector = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/ColorSelector-RED.png")));
+    blueSelector = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/ColorSelector-BLUE.png")));
+    yellowSelector = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/ColorSelector-YELLOW.png")));
+    blackSelector = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/ColorSelector-BLACK.png")));
     }
     catch(IOException exception){println("Unable to open Combat UI nameframe file");}
     g2d = (Graphics2D) baseImage.createGraphics();
