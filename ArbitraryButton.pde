@@ -178,9 +178,32 @@ class ColorButton extends ArbitraryButton
     this.combatColor = combatColor;
     attackMenu = manager.getMenu(1);
     player = manager.getPlayer();
-    super.setBaseImage(imageMaker.drawBaseCircImage(DIAMETER, combatColor.getColor()));
-    //super.setBaseImage(combatColor.getSelectorImage());
-    super.setHoverImage(imageMaker.drawHoverCircImage(DIAMETER, combatColor.getColor()));
+    //super.setBaseImage(imageMaker.drawBaseCircImage(DIAMETER, combatColor.getColor()));
+    String colorString = "";
+    if(combatColor.getColor() == Color.RED)
+    {
+      colorString = "RED";
+    }
+    else if(combatColor.getColor() == Color.BLUE)
+    {
+      colorString = "BLUE";
+    }
+    else if(combatColor.getColor() == Color.YELLOW)
+    {
+      colorString = "YELLOW";
+    }
+    try
+    {
+    String basePath = ("SpriteAnimations/Combat/ColorSelector-" + colorString + ".png");
+    println("Basepath = " + basePath);
+    BufferedImage base = ImageIO.read(new File(dataPath(basePath)));
+    super.setBaseImage(base);
+    //super.setHoverImage(imageMaker.drawHoverCircImage(DIAMETER, combatColor.getColor()));
+    BufferedImage hover = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/AltColorSelector-" + colorString +".png")));
+    super.setHoverImage(hover);
+    }
+    catch(IOException e){println("Couldnt load colorselectors");}
+    
   }
   
   public void press()

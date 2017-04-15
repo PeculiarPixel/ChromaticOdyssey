@@ -101,8 +101,8 @@ class BaseCombatMenu extends CustomMenu
     baseDisplays.add(new BackgroundDisplay());
     //baseDisplays.add(new SpriteFrame(new Point(128, 128), player));
     //baseDisplays.add(new SpriteFrame(new Point(640, 128), enemy));
-    baseDisplays.add(new SpriteFrame(new Point(128, 128), player));
-    baseDisplays.add(new SpriteFrame(new Point(704, 128), enemy));
+    baseDisplays.add(new SpriteFrame(new Point(128, 192), player));
+    baseDisplays.add(new SpriteFrame(new Point(704, 192), enemy));
     baseDisplays.add(new NameFrame(new Point(128, 0), player));
     baseDisplays.add(new NameFrame(new Point(640, 0), enemy));
     
@@ -142,6 +142,14 @@ class ColorCombatMenu extends CustomMenu
    
     // Basebuttons disabled when in ColorMenu to force user to select a color
     //super.buttons.addAll(manager.getBaseButtons());
+    /*
+    BufferedImage redBase = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/ColorSelector-RED.png")));
+    BufferedImage redHover = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AltColorSelector-RED.png")));
+    BufferedImage blueBase = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/ColorSelector-BLUE.png")));
+    BufferedImage blueHover = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AltColorSelector-RED.png")));
+    BufferedImage yellowBase = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AltColorSelector-RED.png")));
+    BufferedImage yellowHover = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AltColorSelector-RED.png")));
+    */
    
     // Build and add color selection buttons:
     colorButtons.add(new ColorButton(manager, newtColors[0], new Point(128, 256)));

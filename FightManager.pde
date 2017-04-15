@@ -109,6 +109,8 @@ class FightManager
     
     
     BufferedImage fireball = null;
+    BufferedImage empFireball = null;
+    BufferedImage ultFireball = null;
     
     try {
       //String urlString;
@@ -118,28 +120,33 @@ class FightManager
     if (myColor == Color.RED)
     {
       //fireball = ImageIO.read(new File("C:/Users/Wylie/Desktop/ChromaticOdysseyPrototype/ChromaticOdyssey/data/SpriteAnimations/Combat/AttackRed.png"));
-      fireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AttackRed.png")));
+      fireball = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/fireball-red-small.png")));
+      empFireball = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/fireball-red.png")));
+      ultFireball = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/fireball-red-large.png")));
       //fireball = redFireball;
       //urlString = "Data/SpriteAnimations/Combat/AttackRed.png";
     }
     
     else if (myColor == Color.BLUE)
     {
-      fireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AttackBlue.png")));
-      //fireball = blueFireball;
+fireball = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/fireball-blue-small.png")));
+      empFireball = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/fireball-blue.png")));
+      ultFireball = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/fireball-blue-large.png")));      //fireball = blueFireball;
       //urlString = "Data/SpriteAnimations/Combat/AttackBlue.png";
 
     }
     
     else if (myColor == Color.YELLOW)
     {
-       fireball = ImageIO.read(new File(dataPath("/SpriteAnimations/Combat/AttackYellow.png"))); 
+       fireball = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/fireball-yellow-small.png")));
+      empFireball = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/fireball-yellow.png")));
+      ultFireball = ImageIO.read(new File(dataPath("SpriteAnimations/Combat/fireball-yellow-large.png")));
        //fireball = yellowFireball;
        //urlString = "Data/SpriteAnimations/Combat/AttackYellow.png";
  
     }
     
-    } catch(IOException e) {println("IO Exception!");}
+    } catch(IOException e) { println(e); }
     
     //fireball = redFireball;
     
@@ -150,8 +157,8 @@ class FightManager
     CombatMove ult = new CombatMove(4);
     
     base.setFireball(fireball);
-    emp.setFireball(fireball);
-    ult.setFireball(fireball);
+    emp.setFireball(empFireball);
+    ult.setFireball(ultFireball);
     
     
     // Construct Buttons and assosciate with respective CombatMoves:
