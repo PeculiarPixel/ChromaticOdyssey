@@ -9,7 +9,7 @@ public enum LevelName {
   CASTLE_HUB ("Luminous Keep"), 
   LIBRARY ("The Library"), 
   THRONE_ROOM ("The Throne Room"), 
-  MASTER_BEDROOM ("The Royal Bedroom"), 
+  MASTER_BEDROOM ("The Royal Chambers"), 
   KIT_BEDROOM ("Kit's Bedroom"),
   SPIRE ("The Spire"), 
   TEST_0 ("Test Level 0"), 
